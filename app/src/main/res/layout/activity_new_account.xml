@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="409dp"
+    android:layout_height="657dp"
+    android:fillViewport="true"
+    tools:ignore="SpeakableTextPresentCheck"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".NewAccount">
+
+
+        <Spinner
+            android:id="@+id/spnType"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="1dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginEnd="1dp"
+            android:entries="@array/typeUser"
+            android:prompt="@string/txtType"
+            android:spinnerMode="dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.492"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtTitleNewAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/txtNewAccount"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/txtName"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:ems="10"
+            android:hint="@string/txtFName"
+            android:inputType="textPersonName"
+            android:text="@string/txtFName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnType" />
+
+        <EditText
+            android:id="@+id/txtLastName"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:ems="10"
+            android:hint="@string/txtLName"
+            android:inputType="textPersonName"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+        <EditText
+            android:id="@+id/txtPhone"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_phone_24"
+            android:ems="10"
+            android:hint="@string/txtPhone"
+            android:inputType="phone"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtLastName" />
+
+        <EditText
+            android:id="@+id/txtAddress"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/txtAddress"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtPhone"
+            android:textColorHint="#546E7A"
+            android:autofillHints="" />
+
+        <Spinner
+            android:id="@+id/spnStates"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:entries="@array/txtCities"
+            android:prompt="@string/txtState"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCity" />
+
+        <EditText
+            android:id="@+id/txtCity"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/txtCity"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtAddress"
+            android:textColorHint="#546E7A"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/txtEmailNewAccount"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/txtAddEmail"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnStates"
+            android:textColorHint="#546E7A"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/txtCreatePassword"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/txtAddPassword"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtEmailNewAccount"
+            android:textColorHint="#546E7A"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/txtConfirmPassword"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/txtConfirm"
+            android:textColorHint="#546E7A"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCreatePassword"
+            android:autofillHints="" />
+
+        <Button
+            android:id="@+id/btnCreate"
+            android:layout_width="121dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/txtCreate"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtConfirmPassword"
+            app:layout_constraintVertical_bias="0.257" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

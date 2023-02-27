@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Smart_Meal</string>
+    <string name="txtCustomer">Customer</string>
+    <string name="txtBusiness">Business</string>
+    <string name="txtEmail">Enter your e-mail address</string>
+    <string name="txtPassword">Enter your password</string>
+    <string name="txtLogin">Login</string>
+    <string name="txtNewAccount">New Account</string>
+    <string name="txtType">What best describes you?</string>
+    <string name="txtFName">First name</string>
+    <string name="txtLName">Last name</string>
+    <string name="txtPhone">Phone Number </string>
+    <string name="txtAddress">Address</string>
+    <string name="txtCity">City</string>
+    <string name="txtState">State/Province</string>
+    <string name="txtAddEmail">E-mail</string>
+    <string name="txtAddPassword">Password</string>
+    <string name="txtConfirm">Confirm password</string>
+    <string-array name="txtCities">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Central Canada</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Newfoundland and Labrador</item>
+        <item>Northwest Territories</item>
+        <item>Nunavut</item>
+        <item>Nova Scotia</item>
+        <item>Ontario</item>
+        <item>Prairie Provinces</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item>West Coast</item>
+        <item>Yukon Territory</item>
+    </string-array>
+    <string name="txtRegister">Register</string>
+    <string-array name="typeUser">
+        <item>I am a customer</item>
+        <item>I am a business</item>
+    </string-array>
+    <string name="txtCreate">Create</string>
+</resources>
