@@ -13,7 +13,7 @@
         android:autofillHints=""
         android:drawableStart="@drawable/ic_baseline_person_outline_24"
         android:ems="10"
-        android:inputType="textPersonName"
+        android:inputType="textWebEmailAddress"
         android:text="@string/txtEmail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.307" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/txtLogin"
         android:layout_width="121dp"
         android:layout_height="57dp"
         android:text="@string/txtLogin"
@@ -61,6 +61,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/txtLogin"
         app:layout_constraintVertical_bias="0.323" />
 </androidx.constraintlayout.widget.ConstraintLayout>
