@@ -16,6 +16,8 @@
     <string name="txtAddEmail">E-mail</string>
     <string name="txtAddPassword">Password</string>
     <string name="txtConfirm">Confirm password</string>
+    <string name="radioCustomer">Customer</string>
+    <string name="radioBusiness">Business</string>
     <string-array name="txtCities">
         <item>Alberta</item>
         <item>British Columbia</item>

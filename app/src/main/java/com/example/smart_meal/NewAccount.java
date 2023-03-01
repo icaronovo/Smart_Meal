@@ -7,6 +7,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,15 +19,16 @@ import java.util.regex.Pattern;
 public class NewAccount extends AppCompatActivity {
     Spinner spinnerTypeUser, spnState;
     Button btnCreate;
-    EditText txtFName, txtLName, txtPhone, txtAddress, txtCity, txtEmail, txtPassword, txtConfirmPassword;
+    EditText txtFName, txtLName, txtPhone, txtAddress, txtCity, txtEmail, txtPassword, txtConfirmPassword, businessName;
     TextView txtErrorP, txtErrorE;
+    RadioButton radioCustomer, radioBusiness;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
 
-        spinnerTypeUser = findViewById(R.id.spnType);
         btnCreate = findViewById(R.id.btnCreate);
         txtFName = findViewById(R.id.txtName);
         txtLName = findViewById(R.id.txtLastName);
@@ -39,27 +42,30 @@ public class NewAccount extends AppCompatActivity {
         btnCreate = findViewById(R.id.btnCreate);
         txtErrorE = findViewById(R.id.txtErrorEmail);
         txtErrorP = findViewById(R.id.txtErrorPassword);
+        radioCustomer = findViewById(R.id.radioCustomer);
+        radioBusiness = findViewById(R.id.radioBusiness);
+        radioGroup = findViewById(R.id.radioGroup);
+        businessName = findViewById(R.id.txtBusiness);
+        businessName.setVisibility(View.GONE);
 
-        //In case it is selected the "Customer" user, the form for customer will appear.
-        //Otherwise, will be the "Business" form
-        spinnerTypeUser.setOnItemSelectedListener(
-                new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        if(position == 0){
-                            txtFName.setHint("First Name");
-                            txtLName.setVisibility(View.VISIBLE);
-                        } else if(position == 1){
-                            txtFName.setHint("Business Name");
-                            txtLName.setVisibility(View.GONE);
-                        }
-                    }
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-
-                    }
+        //When the user select the type of account, it will change the fields required
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i) {
+                    case R.id.radioCustomer:
+                        businessName.setVisibility(View.GONE);
+                        txtFName.setVisibility(View.VISIBLE);
+                        txtLName.setVisibility(View.VISIBLE);
+                        break;
+                    case R.id.radioBusiness:
+                        businessName.setVisibility(View.VISIBLE);
+                        txtFName.setVisibility(View.GONE);
+                        txtLName.setVisibility(View.GONE);
+                        break;
                 }
-        );
+            }
+        });
 
         //When the user click on "Create", it will create a new account
         btnCreate.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +75,7 @@ public class NewAccount extends AppCompatActivity {
                 String name = txtFName.getText().toString();
                 String userType = spinnerTypeUser.getSelectedItem().toString();
                 //In case that it is a Customer, get their last name
-                if(userType.equals("I am customer")){
+                if (userType.equals("I am customer")) {
                     String lastName = txtLName.getText().toString();
                 }
                 String phone = txtPhone.getText().toString();
@@ -80,42 +86,38 @@ public class NewAccount extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
                 String confirmPassword = txtConfirmPassword.getText().toString();
 
-                if(name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()){
-                //Check if the information is empty
-                    Toast.makeText(NewAccount.this,"Please make sure to fill the form", Toast.LENGTH_LONG).show();
-                }
-                else if(!isEmailValid(email)){
-                //Check if email is valid
+                if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
+                    //Check if the information is empty
+                    Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
+                } else if (!isEmailValid(email)) {
+                    //Check if email is valid
                     txtErrorE.setText("Please make sure to put a valid email");
-                }
-                else if(!password.equals(confirmPassword)){
-                //Check if the passwords match
+                } else if (!password.equals(confirmPassword)) {
+                    //Check if the passwords match
                     txtErrorP.setText("Please make sure your passwords match");
-                }
-                else if(!isPasswordValid(password)){
-                //Check if the password is valid
+                } else if (!isPasswordValid(password)) {
+                    //Check if the password is valid
                     txtErrorP.setText("The password must contain at least:" +
                             "\n - One lowercase letter" +
                             "\n - One uppercase letter " +
                             "\n - One digit " +
                             "\n -One special character" +
                             "\n - At least 8 characters long\n");
-                }
-                else{
-                //Case everything is ok, create a new account
+                } else {
+                    //Case everything is ok, create a new account
                     txtErrorP.setText("");
                     txtErrorE.setText("");
-                    Toast.makeText(NewAccount.this,"Account created!!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
                 }
             }
         });
     }
 
-    private boolean isEmailValid(String email){
+    private boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
-    private boolean isPasswordValid(String password){
+    private boolean isPasswordValid(String password) {
         String pattern = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{8,20}$";
         // The pattern above uses a regular expression to match the password
         // The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character

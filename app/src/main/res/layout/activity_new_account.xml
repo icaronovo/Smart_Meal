@@ -16,21 +16,6 @@
         tools:context=".NewAccount">
 
 
-        <Spinner
-            android:id="@+id/spnType"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="100dp"
-            android:layout_marginEnd="1dp"
-            android:entries="@array/typeUser"
-            android:prompt="@string/txtType"
-            android:spinnerMode="dialog"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.492"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/txtTitleNewAcc"
             android:layout_width="wrap_content"
@@ -41,6 +26,48 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="300dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="40dp"
+            android:onClick="clickMethod"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtTitleNewAcc"
+            tools:checkedButton="@id/radioCustomer"
+            tools:ignore="UsingOnClickInXml">
+
+            <RadioButton
+                android:id="@+id/radioCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:checked="true"
+                android:text="@string/radioCustomer" />
+
+            <RadioButton
+                android:id="@+id/radioBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/radioBusiness"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/txtBusiness"
+            android:layout_width="300dp"
+            android:layout_height="54dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/shop_icon"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/txtBusiness"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <EditText
             android:id="@+id/txtName"
@@ -55,7 +82,7 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spnType" />
+            app:layout_constraintTop_toBottomOf="@+id/txtBusiness" />
 
         <EditText
             android:id="@+id/txtLastName"
@@ -198,7 +225,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="45dp"
             android:textColor="#F44336"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.132"
@@ -210,7 +236,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="45dp"
             android:textColor="#F44336"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.153"
