@@ -45,4 +45,5 @@
     <string name="txtReminder">Reminder</string>
     <string name="txtReports">Reports</string>
     <string name="txtLogout">Logout</string>
+    <string name="txtTitle">Smart Meal</string>
 </resources>
