@@ -48,6 +48,7 @@ public class NewAccount extends AppCompatActivity {
         businessName = findViewById(R.id.txtBusiness);
         businessName.setVisibility(View.GONE);
 
+
         //When the user select the type of account, it will change the fields required
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -73,9 +74,9 @@ public class NewAccount extends AppCompatActivity {
             public void onClick(View v) {
                 //Get the information on the form
                 String name = txtFName.getText().toString();
-                String userType = spinnerTypeUser.getSelectedItem().toString();
+                int selectedRadioButton = radioGroup.getCheckedRadioButtonId();
                 //In case that it is a Customer, get their last name
-                if (userType.equals("I am customer")) {
+                if (selectedRadioButton == radioCustomer.getId()) {
                     String lastName = txtLName.getText().toString();
                 }
                 String phone = txtPhone.getText().toString();
