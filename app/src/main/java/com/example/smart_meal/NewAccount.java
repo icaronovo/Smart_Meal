@@ -48,7 +48,6 @@ public class NewAccount extends AppCompatActivity {
         businessName = findViewById(R.id.txtBusiness);
         businessName.setVisibility(View.GONE);
 
-
         //When the user select the type of account, it will change the fields required
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -86,29 +85,37 @@ public class NewAccount extends AppCompatActivity {
                 String email = txtEmail.getText().toString();
                 String password = txtPassword.getText().toString();
                 String confirmPassword = txtConfirmPassword.getText().toString();
+                String bName = businessName.getText().toString();
 
-                if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
-                    //Check if the information is empty
-                    Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
-                } else if (!isEmailValid(email)) {
-                    //Check if email is valid
-                    txtErrorE.setText("Please make sure to put a valid email");
-                } else if (!password.equals(confirmPassword)) {
-                    //Check if the passwords match
-                    txtErrorP.setText("Please make sure your passwords match");
-                } else if (!isPasswordValid(password)) {
-                    //Check if the password is valid
-                    txtErrorP.setText("The password must contain at least:" +
-                            "\n - One lowercase letter" +
-                            "\n - One uppercase letter " +
-                            "\n - One digit " +
-                            "\n -One special character" +
-                            "\n - At least 8 characters long\n");
-                } else {
-                    //Case everything is ok, create a new account
-                    txtErrorP.setText("");
-                    txtErrorE.setText("");
-                    Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
+                //constructor for  new users
+                try {
+                    BusinessModel businessModel = new BusinessModel(-1, bName, phone, address, city, state, email);
+                    ;
+                    CustomerModel customerModel = new CustomerModel(-1, name, txtLName.getText().toString(), phone, address, city, state, email);
+                } catch (Exception e) {
+                    if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()|| bName.isEmpty()) {
+                        //Check if the information is empty
+                        Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
+                    } else if (!isEmailValid(email)) {
+                        //Check if email is valid
+                        txtErrorE.setText("Please make sure to put a valid email");
+                    } else if (!password.equals(confirmPassword)) {
+                        //Check if the passwords match
+                        txtErrorP.setText("Please make sure your passwords match");
+                    } else if (!isPasswordValid(password)) {
+                        //Check if the password is valid
+                        txtErrorP.setText("The password must contain at least:" +
+                                "\n - One lowercase letter" +
+                                "\n - One uppercase letter " +
+                                "\n - One digit " +
+                                "\n -One special character" +
+                                "\n - At least 8 characters long\n");
+                    } else {
+                        //Case everything is ok, create a new account
+                        txtErrorP.setText("");
+                        txtErrorE.setText("");
+                        Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });

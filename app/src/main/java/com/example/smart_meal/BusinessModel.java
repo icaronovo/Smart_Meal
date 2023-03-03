@@ -23,12 +23,25 @@ public class BusinessModel {
         this.businessEmail = businessEmail;
     }
 
-    public BusinessModel(){
+    public BusinessModel() {
 
     }
 
     //To String
 
+
+    @Override
+    public String toString() {
+        return "BusinessModel{" +
+                "id=" + id +
+                ", businessName='" + businessName + '\'' +
+                ", businessPhone='" + businessPhone + '\'' +
+                ", businessAddress='" + businessAddress + '\'' +
+                ", businessCity='" + businessCity + '\'' +
+                ", businessState='" + businessState + '\'' +
+                ", businessEmail='" + businessEmail + '\'' +
+                '}';
+    }
 
     //Getters and Setters
     public int getId() {
@@ -86,7 +99,6 @@ public class BusinessModel {
     public void setBusinessEmail(String businessEmail) {
         this.businessEmail = businessEmail;
     }
-
 
 
 }
