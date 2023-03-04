@@ -1,9 +1,10 @@
 package com.example.smart_meal;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.location.Address;
+
 
 import androidx.annotation.Nullable;
 
@@ -37,6 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_FIRST_NAME = "FirstName";
     public static final String CUSTOMER_INFO = "CUSTOMER_INFO";
     public static final String COLUMN_BUSINESS_NAME = "BusinessName";
+    public static final String BUSINESS_INFO = "BUSINESS_INFO";
+    public static final String ORDER_INFO = "ORDER_INFO";
 
     //public static final String DBNAMECUSTOMER = "LoginCustomer.db";
     //public static final String DBNAMEBUSINESS = "LoginBusiness.db";
@@ -69,9 +72,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableOrderStatus);
         String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "(" + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_EMAIL_CUST + "TEXT," + COLUMN_FIRST_NAME + " TEXT," + COLUMN_LAST_NAME + " TEXT," + COLUMN_PHONE_CUST + " INTEGER," + COLUMN_ADDRESS + " TEXT," + COLUMN_CITY + " TEXT," + COLUMN_STATE_PROVINCE + " TEXT)";
         db.execSQL(createTableCustomerInfo);
-        String createTableBussinessInfo = "CREATE TABLE BUSINESS_INFO(" + COLUMN_BUSINESS_ID + "INTEGER," + COLUMN_EMAIL_BUS + "TEXT," + COLUMN_BUSINESS_NAME + " TEXT," + " " + COLUMN_PHONE_BUS + " INTEGER," + COLUMN_BUS_ADDRESS + " TEXT," + COLUMN_BUS_CITY + " TEXT," + COLUMN_BUS_STATE_PROVINCE + " TEXT  )";
-        db.execSQL(createTableBussinessInfo);
-        String createTableOrderInfo = "CREATE TABLE ORDER_INFO(" + COLUMN_ORDER_ID + "INTEGER," + COLUMN_ITEM_ID + "INTEGER," + "ItemQty INTEGER," + "ItemValue INTEGER," + COLUMN_ORDER_STATUS1 + "TEXT," + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_BUSINESS_ID + "INTEGER)";
+        String createTableBusinessInfo = "CREATE TABLE " + BUSINESS_INFO + "(" + COLUMN_BUSINESS_ID + "INTEGER," + COLUMN_EMAIL_BUS + "TEXT," + COLUMN_BUSINESS_NAME + " TEXT," + " " + COLUMN_PHONE_BUS + " INTEGER," + COLUMN_BUS_ADDRESS + " TEXT," + COLUMN_BUS_CITY + " TEXT," + COLUMN_BUS_STATE_PROVINCE + " TEXT  )";
+        db.execSQL(createTableBusinessInfo);
+        String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "(" + COLUMN_ORDER_ID + "INTEGER," + COLUMN_ITEM_ID + "INTEGER," + "ItemQty INTEGER," + "ItemValue INTEGER," + COLUMN_ORDER_STATUS1 + "TEXT," + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_BUSINESS_ID + "INTEGER)";
         db.execSQL(createTableOrderInfo);
     }
 
@@ -80,4 +83,42 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
+
+    //method to add customer data in the database
+    public boolean addCustomer(CustomerModel customerModel) {
+
+        //writing data in the database
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //linking data from getters to database fields
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_FIRST_NAME, customerModel.getFirstName());
+        cv.put(COLUMN_LAST_NAME, customerModel.getLastName());
+        cv.put(COLUMN_EMAIL_CUST, customerModel.getCustomerEmail());
+        cv.put(COLUMN_PHONE_CUST, customerModel.getCustomerEmail());
+        cv.put(COLUMN_ADDRESS, customerModel.getCustomerAddress());
+        cv.put(COLUMN_CITY, customerModel.getCustomerCity());
+        cv.put(COLUMN_STATE_PROVINCE, customerModel.getCustomerState());
+        cv.put(COLUMN_PASSWORD_CUST, customerModel.getPassword());
+        //table to insert data above
+        long insert = db.insert(CUSTOMER_INFO, null, cv);
+        return insert != -1;
+    }
+
+    //adding business data to database.
+    public boolean addBusiness(BusinessModel businessModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_BUSINESS_NAME, businessModel.getBusinessName());
+        cv.put(COLUMN_BUS_ADDRESS, businessModel.getBusinessAddress());
+        cv.put(COLUMN_BUS_CITY, businessModel.getBusinessCity());
+        cv.put(COLUMN_EMAIL_BUS, businessModel.getBusinessEmail());
+        cv.put(COLUMN_BUS_STATE_PROVINCE, businessModel.getBusinessState());
+        cv.put(COLUMN_PHONE_BUS, businessModel.getBusinessName());
+        cv.put(COLUMN_PASSWORD_BUS, businessModel.getBusPassword());
+        long insert = db.insert(BUSINESS_INFO, null, cv);
+        return insert != -1;
+    }
 }
+
+

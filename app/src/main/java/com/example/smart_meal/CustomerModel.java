@@ -5,19 +5,23 @@ public class CustomerModel {
     private String firstName;
     private String lastName;
     private String customerPhone;
+
+
+    private String password;
     private String customerAddress;
     private String customerCity;
     private String customerState;
     private String customerEmail;
 
     //Constructors
-    public CustomerModel(int id, String firstName, String lastName, String customerPhone, String customerAddress,
+    public CustomerModel(int id, String firstName, String lastName, String customerPhone, String password, String customerAddress,
                          String customerCity, String customerState, String customerEmail) {
         super();
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.customerPhone = customerPhone;
+        this.password = password;
         this.customerAddress = customerAddress;
         this.customerCity = customerCity;
         this.customerState = customerState;
@@ -107,5 +111,12 @@ public class CustomerModel {
         this.customerEmail = customerEmail;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
 }

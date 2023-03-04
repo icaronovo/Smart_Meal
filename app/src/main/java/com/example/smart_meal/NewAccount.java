@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -17,7 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewAccount extends AppCompatActivity {
-    Spinner spinnerTypeUser, spnState;
+    Spinner  spnState;
     Button btnCreate;
     EditText txtFName, txtLName, txtPhone, txtAddress, txtCity, txtEmail, txtPassword, txtConfirmPassword, businessName;
     TextView txtErrorP, txtErrorE;
@@ -66,7 +65,6 @@ public class NewAccount extends AppCompatActivity {
                 }
             }
         });
-
         //When the user click on "Create", it will create a new account
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,12 +86,18 @@ public class NewAccount extends AppCompatActivity {
                 String bName = businessName.getText().toString();
 
                 //constructor for  new users
+                BusinessModel businessModel = null;
+                CustomerModel customerModel = null;
                 try {
-                    BusinessModel businessModel = new BusinessModel(-1, bName, phone, address, city, state, email);
-                    ;
-                    CustomerModel customerModel = new CustomerModel(-1, name, txtLName.getText().toString(), phone, address, city, state, email);
+                    if (selectedRadioButton == radioBusiness.getId()) {
+                        businessModel = new BusinessModel(-1, bName, phone, address, password, city, state, email);
+                    } else if (selectedRadioButton == radioCustomer.getId()) {
+                        customerModel = new CustomerModel(-1, name, txtLName.getText().toString(), phone, password, address, city, state, email);
+
+                    }
+
                 } catch (Exception e) {
-                    if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()|| bName.isEmpty()) {
+                    if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty() || bName.isEmpty()) {
                         //Check if the information is empty
                         Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
                     } else if (!isEmailValid(email)) {
@@ -104,18 +108,18 @@ public class NewAccount extends AppCompatActivity {
                         txtErrorP.setText("Please make sure your passwords match");
                     } else if (!isPasswordValid(password)) {
                         //Check if the password is valid
-                        txtErrorP.setText("The password must contain at least:" +
-                                "\n - One lowercase letter" +
-                                "\n - One uppercase letter " +
-                                "\n - One digit " +
-                                "\n -One special character" +
-                                "\n - At least 8 characters long\n");
+                        txtErrorP.setText("The password must contain at least:" + "\n - One lowercase letter" + "\n - One uppercase letter " + "\n - One digit " + "\n -One special character" + "\n - At least 8 characters long\n");
                     } else {
                         //Case everything is ok, create a new account
                         txtErrorP.setText("");
                         txtErrorE.setText("");
                         Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
                     }
+                    DBHelper database = new DBHelper(NewAccount.this);
+                    boolean success = database.addCustomer(customerModel);
+                    database.addBusiness(businessModel);
+                    Toast.makeText(NewAccount.this,"success", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });

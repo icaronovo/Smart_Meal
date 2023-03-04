@@ -6,18 +6,23 @@ public class BusinessModel {
     private String businessName;
     private String businessPhone;
     private String businessAddress;
+
+
+    private String busPassword;
+
     private String businessCity;
     private String businessState;
     private String businessEmail;
 
     //Constructor
-    public BusinessModel(int id, String businessName, String businessPhone, String businessAddress, String businessCity,
+    public BusinessModel(int id, String businessName, String businessPhone, String businessAddress, String busPassword, String businessCity,
                          String businessState, String businessEmail) {
         super();
         this.id = id;
         this.businessName = businessName;
         this.businessPhone = businessPhone;
         this.businessAddress = businessAddress;
+        this.busPassword = busPassword;
         this.businessCity = businessCity;
         this.businessState = businessState;
         this.businessEmail = businessEmail;
@@ -98,6 +103,14 @@ public class BusinessModel {
 
     public void setBusinessEmail(String businessEmail) {
         this.businessEmail = businessEmail;
+    }
+
+    public String getBusPassword() {
+        return busPassword;
+    }
+
+    public void setBusPassword(String busPassword) {
+        this.busPassword = busPassword;
     }
 
 
