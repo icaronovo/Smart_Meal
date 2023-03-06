@@ -16,12 +16,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class NewAccount extends AppCompatActivity {
-    Spinner  spnState;
+    Spinner spnState;
     Button btnCreate;
     EditText txtFName, txtLName, txtPhone, txtAddress, txtCity, txtEmail, txtPassword, txtConfirmPassword, businessName;
     TextView txtErrorP, txtErrorE;
     RadioButton radioCustomer, radioBusiness;
     RadioGroup radioGroup;
+    DBHelper DB = new DBHelper(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,14 +87,16 @@ public class NewAccount extends AppCompatActivity {
                 String bName = businessName.getText().toString();
 
                 //constructor for  new users
-                BusinessModel businessModel = null;
                 CustomerModel customerModel = null;
+                BusinessModel businessModel = null;
                 try {
                     if (selectedRadioButton == radioBusiness.getId()) {
                         businessModel = new BusinessModel(-1, bName, phone, address, password, city, state, email);
+                        DB.addBusiness(businessModel);
+
                     } else if (selectedRadioButton == radioCustomer.getId()) {
                         customerModel = new CustomerModel(-1, name, txtLName.getText().toString(), phone, password, address, city, state, email);
-
+                        DB.addCustomer(customerModel);
                     }
 
                 } catch (Exception e) {
@@ -118,7 +121,7 @@ public class NewAccount extends AppCompatActivity {
                     DBHelper database = new DBHelper(NewAccount.this);
                     boolean success = database.addCustomer(customerModel);
                     database.addBusiness(businessModel);
-                    Toast.makeText(NewAccount.this,"success", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(NewAccount.this, "success", Toast.LENGTH_SHORT).show();
 
                 }
             }

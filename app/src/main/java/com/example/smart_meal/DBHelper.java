@@ -2,6 +2,8 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.IntentFilter;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -70,9 +72,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableItem);
         String createTableOrderStatus = "CREATE TABLE " + ORDER_STATUS + "(" + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ORDER_STATUS1 + " TEXT)";
         db.execSQL(createTableOrderStatus);
-        String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "(" + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_EMAIL_CUST + "TEXT," + COLUMN_FIRST_NAME + " TEXT," + COLUMN_LAST_NAME + " TEXT," + COLUMN_PHONE_CUST + " INTEGER," + COLUMN_ADDRESS + " TEXT," + COLUMN_CITY + " TEXT," + COLUMN_STATE_PROVINCE + " TEXT)";
+        String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "(" + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_EMAIL_CUST + "TEXT," + COLUMN_FIRST_NAME + " TEXT," + COLUMN_LAST_NAME + " TEXT," + COLUMN_PHONE_CUST + " INTEGER," + COLUMN_ADDRESS + " TEXT," + COLUMN_CITY + " TEXT," + COLUMN_STATE_PROVINCE + " TEXT," + COLUMN_PASSWORD_CUST + " TEXT)";
         db.execSQL(createTableCustomerInfo);
-        String createTableBusinessInfo = "CREATE TABLE " + BUSINESS_INFO + "(" + COLUMN_BUSINESS_ID + "INTEGER," + COLUMN_EMAIL_BUS + "TEXT," + COLUMN_BUSINESS_NAME + " TEXT," + " " + COLUMN_PHONE_BUS + " INTEGER," + COLUMN_BUS_ADDRESS + " TEXT," + COLUMN_BUS_CITY + " TEXT," + COLUMN_BUS_STATE_PROVINCE + " TEXT  )";
+        String createTableBusinessInfo = "CREATE TABLE " + BUSINESS_INFO + "(" + COLUMN_BUSINESS_ID + "INTEGER," + COLUMN_EMAIL_BUS + "TEXT," + COLUMN_BUSINESS_NAME + " TEXT," + " " + COLUMN_PHONE_BUS + " INTEGER," + COLUMN_BUS_ADDRESS + " TEXT," + COLUMN_BUS_CITY + " TEXT," + COLUMN_BUS_STATE_PROVINCE + " TEXT," + COLUMN_PASSWORD_BUS + "TEXT)";
         db.execSQL(createTableBusinessInfo);
         String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "(" + COLUMN_ORDER_ID + "INTEGER," + COLUMN_ITEM_ID + "INTEGER," + "ItemQty INTEGER," + "ItemValue INTEGER," + COLUMN_ORDER_STATUS1 + "TEXT," + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_BUSINESS_ID + "INTEGER)";
         db.execSQL(createTableOrderInfo);
@@ -80,8 +82,50 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // this is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
+    //CREATING TABLES OR DROPPING IF IT EXISTS
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("drop table if exists CUSTOMER");
+        db.execSQL("drop table if exists BUSINESS");
+        db.execSQL("drop table if exists ITEM");
+        db.execSQL("drop table if exists ORDER_STATUS");
+        db.execSQL("drop table if exists CUSTOMER_INFO");
+        db.execSQL("drop table if exists BUSINESS_INFO");
+        db.execSQL("drop table if exists ORDER_INFO");
 
+    }
+
+    //METHOD TO ADD A NEW USER
+    public boolean insertUser(String COLUMN_EMAIL_CUST, String COLUMN_PASSWORD_CUST) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", COLUMN_EMAIL_CUST);
+        contentValues.put("password", COLUMN_PASSWORD_CUST);
+        long result = db.insert("users", null, contentValues);
+        return result != -1;
+    }
+
+    //METHOD TO ADD A NEW BUSINESS
+    public boolean insertBusiness(String COLUMN_EMAIL_BUS, String COLUMN_PASSWORD_BUS) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", COLUMN_EMAIL_BUS);
+        contentValues.put("password", COLUMN_PASSWORD_BUS);
+        long result = db.insert("users", null, contentValues);
+        return result != -1;
+    }
+
+    //checking if the user already exists in the database
+    public boolean checkUser(String COLUMN_EMAIL_CUST, String COLUMN_EMAIL_BUS) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from users where username =?", new String[]{COLUMN_EMAIL_CUST, COLUMN_EMAIL_BUS});
+        return cursor.getCount() > 0;
+    }
+
+    //CHECKING IF PASSWORD ALREADY EXISTS IN THE DATABASE
+    public boolean checkUserPassword(String COLUMN_EMAIL_CUST, String COLUMN_PASSWORD_CUST, String COLUMN_EMAIL_BUS, String COLUMN_PASSWORD_BUS) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("Select * from users where username =? and password=?", new String[]{COLUMN_EMAIL_CUST, COLUMN_PASSWORD_CUST, COLUMN_EMAIL_BUS, COLUMN_PASSWORD_BUS});
+        return cursor.getCount() > 0;
     }
 
     //method to add customer data in the database

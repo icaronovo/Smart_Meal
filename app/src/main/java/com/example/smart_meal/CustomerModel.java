@@ -6,7 +6,6 @@ public class CustomerModel {
     private String lastName;
     private String customerPhone;
 
-
     private String password;
     private String customerAddress;
     private String customerCity;
