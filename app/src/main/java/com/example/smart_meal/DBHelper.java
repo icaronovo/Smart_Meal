@@ -2,7 +2,6 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.IntentFilter;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -42,6 +41,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_BUSINESS_NAME = "BusinessName";
     public static final String BUSINESS_INFO = "BUSINESS_INFO";
     public static final String ORDER_INFO = "ORDER_INFO";
+    public static final String COLUMN_ITEM_QTY = "ItemQty";
 
     //public static final String DBNAMECUSTOMER = "LoginCustomer.db";
     //public static final String DBNAMEBUSINESS = "LoginBusiness.db";
@@ -64,19 +64,23 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //String createTable = "CREATE TABLE BUSINESS(BusinessID INTEGER PRIMARY KEY AUTOINCREMENT, EmailBus TEXT)"
-        String createTableCustomer = " CREATE TABLE " + CUSTOMER + "(" + COLUMN_CUSTOMER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_EMAIL_CUST + " TEXT, " + COLUMN_PASSWORD_CUST + " TEXT)";
+        String createTableCustomer = " CREATE TABLE " + CUSTOMER + "(" + COLUMN_CUSTOMER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_EMAIL_CUST + " TEXT, " + COLUMN_PASSWORD_CUST + " TEXT)";
         db.execSQL(createTableCustomer);
-        String createTableBusiness = " CREATE TABLE " + BUSINESS + " (" + COLUMN_BUSINESS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_EMAIL_BUS + " TEXT," + COLUMN_PASSWORD_BUS + " TEXT)";
+        String createTableBusiness = " CREATE TABLE " + BUSINESS + " (" + COLUMN_BUSINESS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_EMAIL_BUS + " TEXT," + COLUMN_PASSWORD_BUS + " TEXT)";
         db.execSQL(createTableBusiness);
-        String createTableItem = "CREATE TABLE " + ITEM + "(" + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_ITEM_VALUE + " INTEGER, " + COLUMN_ITEM_NAME + " TEXT, " + COLUMN_ITEM_DESCRIPTION + " TEXT)";
+        String createTableItem = "CREATE TABLE " + ITEM + "(" + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ITEM_VALUE + " INTEGER, " +
+                COLUMN_ITEM_NAME + " TEXT, " + COLUMN_ITEM_DESCRIPTION + " TEXT)";
         db.execSQL(createTableItem);
         String createTableOrderStatus = "CREATE TABLE " + ORDER_STATUS + "(" + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " + COLUMN_ORDER_STATUS1 + " TEXT)";
         db.execSQL(createTableOrderStatus);
-        String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "(" + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_EMAIL_CUST + "TEXT," + COLUMN_FIRST_NAME + " TEXT," + COLUMN_LAST_NAME + " TEXT," + COLUMN_PHONE_CUST + " INTEGER," + COLUMN_ADDRESS + " TEXT," + COLUMN_CITY + " TEXT," + COLUMN_STATE_PROVINCE + " TEXT," + COLUMN_PASSWORD_CUST + " TEXT)";
+        String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "(" + COLUMN_CUSTOMER_ID + "INTEGER, " + COLUMN_EMAIL_CUST + "TEXT," + COLUMN_FIRST_NAME + " TEXT," + COLUMN_LAST_NAME + " TEXT," + COLUMN_PHONE_CUST + " INTEGER,"
+                + COLUMN_ADDRESS + " TEXT," + COLUMN_CITY + " TEXT," + COLUMN_STATE_PROVINCE + " TEXT," + COLUMN_PASSWORD_CUST + " TEXT)";
         db.execSQL(createTableCustomerInfo);
-        String createTableBusinessInfo = "CREATE TABLE " + BUSINESS_INFO + "(" + COLUMN_BUSINESS_ID + "INTEGER," + COLUMN_EMAIL_BUS + "TEXT," + COLUMN_BUSINESS_NAME + " TEXT," + " " + COLUMN_PHONE_BUS + " INTEGER," + COLUMN_BUS_ADDRESS + " TEXT," + COLUMN_BUS_CITY + " TEXT," + COLUMN_BUS_STATE_PROVINCE + " TEXT," + COLUMN_PASSWORD_BUS + "TEXT)";
+        String createTableBusinessInfo = "CREATE TABLE " + BUSINESS_INFO + "(" + COLUMN_BUSINESS_ID + "INTEGER, " + COLUMN_EMAIL_BUS + "TEXT," + COLUMN_BUSINESS_NAME + " TEXT," + " " + COLUMN_PHONE_BUS + " INTEGER,"
+                + COLUMN_BUS_ADDRESS + " TEXT," + COLUMN_BUS_CITY + " TEXT," + COLUMN_BUS_STATE_PROVINCE + " TEXT," + COLUMN_PASSWORD_BUS + "TEXT)";
         db.execSQL(createTableBusinessInfo);
-        String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "(" + COLUMN_ORDER_ID + "INTEGER," + COLUMN_ITEM_ID + "INTEGER," + "ItemQty INTEGER," + "ItemValue INTEGER," + COLUMN_ORDER_STATUS1 + "TEXT," + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_BUSINESS_ID + "INTEGER)";
+        String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "(" + COLUMN_ORDER_ID + "INTEGER," + COLUMN_ITEM_ID + "INTEGER," + COLUMN_ITEM_QTY + " INTEGER," +
+                COLUMN_ITEM_VALUE + "INTEGER, " + COLUMN_ORDER_STATUS1 + "TEXT," + COLUMN_CUSTOMER_ID + "INTEGER," + COLUMN_BUSINESS_ID + "INTEGER)";
         db.execSQL(createTableOrderInfo);
     }
 
@@ -95,29 +99,30 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //METHOD TO ADD A NEW USER
-    public boolean insertUser(String COLUMN_EMAIL_CUST, String COLUMN_PASSWORD_CUST) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username", COLUMN_EMAIL_CUST);
-        contentValues.put("password", COLUMN_PASSWORD_CUST);
-        long result = db.insert("users", null, contentValues);
-        return result != -1;
-    }
-
-    //METHOD TO ADD A NEW BUSINESS
-    public boolean insertBusiness(String COLUMN_EMAIL_BUS, String COLUMN_PASSWORD_BUS) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("username", COLUMN_EMAIL_BUS);
-        contentValues.put("password", COLUMN_PASSWORD_BUS);
-        long result = db.insert("users", null, contentValues);
-        return result != -1;
-    }
+//    public boolean insertUser(String COLUMN_EMAIL_CUST, String COLUMN_PASSWORD_CUST) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("username", COLUMN_EMAIL_CUST);
+//        contentValues.put("password", COLUMN_PASSWORD_CUST);
+//        long result = db.insert("users", null, contentValues);
+//        return result != -1;
+//    }
+//
+//    //METHOD TO ADD A NEW BUSINESS
+//    public boolean insertBusiness(String COLUMN_EMAIL_BUS, String COLUMN_PASSWORD_BUS) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        ContentValues contentValues = new ContentValues();
+//        contentValues.put("username", COLUMN_EMAIL_BUS);
+//        contentValues.put("password", COLUMN_PASSWORD_BUS);
+//        long result = db.insert("users", null, contentValues);
+//        return result != -1;
+//    }
 
     //checking if the user already exists in the database
     public boolean checkUser(String COLUMN_EMAIL_CUST, String COLUMN_EMAIL_BUS) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where username =?", new String[]{COLUMN_EMAIL_CUST, COLUMN_EMAIL_BUS});
+        cursor.close();
         return cursor.getCount() > 0;
     }
 
@@ -125,6 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean checkUserPassword(String COLUMN_EMAIL_CUST, String COLUMN_PASSWORD_CUST, String COLUMN_EMAIL_BUS, String COLUMN_PASSWORD_BUS) {
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("Select * from users where username =? and password=?", new String[]{COLUMN_EMAIL_CUST, COLUMN_PASSWORD_CUST, COLUMN_EMAIL_BUS, COLUMN_PASSWORD_BUS});
+        cursor.close();
         return cursor.getCount() > 0;
     }
 
@@ -136,10 +142,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         //linking data from getters to database fields
         ContentValues cv = new ContentValues();
+        //cv.put(COLUMN_CUSTOMER_ID,customerModel.getId());
         cv.put(COLUMN_FIRST_NAME, customerModel.getFirstName());
         cv.put(COLUMN_LAST_NAME, customerModel.getLastName());
         cv.put(COLUMN_EMAIL_CUST, customerModel.getCustomerEmail());
-        cv.put(COLUMN_PHONE_CUST, customerModel.getCustomerEmail());
+        cv.put(COLUMN_PHONE_CUST, customerModel.getCustomerPhone());
         cv.put(COLUMN_ADDRESS, customerModel.getCustomerAddress());
         cv.put(COLUMN_CITY, customerModel.getCustomerCity());
         cv.put(COLUMN_STATE_PROVINCE, customerModel.getCustomerState());
@@ -153,12 +160,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean addBusiness(BusinessModel businessModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        //cv.put(COLUMN_BUSINESS_ID,businessModel.getId());
         cv.put(COLUMN_BUSINESS_NAME, businessModel.getBusinessName());
         cv.put(COLUMN_BUS_ADDRESS, businessModel.getBusinessAddress());
         cv.put(COLUMN_BUS_CITY, businessModel.getBusinessCity());
         cv.put(COLUMN_EMAIL_BUS, businessModel.getBusinessEmail());
         cv.put(COLUMN_BUS_STATE_PROVINCE, businessModel.getBusinessState());
-        cv.put(COLUMN_PHONE_BUS, businessModel.getBusinessName());
+        cv.put(COLUMN_PHONE_BUS, businessModel.getBusinessPhone());
         cv.put(COLUMN_PASSWORD_BUS, businessModel.getBusPassword());
         long insert = db.insert(BUSINESS_INFO, null, cv);
         return insert != -1;

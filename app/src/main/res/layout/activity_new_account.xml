@@ -63,8 +63,8 @@
             android:autofillHints=""
             android:drawableStart="@drawable/shop_icon"
             android:ems="10"
+            android:hint="@string/txtBusiness"
             android:inputType="textPersonName"
-            android:text="@string/txtBusiness"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />

@@ -28,7 +28,6 @@ public class NewAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-
         btnCreate = findViewById(R.id.btnCreate);
         txtFName = findViewById(R.id.txtName);
         txtLName = findViewById(R.id.txtLastName);
@@ -87,8 +86,8 @@ public class NewAccount extends AppCompatActivity {
                 String bName = businessName.getText().toString();
 
                 //constructor for  new users
-                CustomerModel customerModel = null;
-                BusinessModel businessModel = null;
+                CustomerModel customerModel ;
+                BusinessModel businessModel ;
                 try {
                     if (selectedRadioButton == radioBusiness.getId()) {
                         businessModel = new BusinessModel(-1, bName, phone, address, password, city, state, email);
@@ -118,11 +117,7 @@ public class NewAccount extends AppCompatActivity {
                         txtErrorE.setText("");
                         Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
                     }
-                    DBHelper database = new DBHelper(NewAccount.this);
-                    boolean success = database.addCustomer(customerModel);
-                    database.addBusiness(businessModel);
-                    Toast.makeText(NewAccount.this, "success", Toast.LENGTH_SHORT).show();
-
+                    DB.close();
                 }
             }
         });
@@ -140,6 +135,7 @@ public class NewAccount extends AppCompatActivity {
 
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(password);
-        return m.matches();
+        //return m.matches();
+        return  true;
     }
 }
