@@ -32,6 +32,7 @@ public class LoginActivity extends AppCompatActivity {
                 String user = email.getText().toString();
                 String password = pass.getText().toString();
 
+                // UNCOMMENT TO TEST THE DATABASE
                 //checking if user exists and validating with db, simple validation to prevent empty fields
 //                if (user.equals("") || password.equals(""))
 //                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
@@ -42,8 +43,12 @@ public class LoginActivity extends AppCompatActivity {
 //                        startActivity(new Intent(LoginActivity.this, NewAccount.class));
 //                    }
 //                }
-                //Está indo direto para o Business Main só irmos avançando enquanto nao termino/testo db
+
+                //UNCOMMENT TO TEST THE CUSTOMER CLASS
                 startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+
+                //UNCOMMENT TO TEST THE  BUSINESS CLASS
+//                startActivity(new Intent(LoginActivity.this, BusinessMain.class));
             }
         });
         //Create new account
