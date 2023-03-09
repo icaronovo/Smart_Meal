@@ -5,10 +5,10 @@
     android:layout_height="match_parent"
     tools:context=".CHomeFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="tESTE 1" />
+        android:layout_height="wrap_content"
+        android:id="@+id/recycler"
+        />
 
 </FrameLayout>
