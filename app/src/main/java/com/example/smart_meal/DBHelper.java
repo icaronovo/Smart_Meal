@@ -2,6 +2,7 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
@@ -9,7 +10,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 7;
+    public static final int dbVersion = 8;
 
     //creating customer table and fields
     public static final String CUSTOMER = "CUSTOMER";
@@ -163,26 +164,35 @@ public class DBHelper extends SQLiteOpenHelper {
 //    }
 
 //    checking if the user already exists in the database, tried to run, query error
-//    public boolean checkUser(String COLUMN_EMAIL_CUST) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("Select * from  " +  CUSTOMER + " where  COLUMN_EMAIL_CUST = ? ", new String[]{COLUMN_EMAIL_CUST});
-//        cursor.close();
+//    public boolean checkUser(String EmailCust) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("Select * from  " +  CUSTOMER + " where  EmailCust = ? ", new String[]{EmailCust});
+//        //cursor.close();
 //        return cursor.getCount() > 0;
 //    }
-//    public boolean checkBus(String COLUMN_EMAIL_BUS) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("Select * from " + BUSINESS + " where COLUMN_EMAIL_BUS = ? ", new String[]{COLUMN_EMAIL_BUS});
-//        cursor.close();
+//    public boolean checkBus(String EmailBus) {
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("Select * from " + BUSINESS + " where EmailBus = ? ", new String[]{EmailBus});
+//        //cursor.close();
 //        return cursor.getCount() > 0;
 //    }
 
-    //CHECKING IF PASSWORD ALREADY EXISTS IN THE DATABASE
-//    public boolean checkUserPassword(String COLUMN_EMAIL_CUST, String COLUMN_PASSWORD_CUST, String COLUMN_EMAIL_BUS, String COLUMN_PASSWORD_BUS) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("Select * from users where username = ? and password = ?", new String[]{COLUMN_EMAIL_CUST, COLUMN_PASSWORD_CUST, COLUMN_EMAIL_BUS, COLUMN_PASSWORD_BUS});
-//        cursor.close();
-//        return cursor.getCount() > 0;
-//    }
+//    CHECKING IF PASSWORD ALREADY EXISTS IN THE DATABASE
+    public boolean checkUserPasswordCustomer (String Email, String Password) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " +  CUSTOMER + " where EmailCust = ? and PasswordCust = ?", new String[]{Email, Password});
+        System.out.print("______________Cursor = " + cursor);
+        //cursor.close();
+        return cursor.getCount() > 0;
+    }
+    public boolean checkUserPasswordBusiness (String EmailBus, String PasswordBus) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("Select * from " + BUSINESS + " where EmailBus = ? and PasswordBus = ?", new String[]{EmailBus, PasswordBus});
+        //cursor.close();
+        return cursor.getCount() > 0;
+    }
+
+//    public boolean checkBusinessPasssword ()
 
     //method to add customer data in the database
     public boolean addCustomer(CustomerModel customerModel) {
