@@ -13,11 +13,11 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link CHomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+///**
+// * A simple {@link Fragment} subclass.
+// * Use the {@link CHomeFragment#newInstance} factory method to
+// * create an instance of this fragment.
+// */
 public class CHomeFragment extends Fragment {
 
     RecyclerView recyclerView;

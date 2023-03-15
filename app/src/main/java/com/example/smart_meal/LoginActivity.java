@@ -32,22 +32,26 @@ public class LoginActivity extends AppCompatActivity {
                 String user = email.getText().toString();
                 String password = pass.getText().toString();
 
-                // UNCOMMENT TO TEST THE DATABASE
-                //checking if user exists and validating with db, simple validation to prevent empty fields
+//                 UNCOMMENT TO TEST THE DATABASE, tried to run, query problem
+//                checking if user exists and validating with db, simple validation to prevent empty fields
 //                if (user.equals("") || password.equals(""))
 //                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
 //                else {
-//                    Boolean checkUser = DB.checkUser(DBHelper.COLUMN_EMAIL_CUST, DBHelper.COLUMN_EMAIL_BUS);
-//                    Boolean checkUserPassword = DB.checkUserPassword(DBHelper.COLUMN_EMAIL_CUST, DBHelper.COLUMN_PASSWORD_CUST, DBHelper.COLUMN_EMAIL_BUS, DBHelper.COLUMN_PASSWORD_BUS);
-//                    if (checkUser == false || checkUserPassword == false) {
+//                    Boolean checkUser = DB.checkUser(DBHelper.COLUMN_EMAIL_CUST);
+//                    Boolean checkBus = DB.checkBus(DBHelper.COLUMN_EMAIL_BUS);
+//                    //Boolean checkUserPassword = DB.checkUserPassword(DBHelper.COLUMN_EMAIL_CUST, DBHelper.COLUMN_PASSWORD_CUST, DBHelper.COLUMN_EMAIL_BUS, DBHelper.COLUMN_PASSWORD_BUS);
+//                    //checkUserPassword == false add it on if when working
+//                    if (checkUser == false || checkBus == false) {
 //                        startActivity(new Intent(LoginActivity.this, NewAccount.class));
-//                    }
+//                    }//else {
+//                        startActivity(new Intent(LoginActivity.this, CHomeFragment.class));
+//                    //}
 //                }
-
-                //UNCOMMENT TO TEST THE CUSTOMER CLASS
-                startActivity(new Intent(LoginActivity.this, CustomerMain.class));
-
-                //UNCOMMENT TO TEST THE  BUSINESS CLASS
+//
+//                //UNCOMMENT TO TEST THE CUSTOMER CLASS
+//                startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+//
+//                //UNCOMMENT TO TEST THE  BUSINESS CLASS
 //                startActivity(new Intent(LoginActivity.this, BusinessMain.class));
             }
         });
