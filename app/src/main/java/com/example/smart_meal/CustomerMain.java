@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -93,9 +94,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
     @Override
     public void onItemClick(View view, int position) {
-        //Apenas para finalidade de teste
+        //Test to see if the items on recycler view is clickable
         Intent intent = new Intent(CustomerMain.this, CustomerSearch.class);
-
+        intent.putExtra("TEST",position);
         startActivity(intent);
+        //End
     }
 }

@@ -54,6 +54,7 @@ public class ItemAdapter extends RecyclerView.Adapter{
     public interface ItemClickListener{
         void onItemClick(View view, int position);
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView itemImage;
@@ -65,12 +66,13 @@ public class ItemAdapter extends RecyclerView.Adapter{
             textTitle = itemView.findViewById(R.id.txtTitleItem);
             textPrice = itemView.findViewById(R.id.txtPriceItem);
             textDesc = itemView.findViewById(R.id.txtDescItem);
+            itemView.setOnClickListener(this);
         }
 
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             if(itemClickListener != null){
-                itemClickListener.onItemClick(v,getAdapterPosition());
+                itemClickListener.onItemClick(view,getAdapterPosition());
             }
         }
     }
