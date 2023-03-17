@@ -13,6 +13,13 @@
         android:theme="@style/Theme.Smart_Meal"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerSearch"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".CustomerMain"
             android:exported="false">
             <meta-data

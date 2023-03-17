@@ -30,13 +30,38 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        //Recycler view
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
         int numOfColumns = 1;
         recyclerView.setLayoutManager(new GridLayoutManager(this,numOfColumns));
         itemAdapter = new ItemAdapter(this,initData());
         itemAdapter.setClickListener(this);
         recyclerView.setAdapter(itemAdapter);
+
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.home:
+                        recyclerView.setVisibility(View.VISIBLE);
+                        return true;
+                    case R.id.search:
+                        startActivity(new Intent(CustomerMain.this,CustomerSearch.class));
+                        return true;
+                    case R.id.order:
+                        recyclerView.setVisibility(View.INVISIBLE);
+
+                        return true;
+                    case R.id.profile:
+                        recyclerView.setVisibility(View.INVISIBLE);
+                        return true;
+                }
+
+                return false;
+            }
+        });
     }
 
     //Created a list to tryout the recyclervier
