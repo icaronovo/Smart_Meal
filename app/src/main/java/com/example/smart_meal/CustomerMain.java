@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -25,6 +26,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     RecyclerView recyclerView;
     ImageView imageView;
     ItemAdapter itemAdapter;
+    TextView titleText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,22 +41,29 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         itemAdapter.setClickListener(this);
         recyclerView.setAdapter(itemAdapter);
 
+        //Top text
+        titleText = findViewById(R.id.topText);
+        titleText.setText("Welcome User");
+
+        //Bottom naviagation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.home:
+                        titleText.setText("Welcome User");
                         recyclerView.setVisibility(View.VISIBLE);
                         return true;
                     case R.id.search:
                         startActivity(new Intent(CustomerMain.this,CustomerSearch.class));
                         return true;
                     case R.id.order:
+                        titleText.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
-
                         return true;
                     case R.id.profile:
+                        titleText.setText("Profile");
                         recyclerView.setVisibility(View.INVISIBLE);
                         return true;
                 }
@@ -84,6 +93,9 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
     @Override
     public void onItemClick(View view, int position) {
-        Toast.makeText(this,"Selected space",Toast.LENGTH_LONG).show();
+        //Apenas para finalidade de teste
+        Intent intent = new Intent(CustomerMain.this, CustomerSearch.class);
+
+        startActivity(intent);
     }
 }
