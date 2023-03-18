@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin, btnNewAccount;
@@ -20,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         Intent intent = getIntent();
-        int typeCustomer = getIntent().getIntExtra("TEST",-1);
+        int typeCustomer = getIntent().getIntExtra("TYPE",-1);
 
         btnLogin = findViewById(R.id.txtLogin);
         btnNewAccount = findViewById(R.id.txtNewAccount);
@@ -38,26 +37,30 @@ public class LoginActivity extends AppCompatActivity {
                 // UNCOMMENT TO TEST THE DATABASE
                 //checking if user exists and validating with db, simple validation to prevent empty fields
 //                if (user.equals("") || password.equals(""))
-//                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivityBusiness.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
 //                else {
-//                    Boolean checkUser = DB.checkUser(DBHelper.COLUMN_EMAIL_CUST, DBHelper.COLUMN_EMAIL_BUS);
-//                    Boolean checkUserPassword = DB.checkUserPassword(DBHelper.COLUMN_EMAIL_CUST, DBHelper.COLUMN_PASSWORD_CUST, DBHelper.COLUMN_EMAIL_BUS, DBHelper.COLUMN_PASSWORD_BUS);
-//                    if (checkUser == false || checkUserPassword == false) {
-//                        startActivity(new Intent(LoginActivity.this, NewAccount.class));
+//                    //Boolean checkBus = DB.checkBus(DBHelper.COLUMN_EMAIL_BUS);
+//                    Boolean checkUserPasswordBusiness = DB.checkUserPasswordBusiness(email.getText().toString(), pass.getText().toString());
+////                    checkUserPassword == false // add it on if when working
+//                    if (checkUserPasswordBusiness == false) { //checkBus == false ||
+//                        startActivity(new Intent(LoginActivityBusiness.this, NewAccount.class));
+//                    } else {
+//                        startActivity(new Intent(LoginActivityBusiness.this, CHomeFragment.class));
 //                    }
 //                }
 
+//                Log.d("MinhaTag","Entrou");
                 if(typeCustomer == 0){
                     //UNCOMMENT TO TEST THE CUSTOMER CLASS
-                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                    startActivity(new Intent(LoginActivity.this, BusinessMain.class));
                 } else if (typeCustomer == 1){
                     //UNCOMMENT TO TEST THE  BUSINESS CLASS
-                    startActivity(new Intent(LoginActivity.this, BusinessMain.class));
+                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
                 }
 
             }
         });
-        
+
         //Create new account
         btnNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
