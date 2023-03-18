@@ -84,6 +84,7 @@ public class NewAccount extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
                 String confirmPassword = txtConfirmPassword.getText().toString();
                 String bName = businessName.getText().toString();
+                String lastName = txtLName.getText().toString();
 
                 //constructor for  new users
                 CustomerModel customerModel ;
@@ -94,7 +95,7 @@ public class NewAccount extends AppCompatActivity {
                         DB.addBusiness(businessModel);
 
                     } else if (selectedRadioButton == radioCustomer.getId()) {
-                        customerModel = new CustomerModel(-1, name, txtLName.getText().toString(), phone, password, address, city, state, email);
+                        customerModel = new CustomerModel(-1, name, lastName, phone, password, address, city, state, email);
                         DB.addCustomer(customerModel);
                     }
 
