@@ -74,6 +74,15 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         });
     }
 
+
+    @Override
+    public void onItemClick(View view, int position) {
+        //Test to see if the items on recycler view is clickable
+        Intent intent = new Intent(CustomerMain.this, CustomerSearch.class);
+        intent.putExtra("TEST",position);
+        startActivity(intent);
+        //End
+    }
     //Created a list to tryout the recyclervier
     //Latter figure out how to import from database :)
     private List<ItemModel> initData(){
@@ -90,14 +99,5 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
 
         return itemList;
-    }
-
-    @Override
-    public void onItemClick(View view, int position) {
-        //Test to see if the items on recycler view is clickable
-        Intent intent = new Intent(CustomerMain.this, CustomerSearch.class);
-        intent.putExtra("TEST",position);
-        startActivity(intent);
-        //End
     }
 }

@@ -14,7 +14,7 @@ public class CustomerSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_search);
 
-        //Test
+        //Test to see if the Recycler View is clickable
         TextView test = findViewById(R.id.test);
         Intent intent = getIntent();
         int test2 = getIntent().getIntExtra("TEST",0);

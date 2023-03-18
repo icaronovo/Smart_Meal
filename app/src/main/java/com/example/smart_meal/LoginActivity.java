@@ -19,6 +19,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        Intent intent = getIntent();
+        int typeCustomer = getIntent().getIntExtra("TEST",-1);
+
         btnLogin = findViewById(R.id.txtLogin);
         btnNewAccount = findViewById(R.id.txtNewAccount);
         email = findViewById(R.id.txtEmail);
@@ -44,13 +47,17 @@ public class LoginActivity extends AppCompatActivity {
 //                    }
 //                }
 
-                //UNCOMMENT TO TEST THE CUSTOMER CLASS
-                startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                if(typeCustomer == 0){
+                    //UNCOMMENT TO TEST THE CUSTOMER CLASS
+                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                } else if (typeCustomer == 1){
+                    //UNCOMMENT TO TEST THE  BUSINESS CLASS
+                    startActivity(new Intent(LoginActivity.this, BusinessMain.class));
+                }
 
-                //UNCOMMENT TO TEST THE  BUSINESS CLASS
-//                startActivity(new Intent(LoginActivity.this, BusinessMain.class));
             }
         });
+        
         //Create new account
         btnNewAccount.setOnClickListener(new View.OnClickListener() {
             @Override
