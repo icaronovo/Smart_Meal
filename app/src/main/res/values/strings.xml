@@ -7,8 +7,7 @@
     <string name="txtLogin">Login</string>
     <string name="txtNewAccount">New Account</string>
     <string name="txtType">What best describes you?</string>
-    <string name="txtFName">First name</string>
-    <string name="txtLName">Last name</string>
+    <string name="txtFName">Full name</string>
     <string name="txtPhone">Phone Number </string>
     <string name="txtAddress">Address</string>
     <string name="txtCity">City</string>

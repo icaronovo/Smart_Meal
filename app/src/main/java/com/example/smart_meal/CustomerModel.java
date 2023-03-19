@@ -2,32 +2,34 @@ package com.example.smart_meal;
 
 public class CustomerModel {
     private int id;
-    private String firstName;
-    private String lastName;
+    private String accountType;
+    private String customerEmail;
+    private String password;
+    private String customerName;
     private String customerPhone;
 
-    private String password;
+
     private String customerAddress;
     private String customerCity;
-    private String customerState;
-    private String customerEmail;
+    private String customerProvince;
+
 
     //Constructors
-    public CustomerModel(int id, String firstName, String lastName, String customerPhone, String password, String customerAddress,
-                         String customerCity, String customerState, String customerEmail) {
+
+    public CustomerModel (int id, String accountType, String customerEmail,
+                         String password, String customerName, String customerPhone,
+                         String customerAddress, String customerCity, String customerProvince) {
         super();
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.customerPhone = customerPhone;
+        this.accountType = accountType;
+        this.customerEmail = customerEmail;
         this.password = password;
+        this.customerName = customerName;
+        this.customerPhone = customerPhone;
         this.customerAddress = customerAddress;
         this.customerCity = customerCity;
-        this.customerState = customerState;
-        this.customerEmail = customerEmail;
+        this.customerProvince = customerProvince;
     }
-
-
     //To String
 
 
@@ -35,17 +37,20 @@ public class CustomerModel {
     public String toString() {
         return "CustomerModel{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", accountType='" + accountType + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", password='" + password + '\'' +
+                ", customerName='" + customerName + '\'' +
                 ", customerPhone='" + customerPhone + '\'' +
                 ", customerAddress='" + customerAddress + '\'' +
                 ", customerCity='" + customerCity + '\'' +
-                ", customerState='" + customerState + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
+                ", customerProvince='" + customerProvince + '\'' +
                 '}';
     }
 
     //Getters and Setters
+
+
     public int getId() {
         return id;
     }
@@ -54,20 +59,36 @@ public class CustomerModel {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getAccountType() {
+        return accountType;
     }
 
-    public void setFistName(String fistName) {
-        this.firstName = fistName;
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getCustomerEmail() {
+        return customerEmail;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setCustomerEmail(String customerEmail) {
+        this.customerEmail = customerEmail;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getCustomerPhone() {
@@ -94,28 +115,11 @@ public class CustomerModel {
         this.customerCity = customerCity;
     }
 
-    public String getCustomerState() {
-        return customerState;
+    public String getCustomerProvince() {
+        return customerProvince;
     }
 
-    public void setCustomerState(String customerState) {
-        this.customerState = customerState;
+    public void setCustomerProvince(String customerProvince) {
+        this.customerProvince = customerProvince;
     }
-
-    public String getCustomerEmail() {
-        return customerEmail;
-    }
-
-    public void setCustomerEmail(String customerEmail) {
-        this.customerEmail = customerEmail;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 }

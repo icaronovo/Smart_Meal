@@ -24,13 +24,14 @@ public class NewAccount extends AppCompatActivity {
     RadioGroup radioGroup;
     DBHelper DB = new DBHelper(this);
 
+    String accountType;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
         btnCreate = findViewById(R.id.btnCreate);
         txtFName = findViewById(R.id.txtName);
-        txtLName = findViewById(R.id.txtLastName);
         txtPhone = findViewById(R.id.txtPhone);
         txtAddress = findViewById(R.id.txtAddress);
         txtCity = findViewById(R.id.txtCity);
@@ -55,12 +56,12 @@ public class NewAccount extends AppCompatActivity {
                     case R.id.radioCustomer:
                         businessName.setVisibility(View.GONE);
                         txtFName.setVisibility(View.VISIBLE);
-                        txtLName.setVisibility(View.VISIBLE);
+                        accountType = "Customer";
                         break;
                     case R.id.radioBusiness:
                         businessName.setVisibility(View.VISIBLE);
                         txtFName.setVisibility(View.GONE);
-                        txtLName.setVisibility(View.GONE);
+                        accountType = "Business";
                         break;
                 }
             }
@@ -71,11 +72,7 @@ public class NewAccount extends AppCompatActivity {
             public void onClick(View v) {
                 //Get the information on the form
                 String name = txtFName.getText().toString();
-                int selectedRadioButton = radioGroup.getCheckedRadioButtonId();
-                //In case that it is a Customer, get their last name
-                if (selectedRadioButton == radioCustomer.getId()) {
-                    String lastName = txtLName.getText().toString();
-                }
+                String type = accountType;
                 String phone = txtPhone.getText().toString();
                 String address = txtAddress.getText().toString();
                 String city = txtCity.getText().toString();
@@ -83,24 +80,16 @@ public class NewAccount extends AppCompatActivity {
                 String email = txtEmail.getText().toString();
                 String password = txtPassword.getText().toString();
                 String confirmPassword = txtConfirmPassword.getText().toString();
-                String bName = businessName.getText().toString();
-                String lastName = txtLName.getText().toString();
 
                 //constructor for  new users
                 CustomerModel customerModel ;
                 BusinessModel businessModel ;
                 try {
-                    if (selectedRadioButton == radioBusiness.getId()) {
-                        businessModel = new BusinessModel(-1, bName, phone, address, password, city, state, email);
-                        DB.addBusiness(businessModel);
+                        customerModel = new CustomerModel(-1, type, email, password, name, phone, address, city, state);
 
-                    } else if (selectedRadioButton == radioCustomer.getId()) {
-                        customerModel = new CustomerModel(-1, name, lastName, phone, password, address, city, state, email);
                         DB.addCustomer(customerModel);
-                    }
-
                 } catch (Exception e) {
-                    if (name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty() || bName.isEmpty()) {
+                    if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
                         //Check if the information is empty
                         Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
                     } else if (!isEmailValid(email)) {
