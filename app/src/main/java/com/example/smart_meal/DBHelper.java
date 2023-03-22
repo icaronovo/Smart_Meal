@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 10;
+    public static final int dbVersion = 11;
 
 
     //creating item table and fields
@@ -52,14 +52,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //String createTable = "CREATE TABLE BUSINESS(BusinessID INTEGER PRIMARY KEY AUTOINCREMENT, EmailBus TEXT)"
         String createTableItem = "CREATE TABLE " + ITEM + "("
-                + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ITEM_VALUE + " INTEGER, "
                 + COLUMN_ITEM_NAME + " TEXT, "
                 + COLUMN_ITEM_DESCRIPTION + " TEXT)";
         db.execSQL(createTableItem);
 
         String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "("
-                + COLUMN_CUSTOMER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_CUSTOMER_ID + " INTEGER PRIMARY KEY, "
                 + ACCOUNT_TYPE + " TEXT, "
                 + COLUMN_EMAIL + " TEXT, "
                 + COLUMN_PASSWORD + " TEXT, "
@@ -71,7 +71,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableCustomerInfo);
 
         String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "("
-                + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ORDER_STATUS + " INTEGER , "
                 + COLUMN_ITEM_ID + " INTEGER, "
                 + COLUMN_ITEM_VALUE + " INTEGER, "

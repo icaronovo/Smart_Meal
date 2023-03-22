@@ -51,6 +51,18 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
                     }
                 }
+
+                //Apagar dps
+
+//                Intent intent = getIntent();
+//                int typeCustomer = getIntent().getIntExtra("TYPE",-1);
+//                if(typeCustomer == 0){
+//                    //UNCOMMENT TO TEST THE CUSTOMER CLASS
+//                    startActivity(new Intent(LoginActivity.this, BusinessMain.class));
+//                } else if (typeCustomer == 1) {
+//                    //UNCOMMENT TO TEST THE  BUSINESS CLASS
+//                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+//                }
             }
         });
 

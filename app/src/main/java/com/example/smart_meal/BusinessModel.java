@@ -2,7 +2,7 @@ package com.example.smart_meal;
 
 public class BusinessModel {
 
-    private int id;
+//    private int id;
     private String businessName;
     private String businessPhone;
     private String businessAddress;
@@ -15,10 +15,10 @@ public class BusinessModel {
     private String businessEmail;
 
     //Constructor
-    public BusinessModel(int id, String businessName, String businessPhone, String businessAddress, String busPassword, String businessCity,
+    public BusinessModel(String businessName, String businessPhone, String businessAddress, String busPassword, String businessCity,
                          String businessState, String businessEmail) {
         super();
-        this.id = id;
+//        this.id = id;
         this.businessName = businessName;
         this.businessPhone = businessPhone;
         this.businessAddress = businessAddress;
@@ -38,7 +38,7 @@ public class BusinessModel {
     @Override
     public String toString() {
         return "BusinessModel{" +
-                "id=" + id +
+//                "id=" + id +
                 ", businessName='" + businessName + '\'' +
                 ", businessPhone='" + businessPhone + '\'' +
                 ", businessAddress='" + businessAddress + '\'' +
@@ -49,13 +49,13 @@ public class BusinessModel {
     }
 
     //Getters and Setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getBusinessName() {
         return businessName;

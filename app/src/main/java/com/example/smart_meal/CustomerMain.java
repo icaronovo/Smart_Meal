@@ -64,7 +64,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         recyclerView.setVisibility(View.INVISIBLE);
                         return true;
                     case R.id.profile:
-                        titleText.setText("Profile");
+                        titleText.setText("Account");
                         recyclerView.setVisibility(View.INVISIBLE);
                         return true;
                 }
@@ -83,6 +83,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         startActivity(intent);
         //End
     }
+
     //Created a list to tryout the recyclervier
     //Latter figure out how to import from database :)
     private List<ItemModel> initData(){

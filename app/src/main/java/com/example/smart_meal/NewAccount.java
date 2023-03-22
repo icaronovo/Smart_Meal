@@ -2,6 +2,7 @@ package com.example.smart_meal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -71,7 +72,13 @@ public class NewAccount extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Get the information on the form
-                String name = txtFName.getText().toString();
+                //Get the name depending of the type of account
+                String name = "";
+                if (accountType.equals("Business")){
+                    name = businessName.getText().toString();
+                }else if(accountType.equals("Customer")){
+                    name = txtFName.getText().toString();
+                }
                 String type = accountType;
                 String phone = txtPhone.getText().toString();
                 String address = txtAddress.getText().toString();
@@ -83,11 +90,16 @@ public class NewAccount extends AppCompatActivity {
 
                 //constructor for  new users
                 CustomerModel customerModel ;
-                BusinessModel businessModel ;
-                try {
-                        customerModel = new CustomerModel(-1, type, email, password, name, phone, address, city, state);
+//                BusinessModel businessModel ;
 
+                try {
+                        customerModel = new CustomerModel(type, email, password, name, phone, address, city, state);
                         DB.addCustomer(customerModel);
+                        if(type.equals("Customer")){
+                            startActivity(new Intent(NewAccount.this,CustomerMain.class));
+                        } else if (type.equals("Business")){
+                            startActivity(new Intent(NewAccount.this,BusinessMain.class));
+                        }
                 } catch (Exception e) {
                     if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
                         //Check if the information is empty
@@ -107,7 +119,7 @@ public class NewAccount extends AppCompatActivity {
                         txtErrorE.setText("");
                         Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
                     }
-                    DB.close();
+//                    DB.close();
                 }
             }
         });
