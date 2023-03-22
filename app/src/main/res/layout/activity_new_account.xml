@@ -56,20 +56,6 @@
         </RadioGroup>
 
         <EditText
-            android:id="@+id/txtBusiness"
-            android:layout_width="300dp"
-            android:layout_height="54dp"
-            android:layout_marginTop="40dp"
-            android:autofillHints=""
-            android:drawableStart="@drawable/shop_icon"
-            android:ems="10"
-            android:hint="@string/txtBusiness"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
-
-        <EditText
             android:id="@+id/txtName"
             android:layout_width="300dp"
             android:layout_height="50dp"
@@ -82,7 +68,7 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtBusiness" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
         <EditText
             android:id="@+id/txtPhone"
