@@ -2,6 +2,7 @@ package com.example.smart_meal;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +29,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     ImageView imageView;
     ItemAdapter itemAdapter;
     TextView titleText;
+    CustomerProfileFragment customerProfileFragment = new CustomerProfileFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,9 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         titleText = findViewById(R.id.topText);
         titleText.setText("Welcome User");
 
+        ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
+
+
         //Bottom naviagation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -55,6 +60,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                     case R.id.home:
                         titleText.setText("Welcome User");
                         recyclerView.setVisibility(View.VISIBLE);
+                        constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
                     case R.id.search:
                         startActivity(new Intent(CustomerMain.this,CustomerSearch.class));
@@ -65,7 +71,9 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         return true;
                     case R.id.profile:
                         titleText.setText("Account");
+                        constraintLayout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,customerProfileFragment).commit();
                         return true;
                 }
 
