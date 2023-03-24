@@ -48,6 +48,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         titleText = findViewById(R.id.topText);
         titleText.setText("Welcome User");
 
+        //Constraint layout where is the Fragments
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 
 
@@ -76,7 +77,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,customerProfileFragment).commit();
                         return true;
                 }
-
                 return false;
             }
         });
@@ -86,8 +86,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     @Override
     public void onItemClick(View view, int position) {
         //Test to see if the items on recycler view is clickable
-        Intent intent = new Intent(CustomerMain.this, CustomerSearch.class);
-        intent.putExtra("TEST",position);
+        Intent intent = new Intent(CustomerMain.this, CustomerRestaurant.class);
+        intent.putExtra("RESTAURANTID",position);
         startActivity(intent);
         //End
     }
@@ -97,7 +97,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private List<ItemModel> initData(){
         itemList = new ArrayList<>();
         itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_foreground,"Title Item","$9.99","Description, description bla bla bla"));
         itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
         itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
         itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));

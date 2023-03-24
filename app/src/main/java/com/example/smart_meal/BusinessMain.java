@@ -34,6 +34,7 @@ public class BusinessMain extends AppCompatActivity {
             }
         });
     }
+
     //When creating the other activities from the Business Part, if you want to put the top menu
     //Insert all the bottom code with the toolbar
     @Override

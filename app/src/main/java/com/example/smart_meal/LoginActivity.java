@@ -36,33 +36,33 @@ public class LoginActivity extends AppCompatActivity {
                 String password = pass.getText().toString();
 
                 //checking if user exists and validating with db, simple validation to prevent empty fields
-                if (user.equals("") || password.equals(""))
-                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
-                else {
-                    try {
-                        Cursor cursor = DB.checkAccountType(user);
-                        accountType = cursor.getString(0);
-                        if(accountType.equals("Business")){
-                            startActivity(new Intent(LoginActivity.this, BusinessMain.class));
-                        } else if (accountType.equals("Customer")){
-                            startActivity(new Intent(LoginActivity.this, CustomerMain.class));
-                        }
-                    } catch (Exception e) {
-                        Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
-                    }
-                }
+//                if (user.equals("") || password.equals(""))
+//                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+//                else {
+//                    try {
+//                        Cursor cursor = DB.checkAccountType(user);
+//                        accountType = cursor.getString(0);
+//                        if(accountType.equals("Business")){
+//                            startActivity(new Intent(LoginActivity.this, BusinessMain.class));
+//                        } else if (accountType.equals("Customer")){
+//                            startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+//                        }
+//                    } catch (Exception e) {
+//                        Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
 
                 //Apagar dps
 
-//                Intent intent = getIntent();
-//                int typeCustomer = getIntent().getIntExtra("TYPE",-1);
-//                if(typeCustomer == 0){
-//                    //UNCOMMENT TO TEST THE CUSTOMER CLASS
-//                    startActivity(new Intent(LoginActivity.this, BusinessMain.class));
-//                } else if (typeCustomer == 1) {
-//                    //UNCOMMENT TO TEST THE  BUSINESS CLASS
-//                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
-//                }
+                Intent intent = getIntent();
+                int typeCustomer = getIntent().getIntExtra("TYPE",-1);
+                if(typeCustomer == 0){
+                    //UNCOMMENT TO TEST THE CUSTOMER CLASS
+                    startActivity(new Intent(LoginActivity.this, BusinessMain.class));
+                } else if (typeCustomer == 1) {
+                    //UNCOMMENT TO TEST THE  BUSINESS CLASS
+                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                }
             }
         });
 

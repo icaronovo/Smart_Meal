@@ -47,6 +47,11 @@
     <string name="txtReports">Reports</string>
     <string name="txtLogout">Logout</string>
     <string name="txtTitle">Smart Meal</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imgRes">Restaurant Image</string>
+    <string name="DELtextRest">Restaurante Pipipopo</string>
+    <string name="txtDesc">Description:</string>
+    <string name="DELtextDescri">4090 Kingsway - Burnaby, BC</string>
+    <string name="imgStart">Restaurant avaliation</string>
+    <string name="DELtxtRating">4.5 / 5.0</string>
 </resources>
