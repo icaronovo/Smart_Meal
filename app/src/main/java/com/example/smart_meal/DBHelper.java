@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -25,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ORDER_INFO = "ORDER_INFO";
     public static final String COLUMN_ORDER_ID = "OrderID";
     public static final String COLUMN_ORDER_STATUS = "OrderStatus";
-//    public static final String COLUMN_ITEM_ID = "ItemID";
+    //    public static final String COLUMN_ITEM_ID = "ItemID";
 //    public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_QTY = "ItemQty";
     public static final String COLUMN_BUSINESS_ID = "BusinessID";
@@ -47,6 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(@Nullable Context context) {
         super(context, SMART_MEAL_DB, null, dbVersion);
     }
+
     //this is called the first time a database is accessed. there should be code in here to create a new database.
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -92,13 +94,31 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     // This method us used to check if the account is of type Business or Customer
-    public Cursor checkAccountType (String Email) {
+    public Cursor checkAccountType(String Email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT AccountType FROM CUSTOMER_INFO WHERE EmailCust= ?", new String[]{Email});
         if (cursor != null) {
             cursor.moveToFirst();
         }
         return cursor;
+    }
+    public boolean checkUserAccount (String username, String password){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? AND PasswordCust = ? ", new String[]{username, password});
+        if(cursor.getCount()>0){
+            return true;
+        }
+        return false;
+    }
+   //method to delete record from db
+    public boolean deleteUserAccount(String id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        int d = sqLiteDatabase.delete(CUSTOMER_INFO, "EmailCust=?", new String[]{id});
+        if (d > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //method to add customer data in the database
@@ -107,7 +127,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         //linking data from getters to database fields
         ContentValues cv = new ContentValues();
-        //cv.put(COLUMN_CUSTOMER_ID,customerModel.getId());
         cv.put(ACCOUNT_TYPE, customerModel.getAccountType());
         cv.put(COLUMN_EMAIL, customerModel.getCustomerEmail());
         cv.put(COLUMN_PASSWORD, customerModel.getPassword());

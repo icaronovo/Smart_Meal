@@ -49,9 +49,12 @@ public class NewAccount extends AppCompatActivity {
         radioGroup = findViewById(R.id.radioGroup);
 
         //When the user select the type of account, it will change the fields required
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
                 switch (i) {
                     case R.id.radioCustomer:
                         username.setHint("Full Name");
@@ -82,41 +85,40 @@ public class NewAccount extends AppCompatActivity {
                 String confirmPassword = txtConfirmPassword.getText().toString();
 
                 //constructor for  new users
-                CustomerModel customerModel ;
+                CustomerModel customerModel;
+                if (accountType == null) {
+                    Toast.makeText(NewAccount.this, "Please select account type", Toast.LENGTH_LONG).show();
 
-                try {
+                } else {
+                    try {
                         customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state);
                         DB.addCustomer(customerModel);
-
-                            Log.d("MyTag","na porta lol");
-
-                        if(accountType.equals("Customer")){
-                            Log.d("MyTag","ENTREI");
-                            startActivity(new Intent(NewAccount.this,CustomerMain.class));
-                        } else if (accountType.equals("Business")){
-                            startActivity(new Intent(NewAccount.this,BusinessMain.class));
+                        if (accountType.equals("Customer")) {
+                            startActivity(new Intent(NewAccount.this, CustomerMain.class));
+                        } else if (accountType.equals("Business")) {
+                            startActivity(new Intent(NewAccount.this, BusinessMain.class));
                         }
 
-                } catch (Exception e) {
-                    if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
-                        //Check if the information is empty
-                        Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
-                    } else if (!isEmailValid(email)) {
-                        //Check if email is valid
-                        txtErrorE.setText("Please make sure to put a valid email");
-                    } else if (!password.equals(confirmPassword)) {
-                        //Check if the passwords match
-                        txtErrorP.setText("Please make sure your passwords match");
-                    } else if (!isPasswordValid(password)) {
-                        //Check if the password is valid
-                        txtErrorP.setText("The password must contain at least:" + "\n - One lowercase letter" + "\n - One uppercase letter " + "\n - One digit " + "\n -One special character" + "\n - At least 8 characters long\n");
-                    } else {
-                        //Case everything is ok, create a new account
-                        txtErrorP.setText("");
-                        txtErrorE.setText("");
-                        Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
+                    } catch (Exception e) {
+                        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
+                            //Check if the information is empty
+                            Toast.makeText(NewAccount.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
+                        } else if (!isEmailValid(email)) {
+                            //Check if email is valid
+                            txtErrorE.setText("Please make sure to put a valid email");
+                        } else if (!password.equals(confirmPassword)) {
+                            //Check if the passwords match
+                            txtErrorP.setText("Please make sure your passwords match");
+                        } else if (!isPasswordValid(password)) {
+                            //Check if the password is valid
+                            txtErrorP.setText("The password must contain at least:" + "\n - One lowercase letter" + "\n - One uppercase letter " + "\n - One digit " + "\n -One special character" + "\n - At least 8 characters long\n");
+                        } else {
+                            //Case everything is ok, create a new account
+                            txtErrorP.setText("");
+                            txtErrorE.setText("");
+                            Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
+                        }
                     }
-//                    DB.close();
                 }
             }
         });
@@ -135,6 +137,6 @@ public class NewAccount extends AppCompatActivity {
         Pattern p = Pattern.compile(pattern);
         Matcher m = p.matcher(password);
         //return m.matches();
-        return  true;
+        return true;
     }
 }

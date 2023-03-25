@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 public class BusinessMain extends AppCompatActivity {
     Toolbar toolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,20 +22,21 @@ public class BusinessMain extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
     }
+
     //When creating the other activities from the Business Part, if you want to put the top menu
     //Insert all the bottom code with the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.top_menu_business,menu);
+        inflater.inflate(R.menu.top_menu_business, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.profile:
-                startActivity(new Intent(BusinessMain.this,BusinessProfile.class));
+                startActivity(new Intent(BusinessMain.this, BusinessProfile.class));
                 break;
         }
         return super.onOptionsItemSelected(item);
