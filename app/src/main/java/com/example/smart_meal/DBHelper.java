@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 11;
+    public static final int dbVersion = 12;
 
 
     //creating item table and fields

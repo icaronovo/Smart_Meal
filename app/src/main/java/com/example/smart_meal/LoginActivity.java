@@ -28,21 +28,21 @@ public class LoginActivity extends AppCompatActivity {
         DB = new DBHelper(this);
 
         //btn to delete record from db
-//        Button btnDel = findViewById(R.id.btnDel);
-//
-//        btnDel.setOnClickListener(new View.OnClickListener() {
-//            boolean isDeleted;
-//            @Override
-//            public void onClick(View view) {
-//                String id = (email.getText().toString());
-//                DB.deleteUserAccount(id);
-//                if (isDeleted) {
-//                    Toast.makeText(LoginActivity.this, "Nothing to Delete", Toast.LENGTH_LONG).show();
-//                } else {
-//                    Toast.makeText(LoginActivity.this, "Record deleted.", Toast.LENGTH_LONG).show();
-//                }
-//            }
-//        });
+        Button btnDel = findViewById(R.id.btnDel);
+
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            boolean isDeleted;
+            @Override
+            public void onClick(View view) {
+                String id = (email.getText().toString());
+                DB.deleteUserAccount(id);
+                if (isDeleted) {
+                    Toast.makeText(LoginActivity.this, "Nothing to Delete", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Record deleted.", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
 
         //Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
