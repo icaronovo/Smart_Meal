@@ -86,12 +86,12 @@ public class NewAccount extends AppCompatActivity {
 
                 //constructor for  new users
                 CustomerModel customerModel;
-                if (accountType == null) {
+                if (accountType == null || accountType.equals("")) {
                     Toast.makeText(NewAccount.this, "Please select account type", Toast.LENGTH_LONG).show();
 
                 } else {
                     try {
-                        customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state);
+                        customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state, R.drawable.shop_icon);
                         DB.addCustomer(customerModel);
 
                         if (accountType.equals("Customer")) {

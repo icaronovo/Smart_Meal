@@ -23,7 +23,7 @@ public class ItemAdapter extends RecyclerView.Adapter {
     }
 
     Integer getItem(int id) {
-        return itemList.get(id).getImageItem();
+        return itemList.get(id).getItemImage();
     }
 
     @NonNull
@@ -36,10 +36,10 @@ public class ItemAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).itemImage.setImageResource(itemList.get(position).getImageItem());
-        ((ViewHolder) holder).textTitle.setText(itemList.get(position).getTitleTxt());
-        ((ViewHolder) holder).textPrice.setText(itemList.get(position).getTxtPrice());
-        ((ViewHolder) holder).textDesc.setText(itemList.get(position).getTxtDescItem());
+        ((ViewHolder) holder).itemImage.setImageResource(itemList.get(position).getItemImage());
+        ((ViewHolder) holder).textTitle.setText(itemList.get(position).getItemName());
+        ((ViewHolder) holder).textPrice.setText(itemList.get(position).getItemPrice().toString());
+        ((ViewHolder) holder).textDesc.setText(itemList.get(position).getItemDescription());
     }
 
     @Override

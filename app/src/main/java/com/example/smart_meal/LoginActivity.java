@@ -3,8 +3,10 @@ package com.example.smart_meal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,22 +29,32 @@ public class LoginActivity extends AppCompatActivity {
         pass = findViewById(R.id.txtPassword);
         DB = new DBHelper(this);
 
+        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+
         //btn to delete record from db
         Button btnDel = findViewById(R.id.btnDel);
 
         btnDel.setOnClickListener(new View.OnClickListener() {
-            boolean isDeleted;
             @Override
             public void onClick(View view) {
-                String id = (email.getText().toString());
-                DB.deleteUserAccount(id);
-                if (isDeleted) {
-                    Toast.makeText(LoginActivity.this, "Nothing to Delete", Toast.LENGTH_LONG).show();
-                } else {
-                    Toast.makeText(LoginActivity.this, "Record deleted.", Toast.LENGTH_LONG).show();
-                }
+                startActivity(new Intent(LoginActivity.this, PasswordRecovery.class));
             }
         });
+
+//        btnDel.setOnClickListener(new View.OnClickListener() {
+//            boolean isDeleted;
+//            @Override
+//            public void onClick(View view) {
+//                String id = (email.getText().toString());
+//                DB.deleteUserAccount(id);
+//                if (isDeleted) {
+//                    Toast.makeText(LoginActivity.this, "Nothing to Delete", Toast.LENGTH_LONG).show();
+//                } else {
+//                    Toast.makeText(LoginActivity.this, "Record deleted.", Toast.LENGTH_LONG).show();
+//                }
+//            }
+//        });
 
         //Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -66,20 +78,19 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
                             }
 
-
                         } else if (accountType.equals("Customer")) {
                             if (c == true) {
                                 startActivity(new Intent(LoginActivity.this, CustomerMain.class));
                             } else {
                                 Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
                             }
-
                         }
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putLong("user", Long.parseLong(user));
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
                     }
                 }
-
             }
         });
 

@@ -96,17 +96,16 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     //Latter figure out how to import from database :)
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
-
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
         return itemList;
     }
 }

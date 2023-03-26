@@ -18,6 +18,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ITEM = "ITEM";
     public static final String COLUMN_ITEM_ID = "ItemID";
     public static final String COLUMN_ITEM_NAME = "ItemName";
+    public static final String COLUMN_ITEM_IMAGE = "ItemImage";
+
     public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_DESCRIPTION = "ItemDescription";
 
@@ -43,6 +45,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ADDRESS = "Address";
     public static final String COLUMN_CITY = "City";
     public static final String COLUMN_PROVINCE = "Province";
+    public static final String COLUMN_PROFILE_IMAGE = "ProfileImage";
+
 
 
     public DBHelper(@Nullable Context context) {
@@ -57,7 +61,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ITEM_VALUE + " INTEGER, "
                 + COLUMN_ITEM_NAME + " TEXT, "
+                + COLUMN_ITEM_IMAGE + " INTEGER, "
                 + COLUMN_ITEM_DESCRIPTION + " TEXT)";
+
         db.execSQL(createTableItem);
 
         String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "("
@@ -69,7 +75,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_PHONE + " TEXT, "
                 + COLUMN_ADDRESS + " TEXT, "
                 + COLUMN_CITY + " TEXT, "
-                + COLUMN_PROVINCE + " TEXT)";
+                + COLUMN_PROVINCE + " TEXT, "
+                + COLUMN_PROFILE_IMAGE + " INTEGER)";
         db.execSQL(createTableCustomerInfo);
 
         String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "("
@@ -110,6 +117,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
    //method to delete record from db
     public boolean deleteUserAccount(String id) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
@@ -135,8 +143,21 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ADDRESS, customerModel.getCustomerAddress());
         cv.put(COLUMN_CITY, customerModel.getCustomerCity());
         cv.put(COLUMN_PROVINCE, customerModel.getCustomerProvince());
+        cv.put(COLUMN_PROFILE_IMAGE, customerModel.getCustomerImage());
         // inserting data above
         long insert = db.insert(CUSTOMER_INFO, null, cv);
+        return insert != -1;
+    }
+
+    public boolean addItem (ItemModel itemModel) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ITEM_NAME, itemModel.getItemName());
+        cv.put(COLUMN_ITEM_VALUE, itemModel.getItemPrice());
+        cv.put(COLUMN_ITEM_IMAGE, itemModel.getItemImage());
+        cv.put(COLUMN_ITEM_DESCRIPTION, itemModel.getItemDescription());
+        cv.put(COLUMN_ITEM_QTY, itemModel.getItemQuantity());
+        long insert = sqLiteDatabase.insert(ITEM, null, cv);
         return insert != -1;
     }
 }

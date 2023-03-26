@@ -7,20 +7,17 @@ public class CustomerModel {
     private String password;
     private String customerName;
     private String customerPhone;
-
-
     private String customerAddress;
     private String customerCity;
     private String customerProvince;
-
+    private int customerImage;
 
     //Constructors
 
-    public CustomerModel(String accountType, String customerEmail,
-                         String password, String customerName, String customerPhone,
-                         String customerAddress, String customerCity, String customerProvince) {
-        super();
 
+    public CustomerModel(String accountType, String customerEmail, String password,
+                         String customerName, String customerPhone, String customerAddress,
+                         String customerCity, String customerProvince, int customerImage) {
         this.accountType = accountType;
         this.customerEmail = customerEmail;
         this.password = password;
@@ -29,24 +26,8 @@ public class CustomerModel {
         this.customerAddress = customerAddress;
         this.customerCity = customerCity;
         this.customerProvince = customerProvince;
+        this.customerImage = customerImage;
     }
-    //To String
-
-    @Override
-    public String toString() {
-        return "CustomerModel{" +
-                ", accountType='" + accountType + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", password='" + password + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", customerPhone='" + customerPhone + '\'' +
-                ", customerAddress='" + customerAddress + '\'' +
-                ", customerCity='" + customerCity + '\'' +
-                ", customerProvince='" + customerProvince + '\'' +
-                '}';
-    }
-
-    //Getters and Setters
 
     public String getAccountType() {
         return accountType;
@@ -110,5 +91,28 @@ public class CustomerModel {
 
     public void setCustomerProvince(String customerProvince) {
         this.customerProvince = customerProvince;
+    }
+
+    public int getCustomerImage() {
+        return customerImage;
+    }
+
+    public void setCustomerImage(int customerImage) {
+        this.customerImage = customerImage;
+    }
+
+    @Override
+    public String toString() {
+        return "CustomerModel{" +
+                "accountType='" + accountType + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", password='" + password + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", customerCity='" + customerCity + '\'' +
+                ", customerProvince='" + customerProvince + '\'' +
+                ", customerImage=" + customerImage +
+                '}';
     }
 }
