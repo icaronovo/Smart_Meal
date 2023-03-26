@@ -26,7 +26,7 @@ public class NewAccount extends AppCompatActivity {
     RadioGroup radioGroup;
     DBHelper DB = new DBHelper(this);
 
-    String accountType;
+    String accountType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +93,7 @@ public class NewAccount extends AppCompatActivity {
                     try {
                         customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state);
                         DB.addCustomer(customerModel);
+
                         if (accountType.equals("Customer")) {
                             startActivity(new Intent(NewAccount.this, CustomerMain.class));
                         } else if (accountType.equals("Business")) {
@@ -118,6 +119,7 @@ public class NewAccount extends AppCompatActivity {
                             txtErrorE.setText("");
                             Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
                         }
+
                     }
                 }
             }
