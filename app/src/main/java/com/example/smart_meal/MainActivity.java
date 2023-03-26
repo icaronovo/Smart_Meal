@@ -20,14 +20,12 @@ public class MainActivity extends AppCompatActivity {
         Button btnCustomer = findViewById(R.id.btnCustomer);
         Button btnBusiness = findViewById(R.id.btnBusiness);
 
-
-
         btnBusiness.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 customerType = 0;
-                intent.putExtra("TYPE",customerType);
+                intent.putExtra("TYPE", customerType);
                 startActivity(intent);
             }
         });
@@ -37,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                 customerType = 1;
-                intent.putExtra("TYPE",customerType);
+                intent.putExtra("TYPE", customerType);
                 startActivity(intent);
             }
         });

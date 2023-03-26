@@ -1,7 +1,7 @@
 package com.example.smart_meal;
 
 public class CustomerModel {
-//    private int id;
+
     private String accountType;
     private String customerEmail;
     private String password;
@@ -16,11 +16,11 @@ public class CustomerModel {
 
     //Constructors
 
-    public CustomerModel (String accountType, String customerEmail,
+    public CustomerModel(String accountType, String customerEmail,
                          String password, String customerName, String customerPhone,
                          String customerAddress, String customerCity, String customerProvince) {
         super();
-//        this.id = id;
+
         this.accountType = accountType;
         this.customerEmail = customerEmail;
         this.password = password;
@@ -32,11 +32,9 @@ public class CustomerModel {
     }
     //To String
 
-
     @Override
     public String toString() {
         return "CustomerModel{" +
-//                "id=" + id +
                 ", accountType='" + accountType + '\'' +
                 ", customerEmail='" + customerEmail + '\'' +
                 ", password='" + password + '\'' +
@@ -49,15 +47,6 @@ public class CustomerModel {
     }
 
     //Getters and Setters
-
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getAccountType() {
         return accountType;

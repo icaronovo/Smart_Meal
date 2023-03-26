@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener{
+public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener {
 
     BottomNavigationView bottomNavigationView;
     ArrayList<ItemModel> itemList;
@@ -39,8 +39,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         //Recycler view
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
         int numOfColumns = 1;
-        recyclerView.setLayoutManager(new GridLayoutManager(this,numOfColumns));
-        itemAdapter = new ItemAdapter(this,initData());
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
+        itemAdapter = new ItemAdapter(this, initData());
         itemAdapter.setClickListener(this);
         recyclerView.setAdapter(itemAdapter);
 
@@ -56,14 +56,14 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
                         titleText.setText("Welcome User");
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
                     case R.id.search:
-                        startActivity(new Intent(CustomerMain.this,CustomerSearch.class));
+                        startActivity(new Intent(CustomerMain.this, CustomerSearch.class));
                         return true;
                     case R.id.order:
                         titleText.setText("Order");
@@ -87,25 +87,25 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     public void onItemClick(View view, int position) {
         //Test to see if the items on recycler view is clickable
         Intent intent = new Intent(CustomerMain.this, CustomerSearch.class);
-        intent.putExtra("TEST",position);
+        intent.putExtra("TEST", position);
         startActivity(intent);
         //End
     }
 
     //Created a list to tryout the recyclervier
     //Latter figure out how to import from database :)
-    private List<ItemModel> initData(){
+    private List<ItemModel> initData() {
         itemList = new ArrayList<>();
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
+        itemList.add(new ItemModel(R.drawable.ic_launcher_background, "Title Item", "$9.99", "Description, description bla bla bla"));
 
         return itemList;
     }

@@ -39,18 +39,20 @@
     <EditText
         android:id="@+id/txtPassword"
         android:layout_width="300dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="290dp"
+        android:layout_marginBottom="231dp"
         android:autofillHints=""
         android:drawableStart="@drawable/ic_baseline_info_24"
         android:ems="10"
         android:hint="@string/txtPassword"
         android:inputType="textPassword"
         android:textColorHint="#090808"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/btnDel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtEmail"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.132" />
 
     <Button
@@ -64,5 +66,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtLogin"
         app:layout_constraintVertical_bias="0.323" />
+
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:text="@string/btnDel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtPassword" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
