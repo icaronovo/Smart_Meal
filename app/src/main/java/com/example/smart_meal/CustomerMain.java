@@ -50,7 +50,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 
-
         //Bottom naviagation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -76,7 +75,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,customerProfileFragment).commit();
                         return true;
                 }
-
                 return false;
             }
         });

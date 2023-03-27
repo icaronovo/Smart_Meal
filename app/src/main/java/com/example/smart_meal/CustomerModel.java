@@ -29,6 +29,7 @@ public class CustomerModel {
         this.customerImage = customerImage;
     }
 
+//getters and setters
     public String getAccountType() {
         return accountType;
     }
@@ -101,6 +102,7 @@ public class CustomerModel {
         this.customerImage = customerImage;
     }
 
+//to string method
     @Override
     public String toString() {
         return "CustomerModel{" +

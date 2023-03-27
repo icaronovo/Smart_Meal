@@ -49,7 +49,11 @@
     <string name="txtTitle">Smart Meal</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="btnDel">Delete Data</string>
+    <string name="btnDel">Update Password</string>
     <string name="newPasswordHint">Enter the new password</string>
     <string name="resetPasswordButtonText">Reset</string>
+    <string name="btnSearch">Search For a Restaurant</string>
+    <string name="btnOrder">Order Food</string>
+    <string name="btnOrderDetails">Order Details and Status</string>
+    <string name="btnOrderHistory">Order History</string>
 </resources>

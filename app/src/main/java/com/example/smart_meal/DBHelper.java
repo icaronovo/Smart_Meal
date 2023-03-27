@@ -13,7 +13,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SMART_MEAL_DB = "SmartMealDB";
     public static final int dbVersion = 12;
 
-
     //creating item table and fields
     public static final String ITEM = "ITEM";
     public static final String COLUMN_ITEM_ID = "ItemID";
@@ -23,17 +22,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_DESCRIPTION = "ItemDescription";
 
-
     //creating order_info table and fields
     public static final String ORDER_INFO = "ORDER_INFO";
     public static final String COLUMN_ORDER_ID = "OrderID";
     public static final String COLUMN_ORDER_STATUS = "OrderStatus";
     //    public static final String COLUMN_ITEM_ID = "ItemID";
-//    public static final String COLUMN_ITEM_VALUE = "ItemValue";
+    //    public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_QTY = "ItemQty";
     public static final String COLUMN_BUSINESS_ID = "BusinessID";
     public static final String COLUMN_CUSTOMER_ID = "CustomerID";
-
 
     //creating general account info table
     public static final String CUSTOMER_INFO = "CUSTOMER_INFO";
@@ -46,8 +43,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CITY = "City";
     public static final String COLUMN_PROVINCE = "Province";
     public static final String COLUMN_PROFILE_IMAGE = "ProfileImage";
-
-
 
     public DBHelper(@Nullable Context context) {
         super(context, SMART_MEAL_DB, null, dbVersion);
@@ -109,6 +104,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return cursor;
     }
+    //method to check if the user exist in DB
     public boolean checkUserAccount (String username, String password){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? AND PasswordCust = ? ", new String[]{username, password});
@@ -118,7 +114,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return false;
     }
 
-   //method to delete record from db
+   //method to delete account record from db
     public boolean deleteUserAccount(String id) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         int d = sqLiteDatabase.delete(CUSTOMER_INFO, "EmailCust=?", new String[]{id});
@@ -127,6 +123,16 @@ public class DBHelper extends SQLiteOpenHelper {
         } else {
             return false;
         }
+    }
+    //method to update password
+    public boolean accountUpdate(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("PasswordCust", password);
+
+        int rowsAffected = db.update("CUSTOMER_INFO", values, "EmailCust = ?", new String[]{username});
+
+        return rowsAffected > 0;
     }
 
     //method to add customer data in the database
@@ -148,7 +154,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long insert = db.insert(CUSTOMER_INFO, null, cv);
         return insert != -1;
     }
-
+    //method to add values to ITEM table
     public boolean addItem (ItemModel itemModel) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -159,6 +165,50 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ITEM_QTY, itemModel.getItemQuantity());
         long insert = sqLiteDatabase.insert(ITEM, null, cv);
         return insert != -1;
+    }
+    //method to add values to ORDER table
+    public boolean addOrder (OrderModel orderModel) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_ORDER_STATUS, orderModel.getOrderStatus());
+        cv.put(COLUMN_BUSINESS_ID, orderModel.getBusinessID());
+        cv.put(COLUMN_CUSTOMER_ID, orderModel.getCustomerID());
+        cv.put(COLUMN_ITEM_VALUE, orderModel.getItemValue());
+        cv.put(COLUMN_ITEM_ID, orderModel.getItemID());
+        cv.put(COLUMN_ITEM_QTY, orderModel.getItemQuantity());
+        long insert = sqLiteDatabase.insert(ORDER_INFO, null, cv);
+        return insert != -1;
+    }
+    // podemos mostrar o email do cliente quando ele for alterar os items e fazer a validacao no codigo,
+    // se for diferente do email dele, nao pode fazer a alteracao
+    public boolean itemsQtyUpdate(String username, String itemQty ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ItemQty", itemQty);
+
+        int rowsAffected = db.update("ITEM", values, "EmailCust = ?", new String[]{username});
+
+        return rowsAffected > 0;
+    }
+    public boolean itemsValueUpdate(String username, String itemValue ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ItemValue", itemValue);
+
+        int rowsAffected = db.update("ITEM", values, "EmailCust = ?", new String[]{username});
+
+        return rowsAffected > 0;
+    }
+    //metodo pra atualizar o order status, podemos setar o orderStatus pra ativo ou completo
+    //(da pra botar isso no codigo tb, botar no checkbox se foi entregue ou nao = ativo/completo)
+    public boolean orderStatusUpdate(String username, String orderStatus ) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("OrderStatus", orderStatus);
+
+        int rowsAffected = db.update("ORDER_INFO", values, "EmailCust = ?", new String[]{username});
+
+        return rowsAffected > 0;
     }
 }
 
