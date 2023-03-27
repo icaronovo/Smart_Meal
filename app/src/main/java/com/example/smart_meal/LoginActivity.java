@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else if (accountType.equals("Customer")) {
                             if (c == true) {
-                                startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                                startActivity(new Intent(LoginActivity.this, CustomerHome.class));
                             } else {
                                 Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
                             }

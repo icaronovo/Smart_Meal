@@ -8,14 +8,14 @@ public class ItemModel {
     private Double itemPrice;
     private int itemQuantity;
 
-
+    //constructor
     public ItemModel(String itemName, int itemImage, String itemDescription, Double itemPrice) {
         this.itemName = itemName;
         this.itemImage = itemImage;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
     }
-
+//getter and setters
     public String getItemName() {
         return itemName;
     }
@@ -56,6 +56,7 @@ public class ItemModel {
         this.itemQuantity = itemQuantity;
     }
 
+    //to string method
     @Override
     public String toString() {
         return "ItemModel{" +
