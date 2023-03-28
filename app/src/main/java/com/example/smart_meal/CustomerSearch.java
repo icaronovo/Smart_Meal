@@ -21,5 +21,6 @@ public class CustomerSearch extends AppCompatActivity {
         test.setText("Restaurant selected is " + test2);
         //End test
 
+
     }
 }

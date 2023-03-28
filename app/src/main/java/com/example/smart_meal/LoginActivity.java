@@ -17,6 +17,7 @@ public class LoginActivity extends AppCompatActivity {
     DBHelper DB;
     EditText email, pass;
     String accountType;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,8 @@ public class LoginActivity extends AppCompatActivity {
         pass = findViewById(R.id.txtPassword);
         DB = new DBHelper(this);
 
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
 
 
         //btn to delete record from db
@@ -58,6 +60,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 String user = email.getText().toString();
@@ -80,13 +83,15 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else if (accountType.equals("Customer")) {
                             if (c == true) {
-                                startActivity(new Intent(LoginActivity.this, CustomerHome.class));
+                                startActivity(new Intent(LoginActivity.this, CustomerMain.class));
                             } else {
                                 Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putLong("user", Long.parseLong(user));
+
+                        SharedPreferences.Editor editor=getSharedPreferences("user",MODE_PRIVATE).edit();
+                        editor.putString("user",user);
+                        editor.apply();
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
                     }

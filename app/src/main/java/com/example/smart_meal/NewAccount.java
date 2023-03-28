@@ -95,7 +95,7 @@ public class NewAccount extends AppCompatActivity {
                         DB.addCustomer(customerModel);
 
                         if (accountType.equals("Customer")) {
-                            startActivity(new Intent(NewAccount.this, CustomerHome.class));
+                            startActivity(new Intent(NewAccount.this, CustomerMain.class));
                         } else if (accountType.equals("Business")) {
                             startActivity(new Intent(NewAccount.this, BusinessMain.class));
                         }

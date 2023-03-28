@@ -6,8 +6,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,6 +34,9 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     TextView titleText;
     CustomerProfileFragment customerProfileFragment = new CustomerProfileFragment();
 
+    private SharedPreferences sharedPreferences;
+
+    DBHelper DB = new DBHelper(this);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         itemAdapter = new ItemAdapter(this, initData());
         itemAdapter.setClickListener(this);
         recyclerView.setAdapter(itemAdapter);
+
+        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        String user = sharedPreferences.getString("user","");
+        Log.d("TAG", user);
 
         //Top text
         titleText = findViewById(R.id.topText);
@@ -72,14 +82,13 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         titleText.setText("Account");
                         constraintLayout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,customerProfileFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfileFragment).commit();
                         return true;
                 }
                 return false;
             }
         });
     }
-
 
     @Override
     public void onItemClick(View view, int position) {
@@ -94,16 +103,19 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     //Latter figure out how to import from database :)
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background,"Description, description bla bla bla",  9.99));
+
+        //DB.addItem(String itemName, int itemImage, String itemDescription, Double itemPrice) CONSTRUCTOR TO ADD ITEMS TO DATABASE.
+
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
         return itemList;
     }
 }
