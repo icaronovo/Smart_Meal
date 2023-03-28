@@ -37,10 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         //btn to delete record from db
         Button btnDel = findViewById(R.id.btnDel);
 
+        //CHECAR O DESTINO DESSE BOTAO SEMPRE
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, PasswordRecovery.class));
+                startActivity(new Intent(LoginActivity.this, CustomerUpdate.class));
             }
         });
 

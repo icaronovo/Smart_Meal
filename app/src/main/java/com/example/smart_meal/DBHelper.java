@@ -156,6 +156,31 @@ public class DBHelper extends SQLiteOpenHelper {
         long insert = db.insert(CUSTOMER_INFO, null, cv);
         return insert != -1;
     }
+//    public boolean getUserData(String username){
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ?", new String[]{username});
+//
+//        if (cursor.getCount() > 0) {
+//            return true;
+//        }
+//        return false;
+//    }
+    public boolean customerUpdate(String prevEmail, String email, String password, String name, String phone, String address,
+                                    String city, String province ) {
+        //writing data in the database
+        SQLiteDatabase db = this.getWritableDatabase();
+        //linking data from getters to database fields
+        ContentValues cv = new ContentValues();
+        cv.put("EmailCust", email);
+        cv.put("PasswordCust", password);
+        cv.put("Name", name);
+        cv.put("Phone", phone);
+        cv.put("Address", address);
+        cv.put("City", city);
+        cv.put("Province", province);
+        int rowsAffected = db.update("CUSTOMER_INFO", cv, "EmailCust = ?", new String[]{email});
+        return rowsAffected > 0;
+    }
 
     //method to add values to ITEM table
     public boolean addItem(ItemModel itemModel) {

@@ -51,8 +51,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         recyclerView.setAdapter(itemAdapter);
 
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        String user = sharedPreferences.getString("user","");
-        Log.d("TAG", user);
+        sharedPreferences.getString("user","");
+
 
         //Top text
         titleText = findViewById(R.id.topText);
