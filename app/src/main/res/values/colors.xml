@@ -8,5 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="smartAppColor">#f9475e</color>
-    <color name="smartAppLightGreen">#add9b7</color>
+    <color name="smartAppYellow">#f9ee80</color>
+    <color name="smartAppGreen">#73da8c</color>
+    <color name="smartAppLightGreen">#daf0df</color>
 </resources>
