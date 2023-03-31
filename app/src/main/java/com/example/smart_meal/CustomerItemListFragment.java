@@ -29,16 +29,16 @@ public class CustomerItemListFragment extends Fragment {
         mListView = view.findViewById(R.id.listView);
 
         mItems = new ArrayList<>();
-        mItems.add("Item 1");
-        mItems.add("Item 2");
-        mItems.add("Item 3");
-        mItems.add("Item 4");
-        mItems.add("Item 5");
-        mItems.add("Item 6");
-        mItems.add("Item 7");
-        mItems.add("Item 8");
-        mItems.add("Item 9");
-        mItems.add("Item 10");
+        mItems.add("Item 1 \n$ 1.90");
+        mItems.add("Item 2 \n$ 2.90");
+        mItems.add("Item 3 \n$ 3.90");
+        mItems.add("Item 4 \n$ 4.90");
+        mItems.add("Item 5 \n$ 5.90");
+        mItems.add("Item 6 \n$ 6.90");
+        mItems.add("Item 7 \n$ 7.90");
+        mItems.add("Item 8 \n$ 8.90");
+        mItems.add("Item 9 \n$ 9.90");
+        mItems.add("Item 10 \n$10.90");
 
         adapter = new CustomListAdapter(getContext(), mItems);
         mListView.setAdapter(adapter);

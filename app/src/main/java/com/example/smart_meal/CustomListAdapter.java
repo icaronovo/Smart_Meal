@@ -13,7 +13,7 @@ import java.util.List;
 public class CustomListAdapter extends ArrayAdapter<String> {
     private final LayoutInflater mInflater;
     private final List<String> mItems;
-    private HashMap<String, Integer> itemCountMap = new HashMap<>();
+    private HashMap<String, Double[]> itemCountMap = new HashMap<>();
 
     public CustomListAdapter(Context context, List<String> items) {
         super(context, R.layout.list_item_layout, items);
@@ -71,7 +71,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 
-    public HashMap<String,Integer> getItems(){
+    public HashMap<String, Double[]> getItems(){
         return itemCountMap;
     }
 
@@ -83,6 +83,9 @@ public class CustomListAdapter extends ArrayAdapter<String> {
 
     private void updateItems(CustomListAdapter.ViewHolder holder, int number){
         String itemName = String.valueOf(holder.itemName.getText());
-        itemCountMap.put(itemName,number);
+        String [] temp = itemName.split("\\$");
+
+        Double[] tempNumber = {Double.parseDouble(temp[1]),Double.valueOf(number)};
+        itemCountMap.put(temp[0],tempNumber);
     }
 }
