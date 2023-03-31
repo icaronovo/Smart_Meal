@@ -54,4 +54,5 @@
     <string name="DELtextDescri">4090 Kingsway - Burnaby, BC</string>
     <string name="imgStart">Restaurant avaliation</string>
     <string name="DELtxtRating">4.5 / 5.0</string>
+    <string name="btnConfirmOrder">Confirm Order</string>
 </resources>

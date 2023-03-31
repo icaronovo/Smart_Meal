@@ -113,6 +113,31 @@
                     app:layout_constraintVertical_bias="0.034"
                     app:srcCompat="@drawable/ic_baseline_star_border_24" />
 
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/listItems"
+                    android:name="com.example.smart_meal.CustomerItemListFragment"
+                    android:layout_width="379dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/txtRatingRest"
+                    app:layout_constraintVertical_bias="0.0"
+                    tools:layout="@layout/fragment_customer_item_list" />
+
+                <androidx.fragment.app.FragmentContainerView
+                    android:id="@+id/selectedOrder"
+                    android:name="com.example.smart_meal.CustomerOrderFragment"
+                    android:layout_width="380dp"
+                    android:layout_height="273dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.562"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/listItems"
+                    app:layout_constraintVertical_bias="0.287"
+                    tools:layout="@layout/fragment_customer_order" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
