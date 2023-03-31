@@ -55,4 +55,5 @@
     <string name="imgStart">Restaurant avaliation</string>
     <string name="DELtxtRating">4.5 / 5.0</string>
     <string name="btnConfirmOrder">Confirm Order</string>
+    <string name="txtItemAv">Items Available</string>
 </resources>
