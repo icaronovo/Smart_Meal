@@ -56,4 +56,11 @@
     <string name="DELtxtRating">4.5 / 5.0</string>
     <string name="btnConfirmOrder">Confirm Order</string>
     <string name="txtItemAv">Items Available</string>
+    <string name="btnDel">Update Password</string>
+    <string name="newPasswordHint">Enter the new password</string>
+    <string name="resetPasswordButtonText">Reset</string>
+    <string name="btnSearch">Search For a Restaurant</string>
+    <string name="btnOrder">Order Food</string>
+    <string name="btnOrderDetails">Order Details and Status</string>
+    <string name="btnOrderHistory">Order History</string>
 </resources>

@@ -2,47 +2,69 @@ package com.example.smart_meal;
 
 public class ItemModel {
 
-    private int imageItem;
-    private String titleTxt;
-    private String txtPrice;
-    private String txtDescItem;
+    private String itemName;
+    private int itemImage;
+    private String itemDescription;
+    private Double itemPrice;
+    private int itemQuantity;
 
-    public ItemModel(int imageItem, String titleTxt, String txtPrice, String txtDescItem) {
-        this.imageItem = imageItem;
-        this.titleTxt = titleTxt;
-        this.txtPrice = txtPrice;
-        this.txtDescItem = txtDescItem;
+    //constructor
+    public ItemModel(String itemName, int itemImage, String itemDescription, Double itemPrice) {
+        this.itemName = itemName;
+        this.itemImage = itemImage;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+    }
+//getter and setters
+    public String getItemName() {
+        return itemName;
     }
 
-    public int getImageItem() {
-        return imageItem;
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
     }
 
-    public void setImageItem(int imageItem) {
-        this.imageItem = imageItem;
+    public int getItemImage() {
+        return itemImage;
     }
 
-    public String getTitleTxt() {
-        return titleTxt;
+    public void setItemImage(int itemImage) {
+        this.itemImage = itemImage;
     }
 
-    public void setTitleTxt(String titleTxt) {
-        this.titleTxt = titleTxt;
+    public String getItemDescription() {
+        return itemDescription;
     }
 
-    public String getTxtPrice() {
-        return txtPrice;
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
     }
 
-    public void setTxtPrice(String txtPrice) {
-        this.txtPrice = txtPrice;
+    public Double getItemPrice() {
+        return itemPrice;
     }
 
-    public String getTxtDescItem() {
-        return txtDescItem;
+    public void setItemPrice(Double itemPrice) {
+        this.itemPrice = itemPrice;
     }
 
-    public void setTxtDescItem(String txtDescItem) {
-        this.txtDescItem = txtDescItem;
+    public int getItemQuantity() {
+        return itemQuantity;
+    }
+
+    public void setItemQuantity(int itemQuantity) {
+        this.itemQuantity = itemQuantity;
+    }
+
+    //to string method
+    @Override
+    public String toString() {
+        return "ItemModel{" +
+                "itemName='" + itemName + '\'' +
+                ", itemImage=" + itemImage +
+                ", itemDescription='" + itemDescription + '\'' +
+                ", itemPrice=" + itemPrice +
+                ", itemQuantity=" + itemQuantity +
+                '}';
     }
 }

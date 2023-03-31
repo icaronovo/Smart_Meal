@@ -15,6 +15,5 @@ public class CustomerSearch extends AppCompatActivity {
         setContentView(R.layout.activity_customer_search);
 
 
-
     }
 }

@@ -1,26 +1,23 @@
 package com.example.smart_meal;
 
 public class CustomerModel {
-//    private int id;
+
     private String accountType;
     private String customerEmail;
     private String password;
     private String customerName;
     private String customerPhone;
-
-
     private String customerAddress;
     private String customerCity;
     private String customerProvince;
-
+    private int customerImage;
 
     //Constructors
 
-    public CustomerModel (String accountType, String customerEmail,
-                         String password, String customerName, String customerPhone,
-                         String customerAddress, String customerCity, String customerProvince) {
-        super();
-//        this.id = id;
+
+    public CustomerModel(String accountType, String customerEmail, String password,
+                         String customerName, String customerPhone, String customerAddress,
+                         String customerCity, String customerProvince, int customerImage) {
         this.accountType = accountType;
         this.customerEmail = customerEmail;
         this.password = password;
@@ -29,36 +26,10 @@ public class CustomerModel {
         this.customerAddress = customerAddress;
         this.customerCity = customerCity;
         this.customerProvince = customerProvince;
-    }
-    //To String
-
-
-    @Override
-    public String toString() {
-        return "CustomerModel{" +
-//                "id=" + id +
-                ", accountType='" + accountType + '\'' +
-                ", customerEmail='" + customerEmail + '\'' +
-                ", password='" + password + '\'' +
-                ", customerName='" + customerName + '\'' +
-                ", customerPhone='" + customerPhone + '\'' +
-                ", customerAddress='" + customerAddress + '\'' +
-                ", customerCity='" + customerCity + '\'' +
-                ", customerProvince='" + customerProvince + '\'' +
-                '}';
+        this.customerImage = customerImage;
     }
 
-    //Getters and Setters
-
-
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-
+//getters and setters
     public String getAccountType() {
         return accountType;
     }
@@ -121,5 +92,29 @@ public class CustomerModel {
 
     public void setCustomerProvince(String customerProvince) {
         this.customerProvince = customerProvince;
+    }
+
+    public int getCustomerImage() {
+        return customerImage;
+    }
+
+    public void setCustomerImage(int customerImage) {
+        this.customerImage = customerImage;
+    }
+
+//to string method
+    @Override
+    public String toString() {
+        return "CustomerModel{" +
+                "accountType='" + accountType + '\'' +
+                ", customerEmail='" + customerEmail + '\'' +
+                ", password='" + password + '\'' +
+                ", customerName='" + customerName + '\'' +
+                ", customerPhone='" + customerPhone + '\'' +
+                ", customerAddress='" + customerAddress + '\'' +
+                ", customerCity='" + customerCity + '\'' +
+                ", customerProvince='" + customerProvince + '\'' +
+                ", customerImage=" + customerImage +
+                '}';
     }
 }

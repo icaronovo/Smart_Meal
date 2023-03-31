@@ -21,7 +21,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener{
+public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener {
 
     BottomNavigationView bottomNavigationView;
     ArrayList<ItemModel> itemList;
@@ -39,8 +39,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         //Recycler view
         androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
         int numOfColumns = 1;
-        recyclerView.setLayoutManager(new GridLayoutManager(this,numOfColumns));
-        itemAdapter = new ItemAdapter(this,initData());
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
+        itemAdapter = new ItemAdapter(this, initData());
         itemAdapter.setClickListener(this);
         recyclerView.setAdapter(itemAdapter);
 
@@ -51,20 +51,19 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         //Constraint layout where is the Fragments
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 
-
         //Bottom naviagation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.home:
                         titleText.setText("Welcome User");
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
                     case R.id.search:
-                        startActivity(new Intent(CustomerMain.this,CustomerSearch.class));
+                        startActivity(new Intent(CustomerMain.this, CustomerSearch.class));
                         return true;
                     case R.id.order:
                         titleText.setText("Order");
@@ -94,19 +93,16 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
     //Created a list to tryout the recyclervier
     //Latter figure out how to import from database :)
-    private List<ItemModel> initData(){
+    private List<ItemModel> initData() {
         itemList = new ArrayList<>();
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_foreground,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-        itemList.add(new ItemModel(R.drawable.ic_launcher_background,"Title Item","$9.99","Description, description bla bla bla"));
-
+        //String itemName, int itemImage, String itemDescription, Double itemPrice
+        itemList.add(new ItemModel("Title Item",R.drawable.ic_launcher_background,"Description, description bla bla bla",9.99));
+        itemList.add(new ItemModel("Title Item 1",R.drawable.ic_launcher_background,"Description, description bla bla bla",19.99));
+        itemList.add(new ItemModel("Title Item 2",R.drawable.ic_launcher_background,"Description, description bla bla bla",92.99));
+        itemList.add(new ItemModel("Title Item 3",R.drawable.ic_launcher_background,"Description, description bla bla bla",39.99));
+        itemList.add(new ItemModel("Title Item 5",R.drawable.ic_launcher_background,"Description, description bla bla bla",49.99));
+        itemList.add(new ItemModel("Title Item 6",R.drawable.ic_launcher_background,"Description, description bla bla bla",59.99));
+        itemList.add(new ItemModel("Title Item 7",R.drawable.ic_launcher_background,"Description, description bla bla bla",39.99));
         return itemList;
     }
 }

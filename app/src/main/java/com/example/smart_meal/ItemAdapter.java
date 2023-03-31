@@ -12,34 +12,34 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class ItemAdapter extends RecyclerView.Adapter{
+public class ItemAdapter extends RecyclerView.Adapter {
     List<ItemModel> itemList;
     LayoutInflater mInflater;
     ItemClickListener itemClickListener;
 
-    public ItemAdapter(Context context, List<ItemModel> itemList){
+    public ItemAdapter(Context context, List<ItemModel> itemList) {
         this.itemList = itemList;
         mInflater = LayoutInflater.from(context);
     }
 
-    Integer getItem(int id){
-        return itemList.get(id).getImageItem();
+    Integer getItem(int id) {
+        return itemList.get(id).getItemImage();
     }
 
     @NonNull
     @Override
     public ItemAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = mInflater.inflate(R.layout.recycler_view_row,parent,false);
+        View view = mInflater.inflate(R.layout.recycler_view_row, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).itemImage.setImageResource(itemList.get(position).getImageItem());
-        ((ViewHolder)holder).textTitle.setText(itemList.get(position).getTitleTxt());
-        ((ViewHolder)holder).textPrice.setText(itemList.get(position).getTxtPrice());
-        ((ViewHolder)holder).textDesc.setText(itemList.get(position).getTxtDescItem());
+        ((ViewHolder) holder).itemImage.setImageResource(itemList.get(position).getItemImage());
+        ((ViewHolder) holder).textTitle.setText(itemList.get(position).getItemName());
+        ((ViewHolder) holder).textPrice.setText(itemList.get(position).getItemPrice().toString());
+        ((ViewHolder) holder).textDesc.setText(itemList.get(position).getItemDescription());
     }
 
     @Override
@@ -47,11 +47,11 @@ public class ItemAdapter extends RecyclerView.Adapter{
         return itemList.size();
     }
 
-    void setClickListener(ItemClickListener mItemClickListener){
+    void setClickListener(ItemClickListener mItemClickListener) {
         itemClickListener = mItemClickListener;
     }
 
-    public interface ItemClickListener{
+    public interface ItemClickListener {
         void onItemClick(View view, int position);
     }
 
@@ -71,8 +71,8 @@ public class ItemAdapter extends RecyclerView.Adapter{
 
         @Override
         public void onClick(View view) {
-            if(itemClickListener != null){
-                itemClickListener.onItemClick(view,getAdapterPosition());
+            if (itemClickListener != null) {
+                itemClickListener.onItemClick(view, getAdapterPosition());
             }
         }
     }

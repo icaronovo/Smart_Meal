@@ -21,6 +21,12 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".CustomerHome"
+            android:exported="false" />
+        <activity
+            android:name=".PasswordRecovery"
+            android:exported="false" />
+        <activity
             android:name=".BusinessProfile"
             android:exported="false"
             android:parentActivityName=".BusinessMain">
