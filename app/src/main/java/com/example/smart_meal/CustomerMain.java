@@ -1,5 +1,6 @@
 package com.example.smart_meal;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -55,30 +56,14 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         Log.d("TAG", email);
 
         if (!TextUtils.isEmpty(email)) {
-            Cursor cursor = DB.getUserData(email);
+            String[] cursor = DB.getUserData(email);
             Log.d("TAG", String.valueOf(cursor));
 
-            if (cursor != null && cursor.getCount() > 0) {
-                StringBuilder str = new StringBuilder();
+            if (cursor != null && cursor.length > 0) {
+//                StringBuilder str = new StringBuilder();
+//                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+//                String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
 
-                while (cursor.moveToNext()) {
-                    str.append(cursor.getString(0));
-                    str.append(cursor.getString(1));
-                    str.append(cursor.getString(2));
-                    str.append(cursor.getString(3));
-                    str.append(cursor.getString(5));
-                    str.append(cursor.getString(6));
-                    str.append(cursor.getString(7));
-                    str.append(cursor.getString(8));
-                    str.append(cursor.getString(9));
-                    str.append("\n");
-                }
-                Log.d("TAG", String.valueOf(str));
-
-                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-                String data = str.toString();
-                editor.putString("data", data);
-                editor.apply();
             } else {
                 // Handle case where cursor is null or empty
             }
@@ -88,7 +73,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         //Top text
         titleText = findViewById(R.id.topText);
-        titleText.setText("Welcome User");
 
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 

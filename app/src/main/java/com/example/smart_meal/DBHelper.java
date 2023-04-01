@@ -2,6 +2,7 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -11,7 +12,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 12;
+    public static final int dbVersion = 13;
 
     //creating item table and fields
     public static final String ITEM = "ITEM";
@@ -43,6 +44,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CITY = "City";
     public static final String COLUMN_PROVINCE = "Province";
     public static final String COLUMN_PROFILE_IMAGE = "ProfileImage";
+
+    private Context mContext;
 
     public DBHelper(@Nullable Context context) {
         super(context, SMART_MEAL_DB, null, dbVersion);
@@ -86,6 +89,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableOrderInfo);
     }
 
+
     // this is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
     //CREATING TABLES OR DROPPING IF IT EXISTS
@@ -96,15 +100,20 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public Cursor getUserData(String email) {
+    public String[] getUserData(String email) {
+        String[] userData = new String[9];
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{email});
         if (cursor != null) {
             cursor.moveToFirst();
+            for (int i = 0; i < userData.length; i++) {
+                userData[i] = cursor.getString(i);
+            }
         }
-        return cursor;
-    }
+       return userData;
 
+
+    }
 
     // This method us used to check if the account is of type Business or Customer
     public Cursor checkAccountType(String Email) {

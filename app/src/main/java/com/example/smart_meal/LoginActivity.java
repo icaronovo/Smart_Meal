@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,9 +72,20 @@ public class LoginActivity extends AppCompatActivity {
                 else {
                     try {
 
-                        Cursor cursor = DB.checkAccountType(user);
-                        accountType = cursor.getString(0);
+                        Cursor cursorAccoountType = DB.checkAccountType(user);
+                        accountType = cursorAccoountType.getString(0);
                         boolean c = DB.checkUserAccount(user, password);
+
+                        String[] userData = DB.getUserData(user);
+                        SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                        String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
+
+                        for (int i = 0; i < userData.length; i++) {
+                            editor.putString(columns[i], userData[i]);
+                            editor.apply();
+                            Log.d(columns[i], userData[i]);
+                        }
+
                         if (accountType.equals("Business")) {
                             if (c == true) {
                                 startActivity(new Intent(LoginActivity.this, BusinessMain.class));
@@ -89,9 +101,11 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
 
-                        SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
-                        editor.putString("user", user);
-                        editor.apply();
+//                        SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+//                        editor.putString("user", user);
+//                        editor.apply();
+
+
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
                     }

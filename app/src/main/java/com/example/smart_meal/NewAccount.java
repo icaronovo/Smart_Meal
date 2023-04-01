@@ -90,7 +90,7 @@ public class NewAccount extends AppCompatActivity {
 
                 } else {
                     try {
-                        customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state, R.drawable.shop_icon);
+                        customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state, R.drawable.ic_baseline_person_outline_24);
                         DB.addCustomer(customerModel);
 
                         if (accountType.equals("Customer")) {
