@@ -8,13 +8,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 public class CustomerOrderFragment extends Fragment {
 
-    TextView orderText;
+    TextView txtYourDelivery, txtDelivery, txtAddress, txtOrders, orderText;
+    RadioButton rdbPickUp, rdbDelivery;
+    RadioGroup radioGroup;
+    EditText inputAddress;
     Button btnConfirm;
 
     @Override
@@ -26,12 +33,48 @@ public class CustomerOrderFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstance){
         super.onViewCreated(view, savedInstance);
+        txtYourDelivery = getActivity().findViewById(R.id.txtYourDelivery);
+        txtDelivery = getActivity().findViewById(R.id.txtTypeOfDelivery);
+        txtAddress = getActivity().findViewById(R.id.txtDeliveryAdd);
+        txtOrders = getActivity().findViewById(R.id.txtOrder);
         orderText = getActivity().findViewById(R.id.orderCustomer);
+        rdbPickUp = getActivity().findViewById(R.id.rbtPickUp);
+        rdbDelivery = getActivity().findViewById(R.id.rbtDelivery);
+        inputAddress = getActivity().findViewById(R.id.txtAddressDelivery);
+        radioGroup = getActivity().findViewById(R.id.radioGroup);
         btnConfirm = getActivity().findViewById(R.id.btnConfirmOrder);
+
+
+
+
     }
 
     public void changeText(ArrayList<String> data){
-        orderText.setText(String.valueOf(data));
+        //Set visibility of the date
+        txtYourDelivery.setVisibility(View.VISIBLE);
+        txtDelivery.setVisibility(View.VISIBLE);
+        txtOrders.setVisibility(View.VISIBLE);
+        rdbPickUp.setVisibility(View.VISIBLE);
+        rdbDelivery.setVisibility(View.VISIBLE);
+        orderText.setVisibility(View.VISIBLE);
+
+        // Set a listener on the radio button
+        rdbPickUp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                // If the radio button is checked, show the Address and the input
+                if (isChecked) {
+                    txtAddress.setVisibility(View.GONE);
+                    inputAddress.setVisibility(View.GONE);
+                } else {
+                    // Otherwise, hide the the Address and the input
+                    txtAddress.setVisibility(View.VISIBLE);
+                    inputAddress.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
         btnConfirm.setVisibility(View.VISIBLE);
+        orderText.setText(String.valueOf(data));
     }
 }
