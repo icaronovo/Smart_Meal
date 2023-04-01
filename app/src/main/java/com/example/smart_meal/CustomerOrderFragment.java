@@ -49,7 +49,7 @@ public class CustomerOrderFragment extends Fragment {
 
     }
 
-    public void changeText(ArrayList<String> data){
+    public void changeText(StringBuilder data){
         //Set visibility of the date
         txtYourDelivery.setVisibility(View.VISIBLE);
         txtDelivery.setVisibility(View.VISIBLE);
