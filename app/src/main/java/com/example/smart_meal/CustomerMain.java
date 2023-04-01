@@ -67,9 +67,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             // Handle case where email is empty or null
         }
 
-        //Top text
-        titleText = findViewById(R.id.topText);
-
+      
         //Constraint layout where is the Fragments
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 
