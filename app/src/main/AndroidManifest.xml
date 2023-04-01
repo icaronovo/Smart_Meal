@@ -16,6 +16,17 @@
             android:name=".CustomerUpdate"
             android:exported="false" />
         <activity
+            android:name=".CustomerRestaurant"
+            android:exported="false"
+            android:parentActivityName=".CustomerMain">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".CustomerHome"
+            android:exported="false" />
+        <activity
             android:name=".PasswordUpdate"
             android:exported="false" />
         <activity
