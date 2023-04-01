@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ public class LoginActivity extends AppCompatActivity {
     DBHelper DB;
     EditText email, pass;
     String accountType;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,16 +31,16 @@ public class LoginActivity extends AppCompatActivity {
         pass = findViewById(R.id.txtPassword);
         DB = new DBHelper(this);
 
-        final SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //btn to delete record from db
         Button btnDel = findViewById(R.id.btnDel);
 
+        //CHECAR O DESTINO DESSE BOTAO SEMPRE
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, PasswordRecovery.class));
+                startActivity(new Intent(LoginActivity.this, PasswordUpdate.class));
             }
         });
 
@@ -97,16 +99,62 @@ public class LoginActivity extends AppCompatActivity {
 
         //Favor não me apagar.. Só deixe como comentário :)
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
+                String user = email.getText().toString();
+                String password = pass.getText().toString();
+
+                //checking if user exists and validating with db, simple validation to prevent empty fields
+                if (user.equals("") || password.equals(""))
+                    Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
+                else {
+                    try {
+                        Cursor cursorAccoountType = DB.checkAccountType(user);
+                        accountType = cursorAccoountType.getString(0);
+                        boolean c = DB.checkUserAccount(user, password);
+
+                        String[] userData = DB.getUserData(user);
+                        SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                        String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
+
+                        for (int i = 0; i < userData.length; i++) {
+                            editor.putString(columns[i], userData[i]);
+                            editor.apply();
+                            Log.d(columns[i], userData[i]);
+                        }
+
+                        if (accountType.equals("Business")) {
+                            if (c == true) {
+                                startActivity(new Intent(LoginActivity.this, BusinessMain.class));
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else if (accountType.equals("Customer")) {
+                            if (c == true) {
+                                startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+//                        SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+//                        editor.putString("user", user);
+//                        editor.apply();
+
+
+                    } catch (Exception e) {
+                        Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
+                    }
+                /*Intent intent = getIntent();
                 int typeCustomer = getIntent().getIntExtra("TYPE",-1);
                 if(typeCustomer == 0){
                     //UNCOMMENT TO TEST THE CUSTOMER CLASS
                     startActivity(new Intent(LoginActivity.this, BusinessMain.class));
                 } else if (typeCustomer == 1) {
                     //UNCOMMENT TO TEST THE  BUSINESS CLASS
-                    startActivity(new Intent(LoginActivity.this, CustomerMain.class));
+                    startActivity(new Intent(LoginActivity.this, CustomerMain.class)); */
                 }
             }
         });

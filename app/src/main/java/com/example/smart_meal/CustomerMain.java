@@ -1,12 +1,17 @@
 package com.example.smart_meal;
 
+import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -27,6 +32,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     CustomerProfileFragment customerProfile = new CustomerProfileFragment();
     CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
 
+    private SharedPreferences sharedPreferences;
+
+    DBHelper DB = new DBHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +46,29 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         //TextView for the titles
         titleTextView = findViewById(R.id.topText);
         titleTextView.setText("Welcome User");
+        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        sharedPreferences.getString("user", "");
+        String email = sharedPreferences.getString("user","");
+        Log.d("TAG", email);
+
+        if (!TextUtils.isEmpty(email)) {
+            String[] cursor = DB.getUserData(email);
+            Log.d("TAG", String.valueOf(cursor));
+
+            if (cursor != null && cursor.length > 0) {
+//                StringBuilder str = new StringBuilder();
+//                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+//                String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
+
+            } else {
+                // Handle case where cursor is null or empty
+            }
+        } else {
+            // Handle case where email is empty or null
+        }
+
+        //Top text
+        titleText = findViewById(R.id.topText);
 
         //Constraint layout where is the Fragments
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
@@ -71,7 +103,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             }
         });
     }
-
 
     @Override
     public void onItemClick(View view, int position) {

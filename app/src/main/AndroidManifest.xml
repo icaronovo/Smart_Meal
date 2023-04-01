@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Smart_Meal"
         tools:targetApi="31">
         <activity
+            android:name=".CustomerUpdate"
+            android:exported="false" />
+        <activity
             android:name=".CustomerRestaurant"
             android:exported="false"
             android:parentActivityName=".CustomerMain">
@@ -24,7 +27,7 @@
             android:name=".CustomerHome"
             android:exported="false" />
         <activity
-            android:name=".PasswordRecovery"
+            android:name=".PasswordUpdate"
             android:exported="false" />
         <activity
             android:name=".BusinessProfile"
