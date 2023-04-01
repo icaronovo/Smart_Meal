@@ -40,7 +40,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         FragmentManager fragmentManager = getSupportFragmentManager();
         CustomerOrderFragment customerOrderFragment = (CustomerOrderFragment)
                 fragmentManager.findFragmentById(R.id.selectedOrder);
-        String str = "";
+        ArrayList<String> str = new ArrayList<>();
         double finalTotal = 0;
 
         DecimalFormat decimalFormat = new DecimalFormat("#");
@@ -48,11 +48,11 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
         for (String key : data.keySet()) {
             Double[] values = data.get(key);
-            str += decimalFormat.format(values[1]) + ". " + key + " $ " + currency.format(values[0]) + "\n";
+            str.add(decimalFormat.format(values[1]) + ". " + key + " $ " + currency.format(values[0]));
             finalTotal += values[0] * values[1];
         }
-        str += "\nSubtotal  $" + currency.format(finalTotal);
-        customerOrderFragment.changeText(String.valueOf(str));
+        str.add("Subtotal  $" + currency.format(finalTotal));
+        customerOrderFragment.changeText(str);
     }
 
     private List<ItemModel> initData() {

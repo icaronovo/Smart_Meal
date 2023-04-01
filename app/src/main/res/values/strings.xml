@@ -64,4 +64,8 @@
     <string name="btnOrderDetails">Order Details and Status</string>
     <string name="btnOrderHistory">Order History</string>
     <string name="btnConfirmORder">Confirm Order</string>
+    <string name="txtYourDelivery">Your Delivery</string>
+    <string name="txtTypeDelivery">Delivery</string>
+    <string name="btnPickUp">Pick up at store</string>
+    <string name="rbt">Delivery</string>
 </resources>

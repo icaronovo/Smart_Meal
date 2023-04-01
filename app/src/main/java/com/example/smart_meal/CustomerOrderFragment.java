@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class CustomerOrderFragment extends Fragment {
 
     TextView orderText;
@@ -28,8 +30,8 @@ public class CustomerOrderFragment extends Fragment {
         btnConfirm = getActivity().findViewById(R.id.btnConfirmOrder);
     }
 
-    public void changeText(String data){
-        orderText.setText(data);
+    public void changeText(ArrayList<String> data){
+        orderText.setText(String.valueOf(data));
         btnConfirm.setVisibility(View.VISIBLE);
     }
 }

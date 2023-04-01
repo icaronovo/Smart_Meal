@@ -1,34 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".CustomerOrderFragment">
+
+    <TextView
+        android:id="@+id/txtYourDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtYourDelivery"
+        android:textSize="20sp"
+        android:textStyle="bold"         />
+
+    <TextView
+        android:id="@+id/txtTypeOfDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="11dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/txtTypeDelivery"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/rdbTypeOfDelivery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtYourDelivery"
+        app:layout_constraintVertical_bias="0.17" />
+
+    <RadioGroup
+        android:id="@+id/rdbTypeOfDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/orderCustomer"
+        app:layout_constraintTop_toBottomOf="@+id/txtYourDelivery"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.343">
+
+        <RadioButton
+            android:id="@+id/rbtPickUp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:checked="true"
+            android:minHeight="48dp"
+            android:text="@string/btnPickUp"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rbtDelivery"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:minHeight="48dp"
+            android:text="@string/rbt"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txtDeliveryAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtAddress"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/txtAddressDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/txtAddress"/>
+
+    <TextView
+        android:id="@+id/txtOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtOrder"
+        android:textSize="16sp"
+        android:textStyle="bold"         />
 
     <TextView
         android:id="@+id/orderCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btnConfirmOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnConfirmORder"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
-
-    <Button
-        android:id="@+id/btnConfirmOrder"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/btnConfirmORder"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/orderCustomer"
-        app:layout_constraintVertical_bias="0.029" />
+        app:layout_constraintVertical_bias="0.067" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
