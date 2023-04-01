@@ -43,20 +43,17 @@ public class CustomerOrderFragment extends Fragment {
         inputAddress = getActivity().findViewById(R.id.txtAddressDelivery);
         radioGroup = getActivity().findViewById(R.id.radioGroup);
         btnConfirm = getActivity().findViewById(R.id.btnConfirmOrder);
-
-
-
-
     }
 
     public void changeText(StringBuilder data){
-        //Set visibility of the date
+        //Set visibility of the items
         txtYourDelivery.setVisibility(View.VISIBLE);
         txtDelivery.setVisibility(View.VISIBLE);
         txtOrders.setVisibility(View.VISIBLE);
         rdbPickUp.setVisibility(View.VISIBLE);
         rdbDelivery.setVisibility(View.VISIBLE);
         orderText.setVisibility(View.VISIBLE);
+        btnConfirm.setVisibility(View.VISIBLE);
 
         // Set a listener on the radio button
         rdbPickUp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -74,7 +71,6 @@ public class CustomerOrderFragment extends Fragment {
             }
         });
 
-        btnConfirm.setVisibility(View.VISIBLE);
         orderText.setText(String.valueOf(data));
     }
 }

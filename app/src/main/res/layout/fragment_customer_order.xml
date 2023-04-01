@@ -12,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtYourDelivery"
-        android:visibility="gone"
+        android:textColor="@color/black"
         android:textSize="20sp"
-        android:textStyle="bold"         />
+        android:textStyle="bold"
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/txtTypeOfDelivery"
@@ -22,6 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:layout_marginBottom="8dp"
+        android:textColor="@color/black"
         android:text="@string/txtTypeDelivery"
         android:textSize="16sp"
         android:textStyle="bold"
@@ -52,6 +54,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:visibility="gone"
+            android:textColor="@color/black"
             android:checked="true"
             android:minHeight="48dp"
             android:text="@string/btnPickUp"
@@ -63,6 +66,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:minHeight="48dp"
+            android:textColor="@color/black"
             android:visibility="gone"
             android:text="@string/rbt"
             android:textSize="16sp" />
@@ -72,6 +76,7 @@
         android:id="@+id/txtDeliveryAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="@string/txtAddress"
         android:visibility="gone"
         android:textSize="16sp"
@@ -88,15 +93,17 @@
         android:id="@+id/txtOrder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:text="@string/txtOrder"
         android:visibility="gone"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:textStyle="bold"         />
 
     <TextView
         android:id="@+id/orderCustomer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:visibility="gone"
         android:textSize="16sp" />
 

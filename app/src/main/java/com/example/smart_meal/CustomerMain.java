@@ -4,16 +4,12 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -25,40 +21,34 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
     BottomNavigationView bottomNavigationView;
     ArrayList<ItemModel> itemList;
-    RecyclerView recyclerView;
-    ImageView imageView;
+    androidx.recyclerview.widget.RecyclerView recyclerView;
     ItemAdapter itemAdapter;
-    TextView titleText;
-    CustomerProfileFragment customerProfileFragment = new CustomerProfileFragment();
+    TextView titleTextView;
+    CustomerProfileFragment customerProfile = new CustomerProfileFragment();
+    CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        //Recycler view
-        androidx.recyclerview.widget.RecyclerView recyclerView = findViewById(R.id.mRecyclerView);
-        int numOfColumns = 1;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
-        itemAdapter = new ItemAdapter(this, initData());
-        itemAdapter.setClickListener(this);
-        recyclerView.setAdapter(itemAdapter);
+        createRecyclerView();
 
-        //Top text
-        titleText = findViewById(R.id.topText);
-        titleText.setText("Welcome User");
+        //TextView for the titles
+        titleTextView = findViewById(R.id.topText);
+        titleTextView.setText("Welcome User");
 
         //Constraint layout where is the Fragments
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 
-        //Bottom naviagation view
+        //Bottom navigation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        titleText.setText("Welcome User");
+                        titleTextView.setText("Welcome User");
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
@@ -66,14 +56,15 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         startActivity(new Intent(CustomerMain.this, CustomerSearch.class));
                         return true;
                     case R.id.order:
-                        titleText.setText("Order");
+                        titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:
-                        titleText.setText("Account");
+                        titleTextView.setText("Account");
                         constraintLayout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout,customerProfileFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfile).commit();
                         return true;
                 }
                 return false;
@@ -89,6 +80,17 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         intent.putExtra("RESTAURANTID",position);
         startActivity(intent);
         //End
+    }
+
+    //Method for the RecyclerView
+    private void createRecyclerView(){
+        //Recycler view
+        recyclerView = findViewById(R.id.mRecyclerView);
+        int numOfColumns = 1;
+        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
+        itemAdapter = new ItemAdapter(this, initData());
+        itemAdapter.setClickListener(this);
+        recyclerView.setAdapter(itemAdapter);
     }
 
     //Created a list to tryout the recyclervier

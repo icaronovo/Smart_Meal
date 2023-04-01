@@ -48,13 +48,19 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
         for (String key : data.keySet()) {
             Double[] values = data.get(key);
-            str.append(decimalFormat.format(values[1]) + ". " + key + " $ " + currency.format(values[0]) + "\n");
+            str.append(decimalFormat.format(values[1]) + " x " + key + " $ " + currency.format(values[0]) + "\n");
             finalTotal += values[0] * values[1];
         }
+
+        final double FEE = 0.6 * finalTotal;
         str.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
+        str.append("Fees  $" + currency.format(FEE)+ "\n");
+        str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
         customerOrderFragment.changeText(str);
     }
 
+    //Get the items from db
+    //Put them here
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
         //String itemName, int itemImage, String itemDescription, Double itemPrice
