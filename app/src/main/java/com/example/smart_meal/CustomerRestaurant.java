@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,20 +40,19 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         FragmentManager fragmentManager = getSupportFragmentManager();
         CustomerOrderFragment customerOrderFragment = (CustomerOrderFragment)
                 fragmentManager.findFragmentById(R.id.selectedOrder);
-        String print = "";
-        double total = 1;
+        String str = "";
+        double finalTotal = 0;
+
+        DecimalFormat decimalFormat = new DecimalFormat("#");
+        DecimalFormat currency = new DecimalFormat("#.##");
 
         for (String key : data.keySet()) {
-            print += key + ": ";
             Double[] values = data.get(key);
-            for (Double value : values) {
-                total *=value;
-                print += value + " ";
-            }
-            print += "Total =" + total;
-            total = 1;
+            str += decimalFormat.format(values[1]) + ". " + key + " $ " + currency.format(values[0]) + "\n";
+            finalTotal += values[0] * values[1];
         }
-        customerOrderFragment.changeText(String.valueOf(print));
+        str += "\nSubtotal  $" + currency.format(finalTotal);
+        customerOrderFragment.changeText(String.valueOf(str));
     }
 
     private List<ItemModel> initData() {

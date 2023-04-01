@@ -54,7 +54,7 @@
     <string name="DELtextDescri">4090 Kingsway - Burnaby, BC</string>
     <string name="imgStart">Restaurant avaliation</string>
     <string name="DELtxtRating">4.5 / 5.0</string>
-    <string name="btnConfirmOrder">Confirm Order</string>
+    <string name="btnViewOrder">View Order</string>
     <string name="txtItemAv">Items Available</string>
     <string name="btnDel">Update Password</string>
     <string name="newPasswordHint">Enter the new password</string>
@@ -63,4 +63,5 @@
     <string name="btnOrder">Order Food</string>
     <string name="btnOrderDetails">Order Details and Status</string>
     <string name="btnOrderHistory">Order History</string>
+    <string name="btnConfirmORder">Confirm Order</string>
 </resources>
