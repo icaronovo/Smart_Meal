@@ -29,7 +29,7 @@ public class CustomerUpdate extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_new_account);
+        setContentView(R.layout.activity_customer_update);
         username = findViewById(R.id.nameUpdate);
         txtPhone = findViewById(R.id.phoneUpdate);
         txtAddress = findViewById(R.id.addressUpdate);
@@ -41,9 +41,11 @@ public class CustomerUpdate extends AppCompatActivity {
         btnUpdate = findViewById(R.id.btnUpdate);
         txtErrorE = findViewById(R.id.txtErrorEmail);
         txtErrorP = findViewById(R.id.txtErrorPassword);
-        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
-        String loggedUser = sharedPreferences.getString("user", "");
+        String loggedUser = sharedPreferences.getString("data", "");
+        String prevEmail = sharedPreferences.getString("EmailCust", "");
+
         Log.d("TAG", loggedUser);
 
         //When the user click on "Create", it will create a new account
@@ -62,8 +64,21 @@ public class CustomerUpdate extends AppCompatActivity {
                 String confirmPassword = txtConfirmPassword.getText().toString();
 
                 try {
-                    DB.customerUpdate(loggedUser, email, password, name, phone, address, city, state);
+                    Boolean emailVerified = DB.checkIfEmailExists(email);
+                    if (!emailVerified) {
+                        DB.customerUpdate(prevEmail, email, password, name, phone, address, city, state);
+                        String[] userData = DB.getUserData(email);
+                        SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                        String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
 
+                        for (int i = 0; i < userData.length; i++) {
+                            editor.putString(columns[i], userData[i]);
+                            editor.apply();
+                            Log.d(columns[i], userData[i]);
+                        }
+                    } else {
+                        Toast.makeText(CustomerUpdate.this, "This email is already in use.", Toast.LENGTH_LONG).show();
+                    }
                 } catch (Exception e) {
                     if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
                         //Check if the information is empty

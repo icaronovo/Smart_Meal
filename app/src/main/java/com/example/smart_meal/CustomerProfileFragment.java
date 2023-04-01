@@ -52,23 +52,38 @@ public class CustomerProfileFragment extends Fragment {
         // Initialize the DB object
         DB = new DBHelper(getActivity());
 
-        SharedPreferences sharedPreferences1 = getActivity().getSharedPreferences("user", Context.MODE_PRIVATE);
-        String email = sharedPreferences1.getString("username","");
-        String[] columns = {"CustomerID", "EmailCust", "Name", "Phone", "Address", "City", "Province"};
-        String selection = "EmailCust= ?";
-        String[]selectionArgs = {email};
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("EmailCust","");
+        String address = sharedPreferences.getString("Address", "");
+        String phone = sharedPreferences.getString("Phone", "");
+        String customerID = sharedPreferences.getString("CustomerID", "");
+        String city = sharedPreferences.getString("City", "");
+        String accountType = sharedPreferences.getString("AccountType", "");
+        String province = sharedPreferences.getString("Province", "");
+        String name = sharedPreferences.getString("Name", "");
 
-        Cursor cursor = DB.getReadableDatabase().query("CUSTOMER_INFO",columns,selection,selectionArgs,null,null,null);
+        custName.setText(name);
+        custID.setText("Customer ID: " + customerID);
+        custPhone.setText(phone);
+        custAddress.setText(address);
+        custCity.setText(city);
+        custState.setText(province);
+        custEmail.setText(email);
 
-        if(cursor.moveToFirst()) {
-            custID.setText(cursor.getString(0));
-            custEmail.setText(cursor.getString(2));
-            custName.setText(cursor.getString(4));
-            custPhone.setText(cursor.getString(5));
-            custAddress.setText(cursor.getString(6));
-            custCity.setText(cursor.getString(7));
-            custState.setText(cursor.getString(8));
-        }
+
+
+//
+//        Cursor cursor = DB.getReadableDatabase().query("CUSTOMER_INFO",columns,selection,selectionArgs,null,null,null);
+//
+//        if(cursor.moveToFirst()) {
+//            custID.setText(cursor.getString(0));
+//            custEmail.setText(cursor.getString(2));
+//            custName.setText(cursor.getString(4));
+//            custPhone.setText(cursor.getString(5));
+//            custAddress.setText(cursor.getString(6));
+//            custCity.setText(cursor.getString(7));
+//            custState.setText(cursor.getString(8));
+//        }
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

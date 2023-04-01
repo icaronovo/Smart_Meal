@@ -3,6 +3,7 @@ package com.example.smart_meal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,7 +11,6 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     int customerType = -1;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -71,7 +71,6 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else {
                     try {
-
                         Cursor cursorAccoountType = DB.checkAccountType(user);
                         accountType = cursorAccoountType.getString(0);
                         boolean c = DB.checkUserAccount(user, password);

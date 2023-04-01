@@ -201,8 +201,18 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("Address", address);
         cv.put("City", city);
         cv.put("Province", province);
-        int rowsAffected = db.update("CUSTOMER_INFO", cv, "EmailCust = " + email, new String[]{email});
+        int rowsAffected = db.update("CUSTOMER_INFO", cv, "EmailCust = ?", new String[]{prevEmail});
         return rowsAffected > 0;
+    }
+
+    public boolean checkIfEmailExists (String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{email});
+        if (cursor.getCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     //method to add values to ITEM table

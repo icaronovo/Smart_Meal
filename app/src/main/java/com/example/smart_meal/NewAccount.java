@@ -90,13 +90,18 @@ public class NewAccount extends AppCompatActivity {
 
                 } else {
                     try {
-                        customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state, R.drawable.ic_baseline_person_outline_24);
-                        DB.addCustomer(customerModel);
+                        Boolean checkEmail = DB.checkIfEmailExists(email);
+                        if (!checkEmail) {
+                            customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state, R.drawable.ic_baseline_person_outline_24);
+                            DB.addCustomer(customerModel);
 
-                        if (accountType.equals("Customer")) {
-                            startActivity(new Intent(NewAccount.this, CustomerMain.class));
-                        } else if (accountType.equals("Business")) {
-                            startActivity(new Intent(NewAccount.this, BusinessMain.class));
+                            if (accountType.equals("Customer")) {
+                                startActivity(new Intent(NewAccount.this, CustomerMain.class));
+                            } else if (accountType.equals("Business")) {
+                                startActivity(new Intent(NewAccount.this, BusinessMain.class));
+                            }
+                        } else {
+                            Toast.makeText(NewAccount.this, "This email is already in use.", Toast.LENGTH_LONG).show();
                         }
 
                     } catch (Exception e) {

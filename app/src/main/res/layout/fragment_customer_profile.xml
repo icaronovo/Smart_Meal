@@ -8,113 +8,133 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
-        android:id="@+id/custName"
+    <Button
+        android:id="@+id/btnLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="29dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/custID"
-        app:layout_constraintStart_toEndOf="@+id/profileImg"
-        app:layout_constraintTop_toTopOf="@+id/profileImg" />
-
-    <TextView
-        android:id="@+id/custEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="18dp"
-        android:text="TextView"
-        app:layout_constraintStart_toStartOf="@+id/custName"
-        app:layout_constraintTop_toBottomOf="@+id/custName" />
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/btnLogoff"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custState" />
 
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="22dp"
-        android:layout_marginBottom="234dp"
         android:text="@string/profileUpdate"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/custPhone"
-        app:layout_constraintTop_toBottomOf="@+id/custPhone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toEndOf="@+id/btnLog"
+        app:layout_constraintTop_toTopOf="@+id/btnLog"
         tools:ignore="NotSibling" />
 
     <TextView
-        android:id="@+id/custPhone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="63dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/btnEdit"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custState" />
-
-    <TextView
-        android:id="@+id/custCity"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="21dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/custState"
-        app:layout_constraintStart_toStartOf="@+id/custAddress"
-        app:layout_constraintTop_toBottomOf="@+id/custAddress" />
+        android:id="@+id/custName"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        android:text="Name"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView" />
 
     <TextView
         android:id="@+id/custAddress"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="18dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/custCity"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        android:text="Address"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/profileImg" />
+        app:layout_constraintTop_toBottomOf="@+id/custID" />
 
     <TextView
         android:id="@+id/custState"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="26dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/custPhone"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:text="State"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custCity" />
 
-    <Button
-        android:id="@+id/btnLog"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginTop="41dp"
-        android:text="@string/btnLogoff"
-        app:layout_constraintStart_toStartOf="@+id/btnEdit"
-        app:layout_constraintTop_toBottomOf="@+id/btnEdit" />
+    <TextView
+        android:id="@+id/custCity"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:text="City"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.513"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/custAddress" />
+
+    <TextView
+        android:id="@+id/custEmail"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:text="Email"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/profileImg"
+        app:layout_constraintStart_toEndOf="@+id/profileImg"
+        app:layout_constraintTop_toTopOf="@+id/profileImg"
+        app:layout_constraintVertical_bias="0.3" />
+
+    <TextView
+        android:id="@+id/custPhone"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="28dp"
+        android:text="Phone"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/custEmail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/custEmail"
+        app:layout_constraintTop_toBottomOf="@+id/custEmail" />
 
     <ImageView
         android:id="@+id/profileImg"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="6dp"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="19dp"
-        android:layout_marginBottom="30dp"
+        android:layout_width="160dp"
+        android:layout_height="160dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
         android:contentDescription="@string/anImage"
         android:src="@drawable/ic_baseline_person_outline_24"
-        app:layout_constraintBottom_toTopOf="@+id/custAddress"
-        app:layout_constraintEnd_toStartOf="@+id/custName"
+        android:textSize="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/custID"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:text="CustomerID"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="@+id/profileImg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/profileImg"
+        app:layout_constraintTop_toBottomOf="@+id/profileImg" />
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="211dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/profileImg"
+        android:layout_height="40dp"
+        android:layout_marginTop="16dp"
+        android:text="Welcome,"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/custName" />
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
