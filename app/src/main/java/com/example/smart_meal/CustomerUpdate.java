@@ -4,14 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,11 +18,9 @@ import java.util.regex.Pattern;
 
 public class CustomerUpdate extends AppCompatActivity {
     Spinner spnState;
-    Button btnCreate;
+    Button btnUpdate;
     EditText username, txtPhone, txtAddress, txtCity, txtEmail, txtPassword, txtConfirmPassword;
     TextView txtErrorP, txtErrorE;
-    RadioButton radioCustomer, radioBusiness;
-    RadioGroup radioGroup;
     DBHelper DB = new DBHelper(this);
 
     private SharedPreferences sharedPreferences;
@@ -35,49 +30,24 @@ public class CustomerUpdate extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        btnCreate = findViewById(R.id.btnCreate);
-        username = findViewById(R.id.txtName);
-        txtPhone = findViewById(R.id.txtPhone);
-        txtAddress = findViewById(R.id.txtAddress);
-        txtCity = findViewById(R.id.txtCity);
-        spnState = findViewById(R.id.spnStates);
-        txtEmail = findViewById(R.id.txtEmailNewAccount);
-        txtPassword = findViewById(R.id.txtCreatePassword);
-        txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
-        btnCreate = findViewById(R.id.btnCreate);
+        username = findViewById(R.id.nameUpdate);
+        txtPhone = findViewById(R.id.phoneUpdate);
+        txtAddress = findViewById(R.id.addressUpdate);
+        txtCity = findViewById(R.id.cityUpdate);
+        spnState = findViewById(R.id.spnStatesUpdate);
+        txtEmail = findViewById(R.id.emailUpdate);
+        txtPassword = findViewById(R.id.passUpdate);
+        txtConfirmPassword = findViewById(R.id.confirmPassUpdate);
+        btnUpdate = findViewById(R.id.btnUpdate);
         txtErrorE = findViewById(R.id.txtErrorEmail);
         txtErrorP = findViewById(R.id.txtErrorPassword);
-        radioCustomer = findViewById(R.id.radioCustomer);
-        radioBusiness = findViewById(R.id.radioBusiness);
-        radioGroup = findViewById(R.id.radioGroup);
-
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        String loggedUser = sharedPreferences.getString("user","");
+
+        String loggedUser = sharedPreferences.getString("user", "");
         Log.d("TAG", loggedUser);
 
-        //When the user select the type of account, it will change the fields required
-
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-
-                switch (i) {
-                    case R.id.radioCustomer:
-                        username.setHint("Full Name");
-                        username.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_person_outline_24, 0, 0, 0);
-                        accountType = "Customer";
-                        break;
-                    case R.id.radioBusiness:
-                        username.setCompoundDrawablesWithIntrinsicBounds(R.drawable.shop_icon, 0, 0, 0);
-                        username.setHint("Business");
-                        accountType = "Business";
-                        break;
-                }
-            }
-        });
         //When the user click on "Create", it will create a new account
-        btnCreate.setOnClickListener(new View.OnClickListener() {
+        btnUpdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Get the information on the form
@@ -91,43 +61,30 @@ public class CustomerUpdate extends AppCompatActivity {
                 String password = txtPassword.getText().toString();
                 String confirmPassword = txtConfirmPassword.getText().toString();
 
-                //constructor for  new users
-                CustomerModel customerModel;
-                if (accountType == null || accountType.equals("")) {
-                    Toast.makeText(CustomerUpdate.this, "Please select account type", Toast.LENGTH_LONG).show();
+                try {
+                    DB.customerUpdate(loggedUser, email, password, name, phone, address, city, state);
 
-                } else {
-                    try {
-
-                        DB.customerUpdate(loggedUser,email,password,name,phone,address,city,state);
-
-                        if (accountType.equals("Customer")) {
-                            startActivity(new Intent(CustomerUpdate.this, CustomerMain.class));
-                        } else if (accountType.equals("Business")) {
-                            startActivity(new Intent(CustomerUpdate.this, BusinessMain.class));
-                        }
-
-                    } catch (Exception e) {
-                        if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
-                            //Check if the information is empty
-                            Toast.makeText(CustomerUpdate.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
-                        } else if (!isEmailValid(email)) {
-                            //Check if email is valid
-                            txtErrorE.setText("Please make sure to put a valid email");
-                        } else if (!password.equals(confirmPassword)) {
-                            //Check if the passwords match
-                            txtErrorP.setText("Please make sure your passwords match");
-                        } else if (!isPasswordValid(password)) {
-                            //Check if the password is valid
-                            txtErrorP.setText("The password must contain at least:" + "\n - One lowercase letter" + "\n - One uppercase letter " + "\n - One digit " + "\n -One special character" + "\n - At least 8 characters long\n");
-                        } else {
-                            //Case everything is ok, create a new account
-                            txtErrorP.setText("");
-                            txtErrorE.setText("");
-                            Toast.makeText(CustomerUpdate.this, "Account created!!", Toast.LENGTH_LONG).show();
-                        }
-
+                } catch (Exception e) {
+                    if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
+                        //Check if the information is empty
+                        Toast.makeText(CustomerUpdate.this, "Please make sure to fill the form", Toast.LENGTH_LONG).show();
+                    } else if (!isEmailValid(email)) {
+                        //Check if email is valid
+                        txtErrorE.setText("Please make sure to put a valid email");
+                    } else if (!password.equals(confirmPassword)) {
+                        //Check if the passwords match
+                        txtErrorP.setText("Please make sure your passwords match");
+                    } else if (!isPasswordValid(password)) {
+                        //Check if the password is valid
+                        txtErrorP.setText("The password must contain at least:" + "\n - One lowercase letter" + "\n - One uppercase letter " + "\n - One digit " + "\n -One special character" + "\n - At least 8 characters long\n");
+                    } else {
+                        //Case everything is ok, create a new account
+                        txtErrorP.setText("");
+                        txtErrorE.setText("");
+                        Toast.makeText(CustomerUpdate.this, "Account updated!!", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(CustomerUpdate.this, LoginActivity.class));
                     }
+
                 }
             }
         });

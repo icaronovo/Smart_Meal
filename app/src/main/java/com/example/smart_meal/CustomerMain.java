@@ -4,19 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -28,7 +26,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
     BottomNavigationView bottomNavigationView;
     ArrayList<ItemModel> itemList;
-    RecyclerView recyclerView;
+
     ImageView imageView;
     ItemAdapter itemAdapter;
     TextView titleText;
@@ -37,6 +35,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private SharedPreferences sharedPreferences;
 
     DBHelper DB = new DBHelper(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,8 +50,41 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         recyclerView.setAdapter(itemAdapter);
 
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        sharedPreferences.getString("user","");
+        sharedPreferences.getString("user", "");
+        String email = sharedPreferences.getString("user","");
+        Log.d("TAG", email);
 
+        if (!TextUtils.isEmpty(email)) {
+            Cursor cursor = DB.getUserData(email);
+            Log.d("TAG", String.valueOf(cursor));
+
+            if (cursor != null && cursor.getCount() > 0) {
+                StringBuilder str = new StringBuilder();
+
+                while (cursor.moveToNext()) {
+                    str.append(cursor.getString(0));
+                    str.append(cursor.getString(1));
+                    str.append(cursor.getString(2));
+                    str.append(cursor.getString(3));
+                    str.append(cursor.getString(5));
+                    str.append(cursor.getString(6));
+                    str.append(cursor.getString(7));
+                    str.append(cursor.getString(8));
+                    str.append(cursor.getString(9));
+                    str.append("\n");
+                }
+                Log.d("TAG", String.valueOf(str));
+
+                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                String data = str.toString();
+                editor.putString("data", data);
+                editor.apply();
+            } else {
+                // Handle case where cursor is null or empty
+            }
+        } else {
+            // Handle case where email is empty or null
+        }
 
         //Top text
         titleText = findViewById(R.id.topText);

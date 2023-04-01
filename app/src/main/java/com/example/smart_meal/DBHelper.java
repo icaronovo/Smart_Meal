@@ -48,6 +48,7 @@ public class DBHelper extends SQLiteOpenHelper {
         super(context, SMART_MEAL_DB, null, dbVersion);
     }
 
+
     //this is called the first time a database is accessed. there should be code in here to create a new database.
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -95,10 +96,20 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public Cursor getUserData(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{email});
+        if (cursor != null) {
+            cursor.moveToFirst();
+        }
+        return cursor;
+    }
+
+
     // This method us used to check if the account is of type Business or Customer
     public Cursor checkAccountType(String Email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT AccountType FROM CUSTOMER_INFO WHERE EmailCust= ?", new String[]{Email});
+        Cursor cursor = db.rawQuery("SELECT AccountType FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{Email});
         if (cursor != null) {
             cursor.moveToFirst();
         }
@@ -127,14 +138,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //method to update password
-    public boolean accountUpdate(String username, String password) {
+    public boolean accountUpdate(String username, String password,String name) {
         SQLiteDatabase db = this.getWritableDatabase();
+        SQLiteDatabase database = this.getReadableDatabase();
+        Cursor dataRead = database.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE Name = ? AND EmailCust=? ", new String[]{name,username});
         ContentValues values = new ContentValues();
-        values.put("PasswordCust", password);
-
-        int rowsAffected = db.update("CUSTOMER_INFO", values, "EmailCust = ?", new String[]{username});
-
-        return rowsAffected > 0;
+        if (dataRead.getCount()>0) {
+            values.put("PasswordCust", password);
+            db.update("CUSTOMER_INFO", values, "EmailCust= " + username, null);
+            return true;
+        }else return false;
     }
 
     //method to add customer data in the database
@@ -156,7 +169,8 @@ public class DBHelper extends SQLiteOpenHelper {
         long insert = db.insert(CUSTOMER_INFO, null, cv);
         return insert != -1;
     }
-//    public boolean getUserData(String username){
+
+    //    public boolean getUserData(String username){
 //        SQLiteDatabase db = this.getReadableDatabase();
 //        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ?", new String[]{username});
 //
@@ -166,7 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //        return false;
 //    }
     public boolean customerUpdate(String prevEmail, String email, String password, String name, String phone, String address,
-                                    String city, String province ) {
+                                  String city, String province) {
         //writing data in the database
         SQLiteDatabase db = this.getWritableDatabase();
         //linking data from getters to database fields
@@ -178,7 +192,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put("Address", address);
         cv.put("City", city);
         cv.put("Province", province);
-        int rowsAffected = db.update("CUSTOMER_INFO", cv, "EmailCust = ?", new String[]{email});
+        int rowsAffected = db.update("CUSTOMER_INFO", cv, "EmailCust = " + email, new String[]{email});
         return rowsAffected > 0;
     }
 
@@ -209,6 +223,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+
     // podemos mostrar o email do cliente quando ele for alterar os items e fazer a validacao no codigo,
     // se for diferente do email dele, nao pode fazer a alteracao
 
@@ -221,6 +236,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return false;
     }
+
     //method to update item qty
     public boolean itemsQtyUpdate(String username, String itemQty) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -230,6 +246,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected > 0;
     }
+
     //method to update item value
     public boolean itemsValueUpdate(String username, String itemValue) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -250,6 +267,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected > 0;
     }
+
     //method to show all orders
     public boolean ordersDisplay(String username, String orders) {
         SQLiteDatabase db = this.getReadableDatabase();

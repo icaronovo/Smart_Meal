@@ -13,53 +13,26 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".NewAccount">
+        tools:context=".CustomerUpdate">
 
 
         <TextView
-            android:id="@+id/txtTitleNewAcc"
+            android:id="@+id/profileUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/txtNewAccount"
+            android:layout_marginTop="40dp"
+            android:text="@string/profileUpdate"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.462"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="300dp"
-            android:layout_height="96dp"
-            android:layout_marginTop="40dp"
-            android:onClick="clickMethod"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtTitleNewAcc"
-            tools:checkedButton="@id/radioCustomer"
-            tools:ignore="UsingOnClickInXml">
-
-            <RadioButton
-                android:id="@+id/radioCustomer"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:checked="false"
-                android:text="@string/radioCustomer" />
-
-            <RadioButton
-                android:id="@+id/radioBusiness"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="@string/radioBusiness"
-                tools:ignore="TouchTargetSizeCheck" />
-
-        </RadioGroup>
-
         <EditText
-            android:id="@+id/txtName"
+            android:id="@+id/nameUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="44dp"
             android:autofillHints=""
             android:drawableStart="@drawable/ic_baseline_person_outline_24"
             android:ems="10"
@@ -67,11 +40,12 @@
             android:inputType="textPersonName"
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+            app:layout_constraintTop_toBottomOf="@+id/profileUpdate" />
 
         <EditText
-            android:id="@+id/txtPhone"
+            android:id="@+id/phoneUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -83,10 +57,10 @@
             android:textColorHint="#000000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtName" />
+            app:layout_constraintTop_toBottomOf="@+id/nameUpdate" />
 
         <EditText
-            android:id="@+id/txtAddress"
+            android:id="@+id/addressUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -99,21 +73,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtPhone" />
+            app:layout_constraintTop_toBottomOf="@+id/phoneUpdate" />
 
         <Spinner
-            android:id="@+id/spnStates"
+            android:id="@+id/spnStatesUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="24dp"
             android:entries="@array/txtCities"
             android:prompt="@string/txtState"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCity" />
+            app:layout_constraintTop_toBottomOf="@+id/cityUpdate" />
 
         <EditText
-            android:id="@+id/txtCity"
+            android:id="@+id/cityUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -123,12 +98,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAddress"
+            app:layout_constraintTop_toBottomOf="@+id/addressUpdate"
             android:textColorHint="#000000"
             android:autofillHints="" />
 
         <EditText
-            android:id="@+id/txtEmailNewAccount"
+            android:id="@+id/emailUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -141,10 +116,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/spnStates" />
+            app:layout_constraintTop_toBottomOf="@+id/spnStatesUpdate" />
 
         <EditText
-            android:id="@+id/txtCreatePassword"
+            android:id="@+id/passUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -157,10 +132,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEmailNewAccount" />
+            app:layout_constraintTop_toBottomOf="@+id/emailUpdate" />
 
         <EditText
-            android:id="@+id/txtConfirmPassword"
+            android:id="@+id/confirmPassUpdate"
             android:layout_width="300dp"
             android:layout_height="50dp"
             android:layout_marginTop="40dp"
@@ -173,15 +148,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtCreatePassword" />
+            app:layout_constraintTop_toBottomOf="@+id/passUpdate" />
 
         <Button
-            android:id="@+id/btnCreate"
+            android:id="@+id/btnUpdate"
             android:layout_width="121dp"
             android:layout_height="57dp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
-            android:text="@string/txtCreate"
+            android:text="@string/btnUpdate"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -199,7 +174,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.132"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtConfirmPassword" />
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassUpdate" />
 
         <TextView
             android:id="@+id/txtErrorEmail"
@@ -210,7 +185,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.153"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtEmailNewAccount" />
+            app:layout_constraintTop_toBottomOf="@+id/emailUpdate" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

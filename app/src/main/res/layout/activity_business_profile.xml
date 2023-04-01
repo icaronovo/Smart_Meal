@@ -7,7 +7,80 @@
     tools:context=".BusinessProfile">
 
     <include
-        layout="@layout/business_appbar"
-        />
+        android:id="@+id/include"
+        layout="@layout/business_appbar" />
+
+    <TextView
+        android:id="@+id/busName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="222dp"
+        android:text="busName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="84dp" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="77dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="27dp"
+        android:contentDescription="@string/anImage"
+        app:layout_constraintEnd_toStartOf="@+id/busEmail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/shop_icon"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="84dp" />
+
+    <TextView
+        android:id="@+id/busAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="busAddress"
+        app:layout_constraintEnd_toEndOf="@+id/busPhone"
+        app:layout_constraintStart_toStartOf="@+id/busPhone"
+        tools:layout_editor_absoluteY="205dp"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/busPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="busPhone"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="27dp"
+        tools:layout_editor_absoluteY="266dp" />
+
+    <TextView
+        android:id="@+id/busEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="224dp"
+        android:text="busEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="127dp" />
+
+    <Button
+        android:id="@+id/btnEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/profileUpdate"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="129dp"
+        tools:layout_editor_absoluteY="396dp" />
+
+    <Button
+        android:id="@+id/btnLogoff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="480dp"
+        tools:text="@string/btnLogoff" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

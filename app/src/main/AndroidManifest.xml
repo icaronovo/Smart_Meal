@@ -16,10 +16,7 @@
             android:name=".CustomerUpdate"
             android:exported="false" />
         <activity
-            android:name=".CustomerHome"
-            android:exported="false" />
-        <activity
-            android:name=".PasswordRecovery"
+            android:name=".PasswordUpdate"
             android:exported="false" />
         <activity
             android:name=".BusinessProfile"

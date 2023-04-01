@@ -56,4 +56,9 @@
     <string name="btnOrder">Order Food</string>
     <string name="btnOrderDetails">Order Details and Status</string>
     <string name="btnOrderHistory">Order History</string>
+    <string name="profileUpdate">Profile Update</string>
+    <string name="btnUpdate">Update</string>
+    <string name="imgRotate">an image</string>
+    <string name="btnLogoff">Logout</string>
+    <string name="anImage">an image</string>
 </resources>

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,16 +31,16 @@ public class NewAccount extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
-        btnCreate = findViewById(R.id.btnCreate);
-        username = findViewById(R.id.txtName);
-        txtPhone = findViewById(R.id.txtPhone);
-        txtAddress = findViewById(R.id.txtAddress);
-        txtCity = findViewById(R.id.txtCity);
-        spnState = findViewById(R.id.spnStates);
-        txtEmail = findViewById(R.id.txtEmailNewAccount);
-        txtPassword = findViewById(R.id.txtCreatePassword);
-        txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
-        btnCreate = findViewById(R.id.btnCreate);
+        btnCreate = findViewById(R.id.btnUpdate);
+        username = findViewById(R.id.nameUpdate);
+        txtPhone = findViewById(R.id.phoneUpdate);
+        txtAddress = findViewById(R.id.addressUpdate);
+        txtCity = findViewById(R.id.cityUpdate);
+        spnState = findViewById(R.id.spnStatesUpdate);
+        txtEmail = findViewById(R.id.emailUpdate);
+        txtPassword = findViewById(R.id.passUpdate);
+        txtConfirmPassword = findViewById(R.id.confirmPassUpdate);
+        btnCreate = findViewById(R.id.btnUpdate);
         txtErrorE = findViewById(R.id.txtErrorEmail);
         txtErrorP = findViewById(R.id.txtErrorPassword);
         radioCustomer = findViewById(R.id.radioCustomer);

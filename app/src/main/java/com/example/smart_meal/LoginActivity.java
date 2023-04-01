@@ -32,8 +32,6 @@ public class LoginActivity extends AppCompatActivity {
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-
-
         //btn to delete record from db
         Button btnDel = findViewById(R.id.btnDel);
 
@@ -41,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         btnDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, CustomerUpdate.class));
+                startActivity(new Intent(LoginActivity.this, PasswordUpdate.class));
             }
         });
 
@@ -72,6 +70,7 @@ public class LoginActivity extends AppCompatActivity {
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else {
                     try {
+
                         Cursor cursor = DB.checkAccountType(user);
                         accountType = cursor.getString(0);
                         boolean c = DB.checkUserAccount(user, password);
@@ -90,8 +89,8 @@ public class LoginActivity extends AppCompatActivity {
                             }
                         }
 
-                        SharedPreferences.Editor editor=getSharedPreferences("user",MODE_PRIVATE).edit();
-                        editor.putString("user",user);
+                        SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
+                        editor.putString("user", user);
                         editor.apply();
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();
