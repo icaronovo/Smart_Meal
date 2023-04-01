@@ -46,6 +46,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         //TextView for the titles
         titleTextView = findViewById(R.id.topText);
         titleTextView.setText("Welcome User");
+
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         sharedPreferences.getString("user", "");
         String email = sharedPreferences.getString("user","");
