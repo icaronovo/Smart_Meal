@@ -10,6 +10,10 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import org.w3c.dom.Document;
+
+import java.io.FileOutputStream;
+
 public class BusinessReport extends AppCompatActivity {
     private Toolbar toolbar;
 

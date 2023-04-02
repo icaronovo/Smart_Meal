@@ -65,6 +65,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         //put data to intent to get in previous activity
         Intent intent = new Intent();
         intent.putExtra("TEST", fullOrder);
+        intent.putExtra("FRAGMENT_ID", R.id.order); // pass the ID of the fragment you want to open
         setResult(RESULT_OK, intent);
         //Finishing activity
         finish();

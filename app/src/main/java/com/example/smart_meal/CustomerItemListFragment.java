@@ -49,6 +49,7 @@ public class CustomerItemListFragment extends Fragment {
     //Create the list of the products of this restaurant
     private List<String> addData(){
         mItems = new ArrayList<>();
+//        "getItemName + " -$" + getPrice"
         mItems.add("Item 1 -$1.90");
         mItems.add("Item 2 -$2.90");
         mItems.add("Item 3 -$3.90");

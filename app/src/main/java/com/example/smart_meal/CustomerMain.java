@@ -39,8 +39,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private CustomerProfileFragment customerProfile = new CustomerProfileFragment();
     private CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
     private SharedPreferences sharedPreferences;
+    private ConstraintLayout constraintLayout;
 
     CustomerOrderModel model = new CustomerOrderModel();
+    private String name = "";
 
     DBHelper DB = new DBHelper(this);
 
@@ -51,7 +53,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         createRecyclerView();
 
-        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("Name", "");
         String email = sharedPreferences.getString("Email","");
         Log.d("TAG", email);
@@ -77,7 +79,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         }
 
         //Constraint layout where is the Fragments
-        ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
+        constraintLayout = findViewById(R.id.fragmentLayout);
 
         //Bottom navigation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -97,7 +99,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
                         constraintLayout.setVisibility(View.VISIBLE);
-                        model.setMyString("name");
+                        model.setMyString(name);
                         customerOrder.setModel(model);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
@@ -141,10 +143,14 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        String name = data.getStringExtra("TEST");
-//                        Toast.makeText(CustomerMain.this, name + "\n" + name, Toast.LENGTH_SHORT).show();
+                        name = data.getStringExtra("TEST");
+                        String fragmentID = data.getStringExtra("FRAGMENT_ID");
+                        Bundle bundle = new Bundle();
+                        bundle.putString("key",fragmentID);
                         model.setMyString(name);
                         customerOrder.setModel(model);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfile).commit();
+
                     } else {
                         Toast.makeText(CustomerMain.this, "Cancelled...", Toast.LENGTH_SHORT).show();
                     }

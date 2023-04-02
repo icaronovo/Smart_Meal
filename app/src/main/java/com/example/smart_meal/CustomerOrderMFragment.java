@@ -1,5 +1,6 @@
 package com.example.smart_meal;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -24,6 +25,12 @@ public class CustomerOrderMFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_customer_order_m, container, false);
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        String str = model.getMyString();
     }
 
     @Override

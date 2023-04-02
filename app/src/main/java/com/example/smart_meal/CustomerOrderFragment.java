@@ -83,7 +83,7 @@ public class CustomerOrderFragment extends Fragment {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onButtonClick("Informação do Fragmento 1");
+                mListener.onButtonClick("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             }
         });
     }
