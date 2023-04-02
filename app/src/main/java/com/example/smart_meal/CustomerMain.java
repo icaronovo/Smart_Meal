@@ -39,6 +39,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
     private SharedPreferences sharedPreferences;
 
+    CustomerOrderModel model = new CustomerOrderModel();
+
     DBHelper DB = new DBHelper(this);
 
     @Override
@@ -48,14 +50,15 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         createRecyclerView();
 
-        //TextView for the titles
-        titleTextView = findViewById(R.id.topText);
-        titleTextView.setText("Welcome User");
-
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         sharedPreferences.getString("user", "");
         String email = sharedPreferences.getString("user", "");
+
         Log.d("TAG", email);
+
+        //TextView for the titles
+        titleTextView = findViewById(R.id.topText);
+        titleTextView.setText("Welcome");
 
         if (!TextUtils.isEmpty(email)) {
             String[] cursor = DB.getUserData(email);
@@ -93,6 +96,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                     case R.id.order:
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
+                        model.setMyString("");
+                        customerOrder.setModel(model);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:
@@ -138,10 +143,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         String name = data.getStringExtra("TEST");
                         Toast.makeText(CustomerMain.this, name + "\n" + name, Toast.LENGTH_SHORT).show();
 
-                        CustomerOrderModel model = new CustomerOrderModel();
                         model.setMyString(name);
                         customerOrder.setModel(model);
-
                     } else {
                         Toast.makeText(CustomerMain.this, "Cancelled...", Toast.LENGTH_SHORT).show();
                     }
