@@ -53,18 +53,12 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("Name", "");
-
-        //TextView for the titles
-        titleTextView = findViewById(R.id.topText);
-        titleTextView.setText("Welcome " + userName);
-
-
         String email = sharedPreferences.getString("Email","");
         Log.d("TAG", email);
 
         //TextView for the titles
         titleTextView = findViewById(R.id.topText);
-        titleTextView.setText("Welcome");
+        titleTextView.setText("Welcome " + userName);
 
         if (!TextUtils.isEmpty(email)) {
             String[] cursor = DB.getUserData(email);
@@ -102,6 +96,9 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                     case R.id.order:
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
+                        constraintLayout.setVisibility(View.VISIBLE);
+                        model.setMyString("name");
+                        customerOrder.setModel(model);
                         getSupportFragmentManager().beginTransaction().add(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:
