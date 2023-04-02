@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -50,10 +51,15 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         createRecyclerView();
 
-        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        sharedPreferences.getString("user", "");
-        String email = sharedPreferences.getString("user", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("Name", "");
 
+        //TextView for the titles
+        titleTextView = findViewById(R.id.topText);
+        titleTextView.setText("Welcome " + userName);
+
+
+        String email = sharedPreferences.getString("Email","");
         Log.d("TAG", email);
 
         //TextView for the titles
@@ -86,7 +92,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        titleTextView.setText("Welcome User");
+                        titleTextView.setText("Welcome " + userName);
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
