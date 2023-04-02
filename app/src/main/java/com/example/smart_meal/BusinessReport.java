@@ -1,5 +1,6 @@
 package com.example.smart_meal;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -8,50 +9,23 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
-public class BusinessMain extends AppCompatActivity {
-    Toolbar toolbar;
-    Button btnReport;
-    Button btnLogout;
+public class BusinessReport extends AppCompatActivity {
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_business_main);
-
-        btnReport = findViewById(R.id.btnReports);
-        btnLogout = findViewById(R.id.btnLogout);
+        setContentView(R.layout.activity_business_report);
 
         //Top menu
         toolbar = findViewById(R.id.toolbarBusiness);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
+        toolbar.setTitle("Report");
         setSupportActionBar(toolbar);
 
-        //Add food item
-
-        //Confirm orders
-
-        //Send reminders
-
-        //Reports
-        btnReport.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this,BusinessReport.class));
-            }
-        });
-
-        //Logout
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
     }
 
-    //When creating the other activities from the Business Part, if you want to put the top menu
-    //Insert all the bottom code with the toolbar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -69,5 +43,4 @@ public class BusinessMain extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

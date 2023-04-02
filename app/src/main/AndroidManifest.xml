@@ -24,9 +24,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerHome"
-            android:exported="false" />
-        <activity
             android:name=".PasswordUpdate"
             android:exported="false" />
         <activity
@@ -69,6 +66,14 @@
         </activity>
         <activity
             android:name=".BusinessMain"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".BusinessReport"
+            android:parentActivityName=".BusinessMain"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

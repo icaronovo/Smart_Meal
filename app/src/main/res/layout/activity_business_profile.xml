@@ -6,21 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".BusinessProfile">
 
+<!--    Não coloque ID no include porque se não, o negocio nao funfa -->
     <include
-        android:id="@+id/include"
         layout="@layout/business_appbar" />
 
     <TextView
         android:id="@+id/busName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="222dp"
         android:text="busName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="84dp" />
+        app:layout_constraintTop_toBottomOf="@+id/include"
+        tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -39,48 +40,55 @@
         android:id="@+id/busAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
         android:text="busAddress"
         app:layout_constraintEnd_toEndOf="@+id/busPhone"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/busPhone"
-        tools:layout_editor_absoluteY="205dp"
+        app:layout_constraintTop_toBottomOf="@+id/busEmail"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/busPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="busPhone"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditProfile"
+        app:layout_constraintTop_toBottomOf="@+id/busAddress"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="27dp"
-        tools:layout_editor_absoluteY="266dp" />
+        tools:layout_editor_absoluteX="27dp" />
 
     <TextView
         android:id="@+id/busEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="224dp"
         android:text="busEmail"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="127dp" />
+        app:layout_constraintTop_toBottomOf="@+id/busName"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="36dp"
         android:text="@string/profileUpdate"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogoff"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="129dp"
-        tools:layout_editor_absoluteY="396dp" />
+        tools:layout_editor_absoluteX="138dp" />
 
     <Button
         android:id="@+id/btnLogoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="144dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="152dp"
-        tools:layout_editor_absoluteY="480dp"
+        tools:layout_editor_absoluteX="161dp"
         tools:text="@string/btnLogoff" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
