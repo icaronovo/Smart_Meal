@@ -74,14 +74,14 @@ public class LoginActivity extends AppCompatActivity {
                         accountType = cursorAccoountType.getString(0);
                         boolean c = DB.checkUserAccount(user, password);
 
-                        String[] userData = DB.getUserData(user);
+                        String[] data = DB.getUserData(user);
                         SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
                         String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
 
-                        for (int i = 0; i < userData.length; i++) {
-                            editor.putString(columns[i], userData[i]);
+                        for (int i = 0; i < data.length; i++) {
+                            editor.putString(columns[i], data[i]);
                             editor.apply();
-                            Log.d(columns[i], userData[i]);
+                            Log.d(columns[i], data[i]);
                         }
 
                         if (accountType.equals("Business")) {

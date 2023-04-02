@@ -33,7 +33,6 @@ public class CustomerProfileFragment extends Fragment {
     Button editProfile, logout;
     DBHelper DB;
 
-    private SharedPreferences sharedPreferences;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -88,6 +87,14 @@ public class CustomerProfileFragment extends Fragment {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences.Editor editor = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE).edit();
+                String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
+
+                for (int i = 0; i < columns.length; i++) {
+                    editor.putString(columns[i], "");
+                    editor.apply();
+                    Log.d(columns[i], "");
+                }
                 DB.close();
                 startActivity(new Intent(getContext(),LoginActivity.class));
             }

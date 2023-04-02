@@ -3,7 +3,9 @@ package com.example.smart_meal;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,6 +97,15 @@ public class NewAccount extends AppCompatActivity {
                             customerModel = new CustomerModel(accountType, email, password, name, phone, address, city, state, R.drawable.ic_baseline_person_outline_24);
                             DB.addCustomer(customerModel);
 
+                            String[] data = DB.getUserData(email);
+                            SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
+                            String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
+
+                            for (int i = 0; i < data.length; i++) {
+                                editor.putString(columns[i], data[i]);
+                                editor.apply();
+                                Log.d(columns[i], data[i]);
+                            }
                             if (accountType.equals("Customer")) {
                                 startActivity(new Intent(NewAccount.this, CustomerMain.class));
                             } else if (accountType.equals("Business")) {
@@ -123,7 +134,6 @@ public class NewAccount extends AppCompatActivity {
                             txtErrorE.setText("");
                             Toast.makeText(NewAccount.this, "Account created!!", Toast.LENGTH_LONG).show();
                         }
-
                     }
                 }
             }

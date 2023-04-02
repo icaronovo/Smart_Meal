@@ -2,6 +2,7 @@ package com.example.smart_meal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -24,7 +25,6 @@ public class CustomerUpdate extends AppCompatActivity {
     DBHelper DB = new DBHelper(this);
 
     private SharedPreferences sharedPreferences;
-    String accountType = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,26 @@ public class CustomerUpdate extends AppCompatActivity {
         txtErrorP = findViewById(R.id.txtErrorPassword);
         sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
 
-        String loggedUser = sharedPreferences.getString("data", "");
         String prevEmail = sharedPreferences.getString("EmailCust", "");
 
-        Log.d("TAG", loggedUser);
+        SharedPreferences userData = getSharedPreferences("data", Context.MODE_PRIVATE);
+        String currentEmail = userData.getString("EmailCust","");
+        String currentAddress = userData.getString("Address", "");
+        String currentPhone = userData.getString("Phone", "");
+        String currentCity = userData.getString("City", "");
+        String currentProvince = userData.getString("Province", "");
+        String currentName = userData.getString("Name", "");
+        String currentPassword = userData.getString("PasswordCust", "");
+
+        txtEmail.setText(currentEmail);
+        txtAddress.setText(currentAddress);
+        txtPhone.setText(currentPhone);
+        txtCity.setText(currentCity);
+//        spnState.setSelection(currentProvince);
+        username.setText(currentName);
+        txtPassword.setText(currentPassword);
+        txtConfirmPassword.setText(currentPassword);
+
 
         //When the user click on "Create", it will create a new account
         btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -67,14 +83,14 @@ public class CustomerUpdate extends AppCompatActivity {
                     Boolean emailVerified = DB.checkIfEmailExists(email);
                     if (!emailVerified) {
                         DB.customerUpdate(prevEmail, email, password, name, phone, address, city, state);
-                        String[] userData = DB.getUserData(email);
+                        String[] data = DB.getUserData(email);
                         SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
                         String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
 
-                        for (int i = 0; i < userData.length; i++) {
-                            editor.putString(columns[i], userData[i]);
+                        for (int i = 0; i < data.length; i++) {
+                            editor.putString(columns[i], data[i]);
                             editor.apply();
-                            Log.d(columns[i], userData[i]);
+                            Log.d(columns[i], data[i]);
                         }
                     } else {
                         Toast.makeText(CustomerUpdate.this, "This email is already in use.", Toast.LENGTH_LONG).show();

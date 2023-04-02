@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -32,8 +33,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     CustomerProfileFragment customerProfile = new CustomerProfileFragment();
     CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
 
-    private SharedPreferences sharedPreferences;
-
     DBHelper DB = new DBHelper(this);
 
     @Override
@@ -43,13 +42,15 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         createRecyclerView();
 
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+        String userName = sharedPreferences.getString("Name", "");
+
         //TextView for the titles
         titleTextView = findViewById(R.id.topText);
-        titleTextView.setText("Welcome User");
+        titleTextView.setText("Welcome " + userName);
 
-        sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
-        sharedPreferences.getString("user", "");
-        String email = sharedPreferences.getString("user","");
+
+        String email = sharedPreferences.getString("Email","");
         Log.d("TAG", email);
 
         if (!TextUtils.isEmpty(email)) {
@@ -79,7 +80,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        titleTextView.setText("Welcome User");
+                        titleTextView.setText("Welcome " + userName);
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
