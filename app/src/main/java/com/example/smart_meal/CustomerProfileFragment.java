@@ -70,8 +70,6 @@ public class CustomerProfileFragment extends Fragment {
         custState.setText(province);
         custEmail.setText(email);
 
-
-
 //
 //        Cursor cursor = DB.getReadableDatabase().query("CUSTOMER_INFO",columns,selection,selectionArgs,null,null,null);
 //

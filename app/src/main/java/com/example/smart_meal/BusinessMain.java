@@ -31,7 +31,6 @@ public class BusinessMain extends AppCompatActivity {
         btnLougout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
     }

@@ -28,6 +28,26 @@ public class CustomerItemListFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_customer_item_list, container, false);
         mListView = view.findViewById(R.id.listView);
 
+        adapter = new CustomListAdapter(getContext(), addData());
+        mListView.setAdapter(adapter);
+        return view;
+    }
+
+    public void onViewCreated(View view, Bundle savedInstance){
+        super.onViewCreated(view, savedInstance);
+        communicator = (Communicator) getActivity();
+        btnConfirmOrder = getActivity().findViewById(R.id.btnFrag1);
+        quantity = getActivity().findViewById(R.id.count);
+        btnConfirmOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                communicator.respond(adapter.getItems());
+            }
+        });
+    }
+
+    //Create the list of the products of this restaurant
+    private List<String> addData(){
         mItems = new ArrayList<>();
         mItems.add("Item 1 -$1.90");
         mItems.add("Item 2 -$2.90");
@@ -45,22 +65,6 @@ public class CustomerItemListFragment extends Fragment {
         mItems.add("Item 14 -$9.90");
         mItems.add("Item 15 -$10.90");
 
-        adapter = new CustomListAdapter(getContext(), mItems);
-        mListView.setAdapter(adapter);
-        return view;
-    }
-
-    public void onViewCreated(View view, Bundle savedInstance){
-        super.onViewCreated(view, savedInstance);
-        communicator = (Communicator) getActivity();
-        btnConfirmOrder = getActivity().findViewById(R.id.btnFrag1);
-        quantity = getActivity().findViewById(R.id.count);
-
-        btnConfirmOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                communicator.respond(adapter.getItems());
-            }
-        });
+        return mItems;
     }
 }

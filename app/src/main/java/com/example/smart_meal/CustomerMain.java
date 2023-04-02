@@ -96,9 +96,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                     case R.id.order:
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
-                        model.setMyString("");
-                        customerOrder.setModel(model);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
+                        getSupportFragmentManager().beginTransaction().add(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:
                         titleTextView.setText("Account");
@@ -141,8 +139,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         String name = data.getStringExtra("TEST");
-                        Toast.makeText(CustomerMain.this, name + "\n" + name, Toast.LENGTH_SHORT).show();
-
+//                        Toast.makeText(CustomerMain.this, name + "\n" + name, Toast.LENGTH_SHORT).show();
                         model.setMyString(name);
                         customerOrder.setModel(model);
                     } else {
@@ -151,7 +148,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                 }
             });
 
-    //Created a list to tryout the recyclerview
+    //Created a list of the recyclerview
     //Latter figure out how to import from database :)
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();

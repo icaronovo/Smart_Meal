@@ -16,6 +16,9 @@ public class CustomerOrderMFragment extends Fragment {
     CustomerOrderModel model;
     TextView textView;
 
+    /*Customer Order Main Fragment
+    * */
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
