@@ -62,12 +62,9 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
     //Handle order submit click, input data and pass to previous activity
     @Override
     public void onButtonClick(String fullOrder) {
-        //put data to intent to get in previous activity
         Intent intent = new Intent();
         intent.putExtra("TEST", fullOrder);
-        intent.putExtra("FRAGMENT_ID", R.id.order); // pass the ID of the fragment you want to open
         setResult(RESULT_OK, intent);
-        //Finishing activity
         finish();
     }
 

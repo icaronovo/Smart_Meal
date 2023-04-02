@@ -144,9 +144,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
                         name = data.getStringExtra("TEST");
-                        String fragmentID = data.getStringExtra("FRAGMENT_ID");
-                        Bundle bundle = new Bundle();
-                        bundle.putString("key",fragmentID);
                         model.setMyString(name);
                         customerOrder.setModel(model);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfile).commit();
