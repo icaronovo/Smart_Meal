@@ -1,6 +1,17 @@
 package com.example.smart_meal;
 
+import static com.example.smart_meal.DBHelper.COLUMN_BUSINESS_ID;
+import static com.example.smart_meal.DBHelper.COLUMN_CUSTOMER_ID;
+import static com.example.smart_meal.DBHelper.COLUMN_ITEM_ID;
+import static com.example.smart_meal.DBHelper.COLUMN_ITEM_QTY;
+import static com.example.smart_meal.DBHelper.COLUMN_ITEM_VALUE;
+import static com.example.smart_meal.DBHelper.COLUMN_ORDER_ID;
+import static com.example.smart_meal.DBHelper.COLUMN_ORDER_STATUS;
+import static com.example.smart_meal.DBHelper.ORDER_INFO;
+
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -14,6 +25,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -29,7 +41,7 @@ public class CustomerOrderFragment extends Fragment {
     private RadioButton rdbDelivery;
     private EditText inputAddress;
     private Button btnConfirm;
-
+    private DBHelper DB;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -76,14 +88,28 @@ public class CustomerOrderFragment extends Fragment {
                 }
             }
         });
-
         orderText.setText(String.valueOf(data));
 
         //Send information of the order
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mListener.onButtonClick("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+                // Initialize the DB object
+                DB = new DBHelper(getActivity());
+
+                //Get customer ID
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+                String customerID = sharedPreferences.getString("CustomerID", "");
+
+                OrderModel newOrder = new OrderModel("orderStatus", "businessID", customerID, 9.90,1,2);
+                if(DB.addOrder(newOrder)){
+                    Toast.makeText(getActivity(), "Na teoria inseriu...", Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(getActivity(), "Nao foi ;;...", Toast.LENGTH_SHORT).show();
+                }
+
+                //Here you are gonna send the ORDERID
+                mListener.onButtonClick(customerID);
             }
         });
     }
