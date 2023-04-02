@@ -1,5 +1,6 @@
 package com.example.smart_meal;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,11 +19,16 @@ import java.util.ArrayList;
 
 public class CustomerOrderFragment extends Fragment {
 
-    TextView txtYourDelivery, txtDelivery, txtAddress, txtOrders, orderText;
-    RadioButton rdbPickUp, rdbDelivery;
-    RadioGroup radioGroup;
-    EditText inputAddress;
-    Button btnConfirm;
+    private OnButtonClickListener mListener;
+    private TextView txtYourDelivery;
+    private TextView txtDelivery;
+    private TextView txtAddress;
+    private TextView txtOrders;
+    private TextView orderText;
+    private RadioButton rdbPickUp;
+    private RadioButton rdbDelivery;
+    private EditText inputAddress;
+    private Button btnConfirm;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,8 +47,8 @@ public class CustomerOrderFragment extends Fragment {
         rdbPickUp = getActivity().findViewById(R.id.rbtPickUp);
         rdbDelivery = getActivity().findViewById(R.id.rbtDelivery);
         inputAddress = getActivity().findViewById(R.id.txtAddressDelivery);
-        radioGroup = getActivity().findViewById(R.id.radioGroup);
         btnConfirm = getActivity().findViewById(R.id.btnConfirmOrder);
+
     }
 
     public void changeText(StringBuilder data){
@@ -72,5 +78,27 @@ public class CustomerOrderFragment extends Fragment {
         });
 
         orderText.setText(String.valueOf(data));
+
+        //Send information of the order
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onButtonClick("Informação do Fragmento 1");
+            }
+        });
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            mListener = (OnButtonClickListener) context;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement OnButtonClickListener");
+        }
+    }
+
+    public interface OnButtonClickListener {
+        void onButtonClick(String info);
     }
 }

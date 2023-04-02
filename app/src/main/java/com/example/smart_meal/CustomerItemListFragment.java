@@ -59,7 +59,6 @@ public class CustomerItemListFragment extends Fragment {
         btnConfirmOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 communicator.respond(adapter.getItems());
             }
         });

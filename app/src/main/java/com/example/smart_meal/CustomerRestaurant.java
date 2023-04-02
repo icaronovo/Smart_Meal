@@ -11,15 +11,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CustomerRestaurant extends AppCompatActivity implements Communicator {
+public class CustomerRestaurant extends AppCompatActivity implements Communicator, CustomerOrderFragment.OnButtonClickListener {
 
-    List<ItemModel> itemList;
+    private List<ItemModel> itemList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,6 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
     @Override
     public void respond(HashMap<String,Double[]> data) {
-
         FragmentManager fragmentManager = getSupportFragmentManager();
         CustomerOrderFragment customerOrderFragment = (CustomerOrderFragment)
                 fragmentManager.findFragmentById(R.id.selectedOrder);
@@ -57,6 +57,17 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         str.append("Fees  $" + currency.format(FEE)+ "\n");
         str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
         customerOrderFragment.changeText(str);
+    }
+
+    //Handle order submit click, input data and pass to previous activity
+    @Override
+    public void onButtonClick(String fullOrder) {
+        //put data to intent to get in previous activity
+        Intent intent = new Intent();
+        intent.putExtra("TEST", fullOrder);
+        setResult(RESULT_OK, intent);
+        //Finishing activity
+        finish();
     }
 
     //Get the items from db

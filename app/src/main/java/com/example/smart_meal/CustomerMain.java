@@ -1,11 +1,16 @@
 package com.example.smart_meal;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -15,6 +20,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -24,14 +30,13 @@ import java.util.List;
 
 public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener {
 
-    BottomNavigationView bottomNavigationView;
-    ArrayList<ItemModel> itemList;
-    androidx.recyclerview.widget.RecyclerView recyclerView;
-    ItemAdapter itemAdapter;
-    TextView titleTextView;
-    CustomerProfileFragment customerProfile = new CustomerProfileFragment();
-    CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
-
+    private BottomNavigationView bottomNavigationView;
+    private ArrayList<ItemModel> itemList;
+    private androidx.recyclerview.widget.RecyclerView recyclerView;
+    private ItemAdapter itemAdapter;
+    private TextView titleTextView;
+    private CustomerProfileFragment customerProfile = new CustomerProfileFragment();
+    private CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
     private SharedPreferences sharedPreferences;
 
     DBHelper DB = new DBHelper(this);
@@ -49,7 +54,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         sharedPreferences = getSharedPreferences("user", MODE_PRIVATE);
         sharedPreferences.getString("user", "");
-        String email = sharedPreferences.getString("user","");
+        String email = sharedPreferences.getString("user", "");
         Log.d("TAG", email);
 
         if (!TextUtils.isEmpty(email)) {
@@ -68,7 +73,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             // Handle case where email is empty or null
         }
 
-      
         //Constraint layout where is the Fragments
         ConstraintLayout constraintLayout = findViewById(R.id.fragmentLayout);
 
@@ -101,20 +105,19 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                 return false;
             }
         });
+
+        //Receive the data in case that you asked for an order
+//        Intent intent = getIntent();
+//        String custOrder = intent.getStringExtra("TEST");
+//
+//        CustomerOrderModel model = new CustomerOrderModel();
+//        model.setMyString(custOrder);
+//        CustomerOrderMFragment fragment = (CustomerOrderMFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLayout);
+//        fragment.setModel(model);
     }
 
-    @Override
-    public void onItemClick(View view, int position) {
-        //Test to see if the items on recycler view is clickable
-        Intent intent = new Intent(CustomerMain.this, CustomerRestaurant.class);
-        intent.putExtra("RESTAURANTID",position);
-        startActivity(intent);
-        //End
-    }
-
-    //Method for the RecyclerView
-    private void createRecyclerView(){
-        //Recycler view
+    //Method for the creation of the recyclerView displaying products
+    private void createRecyclerView() {
         recyclerView = findViewById(R.id.mRecyclerView);
         int numOfColumns = 1;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
@@ -123,18 +126,49 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         recyclerView.setAdapter(itemAdapter);
     }
 
-    //Created a list to tryout the recyclervier
+    //Recycle view  is clickable. When you click in, you go to the restaurant page
+    //And when you click on the confirm order
+    //It brings you back here
+    @Override
+    public void onItemClick(View view, int position) {
+        // The launcher with the Intent you want to start
+        Intent intent = new Intent(CustomerMain.this, CustomerRestaurant.class);
+        launchSomeActivity.launch(intent);
+    }
+
+    //Get the data from the Customer Restaurant Activity
+    private ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        Intent data = result.getData();
+                        String name = data.getStringExtra("TEST");
+                        Toast.makeText(CustomerMain.this, name + "\n" + name, Toast.LENGTH_SHORT).show();
+
+                        CustomerOrderModel model = new CustomerOrderModel();
+                        model.setMyString(name);
+                        customerOrder.setModel(model);
+
+                    } else {
+                        Toast.makeText(CustomerMain.this, "Cancelled...", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+    //Created a list to tryout the recyclerview
     //Latter figure out how to import from database :)
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
         //String itemName, int itemImage, String itemDescription, Double itemPrice
-        itemList.add(new ItemModel("Title Item",R.drawable.ic_launcher_background,"Description, description bla bla bla",9.99));
-        itemList.add(new ItemModel("Title Item 1",R.drawable.ic_launcher_background,"Description, description bla bla bla",19.99));
-        itemList.add(new ItemModel("Title Item 2",R.drawable.ic_launcher_background,"Description, description bla bla bla",92.99));
-        itemList.add(new ItemModel("Title Item 3",R.drawable.ic_launcher_background,"Description, description bla bla bla",39.99));
-        itemList.add(new ItemModel("Title Item 5",R.drawable.ic_launcher_background,"Description, description bla bla bla",49.99));
-        itemList.add(new ItemModel("Title Item 6",R.drawable.ic_launcher_background,"Description, description bla bla bla",59.99));
-        itemList.add(new ItemModel("Title Item 7",R.drawable.ic_launcher_background,"Description, description bla bla bla",39.99));
+        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Item 1", R.drawable.ic_launcher_background, "Description, description bla bla bla", 19.99));
+        itemList.add(new ItemModel("Title Item 2", R.drawable.ic_launcher_background, "Description, description bla bla bla", 92.99));
+        itemList.add(new ItemModel("Title Item 3", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
+        itemList.add(new ItemModel("Title Item 5", R.drawable.ic_launcher_background, "Description, description bla bla bla", 49.99));
+        itemList.add(new ItemModel("Title Item 6", R.drawable.ic_launcher_background, "Description, description bla bla bla", 59.99));
+        itemList.add(new ItemModel("Title Item 7", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
         return itemList;
     }
 }
