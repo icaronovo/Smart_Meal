@@ -28,12 +28,6 @@ public class CustomerOrderMFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        String str = model.getMyString();
-    }
-
-    @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         textView = getActivity().findViewById(R.id.txtFrag2);
