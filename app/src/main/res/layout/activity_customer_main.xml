@@ -20,9 +20,10 @@
 
     <TextView
         android:id="@+id/topText"
-        android:layout_width="274dp"
-        android:layout_height="52dp"
-        android:text=""
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Texto"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

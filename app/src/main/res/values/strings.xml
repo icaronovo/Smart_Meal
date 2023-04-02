@@ -73,4 +73,5 @@
     <string name="txtTypeDelivery">Delivery</string>
     <string name="btnPickUp">Pick up at store</string>
     <string name="rbt">Delivery</string>
+    <string name="btnCancel">Cancel Order</string>
 </resources>

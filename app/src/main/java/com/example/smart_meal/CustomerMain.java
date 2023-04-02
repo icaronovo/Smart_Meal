@@ -105,15 +105,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                 return false;
             }
         });
-
-        //Receive the data in case that you asked for an order
-//        Intent intent = getIntent();
-//        String custOrder = intent.getStringExtra("TEST");
-//
-//        CustomerOrderModel model = new CustomerOrderModel();
-//        model.setMyString(custOrder);
-//        CustomerOrderMFragment fragment = (CustomerOrderMFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentLayout);
-//        fragment.setModel(model);
     }
 
     //Method for the creation of the recyclerView displaying products
