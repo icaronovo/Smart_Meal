@@ -146,7 +146,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         name = data.getStringExtra("TEST");
                         model.setMyString(name);
                         customerOrder.setModel(model);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfile).commit();
+
+                        titleTextView.setText("Order");
+                        recyclerView.setVisibility(View.INVISIBLE);
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
 
                     } else {
                         Toast.makeText(CustomerMain.this, "Cancelled...", Toast.LENGTH_SHORT).show();
