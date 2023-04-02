@@ -99,7 +99,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         constraintLayout.setVisibility(View.VISIBLE);
                         model.setMyString("name");
                         customerOrder.setModel(model);
-                        getSupportFragmentManager().beginTransaction().add(R.id.fragmentLayout, customerOrder).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:
                         titleTextView.setText("Account");
