@@ -1,21 +1,9 @@
 package com.example.smart_meal;
 
-import static com.example.smart_meal.DBHelper.COLUMN_BUSINESS_ID;
-import static com.example.smart_meal.DBHelper.COLUMN_CUSTOMER_ID;
-import static com.example.smart_meal.DBHelper.COLUMN_ITEM_ID;
-import static com.example.smart_meal.DBHelper.COLUMN_ITEM_QTY;
-import static com.example.smart_meal.DBHelper.COLUMN_ITEM_VALUE;
-import static com.example.smart_meal.DBHelper.COLUMN_ORDER_ID;
-import static com.example.smart_meal.DBHelper.COLUMN_ORDER_STATUS;
-import static com.example.smart_meal.DBHelper.ORDER_INFO;
-
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-
 import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +11,11 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class CustomerOrderFragment extends Fragment {
 
@@ -63,7 +51,7 @@ public class CustomerOrderFragment extends Fragment {
 
     }
 
-    public void changeText(StringBuilder data){
+    public void changeText(StringBuilder data, HashMap<String,Double[]> customerOrderList){
         //Set visibility of the items
         txtYourDelivery.setVisibility(View.VISIBLE);
         txtDelivery.setVisibility(View.VISIBLE);
@@ -91,6 +79,8 @@ public class CustomerOrderFragment extends Fragment {
         orderText.setText(String.valueOf(data));
 
         //Send information of the order
+        //And insert the order on the db
+
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -99,17 +89,34 @@ public class CustomerOrderFragment extends Fragment {
 
                 //Get customer ID
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
-                String customerID = sharedPreferences.getString("CustomerID", "");
+                String customerIDStr = sharedPreferences.getString("CustomerID", "");
+                int customerID = Integer.parseInt(customerIDStr);
+                int orderStatus = 0; // 0 for order incomplete; 1 for order complete
+                int businessID = 1; // get the businessId
+                String itemID = ""; // get the items ids
+                String quantityNumber = ""; //get the quantity of items
 
-                OrderModel newOrder = new OrderModel("orderStatus", "businessID", customerID, 9.90,1,2);
+                //Puttin the itemsID and the quantity in a string
+                //so we can sent more than one item to the db
+                for (String key : customerOrderList.keySet()) {
+                    Double[] values = customerOrderList.get(key);
+                    itemID += key + "/";
+                    quantityNumber += values[1] + "/";
+                }
+
+//              customerOrderList = Hashmap <Nome do item, Double [preço,quantity]
+
+                OrderModel newOrder = new OrderModel(orderStatus, businessID, customerID, itemID,quantityNumber);
+
                 if(DB.addOrder(newOrder)){
-                    Toast.makeText(getActivity(), "Na teoria inseriu...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Order sent!", Toast.LENGTH_SHORT).show();
+//                    String orderID =
                 }else{
-                    Toast.makeText(getActivity(), "Nao foi ;;...", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Couldn't submit order. Try again", Toast.LENGTH_SHORT).show();
                 }
 
                 //Here you are gonna send the ORDERID
-                mListener.onButtonClick(customerID);
+                mListener.onButtonClick("a");
             }
         });
     }

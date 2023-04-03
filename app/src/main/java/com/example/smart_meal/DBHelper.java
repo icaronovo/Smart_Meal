@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 13;
+    public static final int dbVersion = 14;
 
     //creating item table and fields
     public static final String ITEM = "ITEM";
@@ -81,8 +81,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "("
                 + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ORDER_STATUS + " INTEGER , "
-                + COLUMN_ITEM_ID + " INTEGER, "
-                + COLUMN_ITEM_VALUE + " INTEGER, "
+                + COLUMN_ITEM_ID + " TEXT, "
+//                + COLUMN_ITEM_VALUE + " INTEGER, "
                 + COLUMN_ITEM_QTY + " TEXT, "
                 + COLUMN_BUSINESS_ID + " INTEGER, "
                 + COLUMN_CUSTOMER_ID + " INTEGER)";
@@ -235,7 +235,6 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_ORDER_STATUS, orderModel.getOrderStatus());
         cv.put(COLUMN_BUSINESS_ID, orderModel.getBusinessID());
         cv.put(COLUMN_CUSTOMER_ID, orderModel.getCustomerID());
-        cv.put(COLUMN_ITEM_VALUE, orderModel.getItemValue());
         cv.put(COLUMN_ITEM_ID, orderModel.getItemID());
         cv.put(COLUMN_ITEM_QTY, orderModel.getItemQuantity());
         long insert = sqLiteDatabase.insert(ORDER_INFO, null, cv);

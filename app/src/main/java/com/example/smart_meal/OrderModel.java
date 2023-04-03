@@ -2,70 +2,60 @@ package com.example.smart_meal;
 
 public class OrderModel {
 
-    private String orderStatus;
-    private String businessID;
-    private String customerID;
-    private Double itemValue;
-    private int itemID;
-    private int itemQuantity;
+    private int orderStatus;
+    private int businessID;
+    private int customerID;
+//    private Double itemValue;
+    private String itemID;
+    private String itemQuantity;
 
     //constructor to order
-    public OrderModel(String orderStatus, String businessID,
-                      String customerID, Double itemValue,
-                      int itemID, int itemQuantity){
+    public OrderModel(int orderStatus, int businessID,
+                      int customerID, String itemID, String itemQuantity){
         this.orderStatus = orderStatus;
         this.businessID = businessID;
         this.customerID = customerID;
-        this.itemValue = itemValue;
         this.itemID = itemID;
         this.itemQuantity = itemQuantity;
     }
     //getters and setters
-    public String getOrderStatus() {
+    public int getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }
 
-    public String getBusinessID() {
+    public int getBusinessID() {
         return businessID;
     }
 
-    public void setBusinessID(String businessID) {
+    public void setBusinessID(int businessID) {
         this.businessID = businessID;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
-    public Double getItemValue() {
-        return itemValue;
-    }
-
-    public void setItemValue(Double itemValue) {
-        this.itemValue = itemValue;
-    }
-
-    public int getItemID() {
+    public String getItemID() {
         return itemID;
     }
 
-    public void setItemID(int itemID) {
+    public void setItemID(String itemID) {
         this.itemID = itemID;
     }
 
-    public int getItemQuantity() {
+    public String getItemQuantity() {
         return itemQuantity;
     }
 
-    public void setItemQuantity(int itemQuantity) {
+    public void setItemQuantity(String itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
     //to string method
@@ -75,7 +65,6 @@ public class OrderModel {
                 "orderStatus='" + orderStatus + '\'' +
                 ", businessID='" + businessID + '\'' +
                 ", customerID='" + customerID + '\'' +
-                ", itemValue=" + itemValue +
                 ", itemID=" + itemID +
                 ", itemQuantity=" + itemQuantity +
                 '}';

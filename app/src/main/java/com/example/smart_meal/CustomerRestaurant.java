@@ -40,6 +40,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         FragmentManager fragmentManager = getSupportFragmentManager();
         CustomerOrderFragment customerOrderFragment = (CustomerOrderFragment)
                 fragmentManager.findFragmentById(R.id.selectedOrder);
+
         StringBuilder str = new StringBuilder();
         double finalTotal = 0;
 
@@ -56,7 +57,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         str.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
         str.append("Fees  $" + currency.format(FEE)+ "\n");
         str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
-        customerOrderFragment.changeText(str);
+        customerOrderFragment.changeText(str, data);
     }
 
     //Handle order submit click, input data and pass to previous activity
@@ -68,7 +69,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         finish();
     }
 
-    //Get the items from db
+    //Get the items from this Restaurant on DB
     //Put them here
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
