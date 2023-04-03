@@ -19,7 +19,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_ID = "ItemID";
     public static final String COLUMN_ITEM_NAME = "ItemName";
     public static final String COLUMN_ITEM_IMAGE = "ItemImage";
-
     public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_DESCRIPTION = "ItemDescription";
 
@@ -286,14 +285,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
 
-    //method to show all orders
-    public boolean ordersDisplay(String username, String orders) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE EmailCust= ? ", new String[]{username, orders});
-        if (cursor.getCount() > 0) {
-            return true;
-        }
-        return false;
+    //Method to show all the orders from a customer
+    public Cursor displayOrder(String customerID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_CUSTOMER_ID + "=?";
+        Cursor cursor = database.rawQuery(query,new String[]{customerID});
+        return cursor;
     }
 
 }

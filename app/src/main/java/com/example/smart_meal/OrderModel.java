@@ -5,11 +5,13 @@ public class OrderModel {
     private int orderStatus;
     private int businessID;
     private int customerID;
-//    private Double itemValue;
     private String itemID;
     private String itemQuantity;
 
     //constructor to order
+    public OrderModel(){
+    }
+
     public OrderModel(int orderStatus, int businessID,
                       int customerID, String itemID, String itemQuantity){
         this.orderStatus = orderStatus;

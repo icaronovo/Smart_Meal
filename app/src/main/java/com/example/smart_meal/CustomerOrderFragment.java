@@ -30,6 +30,8 @@ public class CustomerOrderFragment extends Fragment {
     private EditText inputAddress;
     private Button btnConfirm;
     private DBHelper DB;
+    String delivery = "";
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +53,7 @@ public class CustomerOrderFragment extends Fragment {
 
     }
 
-    public void changeText(StringBuilder data, HashMap<String,Double[]> customerOrderList){
+    public void makeOrder(StringBuilder data, HashMap<String,Double[]> customerOrderList){
         //Set visibility of the items
         txtYourDelivery.setVisibility(View.VISIBLE);
         txtDelivery.setVisibility(View.VISIBLE);
@@ -65,22 +67,23 @@ public class CustomerOrderFragment extends Fragment {
         rdbPickUp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
-                // If the radio button is checked, show the Address and the input
+                // If the radio button is checked, is gonna be pickUp
                 if (isChecked) {
                     txtAddress.setVisibility(View.GONE);
                     inputAddress.setVisibility(View.GONE);
+                    delivery = "Pick up";
                 } else {
-                    // Otherwise, hide the the Address and the input
+                    // Otherwise, tell the address for pickup
                     txtAddress.setVisibility(View.VISIBLE);
                     inputAddress.setVisibility(View.VISIBLE);
+                    delivery = inputAddress.getText().toString();
                 }
             }
         });
         orderText.setText(String.valueOf(data));
 
-        //Send information of the order
-        //And insert the order on the db
-
+        //Click the confirm button and send
+        // information of the order to the db
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -100,8 +103,8 @@ public class CustomerOrderFragment extends Fragment {
                 //so we can sent more than one item to the db
                 for (String key : customerOrderList.keySet()) {
                     Double[] values = customerOrderList.get(key);
-                    itemID += key + "/";
-                    quantityNumber += values[1] + "/";
+                    itemID += key + "$";
+                    quantityNumber += values[1] + "$";
                 }
 
 //              customerOrderList = Hashmap <Nome do item, Double [preço,quantity]
@@ -110,13 +113,12 @@ public class CustomerOrderFragment extends Fragment {
 
                 if(DB.addOrder(newOrder)){
                     Toast.makeText(getActivity(), "Order sent!", Toast.LENGTH_SHORT).show();
-//                    String orderID =
                 }else{
                     Toast.makeText(getActivity(), "Couldn't submit order. Try again", Toast.LENGTH_SHORT).show();
                 }
 
                 //Here you are gonna send the ORDERID
-                mListener.onButtonClick("a");
+                mListener.onButtonClick("a",delivery);
             }
         });
     }
@@ -132,6 +134,6 @@ public class CustomerOrderFragment extends Fragment {
     }
 
     public interface OnButtonClickListener {
-        void onButtonClick(String info);
+        void onButtonClick(String orderID, String delivery);
     }
 }
