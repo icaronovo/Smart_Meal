@@ -13,7 +13,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,12 @@ public class CustomerOrderMFragment extends Fragment {
     private Button btnCancel;
     private DBHelper DB;
 
+    private ListView myListView;
+    private ArrayAdapter<String> myAdapter;
+    private List<String> myList;
+
+
+
     /*Customer Order Main Fragment
     * */
 
@@ -37,7 +45,22 @@ public class CustomerOrderMFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_order_m, container, false);
+        View view = inflater.inflate(R.layout.fragment_customer_order_m, container, false);
+
+        // Initialize the ListView and the list
+        myListView = view.findViewById(R.id.listViewOldOrders);
+        myList = new ArrayList<>();
+
+        // Add some strings to the list
+        myList.add("Item 1");
+        myList.add("Item 2");
+        myList.add("Item 3");
+
+        // Initialize the adapter and set it to the ListView
+        myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, myList);
+        myListView.setAdapter(myAdapter);
+
+        return view;
     }
 
     @Override

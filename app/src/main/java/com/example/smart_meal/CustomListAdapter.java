@@ -84,7 +84,6 @@ public class CustomListAdapter extends ArrayAdapter<String> {
     private void updateItems(CustomListAdapter.ViewHolder holder, int number){
         String itemName = String.valueOf(holder.itemName.getText());
         String [] temp = itemName.split("\\$");
-
         Double[] tempNumber = {Double.parseDouble(temp[1]),Double.valueOf(number)};
         itemCountMap.put(temp[0],tempNumber);
     }

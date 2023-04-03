@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -64,7 +65,6 @@ public class CustomerItemListFragment extends Fragment {
         mItems.add("Item 13 -$8.90");
         mItems.add("Item 14 -$9.90");
         mItems.add("Item 15 -$10.90");
-
         return mItems;
     }
 }
