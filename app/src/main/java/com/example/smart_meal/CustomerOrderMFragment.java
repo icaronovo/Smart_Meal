@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -25,7 +26,6 @@ public class CustomerOrderMFragment extends Fragment {
 
     CustomerOrderModel model;
     private TextView displayOrderNum;
-    private TextView displayAddress;
     private TextView displayOrdersItem;
     private Button btnCancel;
     private DBHelper DB;
@@ -43,10 +43,8 @@ public class CustomerOrderMFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        String str = model.getMyString();
 
         displayOrderNum = getActivity().findViewById(R.id.txtOrderNumber);
-        displayAddress = getActivity().findViewById(R.id.txtAddressForDelivery);
         displayOrdersItem = getActivity().findViewById(R.id.orderCustomerItem);
         btnCancel = getActivity().findViewById(R.id.btnCancel);
 
@@ -59,16 +57,51 @@ public class CustomerOrderMFragment extends Fragment {
 
         //Get the orders from the customer
         Cursor c = DB.displayOrder(customerID);
-        List<String> dataFromDb = updateData(c);
-
+        updateData(c);
         c.close();
 
-        //Separate the data from the last order ================
+
+        //For the user cancel the order
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //
+            }
+        });
+    }
+
+    //Get the data from the DB
+    public void updateData(Cursor c){
+        List<String> dataFromDb = new ArrayList<>();
+        boolean noPrint = false;
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+                dataFromDb.add(c.getString(0)); //OrderID
+                dataFromDb.add(c.getString(1)); //OrderStatus
+                dataFromDb.add(c.getString(2)); //ItemID
+                dataFromDb.add(c.getString(3)); //ItemQty
+                dataFromDb.add(c.getString(4)); //BusinessID
+            }
+        }
+        else{
+            noPrint = true;
+        }
+
+        if(!noPrint){
+            //Separate the data from the last order and display on xml
+            List<String> lastFive = dataFromDb.subList(Math.max(dataFromDb.size() - 5, 0), dataFromDb.size());
+            displayLastOrder(lastFive);
+        } else{
+            displayOrdersItem.setText("NO DATA");
+        }
+    }
+
+    public void displayLastOrder(List<String> lastFive){
+
         DecimalFormat decimalFormat = new DecimalFormat("#");
         DecimalFormat currency = new DecimalFormat("#.##");
         double finalTotal = 0;
 
-        List<String> lastFive = dataFromDb.subList(Math.max(dataFromDb.size() - 5, 0), dataFromDb.size());
         StringBuilder orderToPrint = new StringBuilder();
         //Get the order
         String orderID = lastFive.get(0);
@@ -97,35 +130,8 @@ public class CustomerOrderMFragment extends Fragment {
         orderToPrint.append("Fees  $" + currency.format(FEE)+ "\n");
         orderToPrint.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
 
-        displayOrderNum.setText("ORDER #" + orderID);
+        displayOrderNum.setText("ORDER #" + orderID + " Restaurant " + businessID);
         displayOrdersItem.setText(String.valueOf(orderToPrint));
-
-        //For the user cancel the order
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //
-            }
-        });
-    }
-
-    //Get the data from the DB
-    public List<String> updateData(Cursor c){
-        List<String> dataFromDb = new ArrayList<>();
-        if(c.getCount()>0){
-            while(c.moveToNext()){
-                dataFromDb.add(c.getString(0)); //OrderID
-                dataFromDb.add(c.getString(1)); //OrderStatus
-                dataFromDb.add(c.getString(2)); //ItemID
-                dataFromDb.add(c.getString(3)); //ItemQty
-                dataFromDb.add(c.getString(4)); //BusinessID
-            }
-        }
-        else{
-            displayOrdersItem.setText("No data");
-        }
-        displayOrdersItem.setText(String.valueOf(dataFromDb));
-        return dataFromDb;
     }
 
     public void setModel(CustomerOrderModel model){

@@ -118,7 +118,7 @@ public class CustomerOrderFragment extends Fragment {
                 }
 
                 //Here you are gonna send the ORDERID
-                mListener.onButtonClick("a",delivery);
+                mListener.onButtonClick(delivery);
             }
         });
     }
@@ -134,6 +134,6 @@ public class CustomerOrderFragment extends Fragment {
     }
 
     public interface OnButtonClickListener {
-        void onButtonClick(String orderID, String delivery);
+        void onButtonClick(String delivery);
     }
 }

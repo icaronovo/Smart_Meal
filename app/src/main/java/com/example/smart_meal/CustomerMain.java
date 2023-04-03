@@ -23,6 +23,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -147,10 +148,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         String typeAdd = data.getStringExtra("DELIVERY");
                         model.setMyString(name);
                         customerOrder.setModel(model);
-                        titleTextView.setText("Order");
-                        recyclerView.setVisibility(View.INVISIBLE);
-                        constraintLayout.setVisibility(View.VISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                     }
                 }
             });

@@ -56,9 +56,8 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
     //Handle order submit click, input data and pass to previous activity
     @Override
-    public void onButtonClick(String fullOrder,String delivery) {
+    public void onButtonClick(String delivery) {
         Intent intent = new Intent();
-        intent.putExtra("ORDERID", fullOrder);
         intent.putExtra("DELIVERY",delivery);
         setResult(RESULT_OK, intent);
         finish();
