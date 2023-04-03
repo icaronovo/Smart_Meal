@@ -48,6 +48,8 @@ public class CustomerProfileFragment extends Fragment {
         // Initialize the DB object
         DB = new DBHelper(getActivity());
 
+        //using data stored in shared preferences to fill the proper fields.
+
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
         String email = sharedPreferences.getString("EmailCust","");
         String address = sharedPreferences.getString("Address", "");
@@ -60,24 +62,11 @@ public class CustomerProfileFragment extends Fragment {
 
         custName.setText(name);
         custID.setText("Customer ID: " + customerID);
-        custPhone.setText(phone);
-        custAddress.setText(address);
-        custCity.setText(city);
-        custState.setText(province);
-        custEmail.setText(email);
-
-//
-//        Cursor cursor = DB.getReadableDatabase().query("CUSTOMER_INFO",columns,selection,selectionArgs,null,null,null);
-//
-//        if(cursor.moveToFirst()) {
-//            custID.setText(cursor.getString(0));
-//            custEmail.setText(cursor.getString(2));
-//            custName.setText(cursor.getString(4));
-//            custPhone.setText(cursor.getString(5));
-//            custAddress.setText(cursor.getString(6));
-//            custCity.setText(cursor.getString(7));
-//            custState.setText(cursor.getString(8));
-//        }
+        custPhone.setText("Phone Number: " + phone);
+        custAddress.setText("Address: " + address);
+        custCity.setText("City: " + city);
+        custState.setText("Province: " + province);
+        custEmail.setText("Email: " + email);
 
         logout.setOnClickListener(new View.OnClickListener() {
             @Override

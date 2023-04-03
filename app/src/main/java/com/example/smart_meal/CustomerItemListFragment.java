@@ -22,6 +22,9 @@ public class CustomerItemListFragment extends Fragment {
     private List<String> mItems;
     private CustomListAdapter adapter;
 
+    DBHelper DB;
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -48,7 +51,23 @@ public class CustomerItemListFragment extends Fragment {
 
     //Create the list of the products of this restaurant
     private List<String> addData(){
+
+        String name = "";
+        String itemDesc= "";
+        String email = "";
+        int itemImg = 0;
+        Double price = null;
+
+        ItemModel itemAdd = new ItemModel(name, price);
+
         mItems = new ArrayList<>();
+        for (int i = 0; i < mItems.size();i++){
+
+            mItems.add(name + "-$" + price);
+
+            i++;
+        }
+
         mItems.add("Item 1 -$1.90");
         mItems.add("Item 2 -$2.90");
         mItems.add("Item 3 -$3.90");

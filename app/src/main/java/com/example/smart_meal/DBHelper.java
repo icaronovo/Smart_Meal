@@ -2,17 +2,19 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 13;
+    public static final int dbVersion = 14;
 
     //creating item table and fields
     public static final String ITEM = "ITEM";
@@ -44,6 +46,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_CITY = "City";
     public static final String COLUMN_PROVINCE = "Province";
     public static final String COLUMN_PROFILE_IMAGE = "ProfileImage";
+    private static final String COLUMN_TOTAL_ORDER = "TotalOrder";
+    private static final String COLUMN_DATE = "Date";
 
     private Context mContext;
 
@@ -56,8 +60,8 @@ public class DBHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         //String createTable = "CREATE TABLE BUSINESS(BusinessID INTEGER PRIMARY KEY AUTOINCREMENT, EmailBus TEXT)"
-        String createTableItem = "CREATE TABLE " + ITEM + "("
-                + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY, "
+        String createTableItem = "CREATE TABLE " + ITEM +
+                "(" + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ITEM_VALUE + " INTEGER, "
                 + COLUMN_ITEM_NAME + " TEXT, "
                 + COLUMN_ITEM_IMAGE + " INTEGER, "
@@ -65,12 +69,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         db.execSQL(createTableItem);
 
-        String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO + "("
-                + COLUMN_CUSTOMER_ID + " INTEGER PRIMARY KEY, "
+        String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO +
+                "(" + COLUMN_CUSTOMER_ID + " INTEGER PRIMARY KEY, "
                 + ACCOUNT_TYPE + " TEXT, "
                 + COLUMN_EMAIL + " TEXT, "
                 + COLUMN_PASSWORD + " TEXT, "
-                + COLUMN_NAME + " INTEGER, "
+                + COLUMN_NAME + " REAL, "
                 + COLUMN_PHONE + " TEXT, "
                 + COLUMN_ADDRESS + " TEXT, "
                 + COLUMN_CITY + " TEXT, "
@@ -78,12 +82,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 + COLUMN_PROFILE_IMAGE + " INTEGER)";
         db.execSQL(createTableCustomerInfo);
 
-        String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO + "("
-                + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY, "
+        String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO +
+                "(" + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ORDER_STATUS + " INTEGER , "
+                + COLUMN_TOTAL_ORDER + " INTEGER, "
+                + COLUMN_DATE + " TEXT, "
                 + COLUMN_ITEM_ID + " INTEGER, "
                 + COLUMN_ITEM_VALUE + " INTEGER, "
-                + COLUMN_ITEM_QTY + " TEXT, "
+                + COLUMN_ITEM_QTY + " INTEGER, "
                 + COLUMN_BUSINESS_ID + " INTEGER, "
                 + COLUMN_CUSTOMER_ID + " INTEGER)";
         db.execSQL(createTableOrderInfo);
@@ -100,6 +106,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    //query to get user data
     public String[] getUserData(String email) {
         String[] userData = new String[9];
         SQLiteDatabase db = this.getReadableDatabase();
@@ -110,12 +117,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 userData[i] = cursor.getString(i);
             }
         }
-       return userData;
-
+        return userData;
 
     }
 
-    // This method us used to check if the account is of type Business or Customer
+    // This query us used to check if the account is of type Business or Customer
     public Cursor checkAccountType(String Email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT AccountType FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{Email});
@@ -125,41 +131,34 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //method to check if the user exist in DB
+    //query to check if the user exist in DB
     public boolean checkUserAccount(String username, String password) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? AND PasswordCust = ? ", new String[]{username, password});
-        if (cursor.getCount() > 0) {
-            return true;
-        }
-        return false;
+        return cursor.getCount() > 0;
     }
 
-    //method to delete account record from db
+    //query to delete account record from db
     public boolean deleteUserAccount(String id) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         int d = sqLiteDatabase.delete(CUSTOMER_INFO, "EmailCust=?", new String[]{id});
-        if (d > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return d > 0;
     }
 
-    //method to update password
-    public boolean accountUpdate(String username, String password,String name) {
+    //query to update password
+    public boolean accountUpdate(String username, String password, String name) {
         SQLiteDatabase db = this.getWritableDatabase();
         SQLiteDatabase database = this.getReadableDatabase();
-        Cursor dataRead = database.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE Name = ? AND EmailCust=? ", new String[]{name,username});
+        Cursor dataRead = database.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE Name = ? AND EmailCust=? ", new String[]{name, username});
         ContentValues values = new ContentValues();
-        if (dataRead.getCount()>0) {
+        if (dataRead.getCount() > 0) {
             values.put("PasswordCust", password);
-            db.update("CUSTOMER_INFO", values, "EmailCust= " + username, null);
+            db.update("CUSTOMER_INFO", values, "EmailCust= ?", null);
             return true;
-        }else return false;
+        } else return false;
     }
 
-    //method to add customer data in the database
+    //query to add customer data in the database
     public boolean addCustomer(CustomerModel customerModel) {
         //writing data in the database
         SQLiteDatabase db = this.getWritableDatabase();
@@ -179,17 +178,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-    //    public boolean getUserData(String username){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ?", new String[]{username});
-//
-//        if (cursor.getCount() > 0) {
-//            return true;
-//        }
-//        return false;
-//    }
-    public boolean customerUpdate(String prevEmail, String email, String password, String name, String phone, String address,
-                                  String city, String province) {
+    //query to update user data
+    public boolean customerUpdate(String prevEmail, String email, String password, String name, String phone, String address, String city, String province) {
         //writing data in the database
         SQLiteDatabase db = this.getWritableDatabase();
         //linking data from getters to database fields
@@ -205,17 +195,24 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
 
-    public boolean checkIfEmailExists (String email) {
+    //query to validate if email is already in use
+    public boolean checkIfEmailExists(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{email});
-        if (cursor.getCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return cursor.getCount() > 0;
+    }
+    public boolean getBusID(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE CustomerID= ? AND AccountType= 'Business' ", new String[]{email});
+        return cursor.getCount() > 0;
+    }
+    public boolean getCustID(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE CustomerID= ? AND AccountType= 'Customer' ", new String[]{email});
+        return cursor.getCount() > 0;
     }
 
-    //method to add values to ITEM table
+    //query to add values to ITEM table
     public boolean addItem(ItemModel itemModel) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -228,12 +225,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-    //method to add values to ORDER table
+    //query to add values to ORDER table
     public boolean addOrder(OrderModel orderModel) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_ORDER_STATUS, orderModel.getOrderStatus());
         cv.put(COLUMN_BUSINESS_ID, orderModel.getBusinessID());
+        cv.put(COLUMN_DATE, orderModel.getDate());
         cv.put(COLUMN_CUSTOMER_ID, orderModel.getCustomerID());
         cv.put(COLUMN_ITEM_VALUE, orderModel.getItemValue());
         cv.put(COLUMN_ITEM_ID, orderModel.getItemID());
@@ -242,21 +240,20 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-
-    // podemos mostrar o email do cliente quando ele for alterar os items e fazer a validacao no codigo,
-    // se for diferente do email dele, nao pode fazer a alteracao
-
-    //method to show items data.
+    //query to show items data.
     public boolean itemsDisplay(String username, String items) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE EmailCust= ? ", new String[]{username, items});
-        if (cursor.getCount() > 0) {
-            return true;
-        }
-        return false;
+        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE CustomerID= ? AND ItemID ", new String[]{username, items});
+        return cursor.getCount() > 0;
     }
 
-    //method to update item qty
+//    public boolean itemNamePrice(String email, Double itemPrice, String itemName){
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT ItemName,ItemValue FROM ITEM WHERE EmailCust= ? ", new String[]{email,itemPrice.toString(),itemName});
+//        return cursor.getCount() > 0;
+//    }
+
+    //query to update item qty
     public boolean itemsQtyUpdate(String username, String itemQty) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -266,7 +263,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
 
-    //method to update item value
+    //query to update item value
     public boolean itemsValueUpdate(String username, String itemValue) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -275,26 +272,33 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected > 0;
     }
-
-    //metodo pra atualizar o order status, podemos setar o orderStatus pra ativo ou completo
-    //(da pra botar isso no codigo tb, botar no checkbox se foi entregue ou nao = ativo/completo)
+    //query to update order status
     public boolean orderStatusUpdate(String username, String orderStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("OrderStatus", orderStatus);
-        int rowsAffected = db.update("ORDER_INFO", values, "EmailCust = ?", new String[]{username});
+        int rowsAffected = db.update("ORDER_INFO", values, "CustomerID = ?", new String[]{username});
 
         return rowsAffected > 0;
     }
-
-    //method to show all orders
-    public boolean ordersDisplay(String username, String orders) {
+    //query to show all orders
+    public List<String> ordersDisplay(String username, String orders) {
+        List<String> ordersData = new ArrayList<>(7);
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE EmailCust= ? ", new String[]{username, orders});
-        if (cursor.getCount() > 0) {
-            return true;
+        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE CustomerID= ? AND OrderID= ? ", new String[]{username, orders});
+        if (cursor != null) {
+            cursor.moveToFirst();
+            for (int i = 0; i < ordersData.size(); i++) {
+                ordersData.set(i, cursor.getString(i));
+            }
         }
-        return false;
+        return ordersData;
+    }
+    public Cursor displayOrder(String customerID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_BUSINESS_ID + "=?";
+        Cursor cursor = database.rawQuery(query,new String[]{customerID});
+        return cursor;
     }
 
 }

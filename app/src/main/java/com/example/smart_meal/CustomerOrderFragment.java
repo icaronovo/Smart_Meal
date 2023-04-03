@@ -99,9 +99,12 @@ public class CustomerOrderFragment extends Fragment {
 
                 //Get customer ID
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
-                String customerID = sharedPreferences.getString("CustomerID", "");
+                int customerID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
 
-                OrderModel newOrder = new OrderModel("orderStatus", "businessID", customerID, 9.90,1,2);
+                int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
+                DB.getBusID(String.valueOf(businessID));
+
+                OrderModel newOrder = new OrderModel("orderStatus", businessID, customerID, 9.90,"1",2,3);
                 if(DB.addOrder(newOrder)){
                     Toast.makeText(getActivity(), "Na teoria inseriu...", Toast.LENGTH_SHORT).show();
                 }else{
@@ -109,7 +112,7 @@ public class CustomerOrderFragment extends Fragment {
                 }
 
                 //Here you are gonna send the ORDERID
-                mListener.onButtonClick(customerID);
+                mListener.onButtonClick(String.valueOf(customerID));
             }
         });
     }

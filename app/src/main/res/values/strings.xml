@@ -74,4 +74,7 @@
     <string name="btnPickUp">Pick up at store</string>
     <string name="rbt">Delivery</string>
     <string name="btnCancel">Cancel Order</string>
+    <string name="txtWelcome">Welcome, </string>
+    <string name="txtName">Name </string>
+    <string name="custID">Customer ID: </string>
 </resources>

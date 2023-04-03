@@ -67,15 +67,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             Log.d("TAG", String.valueOf(cursor));
 
             if (cursor != null && cursor.length > 0) {
-//                StringBuilder str = new StringBuilder();
-//                SharedPreferences.Editor editor = getSharedPreferences("data", MODE_PRIVATE).edit();
-//                String[] columns = {"CustomerID", "AccountType", "EmailCust", "PasswordCust", "Name", "Phone", "Address", "City", "Province"};
 
-            } else {
-                // Handle case where cursor is null or empty
             }
-        } else {
-            // Handle case where email is empty or null
         }
 
         //Constraint layout where is the Fragments
@@ -162,13 +155,13 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
         //String itemName, int itemImage, String itemDescription, Double itemPrice
-        itemList.add(new ItemModel("Title Item", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
-        itemList.add(new ItemModel("Title Item 1", R.drawable.ic_launcher_background, "Description, description bla bla bla", 19.99));
-        itemList.add(new ItemModel("Title Item 2", R.drawable.ic_launcher_background, "Description, description bla bla bla", 92.99));
-        itemList.add(new ItemModel("Title Item 3", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
-        itemList.add(new ItemModel("Title Item 5", R.drawable.ic_launcher_background, "Description, description bla bla bla", 49.99));
-        itemList.add(new ItemModel("Title Item 6", R.drawable.ic_launcher_background, "Description, description bla bla bla", 59.99));
-        itemList.add(new ItemModel("Title Item 7", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
+        itemList.add(new ItemModel("Title Restaurant", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Restaurant 1", R.drawable.ic_launcher_background, "Description, description bla bla bla", 19.99));
+        itemList.add(new ItemModel("Title Restaurant 2", R.drawable.ic_launcher_background, "Description, description bla bla bla", 92.99));
+        itemList.add(new ItemModel("Title Restaurant 3", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
+        itemList.add(new ItemModel("Title Restaurant 5", R.drawable.ic_launcher_background, "Description, description bla bla bla", 49.99));
+        itemList.add(new ItemModel("Title Restaurant 6", R.drawable.ic_launcher_background, "Description, description bla bla bla", 59.99));
+        itemList.add(new ItemModel("Title Restaurant 7", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
         return itemList;
     }
 }

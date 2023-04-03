@@ -1,17 +1,20 @@
 package com.example.smart_meal;
 
+import android.content.Intent;
+
 public class OrderModel {
 
     private String orderStatus;
-    private String businessID;
-    private String customerID;
+    private int businessID;
+    private int customerID;
+    private String date;
     private Double itemValue;
     private int itemID;
     private int itemQuantity;
 
     //constructor to order
-    public OrderModel(String orderStatus, String businessID,
-                      String customerID, Double itemValue,
+    public OrderModel(String orderStatus, int businessID,
+                      int customerID, Double itemValue, String date,
                       int itemID, int itemQuantity){
         this.orderStatus = orderStatus;
         this.businessID = businessID;
@@ -19,6 +22,7 @@ public class OrderModel {
         this.itemValue = itemValue;
         this.itemID = itemID;
         this.itemQuantity = itemQuantity;
+        this.date = date;
     }
     //getters and setters
     public String getOrderStatus() {
@@ -29,19 +33,19 @@ public class OrderModel {
         this.orderStatus = orderStatus;
     }
 
-    public String getBusinessID() {
+    public int getBusinessID() {
         return businessID;
     }
 
-    public void setBusinessID(String businessID) {
+    public void setBusinessID(int businessID) {
         this.businessID = businessID;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
@@ -69,12 +73,22 @@ public class OrderModel {
         this.itemQuantity = itemQuantity;
     }
     //to string method
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "OrderModel{" +
                 "orderStatus='" + orderStatus + '\'' +
                 ", businessID='" + businessID + '\'' +
                 ", customerID='" + customerID + '\'' +
+                ", date='" + date + '\'' +
                 ", itemValue=" + itemValue +
                 ", itemID=" + itemID +
                 ", itemQuantity=" + itemQuantity +
