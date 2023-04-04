@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -74,8 +75,6 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
 //            Log.d("Business", name);
 //        }
 
-
-
         RecyclerView recyclerView = findViewById(R.id.customerSearchRecyclerView);
 
         CustomerSearchAdapter adapter = new CustomerSearchAdapter(this, restaurantList, this);
@@ -85,10 +84,17 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
 
     @Override
     public void onSelectCustomerSearch(int position) {
+        Log.d("Position", String.valueOf(position));
         Intent intent = new Intent(CustomerSearch.this, CustomerRestaurant.class);
         DBHelper DB = new DBHelper(this);
+        Log.d("Email", restaurantList.get(position).getCustomerEmail());
         int businessID = DB.getBusinessIDFromDB(restaurantList.get(position).getCustomerEmail());
-        intent.putExtra("BusinessID", businessID);
-        startActivity(intent);
+        Log.d("BusinessID", String.valueOf(businessID));
+        if (businessID > -1) {
+            intent.putExtra("RESTAURANTID", businessID);
+            startActivity(intent);
+        } else {
+            Toast.makeText(CustomerSearch.this, "Restaurant not found", Toast.LENGTH_LONG).show();
+        }
     }
 }

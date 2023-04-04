@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
@@ -14,6 +15,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CustomerRestaurant extends AppCompatActivity implements Communicator, CustomerOrderFragment.OnButtonClickListener {
+    DBHelper dbHelper = new DBHelper(this);
     private List<ItemModel> itemList;
 
     @Override
@@ -21,10 +23,17 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_restaurant);
 
+
+        TextView restaurantName = findViewById(R.id.txtRestaurantName);
+        TextView restaurantAddress = findViewById(R.id.txtRestAddress);
+//        restaurantName.setText(restaurantInfo[3]);
+//        restaurantAddress.setText(restaurantInfo[5] + ", " + restaurantInfo[6]);
+
         //Test to see if the Recycler View is clickable
         TextView restaurantDesc = findViewById(R.id.txtRestAddress);
         Intent intent = getIntent();
         int restaurantId = intent.getIntExtra("RESTAURANTID",-1);
+        Log.d("Restaurant ID", String.valueOf(restaurantId));
         restaurantDesc.setText("Restaurant selected is " + restaurantId);
         //End test
     }
@@ -68,13 +77,13 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
         //String itemName, int itemImage, String itemDescription, Double itemPrice
-        itemList.add(new ItemModel("Title Item",R.drawable.ic_launcher_background,"Description, description bla bla bla",9.99));
-        itemList.add(new ItemModel("Title Item 1",R.drawable.ic_launcher_background,"Description, description bla bla bla",19.99));
-        itemList.add(new ItemModel("Title Item 2",R.drawable.ic_launcher_background,"Description, description bla bla bla",92.99));
-        itemList.add(new ItemModel("Title Item 3",R.drawable.ic_launcher_background,"Description, description bla bla bla",39.99));
-        itemList.add(new ItemModel("Title Item 5",R.drawable.ic_launcher_background,"Description, description bla bla bla",49.99));
-        itemList.add(new ItemModel("Title Item 6",R.drawable.ic_launcher_background,"Description, description bla bla bla",59.99));
-        itemList.add(new ItemModel("Title Item 7",R.drawable.ic_launcher_background,"Description, description bla bla bla",39.99));
+        itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99));
+        itemList.add(new ItemModel("Title Item 1","Description, description bla bla bla",19.99));
+        itemList.add(new ItemModel("Title Item 2","Description, description bla bla bla",92.99));
+        itemList.add(new ItemModel("Title Item 3","Description, description bla bla bla",39.99));
+        itemList.add(new ItemModel("Title Item 5","Description, description bla bla bla",49.99));
+        itemList.add(new ItemModel("Title Item 6","Description, description bla bla bla",59.99));
+        itemList.add(new ItemModel("Title Item 7","Description, description bla bla bla",39.99));
         return itemList;
     }
 }

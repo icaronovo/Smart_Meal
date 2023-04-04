@@ -5,17 +5,24 @@ import java.util.List;
 public class ItemModel{
 
     private String itemName;
-    private int itemImage;
     private String itemDescription;
     private Double itemPrice;
     private int itemQuantity;
+    private int businessID;
 
-    public ItemModel(String itemName, int itemImage, String itemDescription, Double itemPrice, int itemQuantity) {
+    public ItemModel(String itemName, String itemDescription, Double itemPrice, int itemQuantity) {
         this.itemName = itemName;
-        this.itemImage = itemImage;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
         this.itemQuantity = itemQuantity;
+    }
+
+    public ItemModel(String itemName, String itemDescription, Double itemPrice, int itemQuantity, int businessID) {
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.itemQuantity = itemQuantity;
+        this.businessID = businessID;
     }
 
     public ItemModel(String itemName, Double itemPrice) {
@@ -24,9 +31,8 @@ public class ItemModel{
     }
 
     //constructor
-    public ItemModel(String itemName, int itemImage, String itemDescription, Double itemPrice) {
+    public ItemModel(String itemName, String itemDescription, Double itemPrice) {
         this.itemName = itemName;
-        this.itemImage = itemImage;
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
     }
@@ -41,13 +47,6 @@ public class ItemModel{
         this.itemName = itemName;
     }
 
-    public int getItemImage() {
-        return itemImage;
-    }
-
-    public void setItemImage(int itemImage) {
-        this.itemImage = itemImage;
-    }
 
     public String getItemDescription() {
         return itemDescription;
@@ -73,12 +72,19 @@ public class ItemModel{
         this.itemQuantity = itemQuantity;
     }
 
+    public int getBusinessID() {
+        return businessID;
+    }
+
+    public void setBusinessID(int businessID) {
+        this.businessID = businessID;
+    }
+
     //to string method
     @Override
     public String toString() {
         return "ItemModel{" +
                 "itemName='" + itemName + '\'' +
-                ", itemImage=" + itemImage +
                 ", itemDescription='" + itemDescription + '\'' +
                 ", itemPrice=" + itemPrice +
                 ", itemQuantity=" + itemQuantity +

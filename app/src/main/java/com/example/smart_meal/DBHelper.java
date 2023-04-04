@@ -17,7 +17,7 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 15;
+    public static final int dbVersion = 16;
 
     //creating item table and fields
     public static final String ITEM = "ITEM";
@@ -33,7 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ORDER_STATUS = "OrderStatus";
     public static final String COLUMN_DATE = "Date";
     //    public static final String COLUMN_ITEM_VALUE = "ItemValue";
-    public static final String COLUMN_ITEM_QTY = "ItemQty";
+    public static final String COLUMN_ITEM_QTY = "ItemQuantity";
     public static final String COLUMN_BUSINESS_ID = "BusinessID";
     public static final String COLUMN_CUSTOMER_ID = "CustomerID";
 
@@ -49,6 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PROVINCE = "Province";
     public static final String COLUMN_PROFILE_IMAGE = "ProfileImage";
     private static final String COLUMN_TOTAL_ORDER = "TotalOrder";
+    private static final String COLUMN_ITEM_QUANTITY = "ItemQuantity";
 
     private Context mContext;
 
@@ -64,10 +65,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableItem = "CREATE TABLE " + ITEM +
                 "(" + COLUMN_ITEM_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ITEM_VALUE + " INTEGER, "
+                + COLUMN_ITEM_QUANTITY + " INTEGER, "
                 + COLUMN_ITEM_NAME + " TEXT, "
-                + COLUMN_ITEM_IMAGE + " INTEGER, "
-                + COLUMN_ITEM_DESCRIPTION + " TEXT)";
-
+                + COLUMN_ITEM_DESCRIPTION + " TEXT,"
+                + COLUMN_BUSINESS_ID + " INTEGER)";
         db.execSQL(createTableItem);
 
         String createTableCustomerInfo = "CREATE TABLE " + CUSTOMER_INFO +
@@ -236,16 +237,17 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public int getBusinessIDFromDB (String customerEmail) {
-        SQLiteDatabase DB = getReadableDatabase();
-        Integer id = 0;
+        SQLiteDatabase database = this.getReadableDatabase();
 
-        Cursor cursor = DB.rawQuery("SELECT CustomerID FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{customerEmail});
-        Log.d("cursor", String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("CustomerID"))));
-        id = cursor.getInt(cursor.getColumnIndexOrThrow("CustomerID"));
+        Integer id = -1;
+        Cursor cursor = database.rawQuery("SELECT * FROM " + CUSTOMER_INFO + " WHERE " + COLUMN_EMAIL + "=?", new String[]{customerEmail});
+        if (cursor != null && cursor.moveToFirst()) {
+            id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_CUSTOMER_ID));
+        }
 
+        cursor.close();
         return id;
     }
-
 
     //query to update user data
     public boolean customerUpdate(String prevEmail, String email, String password, String name, String phone, String address, String city, String province) {
@@ -286,15 +288,51 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean addItem(ItemModel itemModel) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(COLUMN_ITEM_NAME, itemModel.getItemName());
         cv.put(COLUMN_ITEM_VALUE, itemModel.getItemPrice());
-        cv.put(COLUMN_ITEM_IMAGE, itemModel.getItemImage());
-        cv.put(COLUMN_ITEM_DESCRIPTION, itemModel.getItemDescription());
         cv.put(COLUMN_ITEM_QTY, itemModel.getItemQuantity());
+        cv.put(COLUMN_ITEM_NAME, itemModel.getItemName());
+        cv.put(COLUMN_ITEM_DESCRIPTION, itemModel.getItemDescription());
+        cv.put(COLUMN_BUSINESS_ID, itemModel.getBusinessID());
         long insert = sqLiteDatabase.insert(ITEM, null, cv);
         return insert != -1;
     }
 
+    public void insertSeveralItems () {
+        ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
+        itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99, 10, 1));
+        itemList.add(new ItemModel("Title Item 2","Description, description bla bla bla",19.99, 10, 1));
+        itemList.add(new ItemModel("Title Item 3","Description, description bla bla bla",6.99, 10, 1));
+        itemList.add(new ItemModel("Title Item 4","Description, description bla bla bla",5.99, 10, 1));
+        itemList.add(new ItemModel("Title Item 5","Description, description bla bla bla",4.99, 10, 2));
+        itemList.add(new ItemModel("Title Item 6","Description, description bla bla bla",3.99, 10, 2));
+        itemList.add(new ItemModel("Title Item 7","Description, description bla bla bla",21.99, 10, 2));
+        itemList.add(new ItemModel("Title Item 8","Description, description bla bla bla",5.99, 10, 2));
+        itemList.add(new ItemModel("Title Item 9","Description, description bla bla bla",6.99, 10, 3));
+        itemList.add(new ItemModel("Title Item 10","Description, description bla bla bla",1.99, 10, 3));
+        itemList.add(new ItemModel("Title Item 11","Description, description bla bla bla",45.99, 10, 3));
+        itemList.add(new ItemModel("Title Item 12","Description, description bla bla bla",32.99, 10, 3));
+        itemList.add(new ItemModel("Title Item 13","Description, description bla bla bla",12.99, 10, 3));
+        itemList.add(new ItemModel("Title Item 14","Description, description bla bla bla",21.99, 10, 4));
+        itemList.add(new ItemModel("Title Item 15","Description, description bla bla bla",31.99, 10, 4));
+        itemList.add(new ItemModel("Title Item 16","Description, description bla bla bla",13.99, 10, 4));
+        itemList.add(new ItemModel("Title Item 17","Description, description bla bla bla",41.99, 10, 4));
+        itemList.add(new ItemModel("Title Item 18","Description, description bla bla bla",14.99, 10, 4));
+        itemList.add(new ItemModel("Title Item 19","Description, description bla bla bla",15.99, 10, 5));
+        itemList.add(new ItemModel("Title Item 20","Description, description bla bla bla",23.99, 10, 5));
+        itemList.add(new ItemModel("Title Item 21","Description, description bla bla bla",32.99, 10, 5));
+        itemList.add(new ItemModel("Title Item 22","Description, description bla bla bla",25.99, 10, 5));
+        itemList.add(new ItemModel("Title Item 23","Description, description bla bla bla",15.99, 10, 5));
+        itemList.add(new ItemModel("Title Item 24","Description, description bla bla bla",16.99, 10, 5));
+
+        for (int i = 0; i < itemList.size(); i++) {
+            boolean isInserted = addItem(itemList.get(i));
+            if (!isInserted) {
+                Log.d("Item " + i, "Failed to add item.");
+            } else {
+                Log.d("Item " + i, "Added successfully");
+            }
+        }
+    }
 
     //query to add values to ORDER table
     public boolean addOrder(OrderModel orderModel) {
@@ -311,9 +349,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to show items data.
-    public boolean itemsDisplay(String username, String items) {
+    public boolean itemsDisplay(int businessID) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE CustomerID= ? AND ItemID ", new String[]{username, items});
+        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE BusinessID= ?", new String[]{String.valueOf(businessID)});
         return cursor.getCount() > 0;
     }
 
@@ -324,21 +362,21 @@ public class DBHelper extends SQLiteOpenHelper {
 //    }
 
     //query to update item qty
-    public boolean itemsQtyUpdate(String username, String itemQty) {
+    public boolean itemsQtyUpdate(int itemID, String itemQty) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("ItemQty", itemQty);
-        int rowsAffected = db.update("ITEM", values, "EmailCust = ?", new String[]{username});
+        values.put("ItemQuantity", itemQty);
+        int rowsAffected = db.update("ITEM", values, "ItemID = ?", new String[]{String.valueOf(itemID)});
 
         return rowsAffected > 0;
     }
 
     //query to update item value
-    public boolean itemsValueUpdate(String username, String itemValue) {
+    public boolean itemsValueUpdate(int itemID, String itemValue) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("ItemValue", itemValue);
-        int rowsAffected = db.update("ITEM", values, "EmailCust = ?", new String[]{username});
+        int rowsAffected = db.update("ITEM", values, "ItemID = ?", new String[]{String.valueOf(itemID)});
 
         return rowsAffected > 0;
     }
