@@ -79,4 +79,5 @@
     <string name="txtName">Name </string>
     <string name="custID">Customer ID: </string>
     <string name="checkBoxSelect">Select All</string>
+    <string name="customerSearchHint">Select</string>
 </resources>

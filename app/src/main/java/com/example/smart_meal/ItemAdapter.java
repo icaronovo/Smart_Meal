@@ -15,7 +15,7 @@ import java.util.List;
 public class ItemAdapter extends RecyclerView.Adapter {
     List<ItemModel> itemList;
     LayoutInflater mInflater;
-    static ItemClickListener itemClickListener;
+    ItemClickListener itemClickListener;
 
     public ItemAdapter(Context context, List<ItemModel> itemList) {
         this.itemList = itemList;
@@ -55,7 +55,7 @@ public class ItemAdapter extends RecyclerView.Adapter {
         void onItemClick(View view, int position);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView itemImage;
         TextView textTitle, textPrice, textDesc;

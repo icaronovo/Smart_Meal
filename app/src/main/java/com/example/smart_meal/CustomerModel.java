@@ -17,7 +17,8 @@ public class CustomerModel {
     private int customerImage;
 
     //Constructors
-    public CustomerModel (Integer id, String name, String email, String phone, String address, String city, String province, Integer image) {
+    public CustomerModel (Integer id, String name, String email, String phone,
+                          String address, String city, String province, Integer image) {
         this.customerName = name;
         this.customerEmail = email;
         this.customerPhone = phone;
@@ -26,8 +27,6 @@ public class CustomerModel {
         this.customerProvince = province;
         this.customerImage = image;
     }
-
-
 
     public CustomerModel(String accountType, String customerEmail, String password,
                          String customerName, String customerPhone, String customerAddress,
