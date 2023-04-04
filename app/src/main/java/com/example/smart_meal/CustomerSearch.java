@@ -93,6 +93,7 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
         if (businessID > -1) {
             intent.putExtra("RESTAURANTID", businessID);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(CustomerSearch.this, "Restaurant not found", Toast.LENGTH_LONG).show();
         }

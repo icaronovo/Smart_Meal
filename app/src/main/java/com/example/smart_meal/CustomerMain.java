@@ -126,6 +126,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     public void onItemClick(View view, int position) {
         // The launcher with the Intent you want to start
         Intent intent = new Intent(CustomerMain.this, CustomerRestaurant.class);
+        intent.putExtra("RESTAURANTID",position);
         launchSomeActivity.launch(intent);
     }
 
