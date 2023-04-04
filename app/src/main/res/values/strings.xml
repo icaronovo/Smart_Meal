@@ -78,4 +78,5 @@
     <string name="txtWelcome">Welcome, </string>
     <string name="txtName">Name </string>
     <string name="custID">Customer ID: </string>
+    <string name="checkBoxSelect">Select All</string>
 </resources>

@@ -55,14 +55,6 @@ public class OrderModel {
         return orderStatus;
     }
 
-    public boolean isChecked(){
-        if(this.orderStatus == 0){
-            return false;
-        } else{
-            return true;
-        }
-    }
-
     public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }

@@ -40,7 +40,7 @@ public class BusinessAdapter extends ArrayAdapter<OrderModel> {
 
         // Populate the data into the template view using the data object
         textView.setText(item.toString());
-        checkBox.setChecked(true);
+        checkBox.setChecked(false);
 
         // Attach an OnClickListener to the checkbox to update the item's boolean property
 //        checkBox.setOnClickListener(new View.OnClickListener() {
