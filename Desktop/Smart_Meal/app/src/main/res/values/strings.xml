@@ -1,0 +1,82 @@
+<resources>
+    <string name="app_name">Smart_Meal</string>
+    <string name="txtCustomer">Customer</string>
+    <string name="txtBusiness">Business</string>
+    <string name="txtEmail">Enter your e-mail address</string>
+    <string name="txtPassword">Enter your password</string>
+    <string name="txtLogin">Login</string>
+    <string name="txtNewAccount">New Account</string>
+    <string name="txtType">What best describes you?</string>
+    <string name="txtFName">Full name</string>
+    <string name="txtPhone">Phone Number </string>
+    <string name="txtAddress">Address</string>
+    <string name="txtCity">City</string>
+    <string name="txtState">State/Province</string>
+    <string name="txtAddEmail">E-mail</string>
+    <string name="txtAddPassword">Password</string>
+    <string name="txtConfirm">Confirm password</string>
+    <string name="radioCustomer">Customer</string>
+    <string name="radioBusiness">Business</string>
+    <string-array name="txtCities">
+        <item>Alberta</item>
+        <item>British Columbia</item>
+        <item>Central Canada</item>
+        <item>Manitoba</item>
+        <item>New Brunswick</item>
+        <item>Newfoundland and Labrador</item>
+        <item>Northwest Territories</item>
+        <item>Nunavut</item>
+        <item>Nova Scotia</item>
+        <item>Ontario</item>
+        <item>Prairie Provinces</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item>West Coast</item>
+        <item>Yukon Territory</item>
+    </string-array>
+    <string name="txtRegister">Register</string>
+    <string-array name="typeUser">
+        <item>I am a customer</item>
+        <item>I am a business</item>
+    </string-array>
+    <string name="txtCreate">Create</string>
+    <string name="txtFoodItem">Food Item</string>
+    <string name="txtOrder">Order</string>
+    <string name="txtOrders">Orders</string>
+    <string name="txtReminder">Reminder</string>
+    <string name="txtReports">Reports</string>
+    <string name="txtLogout">Logout</string>
+    <string name="txtTitle">Smart Meal</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imgRes">Restaurant Image</string>
+    <string name="DELtextRest">Restaurante Pipipopo</string>
+    <string name="txtDesc">Description:</string>
+    <string name="DELtextDescri">4090 Kingsway - Burnaby, BC</string>
+    <string name="imgStart">Restaurant avaliation</string>
+    <string name="DELtxtRating">4.5 / 5.0</string>
+    <string name="btnViewOrder">View Order</string>
+    <string name="txtItemAv">Items Available</string>
+    <string name="btnDel">Update Password</string>
+    <string name="newPasswordHint">Enter the new password</string>
+    <string name="resetPasswordButtonText">Reset</string>
+    <string name="btnSearch">Search For a Restaurant</string>
+    <string name="btnOrder">Order Food</string>
+    <string name="btnOrderDetails">Order Details and Status</string>
+    <string name="btnOrderHistory">Order History</string>
+    <string name="profileUpdate">Profile Update</string>
+    <string name="btnUpdate">Update</string>
+    <string name="imgRotate">an image</string>
+    <string name="btnLogoff">Logout</string>
+    <string name="anImage">an image</string>
+    <string name="btnConfirmORder">Confirm Order</string>
+    <string name="txtYourDelivery">Your Delivery</string>
+    <string name="txtTypeDelivery">Delivery</string>
+    <string name="btnPickUp">Pick up at store</string>
+    <string name="rbt">Delivery</string>
+    <string name="btnCancel">Cancel Order</string>
+    <string name="txtWelcome">Welcome, </string>
+    <string name="txtName">Name </string>
+    <string name="custID">Customer ID: </string>
+    <string name="checkBoxSelect">Select All</string>
+</resources>

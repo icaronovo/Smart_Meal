@@ -299,38 +299,43 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //add several items when app is loaded
     public void insertSeveralItems () {
-        ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
-        itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99, 10, 1));
-        itemList.add(new ItemModel("Title Item 2","Description, description bla bla bla",19.99, 10, 1));
-        itemList.add(new ItemModel("Title Item 3","Description, description bla bla bla",6.99, 10, 1));
-        itemList.add(new ItemModel("Title Item 4","Description, description bla bla bla",5.99, 10, 1));
-        itemList.add(new ItemModel("Title Item 5","Description, description bla bla bla",4.99, 10, 2));
-        itemList.add(new ItemModel("Title Item 6","Description, description bla bla bla",3.99, 10, 2));
-        itemList.add(new ItemModel("Title Item 7","Description, description bla bla bla",21.99, 10, 2));
-        itemList.add(new ItemModel("Title Item 8","Description, description bla bla bla",5.99, 10, 2));
-        itemList.add(new ItemModel("Title Item 9","Description, description bla bla bla",6.99, 10, 3));
-        itemList.add(new ItemModel("Title Item 10","Description, description bla bla bla",1.99, 10, 3));
-        itemList.add(new ItemModel("Title Item 11","Description, description bla bla bla",45.99, 10, 3));
-        itemList.add(new ItemModel("Title Item 12","Description, description bla bla bla",32.99, 10, 3));
-        itemList.add(new ItemModel("Title Item 13","Description, description bla bla bla",12.99, 10, 3));
-        itemList.add(new ItemModel("Title Item 14","Description, description bla bla bla",21.99, 10, 4));
-        itemList.add(new ItemModel("Title Item 15","Description, description bla bla bla",31.99, 10, 4));
-        itemList.add(new ItemModel("Title Item 16","Description, description bla bla bla",13.99, 10, 4));
-        itemList.add(new ItemModel("Title Item 17","Description, description bla bla bla",41.99, 10, 4));
-        itemList.add(new ItemModel("Title Item 18","Description, description bla bla bla",14.99, 10, 4));
-        itemList.add(new ItemModel("Title Item 19","Description, description bla bla bla",15.99, 10, 5));
-        itemList.add(new ItemModel("Title Item 20","Description, description bla bla bla",23.99, 10, 5));
-        itemList.add(new ItemModel("Title Item 21","Description, description bla bla bla",32.99, 10, 5));
-        itemList.add(new ItemModel("Title Item 22","Description, description bla bla bla",25.99, 10, 5));
-        itemList.add(new ItemModel("Title Item 23","Description, description bla bla bla",15.99, 10, 5));
-        itemList.add(new ItemModel("Title Item 24","Description, description bla bla bla",16.99, 10, 5));
 
-        for (int i = 0; i < itemList.size(); i++) {
-            boolean isInserted = addItem(itemList.get(i));
-            if (!isInserted) {
-                Log.d("Item " + i, "Failed to add item.");
-            } else {
-                Log.d("Item " + i, "Added successfully");
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE ItemID= ? ", new String[]{"1"});
+        if (cursor.getCount() < 0) {
+            ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
+            itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 2","Description, description bla bla bla",19.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 3","Description, description bla bla bla",6.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 4","Description, description bla bla bla",5.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 5","Description, description bla bla bla",4.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 6","Description, description bla bla bla",3.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 7","Description, description bla bla bla",21.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 8","Description, description bla bla bla",5.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 9","Description, description bla bla bla",6.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 10","Description, description bla bla bla",1.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 11","Description, description bla bla bla",45.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 12","Description, description bla bla bla",32.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 13","Description, description bla bla bla",12.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 14","Description, description bla bla bla",21.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 15","Description, description bla bla bla",31.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 16","Description, description bla bla bla",13.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 17","Description, description bla bla bla",41.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 18","Description, description bla bla bla",14.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 19","Description, description bla bla bla",15.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 20","Description, description bla bla bla",23.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 21","Description, description bla bla bla",32.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 22","Description, description bla bla bla",25.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 23","Description, description bla bla bla",15.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 24","Description, description bla bla bla",16.99, 10, 5));
+
+            for (int i = 0; i < itemList.size(); i++) {
+                boolean isInserted = addItem(itemList.get(i));
+                if (!isInserted) {
+                    Log.d("Item " + i, "Failed to add item.");
+                } else {
+                    Log.d("Item " + i, "Added successfully");
+                }
             }
         }
     }
