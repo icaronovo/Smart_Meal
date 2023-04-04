@@ -14,6 +14,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 
@@ -99,6 +101,9 @@ public class CustomerOrderFragment extends Fragment {
                 String itemID = ""; // get the items ids
                 String quantityNumber = ""; //get the quantity of items
 
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                Date dateNow = new Date();
+                String date = formatter.format(dateNow);
                 //Puttin the itemsID and the quantity in a string
                 //so we can sent more than one item to the db
                 for (String key : customerOrderList.keySet()) {
@@ -109,7 +114,8 @@ public class CustomerOrderFragment extends Fragment {
 
 //              customerOrderList = Hashmap <Nome do item, Double [preço,quantity]
 
-                OrderModel newOrder = new OrderModel(orderStatus, businessID, customerID, itemID,quantityNumber);
+
+                OrderModel newOrder = new OrderModel(orderStatus, businessID, customerID, date, itemID, quantityNumber);
 
                 if(DB.addOrder(newOrder)){
                     Toast.makeText(getActivity(), "Order sent!", Toast.LENGTH_SHORT).show();

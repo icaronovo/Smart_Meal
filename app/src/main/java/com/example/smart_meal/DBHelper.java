@@ -14,7 +14,7 @@ import java.util.List;
 public class DBHelper extends SQLiteOpenHelper {
     //creating db
     public static final String SMART_MEAL_DB = "SmartMealDB";
-    public static final int dbVersion = 14;
+    public static final int dbVersion = 15;
 
     //creating item table and fields
     public static final String ITEM = "ITEM";
@@ -28,7 +28,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ORDER_INFO = "ORDER_INFO";
     public static final String COLUMN_ORDER_ID = "OrderID";
     public static final String COLUMN_ORDER_STATUS = "OrderStatus";
-    //    public static final String COLUMN_ITEM_ID = "ItemID";
+    public static final String COLUMN_DATE = "Date";
     //    public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_QTY = "ItemQty";
     public static final String COLUMN_BUSINESS_ID = "BusinessID";
@@ -46,7 +46,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_PROVINCE = "Province";
     public static final String COLUMN_PROFILE_IMAGE = "ProfileImage";
     private static final String COLUMN_TOTAL_ORDER = "TotalOrder";
-    private static final String COLUMN_DATE = "Date";
 
     private Context mContext;
 
@@ -85,13 +84,12 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(" + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ORDER_STATUS + " INTEGER , "
                 + COLUMN_ITEM_ID + " TEXT, "
-//                + COLUMN_ITEM_VALUE + " INTEGER, "
+                + COLUMN_DATE + " TEXT, "
                 + COLUMN_ITEM_QTY + " TEXT, "
                 + COLUMN_BUSINESS_ID + " INTEGER, "
                 + COLUMN_CUSTOMER_ID + " INTEGER)";
         db.execSQL(createTableOrderInfo);
     }
-
 
     // this is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
@@ -221,6 +219,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long insert = sqLiteDatabase.insert(ITEM, null, cv);
         return insert != -1;
     }
+
 
     //query to add values to ORDER table
     public boolean addOrder(OrderModel orderModel) {

@@ -140,10 +140,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         String typeAdd = data.getStringExtra("DELIVERY");
                         model.setMyString(name);
                         customerOrder.setModel(model);
-                        titleTextView.setText("Order");
-                        recyclerView.setVisibility(View.INVISIBLE);
-                        constraintLayout.setVisibility(View.VISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
+//                        titleTextView.setText("Order");
+//                        recyclerView.setVisibility(View.INVISIBLE);
+//                        constraintLayout.setVisibility(View.VISIBLE);
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                     }
                 }
             });
