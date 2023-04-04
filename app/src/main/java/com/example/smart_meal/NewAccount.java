@@ -49,10 +49,8 @@ public class NewAccount extends AppCompatActivity {
         radioBusiness = findViewById(R.id.radioBusiness);
         radioGroup = findViewById(R.id.radioGroup);
 
-        //When the user select the type of account, it will change the fields required
-
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-
+            //defining account type and changing fields accordingly
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
 
@@ -114,7 +112,7 @@ public class NewAccount extends AppCompatActivity {
                         } else {
                             Toast.makeText(NewAccount.this, "This email is already in use.", Toast.LENGTH_LONG).show();
                         }
-
+                    //validation for empty fields, if passwords don't match and e-mail
                     } catch (Exception e) {
                         if (email.isEmpty() || password.isEmpty() || name.isEmpty() || phone.isEmpty() || address.isEmpty() || city.isEmpty() || state.isEmpty()) {
                             //Check if the information is empty

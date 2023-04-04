@@ -13,7 +13,7 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     int customerType = -1;
-
+    DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
         String loggedUser = sharedPreferences.getString("CustomerID", "");
         String loggedUserType = sharedPreferences.getString("AccountType", "");
         Log.d("Logged user", loggedUser);
+
+        DB = new DBHelper(this);
 
         if (!loggedUser.equals("")) {
             if (loggedUserType.equals("Business")) {

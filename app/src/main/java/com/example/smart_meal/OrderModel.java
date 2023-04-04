@@ -1,24 +1,26 @@
 package com.example.smart_meal;
 
+import android.content.Intent;
+
 public class OrderModel {
 
     private int orderStatus;
     private int businessID;
     private int customerID;
+    private String date;
     private String itemID;
     private String itemQuantity;
 
     //constructor to order
-    public OrderModel(){
-    }
-
     public OrderModel(int orderStatus, int businessID,
-                      int customerID, String itemID, String itemQuantity){
+                      int customerID, String date,
+                      String itemID, String itemQuantity){
         this.orderStatus = orderStatus;
         this.businessID = businessID;
         this.customerID = customerID;
         this.itemID = itemID;
         this.itemQuantity = itemQuantity;
+        this.date = date;
     }
     //getters and setters
     public int getOrderStatus() {
@@ -61,12 +63,22 @@ public class OrderModel {
         this.itemQuantity = itemQuantity;
     }
     //to string method
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     @Override
     public String toString() {
         return "OrderModel{" +
                 "orderStatus='" + orderStatus + '\'' +
                 ", businessID='" + businessID + '\'' +
                 ", customerID='" + customerID + '\'' +
+                ", date='" + date + '\'' +
                 ", itemID=" + itemID +
                 ", itemQuantity=" + itemQuantity +
                 '}';

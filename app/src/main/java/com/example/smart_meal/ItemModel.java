@@ -1,12 +1,27 @@
 package com.example.smart_meal;
 
-public class ItemModel {
+import java.util.List;
+
+public class ItemModel{
 
     private String itemName;
     private int itemImage;
     private String itemDescription;
     private Double itemPrice;
     private int itemQuantity;
+
+    public ItemModel(String itemName, int itemImage, String itemDescription, Double itemPrice, int itemQuantity) {
+        this.itemName = itemName;
+        this.itemImage = itemImage;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.itemQuantity = itemQuantity;
+    }
+
+    public ItemModel(String itemName, Double itemPrice) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+    }
 
     //constructor
     public ItemModel(String itemName, int itemImage, String itemDescription, Double itemPrice) {
@@ -15,6 +30,8 @@ public class ItemModel {
         this.itemDescription = itemDescription;
         this.itemPrice = itemPrice;
     }
+
+
 //getter and setters
     public String getItemName() {
         return itemName;

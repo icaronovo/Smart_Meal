@@ -13,7 +13,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CustomerRestaurant extends AppCompatActivity implements Communicator, CustomerOrderFragment.OnButtonClickListener {
-
     private List<ItemModel> itemList;
 
     @Override
