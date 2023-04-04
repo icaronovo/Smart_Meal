@@ -1,17 +1,11 @@
 package com.example.smart_meal;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentContainer;
-import androidx.fragment.app.FragmentContainerView;
 import androidx.fragment.app.FragmentManager;
 
-import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -36,14 +30,15 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
     @Override
     public void respond(HashMap<String,Double[]> data) {
+        DecimalFormat decimalFormat = new DecimalFormat("#");
+        DecimalFormat currency = new DecimalFormat("#.##");
+        double finalTotal = 0;
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         CustomerOrderFragment customerOrderFragment = (CustomerOrderFragment)
                 fragmentManager.findFragmentById(R.id.selectedOrder);
-        StringBuilder str = new StringBuilder();
-        double finalTotal = 0;
 
-        DecimalFormat decimalFormat = new DecimalFormat("#");
-        DecimalFormat currency = new DecimalFormat("#.##");
+        StringBuilder str = new StringBuilder();
 
         for (String key : data.keySet()) {
             Double[] values = data.get(key);
@@ -55,19 +50,20 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         str.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
         str.append("Fees  $" + currency.format(FEE)+ "\n");
         str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
-        customerOrderFragment.changeText(str);
+        customerOrderFragment.makeOrder(str, data);
     }
 
     //Handle order submit click, input data and pass to previous activity
     @Override
-    public void onButtonClick(String fullOrder) {
+    public void onButtonClick(String fullOrder,String delivery) {
         Intent intent = new Intent();
-        intent.putExtra("TEST", fullOrder);
+        intent.putExtra("ORDERID", fullOrder);
+        intent.putExtra("DELIVERY",delivery);
         setResult(RESULT_OK, intent);
         finish();
     }
 
-    //Get the items from db
+    //Get the items from this Restaurant on DB
     //Put them here
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();

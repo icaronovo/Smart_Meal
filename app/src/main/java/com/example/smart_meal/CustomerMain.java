@@ -40,11 +40,11 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
     private SharedPreferences sharedPreferences;
     private ConstraintLayout constraintLayout;
-
-    CustomerOrderModel model = new CustomerOrderModel();
     private String name = "";
 
     DBHelper DB = new DBHelper(this);
+    CustomerOrderModel model = new CustomerOrderModel();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -136,16 +136,14 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        name = data.getStringExtra("TEST");
+                        name = data.getStringExtra("ORDERID");
+                        String typeAdd = data.getStringExtra("DELIVERY");
                         model.setMyString(name);
                         customerOrder.setModel(model);
-
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
+                        constraintLayout.setVisibility(View.VISIBLE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
-
-                    } else {
-                        Toast.makeText(CustomerMain.this, "Cancelled...", Toast.LENGTH_SHORT).show();
                     }
                 }
             });

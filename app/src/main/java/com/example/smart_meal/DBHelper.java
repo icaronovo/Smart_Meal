@@ -21,7 +21,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String COLUMN_ITEM_ID = "ItemID";
     public static final String COLUMN_ITEM_NAME = "ItemName";
     public static final String COLUMN_ITEM_IMAGE = "ItemImage";
-
     public static final String COLUMN_ITEM_VALUE = "ItemValue";
     public static final String COLUMN_ITEM_DESCRIPTION = "ItemDescription";
 
@@ -85,11 +84,9 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableOrderInfo = "CREATE TABLE " + ORDER_INFO +
                 "(" + COLUMN_ORDER_ID + " INTEGER PRIMARY KEY, "
                 + COLUMN_ORDER_STATUS + " INTEGER , "
-                + COLUMN_TOTAL_ORDER + " INTEGER, "
-                + COLUMN_DATE + " TEXT, "
-                + COLUMN_ITEM_ID + " INTEGER, "
-                + COLUMN_ITEM_VALUE + " INTEGER, "
-                + COLUMN_ITEM_QTY + " INTEGER, "
+                + COLUMN_ITEM_ID + " TEXT, "
+//                + COLUMN_ITEM_VALUE + " INTEGER, "
+                + COLUMN_ITEM_QTY + " TEXT, "
                 + COLUMN_BUSINESS_ID + " INTEGER, "
                 + COLUMN_CUSTOMER_ID + " INTEGER)";
         db.execSQL(createTableOrderInfo);
@@ -233,7 +230,6 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_BUSINESS_ID, orderModel.getBusinessID());
         cv.put(COLUMN_DATE, orderModel.getDate());
         cv.put(COLUMN_CUSTOMER_ID, orderModel.getCustomerID());
-        cv.put(COLUMN_ITEM_VALUE, orderModel.getItemValue());
         cv.put(COLUMN_ITEM_ID, orderModel.getItemID());
         cv.put(COLUMN_ITEM_QTY, orderModel.getItemQuantity());
         long insert = sqLiteDatabase.insert(ORDER_INFO, null, cv);
@@ -294,9 +290,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         return ordersData;
     }
+
+    //Method to show all the orders from a customer
     public Cursor displayOrder(String customerID){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_BUSINESS_ID + "=?";
+        String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_CUSTOMER_ID + "=?";
         Cursor cursor = database.rawQuery(query,new String[]{customerID});
         return cursor;
     }

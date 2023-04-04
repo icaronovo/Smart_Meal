@@ -19,17 +19,16 @@ public class OrderModel {
         this.orderStatus = orderStatus;
         this.businessID = businessID;
         this.customerID = customerID;
-        this.itemValue = itemValue;
         this.itemID = itemID;
         this.itemQuantity = itemQuantity;
         this.date = date;
     }
     //getters and setters
-    public String getOrderStatus() {
+    public int getOrderStatus() {
         return orderStatus;
     }
 
-    public void setOrderStatus(String orderStatus) {
+    public void setOrderStatus(int orderStatus) {
         this.orderStatus = orderStatus;
     }
 
@@ -49,27 +48,19 @@ public class OrderModel {
         this.customerID = customerID;
     }
 
-    public Double getItemValue() {
-        return itemValue;
-    }
-
-    public void setItemValue(Double itemValue) {
-        this.itemValue = itemValue;
-    }
-
-    public int getItemID() {
+    public String getItemID() {
         return itemID;
     }
 
-    public void setItemID(int itemID) {
+    public void setItemID(String itemID) {
         this.itemID = itemID;
     }
 
-    public int getItemQuantity() {
+    public String getItemQuantity() {
         return itemQuantity;
     }
 
-    public void setItemQuantity(int itemQuantity) {
+    public void setItemQuantity(String itemQuantity) {
         this.itemQuantity = itemQuantity;
     }
     //to string method
