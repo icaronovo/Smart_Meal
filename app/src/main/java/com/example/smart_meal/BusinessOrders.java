@@ -22,7 +22,7 @@ public class BusinessOrders extends AppCompatActivity {
     DBHelper DB;
     private BusinessAdapter adapter;
     private CheckBox checkBox;
-    private ArrayList<OrderModel> listItems;
+//    private ArrayList<OrderModel> listItems;
     private ListView listView;
 
     @Override
@@ -56,7 +56,7 @@ public class BusinessOrders extends AppCompatActivity {
 
     //Get the data from DB
     //If the customer doesn't has any data
-    //It will show that has no data
+    //It will show that he has no data
     public boolean updateData(Cursor c, String businessID) {
         List<String> list = new ArrayList<>();
         if (c.getCount() > 0) {
