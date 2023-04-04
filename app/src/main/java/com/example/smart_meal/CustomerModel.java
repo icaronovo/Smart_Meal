@@ -1,5 +1,9 @@
 package com.example.smart_meal;
 
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
 public class CustomerModel {
 
     private String accountType;
@@ -13,6 +17,16 @@ public class CustomerModel {
     private int customerImage;
 
     //Constructors
+    public CustomerModel (Integer id, String name, String email, String phone, String address, String city, String province, Integer image) {
+        this.customerName = name;
+        this.customerEmail = email;
+        this.customerPhone = phone;
+        this.customerAddress = address;
+        this.customerCity = city;
+        this.customerProvince = province;
+        this.customerImage = image;
+    }
+
 
 
     public CustomerModel(String accountType, String customerEmail, String password,

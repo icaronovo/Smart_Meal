@@ -2,9 +2,12 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -91,6 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableOrderInfo);
     }
 
+
     // this is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
     //CREATING TABLES OR DROPPING IF IT EXISTS
@@ -113,7 +117,19 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
         return userData;
+    }
 
+    public String[] getUserData(Integer businessID) {
+        String[] userData = new String[9];
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE BusinessID= ? ", new String[]{businessID.toString()});
+        if (cursor != null) {
+            cursor.moveToFirst();
+            for (int i = 0; i < userData.length; i++) {
+                userData[i] = cursor.getString(i);
+            }
+        }
+        return userData;
     }
 
     // This query us used to check if the account is of type Business or Customer
@@ -173,6 +189,64 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+    public void addSeveralBusinesses () {
+        CustomerModel business1 = new CustomerModel("Business", "mcdonalds@mcdonalds", "mcdonalds", "McDonald's", "123", "McDonalds Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business2 = new CustomerModel("Business", "bk@bk", "bk", "Burger King", "123", "Burger King Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business3 = new CustomerModel("Business", "wendys@wendys", "wendys", "Wendy's", "123", "Wendy's Avenue", "New Westminster", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business4 = new CustomerModel("Business", "kfc@kfc", "kfc", "KFC", "123", "KFC Avenue", "Surrey", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business5 = new CustomerModel("Business", "togosushi@togosushi", "togosushi", "ToGo Sushi", "123", "ToGo Sushi Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business6 = new CustomerModel("Business", "dominos@dominos", "dominos", "Domino's", "123", "Domino's Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business7 = new CustomerModel("Business", "pizzahut@pizzahut", "pizzahut", "Pizza Hut", "123", "Pizza Hut Avenue", "New Westminster", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business8 = new CustomerModel("Business", "pizzapizza@pizzapizza", "pizzapizza", "Pizza Pizza", "123", "Pizza Pizza Avenue", "Surrey", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business9 = new CustomerModel("Business", "freshslice@freshslice", "freshslice", "Fresh Slice", "123", "Fresh Slice Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business10 = new CustomerModel("Business", "pizzagarden@pizzagarden", "pizzagarden", "Pizza Garden", "123", "Pizza Garden Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+
+        CustomerModel[] listOfBusiness = {business1, business2, business3, business4, business5, business6, business7, business8, business9, business10};
+
+        for (int i = 0; i < listOfBusiness.length; i++) {
+            boolean emailUsed = checkIfEmailExists(listOfBusiness[i].getCustomerEmail());
+            if (!emailUsed) {
+                addCustomer(listOfBusiness[i]);
+            }
+        }
+    }
+
+    public ArrayList<CustomerModel> retrieveAllBusinesses () {
+
+        ArrayList<CustomerModel> businessList = new ArrayList<CustomerModel>();
+
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE AccountType = ?", new String[] {"Business"});
+        Log.d("cursor", cursor.toString());
+        int i = 0;
+        while (cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("CustomerID"));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("Name"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow("EmailCust"));
+            String phone = cursor.getString(cursor.getColumnIndexOrThrow("Phone"));
+            String address = cursor.getString(cursor.getColumnIndexOrThrow("Address"));
+            String city = cursor.getString(cursor.getColumnIndexOrThrow("City"));
+            String province = cursor.getString(cursor.getColumnIndexOrThrow("Province"));
+            int image = cursor.getInt(cursor.getColumnIndexOrThrow("ProfileImage"));
+            CustomerModel customer = new CustomerModel(id, name, email, phone, address, city, province, image);
+            businessList.add(customer);
+            Log.d("Business", name);
+        }
+        return businessList;
+    }
+
+    public int getBusinessIDFromDB (String customerEmail) {
+        SQLiteDatabase DB = getReadableDatabase();
+        Integer id = 0;
+
+        Cursor cursor = DB.rawQuery("SELECT CustomerID FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{customerEmail});
+        Log.d("cursor", String.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow("CustomerID"))));
+        id = cursor.getInt(cursor.getColumnIndexOrThrow("CustomerID"));
+
+        return id;
+    }
+
+
     //query to update user data
     public boolean customerUpdate(String prevEmail, String email, String password, String name, String phone, String address, String city, String province) {
         //writing data in the database
@@ -196,6 +270,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust= ? ", new String[]{email});
         return cursor.getCount() > 0;
     }
+
     public boolean getBusID(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE CustomerID= ? AND AccountType= 'Business' ", new String[]{email});
