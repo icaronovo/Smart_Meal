@@ -7,7 +7,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -17,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,9 +32,7 @@ public class CustomerOrderMFragment extends Fragment {
     private DBHelper DB;
     private ListView myListView;
     private ArrayAdapter<String> myAdapter;
-    private List<String> myList;
-
-
+    private List<String> pastOrders;
 
     /*Customer Order Main Fragment
     * */
@@ -49,15 +45,15 @@ public class CustomerOrderMFragment extends Fragment {
 
         // Initialize the ListView and the list
         myListView = view.findViewById(R.id.listViewOldOrders);
-        myList = new ArrayList<>();
+        pastOrders = new ArrayList<>();
 
         // Add some strings to the list
-        myList.add("Item 1");
-        myList.add("Item 2");
-        myList.add("Item 3");
+        pastOrders.add("Item 1");
+        pastOrders.add("Item 2");
+        pastOrders.add("Item 3");
 
         // Initialize the adapter and set it to the ListView
-        myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, myList);
+        myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastOrders);
         myListView.setAdapter(myAdapter);
 
         return view;
@@ -165,6 +161,9 @@ public class CustomerOrderMFragment extends Fragment {
         displayOrdersItem.setText(String.valueOf(orderToPrint));
     }
 
+//    public List<String> displayPastOrders(){
+//
+//    }
     public void setModel(CustomerOrderModel model){
         this.model = model;
     }

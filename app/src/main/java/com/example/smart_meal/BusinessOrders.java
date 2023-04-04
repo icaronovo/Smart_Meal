@@ -1,15 +1,11 @@
 package com.example.smart_meal;
 
-import android.annotation.SuppressLint;
-import android.app.ListActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,32 +17,76 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BusinessOrders extends AppCompatActivity implements BusinessAdapter.ItemClickListener {
-    private DBHelper DB;
+    DBHelper DB;
     private BusinessAdapter adapter;
+    private CheckBox checkBox;
     private androidx.recyclerview.widget.RecyclerView recyclerView;
-
+    private List<OrderModel> ordersFromDB = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders);
+
+        checkBox = findViewById(R.id.checkboxSelectAll);
+        recyclerView = findViewById(R.id.recyclerFromBusiness);
 
         //Start the database
         DB = new DBHelper(this);
 
         //Get business ID
         SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
-        String customerID = sharedPreferences.getString("CustomerID", "");
+        String businessID = sharedPreferences.getString("CustomerID", "");
 
         //Get the orders from the customer
-        Cursor c = DB.displayOrder(customerID);
-        List<OrderModel> ordersFromDB = updateData(c, "1");
+        Cursor c = DB.displayOrderBusiness(businessID);
+        List<String> list = new ArrayList<>();
 
-        recyclerView = findViewById(R.id.recyclerFromBusiness);
-        int numOfColumns = 1;
-        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
-        adapter = new BusinessAdapter(this,ordersFromDB);
-        adapter.setCLickListener(this);
-        recyclerView.setAdapter(adapter);
+        boolean noPrint = false;
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+                list.add(c.getString(0)); //OrderID
+                list.add(c.getString(1)); //OrderStatus
+                list.add(c.getString(2)); //ItemID
+                list.add(c.getString(3)); //Date
+                list.add(c.getString(4)); //ItemQty
+                list.add(c.getString(5)); //CustomerID
+            }
+        }
+        else{
+            noPrint = true;
+        }
+        checkBox.setText(String.valueOf(list));
+//        6
+//        Resultado: [1,0,ITem 2$Item 5-$ITem 7$, data, preco,customerid]
+
+//public OrderModel(int orderID, int orderStatus, int businessID,
+//        int customerID, String date,
+//                String itemID, String itemQuantity){
+        if(noPrint){
+            checkBox.setText("NO DATA");
+        } else{
+            //Make the data being add into the list
+            int index = 0;
+            while (index < list.size()) {
+                OrderModel order = new OrderModel(
+                        Integer.parseInt(list.get(index)), //OrderID -  ARRAY 0
+                        Integer.parseInt(list.get(index + 1)), //OrderStatus ARRAY 1
+                        Integer.parseInt(businessID), //BusinessID
+                        Integer.parseInt(list.get(index + 5)),//CustomerID ARRAY 5
+                        list.get(index + 3), //DATE ARRAY 3
+                        list.get(index + 2), //ItemID ARRAY 2
+                        list.get(index + 4)// ItemQty ARRAY 4
+                );
+                ordersFromDB.add(order);
+                index += 6;
+                checkBox.setText(String.valueOf(ordersFromDB));
+            }
+        }
+//        int numOfColumns = 1;
+//        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
+//        adapter = new BusinessAdapter(this,ordersFromDB);
+//        adapter.setCLickListener(this);
+//        recyclerView.setAdapter(adapter);
         c.close();
 
     }
@@ -57,32 +97,8 @@ public class BusinessOrders extends AppCompatActivity implements BusinessAdapter
     }
 
     //Get the data from DB
-    public List<OrderModel> updateData(Cursor c, String businessID){
-        List<OrderModel> dataFromDb = new ArrayList<>();
+    public void updateData(Cursor c, String businessID){
 
-        boolean noPrint = false;
-        if(c.getCount()>0){
-            while(c.moveToNext()){
-
-                String id = c.getString(0); //OrderID
-                String orderStatus =c.getString(1); //OrderStatus
-                String itemId =c.getString(2); //ItemID
-                String date =c.getString(3); //Date
-                String qty =c.getString(4); //ItemQty
-                String cust =c.getString(5); //CustomerID
-
-                OrderModel order = new OrderModel(Integer.parseInt(id),
-                                                    Integer.parseInt(orderStatus),
-                                                    Integer.parseInt(businessID),
-                                                    Integer.parseInt(cust),
-                                                    date,itemId,qty);
-                dataFromDb.add(order);
-            }
-        }
-        else{
-            noPrint = true;
-        }
-        return dataFromDb;
     }
 
     public List<String> fixOrderFromDB(List<String> orderFromDB){
