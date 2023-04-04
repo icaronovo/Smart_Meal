@@ -20,6 +20,7 @@ import android.widget.TextView;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 
 public class CustomerOrderMFragment extends Fragment {
@@ -33,9 +34,8 @@ public class CustomerOrderMFragment extends Fragment {
     private ListView myListView;
     private ArrayAdapter<String> myAdapter;
     private List<String> pastOrders;
-
-    /*Customer Order Main Fragment
-    * */
+    private DecimalFormat decimalFormat = new DecimalFormat("#");
+    private DecimalFormat currency = new DecimalFormat("#.##");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,8 +53,7 @@ public class CustomerOrderMFragment extends Fragment {
         pastOrders.add("Item 3");
 
         // Initialize the adapter and set it to the ListView
-        myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, pastOrders);
-        myListView.setAdapter(myAdapter);
+
 
         return view;
     }
@@ -77,7 +76,15 @@ public class CustomerOrderMFragment extends Fragment {
 
         //Get the orders from the customer
         Cursor c = DB.displayOrder(customerID);
-        updateData(c);
+
+        //Check if the customer has orders
+        Boolean hasNoData = updateData(c,customerID);
+        if (hasNoData == true) {
+            displayOrdersItem.setText("NO DATA");
+            displayDate.setText("NO DATA");
+            displayOrdersItem.setText("NO DATA");
+        }
+
         c.close();
 
         //For the user cancel the order
@@ -89,8 +96,10 @@ public class CustomerOrderMFragment extends Fragment {
         });
     }
 
-    //Get the data from the DB
-    public void updateData(Cursor c){
+    //Get the data from DB
+    //If the customer doesn't has any order
+    //It will show that he has no order
+    public boolean updateData(Cursor c, String customerID){
         List<String> dataFromDb = new ArrayList<>();
         boolean noPrint = false;
         if(c.getCount()>0){
@@ -104,46 +113,74 @@ public class CustomerOrderMFragment extends Fragment {
             }
         }
         else{
-            noPrint = true;
+            return true;
         }
+        addOrderModel(dataFromDb, customerID);
+        return false;
 
-        if(!noPrint){
-            //Separate the data from the last order and display on xml
-            List<String> lastSix = dataFromDb.subList(Math.max(dataFromDb.size() - 6, 0), dataFromDb.size());
-            displayLastOrder(lastSix);
-        } else{
-            displayOrdersItem.setText("NO DATA");
-            displayDate.setText("NO DATA");
-            displayOrdersItem.setText("NO DATA");
+//        if(!noPrint){
+//            //Separate the data from the last order and display on xml
+//            List<String> lastSix = dataFromDb.subList(Math.max(dataFromDb.size() - 6, 0), dataFromDb.size());
+//            displayLastOrder(lastSix);
+//        } else{
+//            displayOrdersItem.setText("NO DATA");
+//            displayDate.setText("NO DATA");
+//            displayOrdersItem.setText("NO DATA");
+//        }
+    }
+
+    public void addOrderModel(List<String> list, String customerID){
+        Stack<OrderModel> stackOrders = new Stack<>();
+
+        ArrayList<OrderModel> listOrders = new ArrayList<>();
+
+        //Make the data being add into the list
+        int index = 0;
+        while (index < list.size()) {
+            OrderModel order = new OrderModel(
+                    Integer.parseInt(list.get(index)), //OrderID -  ARRAY 0
+                    Integer.parseInt(list.get(index + 1)), //OrderStatus ARRAY 1
+                    Integer.parseInt(list.get(index + 5)),//BusinessID ARRAY 5
+                    Integer.parseInt(customerID), //CustomerID
+                    list.get(index + 3), //DATE ARRAY 3
+                    list.get(index + 2), //ItemID ARRAY 2
+                    list.get(index + 4)// ItemQty ARRAY 4
+            );
+            stackOrders.push(order);
+            index += 6;
         }
+        //Get the last item
+        OrderModel lastOrder = stackOrders.pop();
+        displayLastOrder(lastOrder);
+        displayPastOrders(stackOrders);
+//        displayLastOrder(lastSix);
     }
 
     //Display the last order
-    public void displayLastOrder(List<String> lastSix){
-        DecimalFormat decimalFormat = new DecimalFormat("#");
-        DecimalFormat currency = new DecimalFormat("#.##");
-        double finalTotal = 0;
+    public void displayLastOrder(OrderModel lastSix){
 
+        double finalTotal = 0;
         StringBuilder orderToPrint = new StringBuilder();
+
         //Get the order
-        String orderID = lastSix.get(0);
+        int orderID = lastSix.getOrderID();
 
         //Order status
-        String status = lastSix.get(1);
+        int status = lastSix.getOrderStatus();
 
         //Get items id
-        String itemsID = lastSix.get(2);
+        String itemsID = lastSix.getItemID();
         String[] itemID = itemsID.split("\\$");
 
         //Get date
-        String date = lastSix.get(3);
+        String date = lastSix.getDate();
 
         //Get items quantity
-        String itemsQty = lastSix.get(4);
+        String itemsQty = lastSix.getItemQuantity();
         String[] itemQty = itemsQty.split("\\$");
 
         //Get businessid
-        String  businessID = lastSix.get(5);
+        int  businessID = lastSix.getBusinessID();
 
         for(int i = 0; i < itemQty.length;i++){
             //PEGAR O TIPO DE ITEM E PREÇO COM UMA QUERY E SUBSTITUIR PELA PALAVRA ITEM E PREÇO
@@ -161,9 +198,50 @@ public class CustomerOrderMFragment extends Fragment {
         displayOrdersItem.setText(String.valueOf(orderToPrint));
     }
 
-//    public List<String> displayPastOrders(){
-//
-//    }
+    public void displayPastOrders(Stack<OrderModel> pastOrders){
+        List<String> ordersDisplay = new ArrayList<>();
+
+        //Make the display until the stack is empty
+        while(!pastOrders.isEmpty()){
+            OrderModel order = pastOrders.pop();
+            StringBuilder display = new StringBuilder();
+            double finalTotal = 1;
+
+            display.append("Order ID #" + order.getOrderID() + "\n");
+            display.append("Order Status #" + order.getOrderStatus() + "\n");
+            display.append("Date " + order.getDate() + "\n");
+
+            //Caçar o nome do restaurante
+            display.append("Restaurant - " + order.getBusinessID() + "\n");
+
+            //Get items id
+            String itemsID = order.getItemID();
+            String[] itemID = itemsID.split("\\$");
+
+            //Get items quantity
+            String itemsQty = order.getItemQuantity();
+            String[] itemQty = itemsQty.split("\\$");
+
+            for(int i = 0; i < itemQty.length;i++){
+                //PEGAR O TIPO DE ITEM E PREÇO COM UMA QUERY E SUBSTITUIR PELA PALAVRA ITEM E PREÇO
+                display.append(itemQty[i] + "x Item - $ Preco" + "\n");
+                //JA FAZ O CALCULO E VAI SOMANDO PRA NO FIM FAZER DISPLAY
+            }
+            final double FEE = 0.6 * finalTotal;
+            display.append("Subtotal  $" + currency.format(finalTotal)+ "\n");
+            display.append("Fees  $" + currency.format(FEE)+ "\n");
+            display.append("Total  $" + currency.format(finalTotal + FEE)+ "\n");
+
+            ordersDisplay.add(String.valueOf(display));
+        }
+        createListView(ordersDisplay);
+    }
+
+    //Create the view on Listview
+    public void createListView(List<String> listItems) {
+        myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, listItems);
+        myListView.setAdapter(myAdapter);
+    }
     
     public void setModel(CustomerOrderModel model){
         this.model = model;

@@ -104,7 +104,7 @@ public class CustomerOrderFragment extends Fragment {
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date dateNow = new Date();
                 String date = formatter.format(dateNow);
-                //Puttin the itemsID and the quantity in a string
+                //Putting the itemsID and the quantity in a string
                 //so we can sent more than one item to the db
                 for (String key : customerOrderList.keySet()) {
                     Double[] values = customerOrderList.get(key);
