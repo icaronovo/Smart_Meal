@@ -297,6 +297,8 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+
+    //add several items when app is loaded
     public void insertSeveralItems () {
         ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
         itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99, 10, 1));
