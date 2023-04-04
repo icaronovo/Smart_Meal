@@ -22,17 +22,17 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_restaurant);
-
-
         TextView restaurantName = findViewById(R.id.txtRestaurantName);
         TextView restaurantAddress = findViewById(R.id.txtRestAddress);
-//        restaurantName.setText(restaurantInfo[3]);
-//        restaurantAddress.setText(restaurantInfo[5] + ", " + restaurantInfo[6]);
 
         //Test to see if the Recycler View is clickable
-//        TextView restaurantDesc = findViewById(R.id.txtRestAddress);
         Intent intent = getIntent();
         int restaurantId = intent.getIntExtra("RESTAURANTID",-1);
+
+        String[] restaurantInfo = dbHelper.getUserData(restaurantId);
+        restaurantName.setText(restaurantInfo[4]);
+        restaurantAddress.setText(restaurantInfo[6] + ", " + restaurantInfo[7]);
+
         Log.d("Restaurant ID", String.valueOf(restaurantId));
         restaurantAddress.setText("Restaurant selected is " + restaurantId);
         //End test
