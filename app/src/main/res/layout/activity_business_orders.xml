@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
     <CheckBox
-        android:id="@+id/checkOrder"
-        android:layout_width="wrap_content"
+        android:id="@+id/checkboxSelectAll"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:minWidth="48dp"
-        android:minHeight="48dp" />
+        android:minHeight="48dp"
+        android:text="CheckBox"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.007" />
 
-    <TextView
-        android:id="@+id/text_view"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerFromBusiness"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="24sp" />
+        android:layout_height="559dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkboxSelectAll" />
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="TouchTargetSizeCheck">
-    </ListView>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,8 @@
     </string-array>
     <string name="txtCreate">Create</string>
     <string name="txtFoodItem">Food Item</string>
-    <string name="txtOrder">Orders</string>
+    <string name="txtOrder">Order</string>
+    <string name="txtOrders">Orders</string>
     <string name="txtReminder">Reminder</string>
     <string name="txtReports">Reports</string>
     <string name="txtLogout">Logout</string>
