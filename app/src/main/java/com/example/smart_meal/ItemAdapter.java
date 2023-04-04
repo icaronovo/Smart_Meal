@@ -33,6 +33,7 @@ public class ItemAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
         ((ViewHolder) holder).textNameRestaurant.setText(itemList.get(position).getCustomerName());
+        ((ViewHolder) holder).textAdress.setText(itemList.get(position).getCustomerAddress());
         String nameWithCity = itemList.get(position).getCustomerCity() + " - " + itemList.get(position).getCustomerProvince();
         ((ViewHolder) holder).textCityAndProvince.setText(nameWithCity);
     }
@@ -54,12 +55,14 @@ public class ItemAdapter extends RecyclerView.Adapter {
 
         ImageView itemImage;
         TextView textNameRestaurant;
+        TextView textAdress;
         TextView textCityAndProvince;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.leftImage);
             textNameRestaurant = itemView.findViewById(R.id.txtTitleRestaurant);
+            textAdress = itemView.findViewById(R.id.txtAddressRestaurant);
             textCityAndProvince = itemView.findViewById(R.id.txtCityAndProvince);
             itemView.setOnClickListener(this);
         }
