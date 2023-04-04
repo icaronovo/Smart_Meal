@@ -150,13 +150,13 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private List<ItemModel> initData() {
         itemList = new ArrayList<>();
         //String itemName, int itemImage, String itemDescription, Double itemPrice
-        itemList.add(new ItemModel("Title Restaurant", R.drawable.ic_launcher_background, "Description, description bla bla bla", 9.99));
-        itemList.add(new ItemModel("Title Restaurant 1", R.drawable.ic_launcher_background, "Description, description bla bla bla", 19.99));
-        itemList.add(new ItemModel("Title Restaurant 2", R.drawable.ic_launcher_background, "Description, description bla bla bla", 92.99));
-        itemList.add(new ItemModel("Title Restaurant 3", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
-        itemList.add(new ItemModel("Title Restaurant 5", R.drawable.ic_launcher_background, "Description, description bla bla bla", 49.99));
-        itemList.add(new ItemModel("Title Restaurant 6", R.drawable.ic_launcher_background, "Description, description bla bla bla", 59.99));
-        itemList.add(new ItemModel("Title Restaurant 7", R.drawable.ic_launcher_background, "Description, description bla bla bla", 39.99));
+        itemList.add(new ItemModel("Title Restaurant", "Description, description bla bla bla", 9.99));
+        itemList.add(new ItemModel("Title Restaurant 1", "Description, description bla bla bla", 19.99));
+        itemList.add(new ItemModel("Title Restaurant 2", "Description, description bla bla bla", 92.99));
+        itemList.add(new ItemModel("Title Restaurant 3", "Description, description bla bla bla", 39.99));
+        itemList.add(new ItemModel("Title Restaurant 5", "Description, description bla bla bla", 49.99));
+        itemList.add(new ItemModel("Title Restaurant 6", "Description, description bla bla bla", 59.99));
+        itemList.add(new ItemModel("Title Restaurant 7", "Description, description bla bla bla", 39.99));
         return itemList;
     }
 }
