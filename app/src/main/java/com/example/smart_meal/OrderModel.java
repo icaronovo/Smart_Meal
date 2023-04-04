@@ -4,6 +4,7 @@ import android.content.Intent;
 
 public class OrderModel {
 
+    private int orderID;
     private int orderStatus;
     private int businessID;
     private int customerID;
@@ -12,6 +13,7 @@ public class OrderModel {
     private String itemQuantity;
 
     //constructor to order
+
     public OrderModel(int orderStatus, int businessID,
                       int customerID, String date,
                       String itemID, String itemQuantity){
@@ -22,7 +24,28 @@ public class OrderModel {
         this.itemQuantity = itemQuantity;
         this.date = date;
     }
+    public OrderModel(int orderID, int orderStatus, int businessID,
+                      int customerID, String date,
+                      String itemID, String itemQuantity){
+        this.orderID = orderID;
+        this.orderStatus = orderStatus;
+        this.businessID = businessID;
+        this.customerID = customerID;
+        this.itemID = itemID;
+        this.itemQuantity = itemQuantity;
+        this.date = date;
+    }
+
     //getters and setters
+
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public void setOrderID(int orderID) {
+        this.orderID = orderID;
+    }
+
     public int getOrderStatus() {
         return orderStatus;
     }

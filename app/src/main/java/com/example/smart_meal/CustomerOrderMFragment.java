@@ -94,19 +94,6 @@ public class CustomerOrderMFragment extends Fragment {
     }
 
     //Get the data from the DB
-    public void updateData(List<String> c){
-        List<String> dataFromDb = new ArrayList<>();
-        boolean noPrint = false;
-        if(!c.isEmpty()){
-            //Separate the data from the last order and display on xml
-            List<String> lastFive = dataFromDb.subList(Math.max(dataFromDb.size() - 5, 0), dataFromDb.size());
-            displayLastOrder(lastFive);
-        } else{
-            displayOrdersItem.setText("NO DATA");
-        }
-    }
-
-    //Get the data from the DB
     public void updateData(Cursor c){
         List<String> dataFromDb = new ArrayList<>();
         boolean noPrint = false;
@@ -130,10 +117,12 @@ public class CustomerOrderMFragment extends Fragment {
             displayLastOrder(lastSix);
         } else{
             displayOrdersItem.setText("NO DATA");
+            displayDate.setText("NO DATA");
+            displayOrdersItem.setText("NO DATA");
         }
     }
 
-
+    //Display the last order
     public void displayLastOrder(List<String> lastSix){
         DecimalFormat decimalFormat = new DecimalFormat("#");
         DecimalFormat currency = new DecimalFormat("#.##");

@@ -11,14 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.w3c.dom.Text;
 
+import java.util.HashMap;
 import java.util.List;
 
 public class BusinessAdapter extends RecyclerView.Adapter {
-    List<String> mData;
+    List<OrderModel> mData;
     LayoutInflater mInflater;
     ItemClickListener itemCLickListener;
 
-    public BusinessAdapter (Context context, List<String> mData){
+    public BusinessAdapter (Context context, List<OrderModel> mData){
         this.mData = mData;
         this.mInflater = LayoutInflater.from(context);
     }
@@ -33,10 +34,10 @@ public class BusinessAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder)holder).orderID.setText(mData.get(position));
-        ((ViewHolder)holder).orderStatus.setText(mData.get(position));
-        ((ViewHolder)holder).orderDate.setText(mData.get(position));
-        ((ViewHolder)holder).customerID.setText(mData.get(position));
+        ((ViewHolder)holder).orderID.setText(mData.get(position).getOrderID());
+        ((ViewHolder)holder).orderStatus.setText(mData.get(position).getOrderStatus());
+        ((ViewHolder)holder).orderDate.setText(mData.get(position).getDate());
+        ((ViewHolder)holder).customerID.setText(mData.get(position).getCustomerID());
     }
 
     @Override

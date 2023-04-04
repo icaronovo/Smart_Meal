@@ -290,21 +290,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return ordersData;
     }
 
-    //Method to show all the orders for a customer
-//    public List<String> displayOrder(String customerID){
-//        List<String> ordersData = new ArrayList<>(7);
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE CustomerID= ? ", new String[]{customerID});
-//        if (cursor != null) {
-//            cursor.moveToFirst();
-//            for (int i = 0; i < ordersData.size(); i++) {
-//                ordersData.set(i, cursor.getString(i));
-//            }
-//        }
-//        return ordersData;
-//    }
-
-
     //Method to show all the orders from a customer
     public Cursor displayOrder(String customerID){
         SQLiteDatabase database = this.getReadableDatabase();
@@ -314,17 +299,24 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Method that show all the orders for a business
-    public List<String> displayOrderBusiness(String businessID){
-        List<String> ordersData = new ArrayList<>(7);
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE BusinessID= ? ", new String[]{businessID});
-        if (cursor != null) {
-            cursor.moveToFirst();
-            for (int i = 0; i < ordersData.size(); i++) {
-                ordersData.set(i, cursor.getString(i));
-            }
-        }
-        return ordersData;
+//    public List<String> displayOrderBusiness(String businessID){
+//        List<String> ordersData = new ArrayList<>(7);
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE BusinessID= ? ", new String[]{businessID});
+//        if (cursor != null) {
+//            cursor.moveToFirst();
+//            for (int i = 0; i < ordersData.size(); i++) {
+//                ordersData.set(i, cursor.getString(i));
+//            }
+//        }
+//        return ordersData;
+//    }
+
+    public Cursor displayOrderBusiness(String businessID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_BUSINESS_ID + "=?";
+        Cursor cursor = database.rawQuery(query,new String[]{businessID});
+        return cursor;
     }
 
 }

@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BusinessOrders extends AppCompatActivity implements BusinessAdapter.ItemClickListener {
@@ -29,27 +30,59 @@ public class BusinessOrders extends AppCompatActivity implements BusinessAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders);
 
+        //Start the database
+        DB = new DBHelper(this);
+
         //Get business ID
         SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
         String customerID = sharedPreferences.getString("CustomerID", "");
 
-        //Import the data from DB
-        DB = new DBHelper(this);
-        List<String> ordersFromDB = DB.displayOrderBusiness("1");
-        List<String> orders = fixOrderFromDB(ordersFromDB);
+        //Get the orders from the customer
+        Cursor c = DB.displayOrder(customerID);
+        List<OrderModel> ordersFromDB = updateData(c, "1");
 
         recyclerView = findViewById(R.id.recyclerFromBusiness);
         int numOfColumns = 1;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
-        adapter = new BusinessAdapter(this,orders);
+        adapter = new BusinessAdapter(this,ordersFromDB);
         adapter.setCLickListener(this);
         recyclerView.setAdapter(adapter);
+        c.close();
 
     }
 
     @Override
     public void onItemClick(View view, int position){
         Toast.makeText(this,"Selected", Toast.LENGTH_LONG).show();
+    }
+
+    //Get the data from DB
+    public List<OrderModel> updateData(Cursor c, String businessID){
+        List<OrderModel> dataFromDb = new ArrayList<>();
+
+        boolean noPrint = false;
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+
+                String id = c.getString(0); //OrderID
+                String orderStatus =c.getString(1); //OrderStatus
+                String itemId =c.getString(2); //ItemID
+                String date =c.getString(3); //Date
+                String qty =c.getString(4); //ItemQty
+                String cust =c.getString(5); //CustomerID
+
+                OrderModel order = new OrderModel(Integer.parseInt(id),
+                                                    Integer.parseInt(orderStatus),
+                                                    Integer.parseInt(businessID),
+                                                    Integer.parseInt(cust),
+                                                    date,itemId,qty);
+                dataFromDb.add(order);
+            }
+        }
+        else{
+            noPrint = true;
+        }
+        return dataFromDb;
     }
 
     public List<String> fixOrderFromDB(List<String> orderFromDB){
