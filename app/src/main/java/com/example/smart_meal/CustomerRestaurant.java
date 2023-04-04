@@ -30,11 +30,11 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 //        restaurantAddress.setText(restaurantInfo[5] + ", " + restaurantInfo[6]);
 
         //Test to see if the Recycler View is clickable
-        TextView restaurantDesc = findViewById(R.id.txtRestAddress);
+//        TextView restaurantDesc = findViewById(R.id.txtRestAddress);
         Intent intent = getIntent();
         int restaurantId = intent.getIntExtra("RESTAURANTID",-1);
         Log.d("Restaurant ID", String.valueOf(restaurantId));
-        restaurantDesc.setText("Restaurant selected is " + restaurantId);
+        restaurantAddress.setText("Restaurant selected is " + restaurantId);
         //End test
     }
 
