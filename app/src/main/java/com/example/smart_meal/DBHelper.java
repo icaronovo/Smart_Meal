@@ -298,20 +298,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
-    //Method that show all the orders for a business
-//    public List<String> displayOrderBusiness(String businessID){
-//        List<String> ordersData = new ArrayList<>(7);
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE BusinessID= ? ", new String[]{businessID});
-//        if (cursor != null) {
-//            cursor.moveToFirst();
-//            for (int i = 0; i < ordersData.size(); i++) {
-//                ordersData.set(i, cursor.getString(i));
-//            }
-//        }
-//        return ordersData;
-//    }
-
+    //Method to display all the orders that a business has
     public Cursor displayOrderBusiness(String businessID){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_BUSINESS_ID + "=?";

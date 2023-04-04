@@ -164,6 +164,7 @@ public class CustomerOrderMFragment extends Fragment {
 //    public List<String> displayPastOrders(){
 //
 //    }
+    
     public void setModel(CustomerOrderModel model){
         this.model = model;
     }

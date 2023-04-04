@@ -48,10 +48,10 @@ public class BusinessOrders extends AppCompatActivity {
 
         if (hasNoData == true) {
             checkBox.setText("You have no order");
+        } else{
+            checkBox.setText("Select all orders");
         }
-
         c.close();
-
     }
 
     //Get the data from DB

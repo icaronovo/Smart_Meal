@@ -121,9 +121,9 @@ public class OrderModel {
         }
 
         return "Order ID #" + this.orderID + '\n' +
-                "OrderStatus = " + status + '\n' +
-                "CustomerID = " + this.customerID + '\n' +
-                "Date='" + this.date + '\n' +
+                "OrderStatus: " + status + '\n' +
+                "CustomerID: " + this.customerID + '\n' +
+                "Date:" + this.date + '\n' +
                 String.valueOf(str);
     }
 }
