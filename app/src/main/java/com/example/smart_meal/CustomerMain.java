@@ -29,6 +29,7 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener {
 
@@ -52,7 +53,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_main);
 
-        createRecyclerView();
+        initData();
 
         sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("Name", "");
@@ -110,11 +111,11 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     }
 
     //Method for the creation of the recyclerView displaying products
-    private void createRecyclerView() {
+    private void createRecyclerView(ArrayList<CustomerModel> displayRestaurant) {
         recyclerView = findViewById(R.id.mRecyclerView);
         int numOfColumns = 1;
         recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
-        itemAdapter = new ItemAdapter(this, initData());
+        itemAdapter = new ItemAdapter(this, displayRestaurant);
         itemAdapter.setClickListener(this);
         recyclerView.setAdapter(itemAdapter);
     }
@@ -148,16 +149,73 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
     //Created a list of the recyclerview
     //Latter figure out how to import from database :)
-    private List<ItemModel> initData() {
-        itemList = new ArrayList<>();
-        //String itemName, int itemImage, String itemDescription, Double itemPrice
-        itemList.add(new ItemModel("Title Restaurant", "Description, description bla bla bla", 9.99));
-        itemList.add(new ItemModel("Title Restaurant 1", "Description, description bla bla bla", 19.99));
-        itemList.add(new ItemModel("Title Restaurant 2", "Description, description bla bla bla", 92.99));
-        itemList.add(new ItemModel("Title Restaurant 3", "Description, description bla bla bla", 39.99));
-        itemList.add(new ItemModel("Title Restaurant 5", "Description, description bla bla bla", 49.99));
-        itemList.add(new ItemModel("Title Restaurant 6", "Description, description bla bla bla", 59.99));
-        itemList.add(new ItemModel("Title Restaurant 7", "Description, description bla bla bla", 39.99));
-        return itemList;
+    private void initData() {
+        //Get the orders from the customer
+        String accountType = "Business";
+        Cursor c = DB.displayRestaurant(accountType);
+        Boolean hasRestaurant = updateRestaurant(c,accountType);
+
+//        if (hasRestaurant == true) {
+//            recyclerView.setVisibility(View.VISIBLE);
+//        } else{
+//            recyclerView.setVisibility(View.INVISIBLE);
+//        }
+        c.close();
+//        =======
+//        itemList = new ArrayList<>();
+//        //String itemName, int itemImage, String itemDescription, Double itemPrice
+//        itemList.add(new ItemModel("Title Restaurant", "Description, description bla bla bla", 9.99));
+//        itemList.add(new ItemModel("Title Restaurant 1", "Description, description bla bla bla", 19.99));
+//        itemList.add(new ItemModel("Title Restaurant 2", "Description, description bla bla bla", 92.99));
+//        itemList.add(new ItemModel("Title Restaurant 3", "Description, description bla bla bla", 39.99));
+//        itemList.add(new ItemModel("Title Restaurant 5", "Description, description bla bla bla", 49.99));
+//        itemList.add(new ItemModel("Title Restaurant 6", "Description, description bla bla bla", 59.99));
+//        itemList.add(new ItemModel("Title Restaurant 7", "Description, description bla bla bla", 39.99));
+//        return itemList;
+    }
+
+    //Get the restaurants from DB
+    public boolean updateRestaurant(Cursor c, String businessID) {
+        List<String> list = new ArrayList<>();
+        //CustomerID, Name, Address, City, Province, Profile
+        if (c.getCount() > 0) {
+            while (c.moveToNext()) {
+                list.add(c.getString(0)); //CustomerID
+                list.add(c.getString(1)); //Name
+                list.add(c.getString(2)); //Address
+                list.add(c.getString(3)); //City
+                list.add(c.getString(4)); //Province
+                list.add(c.getString(5)); //Profile image
+            }
+        } else {
+            return true;
+        }
+        addRestaurant(list);
+        return false;
+    }
+
+    public void addRestaurant(List<String> list) {
+        Stack<CustomerModel> stackRestaurants = new Stack<>();
+        //Make the data being add into the list
+        int index = 0;
+        while (index < list.size()) {
+//            CustomerModel(Integer id, String name, String address, String city, String province, Integer image)
+            CustomerModel restaurant = new CustomerModel(
+                    Integer.parseInt(list.get(index)), //UserID -  ARRAY 0
+                    list.get(index + 1), //Name ARRAY 1
+                    list.get(index + 2), //Address ARRAY 2
+                    list.get(index + 3),//City ARRAY 3
+                    list.get(index + 4), //Province ARRAY 4
+                    Integer.parseInt(list.get(index + 5)) //Image ARRAY  5
+            );
+            stackRestaurants.push(restaurant);
+            index += 6;
+        }
+
+        ArrayList<CustomerModel> firstInLastOut = new ArrayList<>();
+        while(!stackRestaurants.isEmpty()){
+            firstInLastOut.add(stackRestaurants.pop());
+        }
+        createRecyclerView(firstInLastOut);
     }
 }

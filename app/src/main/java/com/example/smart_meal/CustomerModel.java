@@ -15,8 +15,19 @@ public class CustomerModel {
     private String customerCity;
     private String customerProvince;
     private int customerImage;
+    private int customerID;
 
     //Constructors
+
+    //This contructor will be used to generate the recycler view in the Customer Main Activity
+    public CustomerModel(Integer id, String name, String address, String city, String province, Integer image){
+        this.customerID = id;
+        this.customerName = name;
+        this.customerAddress = address;
+        this.customerCity = city;
+        this.customerProvince = province;
+        this.customerImage = image;
+    }
 
     // This constructor will be used to generate the recycler view in the Customer search activity
     public CustomerModel (Integer id, String name, String email, String phone,

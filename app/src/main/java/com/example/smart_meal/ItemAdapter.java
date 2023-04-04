@@ -13,11 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class ItemAdapter extends RecyclerView.Adapter {
-    List<ItemModel> itemList;
+    List<CustomerModel> itemList;
     LayoutInflater mInflater;
     ItemClickListener itemClickListener;
 
-    public ItemAdapter(Context context, List<ItemModel> itemList) {
+    public ItemAdapter(Context context, List<CustomerModel> itemList) {
         this.itemList = itemList;
         mInflater = LayoutInflater.from(context);
     }
@@ -32,9 +32,9 @@ public class ItemAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        ((ViewHolder) holder).textTitle.setText(itemList.get(position).getItemName());
-        ((ViewHolder) holder).textPrice.setText(itemList.get(position).getItemPrice().toString());
-        ((ViewHolder) holder).textDesc.setText(itemList.get(position).getItemDescription());
+        ((ViewHolder) holder).textNameRestaurant.setText(itemList.get(position).getCustomerName());
+        String nameWithCity = itemList.get(position).getCustomerCity() + " - " + itemList.get(position).getCustomerProvince();
+        ((ViewHolder) holder).textCityAndProvince.setText(nameWithCity);
     }
 
     @Override
@@ -53,14 +53,14 @@ public class ItemAdapter extends RecyclerView.Adapter {
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         ImageView itemImage;
-        TextView textTitle, textPrice, textDesc;
+        TextView textNameRestaurant;
+        TextView textCityAndProvince;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.leftImage);
-            textTitle = itemView.findViewById(R.id.txtTitleItem);
-            textPrice = itemView.findViewById(R.id.txtPriceItem);
-            textDesc = itemView.findViewById(R.id.txtDescItem);
+            textNameRestaurant = itemView.findViewById(R.id.txtTitleRestaurant);
+            textCityAndProvince = itemView.findViewById(R.id.txtCityAndProvince);
             itemView.setOnClickListener(this);
         }
 

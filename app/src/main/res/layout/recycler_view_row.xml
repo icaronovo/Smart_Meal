@@ -34,11 +34,11 @@
                 app:srcCompat="@drawable/ic_launcher_background" />
 
             <TextView
-                android:id="@+id/txtTitleItem"
+                android:id="@+id/txtTitleRestaurant"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="144dp"
-                android:text="Title of the item"
+                android:text="Title of Restaurant"
                 android:textStyle="bold"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -46,31 +46,31 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.16" />
 
-
             <TextView
-                android:id="@+id/txtPriceItem"
-                android:layout_width="wrap_content"
+                android:id="@+id/txtAddressRestaurant"
+                android:layout_width="243dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="28dp"
-                android:textStyle="bold"
-                android:text="$9.99"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.681"
-                app:layout_constraintStart_toEndOf="@+id/txtTitleItem"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txtDescItem"
-                android:layout_width="242dp"
-                android:layout_height="49dp"
-                android:layout_marginStart="144dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="1dp"
                 android:text="Texto texto texto e mais um pouuquinho de texto aqui só pra testar"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.947"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtTitleItem"
+                app:layout_constraintTop_toBottomOf="@+id/txtTitleRestaurant"
+                app:layout_constraintVertical_bias="0.045" />
+
+            <TextView
+                android:id="@+id/txtCityAndProvince"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="144dp"
+                android:layout_marginTop="5dp"
+                android:text="Cidade"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtAddressRestaurant"
                 app:layout_constraintVertical_bias="0.0" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </RelativeLayout>
