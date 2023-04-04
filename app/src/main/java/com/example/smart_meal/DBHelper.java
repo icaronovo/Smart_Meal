@@ -123,7 +123,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public String[] getUserData(Integer businessID) {
         String[] userData = new String[9];
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE BusinessID= ? ", new String[]{businessID.toString()});
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE CustomerID= ? ", new String[]{businessID.toString()});
         if (cursor != null) {
             cursor.moveToFirst();
             for (int i = 0; i < userData.length; i++) {
@@ -297,7 +297,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-
     //add several items when app is loaded
     public void insertSeveralItems () {
         ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
@@ -351,10 +350,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to show items data.
-    public boolean itemsDisplay(int businessID) {
+    public Cursor itemsDisplay(int businessID) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE BusinessID= ?", new String[]{String.valueOf(businessID)});
-        return cursor.getCount() > 0;
+        return cursor;
     }
 
 //    public boolean itemNamePrice(String email, Double itemPrice, String itemName){
@@ -420,6 +419,5 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(query,new String[]{businessID});
         return cursor;
     }
-
 }
 
