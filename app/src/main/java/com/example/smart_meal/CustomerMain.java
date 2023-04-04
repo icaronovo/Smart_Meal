@@ -34,7 +34,6 @@ import java.util.Stack;
 public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener {
 
     private BottomNavigationView bottomNavigationView;
-    private ArrayList<ItemModel> itemList;
     private androidx.recyclerview.widget.RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
     private TextView titleTextView;
@@ -42,11 +41,11 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
     private SharedPreferences sharedPreferences;
     private ConstraintLayout constraintLayout;
+    private List<Integer> restaurantsIdDisplay = new ArrayList<>();
     private String name = "";
 
     DBHelper DB = new DBHelper(this);
     CustomerOrderModel model = new CustomerOrderModel();
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,7 +126,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     public void onItemClick(View view, int position) {
         // The launcher with the Intent you want to start
         Intent intent = new Intent(CustomerMain.this, CustomerRestaurant.class);
-        intent.putExtra("RESTAURANTID",position);
+        intent.putExtra("RESTAURANTID",restaurantsIdDisplay.get(position));
         launchSomeActivity.launch(intent);
     }
 
@@ -155,23 +154,12 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         Cursor c = DB.displayRestaurant(accountType);
         Boolean hasRestaurant = updateRestaurant(c,accountType);
 
-//        if (hasRestaurant == true) {
-//            recyclerView.setVisibility(View.VISIBLE);
-//        } else{
-//            recyclerView.setVisibility(View.INVISIBLE);
-//        }
+        if (hasRestaurant == true) {
+            recyclerView.setVisibility(View.VISIBLE);
+        } else{
+            recyclerView.setVisibility(View.INVISIBLE);
+        }
         c.close();
-//        =======
-//        itemList = new ArrayList<>();
-//        //String itemName, int itemImage, String itemDescription, Double itemPrice
-//        itemList.add(new ItemModel("Title Restaurant", "Description, description bla bla bla", 9.99));
-//        itemList.add(new ItemModel("Title Restaurant 1", "Description, description bla bla bla", 19.99));
-//        itemList.add(new ItemModel("Title Restaurant 2", "Description, description bla bla bla", 92.99));
-//        itemList.add(new ItemModel("Title Restaurant 3", "Description, description bla bla bla", 39.99));
-//        itemList.add(new ItemModel("Title Restaurant 5", "Description, description bla bla bla", 49.99));
-//        itemList.add(new ItemModel("Title Restaurant 6", "Description, description bla bla bla", 59.99));
-//        itemList.add(new ItemModel("Title Restaurant 7", "Description, description bla bla bla", 39.99));
-//        return itemList;
     }
 
     //Get the restaurants from DB
@@ -188,10 +176,10 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                 list.add(c.getString(5)); //Profile image
             }
         } else {
-            return true;
+            return false;
         }
         addRestaurant(list);
-        return false;
+        return true;
     }
 
     public void addRestaurant(List<String> list) {
@@ -199,7 +187,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         //Make the data being add into the list
         int index = 0;
         while (index < list.size()) {
-//            CustomerModel(Integer id, String name, String address, String city, String province, Integer image)
             CustomerModel restaurant = new CustomerModel(
                     Integer.parseInt(list.get(index)), //UserID -  ARRAY 0
                     list.get(index + 1), //Name ARRAY 1
@@ -214,7 +201,9 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         ArrayList<CustomerModel> firstInLastOut = new ArrayList<>();
         while(!stackRestaurants.isEmpty()){
-            firstInLastOut.add(stackRestaurants.pop());
+            CustomerModel restaurant = stackRestaurants.pop();
+            restaurantsIdDisplay.add(restaurant.getCustomerID());
+            firstInLastOut.add(restaurant);
         }
         createRecyclerView(firstInLastOut);
     }

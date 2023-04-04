@@ -56,6 +56,16 @@ public class CustomerModel {
     }
 
 //getters and setters
+
+
+    public int getCustomerID() {
+        return customerID;
+    }
+
+    public void setCustomerID(int customerID) {
+        this.customerID = customerID;
+    }
+
     public String getAccountType() {
         return accountType;
     }
