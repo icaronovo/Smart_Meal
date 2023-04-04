@@ -97,7 +97,7 @@ public class CustomerOrderFragment extends Fragment {
                 String customerIDStr = sharedPreferences.getString("CustomerID", "");
                 int customerID = Integer.parseInt(customerIDStr);
                 int orderStatus = 0; // 0 for order incomplete; 1 for order complete
-                int businessID = 1; // get the businessId
+                int businessID = 2; // get the businessId
                 String itemID = ""; // get the items ids
                 String quantityNumber = ""; //get the quantity of items
 

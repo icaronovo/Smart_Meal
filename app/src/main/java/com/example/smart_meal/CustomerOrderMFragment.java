@@ -29,9 +29,9 @@ public class CustomerOrderMFragment extends Fragment {
     CustomerOrderModel model;
     private TextView displayOrderNum;
     private TextView displayOrdersItem;
+    private TextView displayDate;
     private Button btnCancel;
     private DBHelper DB;
-
     private ListView myListView;
     private ArrayAdapter<String> myAdapter;
     private List<String> myList;
@@ -69,6 +69,7 @@ public class CustomerOrderMFragment extends Fragment {
 
         displayOrderNum = getActivity().findViewById(R.id.txtOrderNumber);
         displayOrdersItem = getActivity().findViewById(R.id.orderCustomerItem);
+        displayDate = getActivity().findViewById(R.id.txtDate);
         btnCancel = getActivity().findViewById(R.id.btnCancel);
 
         //Start the database
@@ -83,7 +84,6 @@ public class CustomerOrderMFragment extends Fragment {
         updateData(c);
         c.close();
 
-
         //For the user cancel the order
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +91,19 @@ public class CustomerOrderMFragment extends Fragment {
                 //
             }
         });
+    }
+
+    //Get the data from the DB
+    public void updateData(List<String> c){
+        List<String> dataFromDb = new ArrayList<>();
+        boolean noPrint = false;
+        if(!c.isEmpty()){
+            //Separate the data from the last order and display on xml
+            List<String> lastFive = dataFromDb.subList(Math.max(dataFromDb.size() - 5, 0), dataFromDb.size());
+            displayLastOrder(lastFive);
+        } else{
+            displayOrdersItem.setText("NO DATA");
+        }
     }
 
     //Get the data from the DB
@@ -102,8 +115,9 @@ public class CustomerOrderMFragment extends Fragment {
                 dataFromDb.add(c.getString(0)); //OrderID
                 dataFromDb.add(c.getString(1)); //OrderStatus
                 dataFromDb.add(c.getString(2)); //ItemID
-                dataFromDb.add(c.getString(3)); //ItemQty
-                dataFromDb.add(c.getString(4)); //BusinessID
+                dataFromDb.add(c.getString(3)); //Date
+                dataFromDb.add(c.getString(4)); //ItemQty
+                dataFromDb.add(c.getString(5)); //BusinessID
             }
         }
         else{
@@ -112,40 +126,43 @@ public class CustomerOrderMFragment extends Fragment {
 
         if(!noPrint){
             //Separate the data from the last order and display on xml
-            List<String> lastFive = dataFromDb.subList(Math.max(dataFromDb.size() - 5, 0), dataFromDb.size());
-            displayLastOrder(lastFive);
+            List<String> lastSix = dataFromDb.subList(Math.max(dataFromDb.size() - 6, 0), dataFromDb.size());
+            displayLastOrder(lastSix);
         } else{
             displayOrdersItem.setText("NO DATA");
         }
     }
 
-    public void displayLastOrder(List<String> lastFive){
 
+    public void displayLastOrder(List<String> lastSix){
         DecimalFormat decimalFormat = new DecimalFormat("#");
         DecimalFormat currency = new DecimalFormat("#.##");
         double finalTotal = 0;
 
         StringBuilder orderToPrint = new StringBuilder();
         //Get the order
-        String orderID = lastFive.get(0);
+        String orderID = lastSix.get(0);
 
         //Order status
-        String status = lastFive.get(1);
+        String status = lastSix.get(1);
 
         //Get items id
-        String itemsID = lastFive.get(2);
+        String itemsID = lastSix.get(2);
         String[] itemID = itemsID.split("\\$");
 
+        //Get date
+        String date = lastSix.get(3);
+
         //Get items quantity
-        String itemsQty = lastFive.get(3);
+        String itemsQty = lastSix.get(4);
         String[] itemQty = itemsQty.split("\\$");
 
-        //Getbusinessid
-        String  businessID = lastFive.get(4);
+        //Get businessid
+        String  businessID = lastSix.get(5);
 
         for(int i = 0; i < itemQty.length;i++){
             //PEGAR O TIPO DE ITEM E PREÇO COM UMA QUERY E SUBSTITUIR PELA PALAVRA ITEM E PREÇO
-            orderToPrint.append(itemQty[i] + "x Item - $ Preco");
+            orderToPrint.append(itemQty[i] + "x Item - $ Preco" + "\n");
             //JA FAZ O CALCULO E VAI SOMANDO PRA NO FIM FAZER DISPLAY
         }
         final double FEE = 0.6 * finalTotal;
@@ -153,7 +170,9 @@ public class CustomerOrderMFragment extends Fragment {
         orderToPrint.append("Fees  $" + currency.format(FEE)+ "\n");
         orderToPrint.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
 
-        displayOrderNum.setText("ORDER #" + orderID + " Restaurant " + businessID);
+        //Display on Order Fragment
+        displayOrderNum.setText("ORDER #" + orderID + " - Restaurant " + businessID);
+        displayDate.setText(date);
         displayOrdersItem.setText(String.valueOf(orderToPrint));
     }
 
