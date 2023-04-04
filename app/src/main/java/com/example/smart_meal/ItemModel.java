@@ -1,6 +1,6 @@
 package com.example.smart_meal;
 
-import java.util.List;
+import android.text.Editable;
 
 public class ItemModel{
 

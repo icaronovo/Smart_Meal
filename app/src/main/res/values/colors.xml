@@ -11,4 +11,5 @@
     <color name="smartAppYellow">#f9ee80</color>
     <color name="smartAppGreen">#73da8c</color>
     <color name="smartAppLightGreen">#daf0df</color>
+    <color name="itemsColor">#FFBC98</color>
 </resources>

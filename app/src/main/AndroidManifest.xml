@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Smart_Meal"
         tools:targetApi="31">
         <activity
+            android:name=".AddFoodItem"
+            android:exported="false" />
+        <activity
             android:name=".BusinessOrders"
             android:exported="false" />
         <activity
