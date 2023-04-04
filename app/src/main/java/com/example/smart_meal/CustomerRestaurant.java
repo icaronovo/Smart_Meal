@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -13,15 +14,25 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CustomerRestaurant extends AppCompatActivity implements Communicator, CustomerOrderFragment.OnButtonClickListener {
+    DBHelper dbHelper = new DBHelper(this);
     private List<ItemModel> itemList;
-
+    private int businessID = getIntent().getIntExtra("BusinessID", -1);
+    private String[] restaurantInfo = dbHelper.getUserData(businessID);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_restaurant);
 
+//        Cursor cursor = dbHelper.
+
+
+        TextView restaurantName = findViewById(R.id.txtRestaurantName);
+        TextView restaurantAddress = findViewById(R.id.txtRestAddress);
+        restaurantName.setText(restaurantInfo[3]);
+        restaurantAddress.setText(restaurantInfo[5] + ", " + restaurantInfo[6]);
+
         //Test to see if the Recycler View is clickable
-        TextView restaurantDesc = findViewById(R.id.txtRestDesc);
+        TextView restaurantDesc = findViewById(R.id.txtRestAddress);
         Intent intent = getIntent();
         int restaurantId = getIntent().getIntExtra("RESTAURANTID",-1);
         restaurantDesc.setText("Restaurant selected is " + restaurantId);

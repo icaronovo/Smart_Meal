@@ -66,19 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/txtDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtDesc"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.09"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtRestaurantName" />
-
-                <TextView
-                    android:id="@+id/txtRestDesc"
+                    android:id="@+id/txtRestAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/DELtextDescri"
@@ -87,7 +75,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="1.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtDescription"
+                    app:layout_constraintTop_toBottomOf="@+id/txtRestaurantName"
                     app:layout_constraintVertical_bias="0.012" />
 
                 <TextView
@@ -95,12 +83,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:layout_marginTop="14dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/DELtxtRating"
                     android:textSize="25sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/imgStar"
-                    app:layout_constraintTop_toBottomOf="@+id/txtRestDesc" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtRestAddress" />
 
                 <ImageView
                     android:id="@+id/imgStar"
@@ -110,7 +98,7 @@
                     android:contentDescription="@string/imgStart"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtRestDesc"
+                    app:layout_constraintTop_toBottomOf="@+id/txtRestAddress"
                     app:layout_constraintVertical_bias="0.019"
                     app:srcCompat="@drawable/ic_baseline_star_border_24"
                     tools:ignore="ImageContrastCheck" />
@@ -135,6 +123,7 @@
                     android:orientation="vertical"
                     android:layout_marginTop="20dp"
                     app:layout_constraintTop_toBottomOf="@+id/txtItemAvailable">
+
                     <androidx.fragment.app.FragmentContainerView
                         android:id="@+id/listItems"
                         android:name="com.example.smart_meal.CustomerItemListFragment"
@@ -142,8 +131,8 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintVertical_bias="0.034"
                         tools:layout="@layout/fragment_customer_item_list" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
