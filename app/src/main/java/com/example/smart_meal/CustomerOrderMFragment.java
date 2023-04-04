@@ -45,15 +45,6 @@ public class CustomerOrderMFragment extends Fragment {
 
         // Initialize the ListView and the list
         myListView = view.findViewById(R.id.listViewOldOrders);
-        pastOrders = new ArrayList<>();
-
-        // Add some strings to the list
-        pastOrders.add("Item 1");
-        pastOrders.add("Item 2");
-        pastOrders.add("Item 3");
-
-        // Initialize the adapter and set it to the ListView
-
 
         return view;
     }
@@ -101,7 +92,6 @@ public class CustomerOrderMFragment extends Fragment {
     //It will show that he has no order
     public boolean updateData(Cursor c, String customerID){
         List<String> dataFromDb = new ArrayList<>();
-        boolean noPrint = false;
         if(c.getCount()>0){
             while(c.moveToNext()){
                 dataFromDb.add(c.getString(0)); //OrderID
@@ -117,23 +107,10 @@ public class CustomerOrderMFragment extends Fragment {
         }
         addOrderModel(dataFromDb, customerID);
         return false;
-
-//        if(!noPrint){
-//            //Separate the data from the last order and display on xml
-//            List<String> lastSix = dataFromDb.subList(Math.max(dataFromDb.size() - 6, 0), dataFromDb.size());
-//            displayLastOrder(lastSix);
-//        } else{
-//            displayOrdersItem.setText("NO DATA");
-//            displayDate.setText("NO DATA");
-//            displayOrdersItem.setText("NO DATA");
-//        }
     }
 
     public void addOrderModel(List<String> list, String customerID){
         Stack<OrderModel> stackOrders = new Stack<>();
-
-        ArrayList<OrderModel> listOrders = new ArrayList<>();
-
         //Make the data being add into the list
         int index = 0;
         while (index < list.size()) {
@@ -153,7 +130,6 @@ public class CustomerOrderMFragment extends Fragment {
         OrderModel lastOrder = stackOrders.pop();
         displayLastOrder(lastOrder);
         displayPastOrders(stackOrders);
-//        displayLastOrder(lastSix);
     }
 
     //Display the last order

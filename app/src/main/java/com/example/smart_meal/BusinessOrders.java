@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 public class BusinessOrders extends AppCompatActivity {
     DBHelper DB;
@@ -45,7 +46,6 @@ public class BusinessOrders extends AppCompatActivity {
 
         //Check if the customer has orders
         Boolean hasNoData = updateData(c, businessID);
-
         if (hasNoData == true) {
             checkBox.setText("You have no order");
         } else{
@@ -78,7 +78,7 @@ public class BusinessOrders extends AppCompatActivity {
     //In case the customer has orders
     //Makes a OrderModel object for display
     public void addDataListModel(List<String> list, String businessID) {
-        ArrayList<OrderModel> listItems = new ArrayList<>();
+        Stack<OrderModel> stackItems = new Stack<>();
         //Make the data being add into the list
         int index = 0;
         while (index < list.size()) {
@@ -91,10 +91,15 @@ public class BusinessOrders extends AppCompatActivity {
                     list.get(index + 2), //ItemID ARRAY 2
                     list.get(index + 4)// ItemQty ARRAY 4
             );
-            listItems.add(order);
+            stackItems.push(order);
             index += 6;
         }
-        createListView(listItems);
+
+        ArrayList<OrderModel> firstInLastOut = new ArrayList<>();
+        while(!stackItems.isEmpty()){
+            firstInLastOut.add(stackItems.pop());
+        }
+        createListView(firstInLastOut);
     }
 
     //Create the view on Listview
