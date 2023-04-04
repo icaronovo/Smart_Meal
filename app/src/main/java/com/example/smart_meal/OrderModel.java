@@ -14,6 +14,11 @@ public class OrderModel {
 
     //constructor to order
 
+    public OrderModel(int orderID, int orderStatus){
+        this.orderID = orderID;
+        this.orderStatus = orderStatus;
+    }
+
     public OrderModel(int orderStatus, int businessID,
                       int customerID, String date,
                       String itemID, String itemQuantity){
@@ -48,6 +53,14 @@ public class OrderModel {
 
     public int getOrderStatus() {
         return orderStatus;
+    }
+
+    public boolean isChecked(){
+        if(this.orderStatus == 0){
+            return false;
+        } else{
+            return true;
+        }
     }
 
     public void setOrderStatus(int orderStatus) {
@@ -97,13 +110,28 @@ public class OrderModel {
 
     @Override
     public String toString() {
-        return "OrderModel{" +
-                "orderStatus='" + orderStatus + '\'' +
-                ", businessID='" + businessID + '\'' +
-                ", customerID='" + customerID + '\'' +
-                ", date='" + date + '\'' +
-                ", itemID=" + itemID +
-                ", itemQuantity=" + itemQuantity +
-                '}';
+        //Get the type of status
+        String status = "";
+        if(orderStatus == 0){
+            status = "PROCESSING";
+        }else{
+            status = "COMPLETE";
+        }
+
+        //Get items id
+        String[] itemsID = this.itemID.split("\\$");
+        //Get items quantity
+        String[] itemQty = this.itemQuantity.split("\\$");
+        StringBuilder str = new StringBuilder();
+
+        for(int i = 0; i < itemsID.length; i++){
+            str.append("Item ID: #" + itemsID[i] + " x Quantity: " + itemQty[i] + "\n");
+        }
+
+        return "Order ID #" + this.orderID + '\n' +
+                "OrderStatus = " + status + '\n' +
+                "CustomerID = " + this.customerID + '\n' +
+                "Date='" + this.date + '\n' +
+                String.valueOf(str);
     }
 }

@@ -1,11 +1,13 @@
 package com.example.smart_meal;
 
+import android.app.LauncherActivity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,19 +18,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BusinessOrders extends AppCompatActivity implements BusinessAdapter.ItemClickListener {
+public class BusinessOrders extends AppCompatActivity {
     DBHelper DB;
     private BusinessAdapter adapter;
     private CheckBox checkBox;
     private androidx.recyclerview.widget.RecyclerView recyclerView;
     private List<OrderModel> ordersFromDB = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders);
 
         checkBox = findViewById(R.id.checkboxSelectAll);
-        recyclerView = findViewById(R.id.recyclerFromBusiness);
+//        recyclerView = findViewById(R.id.recyclerFromBusiness);
 
         //Start the database
         DB = new DBHelper(this);
@@ -55,13 +59,9 @@ public class BusinessOrders extends AppCompatActivity implements BusinessAdapter
         else{
             noPrint = true;
         }
-        checkBox.setText(String.valueOf(list));
-//        6
-//        Resultado: [1,0,ITem 2$Item 5-$ITem 7$, data, preco,customerid]
 
-//public OrderModel(int orderID, int orderStatus, int businessID,
-//        int customerID, String date,
-//                String itemID, String itemQuantity){
+        ArrayList<OrderModel> listItems = new ArrayList<>();
+
         if(noPrint){
             checkBox.setText("NO DATA");
         } else{
@@ -77,11 +77,16 @@ public class BusinessOrders extends AppCompatActivity implements BusinessAdapter
                         list.get(index + 2), //ItemID ARRAY 2
                         list.get(index + 4)// ItemQty ARRAY 4
                 );
-                ordersFromDB.add(order);
+
+                listItems.add(order);
                 index += 6;
-                checkBox.setText(String.valueOf(ordersFromDB));
             }
         }
+
+        ListView listView = findViewById(R.id.listViewBusiness);
+        BusinessAdapter adapter = new BusinessAdapter(this, listItems);
+        listView.setAdapter(adapter);
+
 //        int numOfColumns = 1;
 //        recyclerView.setLayoutManager(new GridLayoutManager(this, numOfColumns));
 //        adapter = new BusinessAdapter(this,ordersFromDB);
@@ -89,11 +94,6 @@ public class BusinessOrders extends AppCompatActivity implements BusinessAdapter
 //        recyclerView.setAdapter(adapter);
         c.close();
 
-    }
-
-    @Override
-    public void onItemClick(View view, int position){
-        Toast.makeText(this,"Selected", Toast.LENGTH_LONG).show();
     }
 
     //Get the data from DB
