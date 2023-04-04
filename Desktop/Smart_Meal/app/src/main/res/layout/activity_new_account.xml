@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="409dp"
+    android:layout_height="657dp"
+    android:fillViewport="true"
+    tools:ignore="SpeakableTextPresentCheck"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".NewAccount">
+
+
+        <TextView
+            android:id="@+id/profileUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/txtNewAccount"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="300dp"
+            android:layout_height="96dp"
+            android:layout_marginTop="40dp"
+            android:onClick="clickMethod"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileUpdate"
+            tools:checkedButton="@id/radioCustomer"
+            tools:ignore="UsingOnClickInXml">
+
+            <RadioButton
+                android:id="@+id/radioCustomer"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:checked="false"
+                android:text="@string/radioCustomer" />
+
+            <RadioButton
+                android:id="@+id/radioBusiness"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:text="@string/radioBusiness"
+                tools:ignore="TouchTargetSizeCheck" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/nameUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_person_outline_24"
+            android:ems="10"
+            android:hint="@string/txtFName"
+            android:inputType="textPersonName"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <EditText
+            android:id="@+id/phoneUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_phone_24"
+            android:ems="10"
+            android:hint="@string/txtPhone"
+            android:inputType="phone"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nameUpdate" />
+
+        <EditText
+            android:id="@+id/addressUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_location_on_24"
+            android:ems="10"
+            android:hint="@string/txtAddress"
+            android:inputType="textPersonName"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneUpdate" />
+
+        <Spinner
+            android:id="@+id/spnStatesUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:entries="@array/txtCities"
+            android:prompt="@string/txtState"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cityUpdate" />
+
+        <EditText
+            android:id="@+id/cityUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:ems="10"
+            android:hint="@string/txtCity"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addressUpdate"
+            android:textColorHint="#000000"
+            android:autofillHints="" />
+
+        <EditText
+            android:id="@+id/emailUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_email_24"
+            android:ems="10"
+            android:hint="@string/txtAddEmail"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spnStatesUpdate" />
+
+        <EditText
+            android:id="@+id/passUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:ems="10"
+            android:hint="@string/txtAddPassword"
+            android:inputType="textPassword"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailUpdate" />
+
+        <EditText
+            android:id="@+id/confirmPassUpdate"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="40dp"
+            android:autofillHints=""
+            android:drawableStart="@drawable/ic_baseline_lock_24"
+            android:ems="10"
+            android:hint="@string/txtConfirm"
+            android:inputType="textPassword"
+            android:textColorHint="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passUpdate" />
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="121dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="@string/txtCreate"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtErrorPassword"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/txtErrorPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#F44336"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.132"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/confirmPassUpdate" />
+
+        <TextView
+            android:id="@+id/txtErrorEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textColor="#F44336"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.153"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailUpdate" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
