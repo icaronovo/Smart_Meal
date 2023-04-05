@@ -2,12 +2,11 @@ package com.example.smart_meal;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -190,7 +189,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
-    public void addSeveralBusinesses () {
+    public void addSeveralBusinesses() {
         CustomerModel business1 = new CustomerModel("Business", "mcdonalds@mcdonalds", "mcdonalds", "McDonald's", "123", "McDonalds Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
         CustomerModel business2 = new CustomerModel("Business", "bk@bk", "bk", "Burger King", "123", "Burger King Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
         CustomerModel business3 = new CustomerModel("Business", "wendys@wendys", "wendys", "Wendy's", "123", "Wendy's Avenue", "New Westminster", "British Columbia", R.drawable.ic_baseline_person_outline_24);
@@ -213,11 +212,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<CustomerModel> retrieveAllBusinesses () {
-
+    //public Cursor retrieveAllBusinesses() {
         ArrayList<CustomerModel> businessList = new ArrayList<CustomerModel>();
-
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE AccountType = ?", new String[] {"Business"});
+        Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE AccountType = 'Business'", null);
         Log.d("cursor", cursor.toString());
         int i = 0;
         while (cursor.moveToNext()) {
@@ -236,7 +234,7 @@ public class DBHelper extends SQLiteOpenHelper {
         return businessList;
     }
 
-    public int getBusinessIDFromDB (String customerEmail) {
+    public int getBusinessIDFromDB(String customerEmail) {
         SQLiteDatabase database = this.getReadableDatabase();
 
         Integer id = -1;
@@ -278,6 +276,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE CustomerID= ? AND AccountType= 'Business' ", new String[]{email});
         return cursor.getCount() > 0;
     }
+
     public boolean getCustID(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE CustomerID= ? AND AccountType= 'Customer' ", new String[]{email});
@@ -298,36 +297,36 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //add several items when app is loaded
-    public void insertSeveralItems () {
+    public void insertSeveralItems() {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE ItemID= ? ", new String[]{"1"});
         if (cursor.getCount() < 0) {
             ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
-            itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99, 10, 1));
-            itemList.add(new ItemModel("Title Item 2","Description, description bla bla bla",19.99, 10, 1));
-            itemList.add(new ItemModel("Title Item 3","Description, description bla bla bla",6.99, 10, 1));
-            itemList.add(new ItemModel("Title Item 4","Description, description bla bla bla",5.99, 10, 1));
-            itemList.add(new ItemModel("Title Item 5","Description, description bla bla bla",4.99, 10, 2));
-            itemList.add(new ItemModel("Title Item 6","Description, description bla bla bla",3.99, 10, 2));
-            itemList.add(new ItemModel("Title Item 7","Description, description bla bla bla",21.99, 10, 2));
-            itemList.add(new ItemModel("Title Item 8","Description, description bla bla bla",5.99, 10, 2));
-            itemList.add(new ItemModel("Title Item 9","Description, description bla bla bla",6.99, 10, 3));
-            itemList.add(new ItemModel("Title Item 10","Description, description bla bla bla",1.99, 10, 3));
-            itemList.add(new ItemModel("Title Item 11","Description, description bla bla bla",45.99, 10, 3));
-            itemList.add(new ItemModel("Title Item 12","Description, description bla bla bla",32.99, 10, 3));
-            itemList.add(new ItemModel("Title Item 13","Description, description bla bla bla",12.99, 10, 3));
-            itemList.add(new ItemModel("Title Item 14","Description, description bla bla bla",21.99, 10, 4));
-            itemList.add(new ItemModel("Title Item 15","Description, description bla bla bla",31.99, 10, 4));
-            itemList.add(new ItemModel("Title Item 16","Description, description bla bla bla",13.99, 10, 4));
-            itemList.add(new ItemModel("Title Item 17","Description, description bla bla bla",41.99, 10, 4));
-            itemList.add(new ItemModel("Title Item 18","Description, description bla bla bla",14.99, 10, 4));
-            itemList.add(new ItemModel("Title Item 19","Description, description bla bla bla",15.99, 10, 5));
-            itemList.add(new ItemModel("Title Item 20","Description, description bla bla bla",23.99, 10, 5));
-            itemList.add(new ItemModel("Title Item 21","Description, description bla bla bla",32.99, 10, 5));
-            itemList.add(new ItemModel("Title Item 22","Description, description bla bla bla",25.99, 10, 5));
-            itemList.add(new ItemModel("Title Item 23","Description, description bla bla bla",15.99, 10, 5));
-            itemList.add(new ItemModel("Title Item 24","Description, description bla bla bla",16.99, 10, 5));
+            itemList.add(new ItemModel("Title Item", "Description, description bla bla bla", 9.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 2", "Description, description bla bla bla", 19.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 3", "Description, description bla bla bla", 6.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 4", "Description, description bla bla bla", 5.99, 10, 1));
+            itemList.add(new ItemModel("Title Item 5", "Description, description bla bla bla", 4.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 6", "Description, description bla bla bla", 3.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 7", "Description, description bla bla bla", 21.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 8", "Description, description bla bla bla", 5.99, 10, 2));
+            itemList.add(new ItemModel("Title Item 9", "Description, description bla bla bla", 6.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 10", "Description, description bla bla bla", 1.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 11", "Description, description bla bla bla", 45.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 12", "Description, description bla bla bla", 32.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 13", "Description, description bla bla bla", 12.99, 10, 3));
+            itemList.add(new ItemModel("Title Item 14", "Description, description bla bla bla", 21.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 15", "Description, description bla bla bla", 31.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 16", "Description, description bla bla bla", 13.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 17", "Description, description bla bla bla", 41.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 18", "Description, description bla bla bla", 14.99, 10, 4));
+            itemList.add(new ItemModel("Title Item 19", "Description, description bla bla bla", 15.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 20", "Description, description bla bla bla", 23.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 21", "Description, description bla bla bla", 32.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 22", "Description, description bla bla bla", 25.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 23", "Description, description bla bla bla", 15.99, 10, 5));
+            itemList.add(new ItemModel("Title Item 24", "Description, description bla bla bla", 16.99, 10, 5));
 
             for (int i = 0; i < itemList.size(); i++) {
                 boolean isInserted = addItem(itemList.get(i));
@@ -368,13 +367,19 @@ public class DBHelper extends SQLiteOpenHelper {
 //    }
 
     //query to update item qty
-    public boolean itemsQtyUpdate(int itemID, String itemQty) {
+    public boolean itemsQtyUpdate(int itemID, int itemQty) {
         SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT ItemQuantity FROM ITEM WHERE ItemID = ?", new String[]{String.valueOf(itemID)});
+        int currentAmount = cursor.getInt(cursor.getColumnIndexOrThrow("ItemQuantity"));
+        int finalAmount = currentAmount - itemQty;
         ContentValues values = new ContentValues();
-        values.put("ItemQuantity", itemQty);
-        int rowsAffected = db.update("ITEM", values, "ItemID = ?", new String[]{String.valueOf(itemID)});
-
-        return rowsAffected > 0;
+        if (finalAmount < 0) {
+            return false;
+        } else {
+            values.put("ItemQuantity", itemQty);
+            int rowsAffected = db.update("ITEM", values, "ItemID = ?", new String[]{String.valueOf(itemID)});
+            return true;
+        }
     }
 
     //query to update item value
@@ -386,6 +391,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected > 0;
     }
+
     //query to update order status
     public boolean orderStatusUpdate(String username, String orderStatus) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -395,6 +401,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         return rowsAffected > 0;
     }
+
     //query to show all orders
     public List<String> ordersDisplay(String username, String orders) {
         List<String> ordersData = new ArrayList<>(7);
@@ -410,18 +417,18 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Method to show all the orders from a customer
-    public Cursor displayOrder(String customerID){
+    public Cursor displayOrder(String customerID) {
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_CUSTOMER_ID + "=?";
-        Cursor cursor = database.rawQuery(query,new String[]{customerID});
+        Cursor cursor = database.rawQuery(query, new String[]{customerID});
         return cursor;
     }
 
     //Method to display all the orders that a business has
-    public Cursor displayOrderBusiness(String businessID){
+    public Cursor displayOrderBusiness(String businessID) {
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + ORDER_INFO + " WHERE " + COLUMN_BUSINESS_ID + "=?";
-        Cursor cursor = database.rawQuery(query,new String[]{businessID});
+        Cursor cursor = database.rawQuery(query, new String[]{businessID});
         return cursor;
     }
 
@@ -446,16 +453,21 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //Method to display all the restaurants
-    public Cursor displayRestaurant(String account){
+    public Cursor displayRestaurant(String account) {
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT "+ COLUMN_CUSTOMER_ID + ", "
-                                + COLUMN_NAME + ", "
-                                + COLUMN_ADDRESS + ", "
-                                + COLUMN_CITY + ", "
-                                + COLUMN_PROVINCE + ", "
-                                + COLUMN_PROFILE_IMAGE + " FROM " + CUSTOMER_INFO + " WHERE " + ACCOUNT_TYPE + "=?";
-        Cursor cursor = database.rawQuery(query,new String[]{account});
+        String query = "SELECT " + COLUMN_CUSTOMER_ID + ", "
+                + COLUMN_NAME + ", "
+                + COLUMN_ADDRESS + ", "
+                + COLUMN_CITY + ", "
+                + COLUMN_PROVINCE + ", "
+                + COLUMN_PROFILE_IMAGE + " FROM " + CUSTOMER_INFO + " WHERE " + ACCOUNT_TYPE + "=?";
+        Cursor cursor = database.rawQuery(query, new String[]{account});
         return cursor;
+    }
+
+    public void removeQuantityfromItem(int businessID) {
+        SQLiteDatabase database = this.getReadableDatabase();
+
     }
 }
 
