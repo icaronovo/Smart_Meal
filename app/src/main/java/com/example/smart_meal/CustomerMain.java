@@ -71,7 +71,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
             }
         }
-
         //Constraint layout where is the Fragments
         constraintLayout = findViewById(R.id.fragmentLayout);
 

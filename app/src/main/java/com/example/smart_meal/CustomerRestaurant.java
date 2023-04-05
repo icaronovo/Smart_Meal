@@ -15,9 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CustomerRestaurant extends AppCompatActivity implements Communicator, CustomerOrderFragment.OnButtonClickListener {
-    DBHelper dbHelper = new DBHelper(this);
+    DBHelper DB = new DBHelper(this);
     private List<ItemModel> itemList;
     public int restaurantId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +29,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         //Get the restaurant ID
         Intent intent = getIntent();
         restaurantId = intent.getIntExtra("RESTAURANTID",-1);
-        String[] restaurantInfo = dbHelper.getUserData(restaurantId);
+        String[] restaurantInfo = DB.getUserData(restaurantId);
         restaurantName.setText(restaurantInfo[4]);
         restaurantAddress.setText(restaurantInfo[6] + ", " + restaurantInfo[7]);
 
@@ -47,39 +48,49 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         StringBuilder str = new StringBuilder();
 
         for (Integer key : itemIdAndQty.keySet()) {
-            Integer values = itemIdAndQty.get(key);
-//            str.append(decimalFormat.format(values[1]) + " x " + key + " $ " + currency.format(values[0]) + "\n");
-//            finalTotal += values[0] * values[1];
+            Integer quantity = itemIdAndQty.get(key);
+            Double price = getPrice(String.valueOf(restaurantId),key);
+            String name = getName(String.valueOf(restaurantId),key);
+            str.append(quantity + " x " + name + " $ " + currency.format(price) + "\n");
+            finalTotal += quantity * price;
         }
-
         final double FEE = 0.6 * finalTotal;
         str.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
         str.append("Fees  $" + currency.format(FEE)+ "\n");
         str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
-//        customerOrderFragment.makeOrder(str, data);
+        customerOrderFragment.makeOrder(str, itemIdAndQty);
     }
 
     //Handle order submit click, input data and pass to previous activity
     @Override
-    public void onButtonClick(String delivery) {
+    public void onButtonClick() {
         Intent intent = new Intent();
-        intent.putExtra("DELIVERY",delivery);
+//        intent.putExtra("DELIVERY",delivery);
         setResult(RESULT_OK, intent);
         finish();
     }
 
-//    //Get the items from this Restaurant on DB
-//    //Put them here
-//    private List<ItemModel> initData() {
-//        itemList = new ArrayList<>();
-//        //String itemName, int itemImage, String itemDescription, Double itemPrice
-//        itemList.add(new ItemModel("Title Item","Description, description bla bla bla",9.99));
-//        itemList.add(new ItemModel("Title Item 1","Description, description bla bla bla",19.99));
-//        itemList.add(new ItemModel("Title Item 2","Description, description bla bla bla",92.99));
-//        itemList.add(new ItemModel("Title Item 3","Description, description bla bla bla",39.99));
-//        itemList.add(new ItemModel("Title Item 5","Description, description bla bla bla",49.99));
-//        itemList.add(new ItemModel("Title Item 6","Description, description bla bla bla",59.99));
-//        itemList.add(new ItemModel("Title Item 7","Description, description bla bla bla",39.99));
-//        return itemList;
-//    }
+    //Get the items price from this Restaurant on DB
+    public Double getPrice(String restaurantId, int productID){
+        Double itemPrice = 0.0;
+        Cursor c = DB.displayPrice(restaurantId,productID);
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+                itemPrice = Double.parseDouble(c.getString(0));
+            }
+        }
+        return itemPrice;
+    }
+
+    //Get the items price from this Restaurant on DB
+    public String getName(String restaurantId, int productID){
+        String itemName = "";
+        Cursor c = DB.displayName(restaurantId,productID);
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+                itemName = c.getString(0);
+            }
+        }
+        return itemName;
+    }
 }

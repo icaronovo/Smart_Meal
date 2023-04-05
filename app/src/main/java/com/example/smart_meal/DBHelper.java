@@ -425,6 +425,26 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public Cursor displayPrice(String businessID, int itemID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_ITEM_VALUE
+                    + " FROM " + ITEM
+                    + " WHERE " + COLUMN_BUSINESS_ID + "=? "
+                    + " AND " + COLUMN_ITEM_ID + "=? ";
+        Cursor cursor = database.rawQuery(query,new String[]{businessID, String.valueOf(itemID)});
+        return cursor;
+    }
+
+    public Cursor displayName(String businessID, int itemID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_ITEM_NAME
+                + " FROM " + ITEM
+                + " WHERE " + COLUMN_BUSINESS_ID + "=? "
+                + " AND " + COLUMN_ITEM_ID + "=? ";
+        Cursor cursor = database.rawQuery(query,new String[]{businessID, String.valueOf(itemID)});
+        return cursor;
+    }
+
     //Method to display all the restaurants
     public Cursor displayRestaurant(String account){
         SQLiteDatabase database = this.getReadableDatabase();

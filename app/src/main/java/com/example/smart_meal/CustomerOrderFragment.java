@@ -37,6 +37,7 @@ public class CustomerOrderFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_customer_order, container, false);
     }
@@ -55,7 +56,7 @@ public class CustomerOrderFragment extends Fragment {
 
     }
 
-    public void makeOrder(StringBuilder data, HashMap<String,Double[]> customerOrderList){
+    public void makeOrder(StringBuilder data, HashMap<Integer,Integer> customerOrderList){
         //Set visibility of the items
         txtYourDelivery.setVisibility(View.VISIBLE);
         txtDelivery.setVisibility(View.VISIBLE);
@@ -64,6 +65,10 @@ public class CustomerOrderFragment extends Fragment {
         rdbDelivery.setVisibility(View.VISIBLE);
         orderText.setVisibility(View.VISIBLE);
         btnConfirm.setVisibility(View.VISIBLE);
+
+        //Get the restaurant ID on the Customer Restaurant activity
+        CustomerRestaurant activity = (CustomerRestaurant) getActivity();
+        int businessID = activity.restaurantId;
 
         // Set a listener on the radio button
         rdbPickUp.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -97,23 +102,20 @@ public class CustomerOrderFragment extends Fragment {
                 String customerIDStr = sharedPreferences.getString("CustomerID", "");
                 int customerID = Integer.parseInt(customerIDStr);
                 int orderStatus = 0; // 0 for order incomplete; 1 for order complete
-                int businessID = 2; // get the businessId
                 String itemID = ""; // get the items ids
                 String quantityNumber = ""; //get the quantity of items
 
                 SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
                 Date dateNow = new Date();
                 String date = formatter.format(dateNow);
+
                 //Putting the itemsID and the quantity in a string
                 //so we can sent more than one item to the db
-                for (String key : customerOrderList.keySet()) {
-                    Double[] values = customerOrderList.get(key);
+                for (Integer key : customerOrderList.keySet()) {
+                    Integer values = customerOrderList.get(key);
                     itemID += key + "$";
-                    quantityNumber += values[1] + "$";
+                    quantityNumber += values + "$";
                 }
-
-//              customerOrderList = Hashmap <Nome do item, Double [preço,quantity]
-
 
                 OrderModel newOrder = new OrderModel(orderStatus, businessID, customerID, date, itemID, quantityNumber);
 
@@ -122,9 +124,8 @@ public class CustomerOrderFragment extends Fragment {
                 }else{
                     Toast.makeText(getActivity(), "Couldn't submit order. Try again", Toast.LENGTH_SHORT).show();
                 }
-
                 //Here you are gonna send the ORDERID
-                mListener.onButtonClick(delivery);
+                mListener.onButtonClick();
             }
         });
     }
@@ -140,6 +141,6 @@ public class CustomerOrderFragment extends Fragment {
     }
 
     public interface OnButtonClickListener {
-        void onButtonClick(String delivery);
+        void onButtonClick();
     }
 }
