@@ -13,6 +13,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     DBHelper DB;
     EditText email, pass;
     String accountType;
+    TextView upPass;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -31,19 +33,16 @@ public class LoginActivity extends AppCompatActivity {
         btnNewAccount = findViewById(R.id.txtNewAccount);
         email = findViewById(R.id.txtEmail);
         pass = findViewById(R.id.txtPassword);
+        upPass = findViewById(R.id.upPass);
         DB = new DBHelper(this);
         ImageView imageView = findViewById(R.id.imgRotate2);
-        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.rotation));
+        imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotation));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        //btn to delete record from db
-        Button btnDel = findViewById(R.id.btnDel);
-
-        //CHECAR O DESTINO DESSE BOTAO SEMPRE
-        btnDel.setOnClickListener(new View.OnClickListener() {
+        upPass.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, PasswordUpdate.class));
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this,PasswordUpdate.class));
             }
         });
 

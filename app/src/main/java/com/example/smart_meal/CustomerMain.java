@@ -79,7 +79,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        titleTextView.setText("Welcome " + userName);
+                        titleTextView.setText("Welcome, " + userName);
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
