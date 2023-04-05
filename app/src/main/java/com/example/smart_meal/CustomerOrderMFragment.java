@@ -33,7 +33,6 @@ public class CustomerOrderMFragment extends Fragment {
     private DBHelper DB;
     private ListView myListView;
     private ArrayAdapter<String> myAdapter;
-    private List<String> pastOrders;
     private DecimalFormat decimalFormat = new DecimalFormat("#");
     private DecimalFormat currency = new DecimalFormat("#.##");
 

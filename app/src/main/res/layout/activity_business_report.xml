@@ -6,8 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".BusinessReport">
 
-    <include
-        layout="@layout/business_appbar"
-        />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarReport"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/smartAppColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

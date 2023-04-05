@@ -15,6 +15,7 @@ public class AddFoodItem extends AppCompatActivity {
     EditText txtName, txtDescrip, txtQuant, txtPrice;
     Button btnAdd;
     private SharedPreferences sharedPreferences;
+    private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +27,22 @@ public class AddFoodItem extends AppCompatActivity {
         txtQuant = findViewById(R.id.editQuantity);
         txtPrice = findViewById(R.id.editPrice);
         btnAdd = findViewById(R.id.btnAdd);
+
+        //Insert the toolbar
+        toolbar = findViewById(R.id.toolbarAdd);
+        toolbar.setTitle("Add Items");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
+        // Handle navigation icon click event
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click here
+                onBackPressed();
+            }
+        });
+
+
         int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
         Log.d("BusinessID", String.valueOf(businessID));
 

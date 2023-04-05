@@ -17,7 +17,8 @@
             android:exported="false" />
         <activity
             android:name=".BusinessOrders"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".BusinessMain"/>
         <activity
             android:name=".CustomerUpdate"
             android:exported="false" />

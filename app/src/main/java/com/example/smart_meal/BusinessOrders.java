@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -23,8 +24,8 @@ public class BusinessOrders extends AppCompatActivity {
     DBHelper DB;
     private BusinessAdapter adapter;
     private CheckBox checkBox;
-//    private ArrayList<OrderModel> listItems;
     private ListView listView;
+    private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,18 @@ public class BusinessOrders extends AppCompatActivity {
 
         checkBox = findViewById(R.id.checkboxSelectAll);
         listView = findViewById(R.id.listViewBusiness);
+        toolbar = findViewById(R.id.toolbarOrder);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w); // Replace with your icon resource ID
+
+        // Handle navigation icon click event
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Handle back button click here
+                onBackPressed();
+            }
+        });
 
         //Start the database
         DB = new DBHelper(this);
@@ -52,6 +65,12 @@ public class BusinessOrders extends AppCompatActivity {
             checkBox.setText("Select all orders");
         }
         c.close();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 
     //Get the data from DB
