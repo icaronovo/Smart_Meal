@@ -45,7 +45,6 @@ public class CustomerOrderMFragment extends Fragment {
 
         // Initialize the ListView and the list
         myListView = view.findViewById(R.id.listViewOldOrders);
-
         return view;
     }
 
@@ -75,7 +74,6 @@ public class CustomerOrderMFragment extends Fragment {
             displayDate.setText("NO DATA");
             displayOrdersItem.setText("NO DATA");
         }
-
         c.close();
 
         //For the user cancel the order
@@ -144,6 +142,9 @@ public class CustomerOrderMFragment extends Fragment {
         //Order status
         int status = lastSix.getOrderStatus();
 
+        //BusinessID
+        int businessID = lastSix.getBusinessID();
+
         //Get items id
         String itemsID = lastSix.getItemID();
         String[] itemID = itemsID.split("\\$");
@@ -155,13 +156,11 @@ public class CustomerOrderMFragment extends Fragment {
         String itemsQty = lastSix.getItemQuantity();
         String[] itemQty = itemsQty.split("\\$");
 
-        //Get businessid
-        int  businessID = lastSix.getBusinessID();
-
         for(int i = 0; i < itemQty.length;i++){
-            //PEGAR O TIPO DE ITEM E PREÇO COM UMA QUERY E SUBSTITUIR PELA PALAVRA ITEM E PREÇO
-            orderToPrint.append(itemQty[i] + "x Item - $ Preco" + "\n");
-            //JA FAZ O CALCULO E VAI SOMANDO PRA NO FIM FAZER DISPLAY
+            String name = getName(String.valueOf(businessID),Integer.parseInt(itemID[i]));
+            Double price = getPrice(String.valueOf(businessID),Integer.parseInt(itemID[i]));
+            orderToPrint.append(itemQty[i] + "x "+ name +" - $" + currency.format(price) + "\n");
+            finalTotal += price * Double.parseDouble(itemQty[i]);
         }
         final double FEE = 0.6 * finalTotal;
         orderToPrint.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
@@ -169,26 +168,36 @@ public class CustomerOrderMFragment extends Fragment {
         orderToPrint.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
 
         //Display on Order Fragment
-        displayOrderNum.setText("ORDER #" + orderID + " - Restaurant " + businessID);
+        String businessName = DB.displayBusinessName(String.valueOf(businessID),"Business");
+        displayOrderNum.setText("ORDER #" + orderID + " - " + businessName);
         displayDate.setText(date);
         displayOrdersItem.setText(String.valueOf(orderToPrint));
+
     }
 
     public void displayPastOrders(Stack<OrderModel> pastOrders){
         List<String> ordersDisplay = new ArrayList<>();
 
         //Make the display until the stack is empty
-        while(!pastOrders.isEmpty()){
+        while(pastOrders.size() > 10){
             OrderModel order = pastOrders.pop();
             StringBuilder display = new StringBuilder();
             double finalTotal = 1;
 
             display.append("Order ID #" + order.getOrderID() + "\n");
-            display.append("Order Status #" + order.getOrderStatus() + "\n");
+            /*0 = Pedido enviado
+            1 = Pedido recebido pelo Restaurante & enviar alerta pro customer (caso dê lol)
+            2 = Customer cancelar order
+            3 = Business cancelar order*/
+            if(order.getOrderStatus() == 2 || order.getOrderStatus() == 3){
+                display.append("Order Status #CANCELED\n");
+            }
             display.append("Date " + order.getDate() + "\n");
 
             //Caçar o nome do restaurante
-            display.append("Restaurant - " + order.getBusinessID() + "\n");
+            String businessID = String.valueOf(order.getBusinessID());
+            String businessName = DB.displayBusinessName(businessID,"Business");
+            display.append("Restaurant - " + businessName + "\n");
 
             //Get items id
             String itemsID = order.getItemID();
@@ -199,9 +208,11 @@ public class CustomerOrderMFragment extends Fragment {
             String[] itemQty = itemsQty.split("\\$");
 
             for(int i = 0; i < itemQty.length;i++){
-                //PEGAR O TIPO DE ITEM E PREÇO COM UMA QUERY E SUBSTITUIR PELA PALAVRA ITEM E PREÇO
-                display.append(itemQty[i] + "x Item - $ Preco" + "\n");
-                //JA FAZ O CALCULO E VAI SOMANDO PRA NO FIM FAZER DISPLAY
+                int id = Integer.parseInt(itemID[i]);
+                String name = getName(businessID,id);
+                Double price = getPrice(businessID,id);
+                display.append(itemQty[i] + "x "+ name +" - $" + currency.format(price) + "\n");
+                finalTotal += price * Double.parseDouble(itemQty[i]);
             }
             final double FEE = 0.6 * finalTotal;
             display.append("Subtotal  $" + currency.format(finalTotal)+ "\n");
@@ -218,7 +229,31 @@ public class CustomerOrderMFragment extends Fragment {
         myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, listItems);
         myListView.setAdapter(myAdapter);
     }
-    
+
+    //Get the items price from this Restaurant on DB
+    public Double getPrice(String restaurantId, int productID){
+        Double itemPrice = 0.0;
+        Cursor c = DB.displayPrice(restaurantId,productID);
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+                itemPrice = Double.parseDouble(c.getString(0));
+            }
+        }
+        return itemPrice;
+    }
+
+    //Get the items price from this Restaurant on DB
+    public String getName(String restaurantId, int productID){
+        String itemName = "";
+        Cursor c = DB.displayName(restaurantId,productID);
+        if(c.getCount()>0){
+            while(c.moveToNext()){
+                itemName = c.getString(0);
+            }
+        }
+        return itemName;
+    }
+
     public void setModel(CustomerOrderModel model){
         this.model = model;
     }

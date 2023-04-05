@@ -452,6 +452,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return cursor;
     }
 
+    public String displayBusinessName(String businessID, String accountType){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String businessName = "";
+        String query = "SELECT " + COLUMN_NAME
+                + " FROM " + CUSTOMER_INFO
+                + " WHERE " + COLUMN_CUSTOMER_ID + "=? "
+                + " AND " + ACCOUNT_TYPE + "=? ";
+        Cursor cursor = database.rawQuery(query,new String[]{businessID, String.valueOf(accountType)});
+        if(cursor.getCount()>0){
+            while(cursor.moveToNext()){
+                businessName = cursor.getString(0);
+            }
+        }
+        return businessName;
+    }
+
     //Method to display all the restaurants
     public Cursor displayRestaurant(String account) {
         SQLiteDatabase database = this.getReadableDatabase();

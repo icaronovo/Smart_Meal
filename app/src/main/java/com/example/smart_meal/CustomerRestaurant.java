@@ -65,7 +65,6 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
     @Override
     public void onButtonClick() {
         Intent intent = new Intent();
-//        intent.putExtra("DELIVERY",delivery);
         setResult(RESULT_OK, intent);
         finish();
     }
