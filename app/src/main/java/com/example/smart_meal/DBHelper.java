@@ -355,9 +355,9 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to show items data.
-    public Cursor itemsDisplay(int businessID) {
+    public Cursor itemsDisplay(String businessID) {
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE BusinessID= ?", new String[]{String.valueOf(businessID)});
+        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE BusinessID= ?", new String[]{businessID});
         return cursor;
     }
 

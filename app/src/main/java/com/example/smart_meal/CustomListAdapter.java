@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CustomListAdapter extends ArrayAdapter<String> {
+public class CustomListAdapter extends ArrayAdapter<ItemModel> {
     private final LayoutInflater mInflater;
-    private final List<String> mItems;
-    private HashMap<String, Double[]> itemCountMap = new HashMap<>();
+    private final ArrayList<ItemModel> mItems;
+    private HashMap<Integer,Integer> itemCountMap = new HashMap<>();
 
-    public CustomListAdapter(Context context, List<String> items) {
+    public CustomListAdapter(Context context, ArrayList<ItemModel> items) {
         super(context, R.layout.list_item_layout, items);
         mInflater = LayoutInflater.from(context);
         mItems = items;
@@ -36,20 +38,21 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        String textDisplay = mItems.get(position).getItemName() + " - $" +  mItems.get(position).getItemPrice();
+        holder.itemName.setText(textDisplay);
 
-        String item = mItems.get(position);
-        holder.itemName.setText(item);
-
+        //Add quantity of item on the card
         holder.addItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int number = Integer.parseInt(String.valueOf(holder.quantityItem.getText()));
                 number++;
                 holder.quantityItem.setText(String.valueOf(number));
-                updateItems(holder,number);
+                updateItems(mItems.get(position).getItemID(),number);
             }
         });
 
+        //Retrive quantity of items on the card
         holder.removeItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -59,7 +62,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
                 }
                 holder.quantityItem.setText(String.valueOf(number));
                 if (number > 0){
-                    updateItems(holder,number);
+                    updateItems(mItems.get(position).getItemID(),number);
                 }else {
                     String item = String.valueOf(holder.itemName.getText());
                     if(itemCountMap.containsKey(item)){
@@ -71,7 +74,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         return convertView;
     }
 
-    public HashMap<String, Double[]> getItems(){
+    public HashMap<Integer,Integer> getItems(){
         return itemCountMap;
     }
 
@@ -81,10 +84,7 @@ public class CustomListAdapter extends ArrayAdapter<String> {
         ImageButton removeItem;
     }
 
-    private void updateItems(CustomListAdapter.ViewHolder holder, int number){
-        String itemName = String.valueOf(holder.itemName.getText());
-        String [] temp = itemName.split("\\$");
-        Double[] tempNumber = {Double.parseDouble(temp[1]),Double.valueOf(number)};
-        itemCountMap.put(temp[0],tempNumber);
+    private void updateItems(int itemID, int number){
+        itemCountMap.put(itemID,number);
     }
 }

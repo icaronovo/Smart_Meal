@@ -9,6 +9,16 @@ public class ItemModel{
     private Double itemPrice;
     private int itemQuantity;
     private int businessID;
+    private int itemID;
+
+    public ItemModel(int itemID, String itemName, String itemDescription, Double itemPrice, int itemQuantity, int businessID) {
+        this.itemID = itemID;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
+        this.itemPrice = itemPrice;
+        this.itemQuantity = itemQuantity;
+        this.businessID = businessID;
+    }
 
     public ItemModel(String itemName, String itemDescription, Double itemPrice, int itemQuantity) {
         this.itemName = itemName;
@@ -39,6 +49,15 @@ public class ItemModel{
 
 
 //getter and setters
+
+    public int getItemID() {
+        return itemID;
+    }
+
+    public void setItemID(int itemID) {
+        this.itemID = itemID;
+    }
+
     public String getItemName() {
         return itemName;
     }
