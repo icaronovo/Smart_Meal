@@ -188,15 +188,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void addSeveralBusinesses() {
         CustomerModel business1 = new CustomerModel("Business", "mcdonalds@mcdonalds", "mcdonalds", "McDonald's", "123", "McDonalds Avenue", "Burnaby", "British Columbia", R.drawable.mcdonalds);
-        CustomerModel business2 = new CustomerModel("Business", "bk@bk", "bk", "Burger King", "123", "Burger King Avenue", "Vancouver", "British Columbia", R.drawable.bk);
-        CustomerModel business3 = new CustomerModel("Business", "wendys@wendys", "wendys", "Wendy's", "123", "Wendy's Avenue", "New Westminster", "British Columbia", R.drawable.wendys);
+        CustomerModel business2 = new CustomerModel("Business", "bk@bk", "bk", "Burger King", "123", "Burger King Avenue", "Calgary", "Alberta", R.drawable.bk);
+        CustomerModel business3 = new CustomerModel("Business", "wendys@wendys", "wendys", "Wendy's", "123", "Wendy's Avenue", "Toronto", "Ontario", R.drawable.wendys);
         CustomerModel business4 = new CustomerModel("Business", "kfc@kfc", "kfc", "KFC", "123", "KFC Avenue", "Surrey", "British Columbia", R.drawable.kfc);
         CustomerModel business5 = new CustomerModel("Business", "togosushi@togosushi", "togosushi", "ToGo Sushi", "123", "ToGo Sushi Avenue", "Burnaby", "British Columbia", R.drawable.togosushi);
-        CustomerModel business6 = new CustomerModel("Business", "dominos@dominos", "dominos", "Domino's", "123", "Domino's Avenue", "Vancouver", "British Columbia", R.drawable.dominos);
+        CustomerModel business6 = new CustomerModel("Business", "dominos@dominos", "dominos", "Domino's", "123", "Domino's Avenue", "Calgary", "Alberta", R.drawable.dominos);
         CustomerModel business7 = new CustomerModel("Business", "pizzahut@pizzahut", "pizzahut", "Pizza Hut", "123", "Pizza Hut Avenue", "New Westminster", "British Columbia", R.drawable.pizzahut);
-        CustomerModel business8 = new CustomerModel("Business", "pizzapizza@pizzapizza", "pizzapizza", "Pizza Pizza", "123", "Pizza Pizza Avenue", "Surrey", "British Columbia", R.drawable.pizzapizza);
+        CustomerModel business8 = new CustomerModel("Business", "pizzapizza@pizzapizza", "pizzapizza", "Pizza Pizza", "123", "Pizza Pizza Avenue", "Toronto", "Ontario", R.drawable.pizzapizza);
         CustomerModel business9 = new CustomerModel("Business", "freshslice@freshslice", "freshslice", "Fresh Slice", "123", "Fresh Slice Avenue", "Burnaby", "British Columbia", R.drawable.freshslice);
-        CustomerModel business10 = new CustomerModel("Business", "pizzagarden@pizzagarden", "pizzagarden", "Pizza Garden", "123", "Pizza Garden Avenue", "Vancouver", "British Columbia", R.drawable.pizzagarden);
+        CustomerModel business10 = new CustomerModel("Business", "pizzagarden@pizzagarden", "pizzagarden", "Pizza Garden", "123", "Pizza Garden Avenue", "Toronto", "Ontario", R.drawable.pizzagarden);
 
         CustomerModel[] listOfBusiness = {business1, business2, business3, business4, business5, business6, business7, business8, business9, business10};
 
@@ -298,7 +298,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE ItemID= ? ", new String[]{"1"});
-        if (cursor.getCount() < 0) {
+        Log.d("cursor", String.valueOf(cursor.getColumnIndexOrThrow("ItemID")));
+        if (cursor.getCount() == 0) {
             ArrayList<ItemModel> itemList = new ArrayList<ItemModel>();
             itemList.add(new ItemModel("Title Item", "Description, description bla bla bla", 9.99, 10, 1));
             itemList.add(new ItemModel("Title Item 2", "Description, description bla bla bla", 19.99, 10, 1));
