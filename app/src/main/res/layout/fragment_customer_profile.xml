@@ -17,7 +17,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/btnLogoff"
         android:background="@drawable/rounded"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/smartAppLightGreen"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custState" />
 
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="@string/profileUpdate"
         android:background="@drawable/rounded"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/smartAppLightGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/btnLog"

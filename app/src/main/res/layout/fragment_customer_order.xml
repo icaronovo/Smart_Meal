@@ -113,6 +113,7 @@
         android:layout_height="wrap_content"
         android:text="@string/btnConfirmORder"
         android:visibility="gone"
+        android:background="@drawable/rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"

@@ -34,6 +34,6 @@ public class SplashActivity extends AppCompatActivity {
 
         };
         Timer opening = new Timer();
-        opening.schedule(task, 1000); // Schedule the task to run after 1 second
+        opening.schedule(task, 3000); // Schedule the task to run after 1 second
     }
 }
