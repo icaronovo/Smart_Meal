@@ -41,7 +41,7 @@ public class BusinessAdapter extends ArrayAdapter<OrderModel> {
         // Populate the data into the template view using the data object
         textView.setText(item.toString());
         checkBox.setChecked(false);
-        
+
         // Return the completed view to render on screen
         return convertView;
     }

@@ -23,7 +23,6 @@ public class BusinessItems extends AppCompatActivity {
     private androidx.appcompat.widget.Toolbar toolbar;
     private DBHelper DB;
     private SharedPreferences sharedPreferences;
-//    private SimpleAdapter adapter;
     private BusinessItemAdapter adapter;
     private ListView mListView;
 
