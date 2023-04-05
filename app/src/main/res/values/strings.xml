@@ -41,8 +41,8 @@
         <item>I am a business</item>
     </string-array>
     <string name="txtCreate">Create</string>
-    <string name="txtFoodItem">Food Items</string>
-    <string name="txtOrder">Orders</string>
+    <string name="txtFoodItem">Food Item</string>
+    <string name="txtOrder">Order</string>
     <string name="txtOrders">Orders</string>
     <string name="txtReminder">Reminder</string>
     <string name="txtReports">Reports</string>
@@ -85,6 +85,9 @@
     <string name="addItemQuantityHint">Quantity</string>
     <string name="addItemPriceHint">Price</string>
     <string name="upPass">Change Password</string>
+    <string name="txtHistory">History</string>
+    <string name="txtItemDisplay">Item Display</string>
+    <string name="btnAdd">Add item</string>
 
 
 </resources>

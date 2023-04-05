@@ -39,7 +39,7 @@ public class BusinessMain extends AppCompatActivity {
         btnAddFoodItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this, AddFoodItem.class));
+                startActivity(new Intent(BusinessMain.this, BusinessItems.class));
             }
         });
 

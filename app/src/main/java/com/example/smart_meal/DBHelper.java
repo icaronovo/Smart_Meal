@@ -187,16 +187,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     public void addSeveralBusinesses() {
-        CustomerModel business1 = new CustomerModel("Business", "mcdonalds@mcdonalds", "mcdonalds", "McDonald's", "123", "McDonalds Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business2 = new CustomerModel("Business", "bk@bk", "bk", "Burger King", "123", "Burger King Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business3 = new CustomerModel("Business", "wendys@wendys", "wendys", "Wendy's", "123", "Wendy's Avenue", "New Westminster", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business4 = new CustomerModel("Business", "kfc@kfc", "kfc", "KFC", "123", "KFC Avenue", "Surrey", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business5 = new CustomerModel("Business", "togosushi@togosushi", "togosushi", "ToGo Sushi", "123", "ToGo Sushi Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business6 = new CustomerModel("Business", "dominos@dominos", "dominos", "Domino's", "123", "Domino's Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business7 = new CustomerModel("Business", "pizzahut@pizzahut", "pizzahut", "Pizza Hut", "123", "Pizza Hut Avenue", "New Westminster", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business8 = new CustomerModel("Business", "pizzapizza@pizzapizza", "pizzapizza", "Pizza Pizza", "123", "Pizza Pizza Avenue", "Surrey", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business9 = new CustomerModel("Business", "freshslice@freshslice", "freshslice", "Fresh Slice", "123", "Fresh Slice Avenue", "Burnaby", "British Columbia", R.drawable.ic_baseline_person_outline_24);
-        CustomerModel business10 = new CustomerModel("Business", "pizzagarden@pizzagarden", "pizzagarden", "Pizza Garden", "123", "Pizza Garden Avenue", "Vancouver", "British Columbia", R.drawable.ic_baseline_person_outline_24);
+        CustomerModel business1 = new CustomerModel("Business", "mcdonalds@mcdonalds", "mcdonalds", "McDonald's", "123", "McDonalds Avenue", "Burnaby", "British Columbia", R.drawable.mcdonalds);
+        CustomerModel business2 = new CustomerModel("Business", "bk@bk", "bk", "Burger King", "123", "Burger King Avenue", "Vancouver", "British Columbia", R.drawable.bk);
+        CustomerModel business3 = new CustomerModel("Business", "wendys@wendys", "wendys", "Wendy's", "123", "Wendy's Avenue", "New Westminster", "British Columbia", R.drawable.wendys);
+        CustomerModel business4 = new CustomerModel("Business", "kfc@kfc", "kfc", "KFC", "123", "KFC Avenue", "Surrey", "British Columbia", R.drawable.kfc);
+        CustomerModel business5 = new CustomerModel("Business", "togosushi@togosushi", "togosushi", "ToGo Sushi", "123", "ToGo Sushi Avenue", "Burnaby", "British Columbia", R.drawable.togosushi);
+        CustomerModel business6 = new CustomerModel("Business", "dominos@dominos", "dominos", "Domino's", "123", "Domino's Avenue", "Vancouver", "British Columbia", R.drawable.dominos);
+        CustomerModel business7 = new CustomerModel("Business", "pizzahut@pizzahut", "pizzahut", "Pizza Hut", "123", "Pizza Hut Avenue", "New Westminster", "British Columbia", R.drawable.pizzahut);
+        CustomerModel business8 = new CustomerModel("Business", "pizzapizza@pizzapizza", "pizzapizza", "Pizza Pizza", "123", "Pizza Pizza Avenue", "Surrey", "British Columbia", R.drawable.pizzapizza);
+        CustomerModel business9 = new CustomerModel("Business", "freshslice@freshslice", "freshslice", "Fresh Slice", "123", "Fresh Slice Avenue", "Burnaby", "British Columbia", R.drawable.freshslice);
+        CustomerModel business10 = new CustomerModel("Business", "pizzagarden@pizzagarden", "pizzagarden", "Pizza Garden", "123", "Pizza Garden Avenue", "Vancouver", "British Columbia", R.drawable.pizzagarden);
 
         CustomerModel[] listOfBusiness = {business1, business2, business3, business4, business5, business6, business7, business8, business9, business10};
 
@@ -483,6 +483,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void removeQuantityfromItem(int businessID) {
         SQLiteDatabase database = this.getReadableDatabase();
+
+    }
+
+    public void getLastOrderID (String customerID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_ORDER_ID +
+                " FROM " + ORDER_INFO +
+                " WHERE " + COLUMN_CUSTOMER_ID + "=?" +
+                " ORDER BY "+ COLUMN_CUSTOMER_ID +
+                " LIMIT 1";
+        Cursor cursor = database.rawQuery(query, new String[]{customerID});
 
     }
 }

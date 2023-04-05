@@ -78,6 +78,9 @@ public class CustomListAdapter extends ArrayAdapter<ItemModel> {
         return itemCountMap;
     }
 
+    public void setClickListener(BusinessItems businessItems) {
+    }
+
     private static class ViewHolder {
         TextView itemName, quantityItem;
         ImageButton addItem;
