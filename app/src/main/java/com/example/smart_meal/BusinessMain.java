@@ -16,7 +16,7 @@ import android.widget.Button;
 
 public class BusinessMain extends AppCompatActivity {
     Toolbar toolbar;
-    Button btnReport,btnLogout,btnOrders, btnReminder, btnAddFoodItem;
+    Button btnReport,btnLogout,btnOrders, btnAddFoodItem;
 
     DBHelper DB;
     @Override
@@ -27,7 +27,7 @@ public class BusinessMain extends AppCompatActivity {
         btnReport = findViewById(R.id.btnReports);
         btnLogout = findViewById(R.id.btnLogout);
         btnOrders = findViewById(R.id.btnOrdersFromClient);
-        btnReminder =findViewById(R.id.btnReminder);
+
         btnAddFoodItem = findViewById(R.id.btnAddFoodItem);
 
         DB = new DBHelper(this);
@@ -51,13 +51,6 @@ public class BusinessMain extends AppCompatActivity {
             }
         });
 
-        //Send reminders
-        btnReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
-            }
-        });
 
         //Reports
         btnReport.setOnClickListener(new View.OnClickListener() {
