@@ -120,6 +120,7 @@ public class CustomerOrderFragment extends Fragment {
 
                 if(DB.addOrder(newOrder)){
                     Toast.makeText(getActivity(), "Order sent!", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
                 }else{
                     Toast.makeText(getActivity(), "Couldn't submit order. Try again", Toast.LENGTH_SHORT).show();
                 }

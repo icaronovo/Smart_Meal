@@ -16,7 +16,7 @@ import java.util.List;
 
 public class CustomerRestaurant extends AppCompatActivity implements Communicator {
     DBHelper DB = new DBHelper(this);
-    private List<ItemModel> itemList;
+//    private List<ItemModel> itemList;
     public int restaurantId;
 
     @Override
@@ -37,7 +37,7 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
     @Override
     public void respond(HashMap<Integer,Integer> itemIdAndQty) {
-        DecimalFormat decimalFormat = new DecimalFormat("#");
+//        DecimalFormat decimalFormat = new DecimalFormat("#");
         DecimalFormat currency = new DecimalFormat("#.##");
         double finalTotal = 0;
 
