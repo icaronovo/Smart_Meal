@@ -21,11 +21,11 @@ import java.util.List;
 import java.util.Stack;
 
 public class BusinessOrders extends AppCompatActivity {
-    DBHelper DB;
-    private BusinessAdapter adapter;
-    private CheckBox checkBox;
-    private ListView listView;
-    private androidx.appcompat.widget.Toolbar toolbar;
+    DBHelper DB; // instance of DBHelper class
+    private BusinessAdapter adapter; // instance of BusinessAdapter class
+    private CheckBox checkBox; // instance of CheckBox class
+    private ListView listView; // instance of ListView class
+    private androidx.appcompat.widget.Toolbar toolbar; // instance of Toolbar class
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +34,9 @@ public class BusinessOrders extends AppCompatActivity {
 
         checkBox = findViewById(R.id.checkboxSelectAll);
         listView = findViewById(R.id.listViewBusiness);
-        toolbar = findViewById(R.id.toolbarOrder);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w); // Replace with your icon resource ID
+        toolbar = findViewById(R.id.toolbarOrder); // retrieve the toolbar object from the activity layout
+        setSupportActionBar(toolbar); // set the toolbar as the action bar for the activity
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w); // set the navigation icon for the toolbar
 
         // Handle navigation icon click event
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -48,28 +48,28 @@ public class BusinessOrders extends AppCompatActivity {
         });
 
         //Start the database
-        DB = new DBHelper(this);
+        DB = new DBHelper(this); // instantiate the DBHelper class
 
         //Get business ID
-        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
-        String businessID = sharedPreferences.getString("CustomerID", "");
+        SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE); // retrieve the shared preferences object from the context
+        String businessID = sharedPreferences.getString("CustomerID", ""); // retrieve the business ID from the shared preferences
 
         //Get the orders from the customer
-        Cursor c = DB.displayOrderBusiness(businessID);
+        Cursor c = DB.displayOrderBusiness(businessID); // retrieve the orders for the business from the database
 
         //Check if the customer has orders
-        Boolean hasNoData = updateData(c, businessID);
+        Boolean hasNoData = updateData(c, businessID); // update the data in the activity
         if (hasNoData == true) {
-            checkBox.setText("You have no order");
+            checkBox.setText("You have no orders");
         } else{
             checkBox.setText("Select all orders");
         }
-        c.close();
+        c.close(); // close the cursor
     }
 
     @Override
     public boolean onSupportNavigateUp() {
-        onBackPressed();
+        onBackPressed(); // handle back button click event
         return true;
     }
 
@@ -77,14 +77,14 @@ public class BusinessOrders extends AppCompatActivity {
     //If the customer doesn't has any data
     //It will show that he has no data
     public boolean updateData(Cursor c, String businessID) {
-        List<String> list = new ArrayList<>();
-        if (c.getCount() > 0) {
-            while (c.moveToNext()) {
-                list.add(c.getString(0)); //OrderID
-                list.add(c.getString(1)); //OrderStatus
-                list.add(c.getString(2)); //ItemID
-                list.add(c.getString(3)); //Date
-                list.add(c.getString(4)); //ItemQty
+        List<String> list = new ArrayList<>(); // create a new array list for storing the orders
+        if (c.getCount() > 0) { // if there are orders in the cursor
+            while (c.moveToNext()) { // loop through the cursor to retrieve the orders
+                list.add(c.getString(0)); // add the order ID to the list
+                list.add(c.getString(1)); // add the order status to the list
+                list.add(c.getString(2)); // add the item ID to the list
+                list.add(c.getString(3)); // add the date to the list
+                list.add(c.getString(4)); // add the item quantity
                 list.add(c.getString(5)); //CustomerID
             }
         } else {

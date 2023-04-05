@@ -12,14 +12,14 @@ import android.widget.Toast;
 
 public class PasswordUpdate extends AppCompatActivity {
 
-    DBHelper DB = new DBHelper(this);
-    TextView email, pass, name;
-    Button btnReset;
+    DBHelper DB = new DBHelper(this); // create an instance of DBHelper class
+    TextView email, pass, name; // create variables for TextViews
+    Button btnReset; // create a variable for a button
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password_recovery);
+        setContentView(R.layout.activity_password_recovery); // set the layout
 
         email = findViewById(R.id.editTextTextPersonName);
         pass = findViewById(R.id.editTextTextPersonName2);
@@ -27,8 +27,8 @@ public class PasswordUpdate extends AppCompatActivity {
 
         btnReset = findViewById(R.id.btnReset);
         SharedPreferences sharedPreferences = getSharedPreferences
-                ("data", MODE_PRIVATE);
-        String emailSP = sharedPreferences.getString("EmailCust", "");
+                ("data", MODE_PRIVATE); // get a reference to SharedPreferences
+        String emailSP = sharedPreferences.getString("EmailCust", ""); // get the email from SharedPreferences
         btnReset.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -38,15 +38,13 @@ public class PasswordUpdate extends AppCompatActivity {
                 String password = pass.getText().toString();
                 String namePrev = name.getText().toString();
 
-                boolean success = DB.accountUpdate(emailSP, password, namePrev);
+                boolean success = DB.accountUpdate(emailSP, password, namePrev); // update the user's account
                 if (success) {
-                    Toast.makeText(PasswordUpdate.this,"Password Updated!",Toast.LENGTH_LONG).show();
-                    startActivity(new Intent(PasswordUpdate.this, LoginActivity.class));
+                    Toast.makeText(PasswordUpdate.this,"Password Updated!",Toast.LENGTH_LONG).show(); // show a toast message if the update is successful
+                    startActivity(new Intent(PasswordUpdate.this, LoginActivity.class)); // start LoginActivity
                 } else {
-                    Toast.makeText(PasswordUpdate.this, "Please check  if your email/name is correct", Toast.LENGTH_LONG).show();
-
+                    Toast.makeText(PasswordUpdate.this, "Please check if your email/name is correct", Toast.LENGTH_LONG).show(); // show a toast message if there is an error
                 }
-
             }
         });
     }

@@ -4,11 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F8C1A2"
     tools:context=".BusinessMain">
 
-    <include
-        layout="@layout/business_appbar"
-        />
+    <include layout="@layout/business_appbar" />
 
     <Button
         android:id="@+id/btnAddFoodItem"
@@ -16,6 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="152dp"
         android:text="@string/txtFoodItem"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -27,6 +29,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:text="@string/txtOrder"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,6 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="@string/txtReminder"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,6 +57,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:text="@string/txtReports"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +71,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
         android:text="@string/txtLogout"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"

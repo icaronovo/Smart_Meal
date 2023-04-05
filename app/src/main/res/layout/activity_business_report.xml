@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BusinessReport">
+    tools:context=".BusinessReport"
+    android:background="#F8C1A2">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarReport"
