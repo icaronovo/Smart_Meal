@@ -6,89 +6,114 @@
     android:layout_height="match_parent"
     tools:context=".BusinessProfile">
 
-<!--    Não coloque ID no include porque se não, o negocio nao funfa -->
-    <include
-        layout="@layout/business_appbar" />
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolBarProf"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/smartAppColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white">
+
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
         android:id="@+id/busName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="222dp"
+        android:layout_marginStart="11dp"
+        android:layout_marginBottom="26dp"
         android:text="busName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/include"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView"
+        app:layout_constraintStart_toEndOf="@+id/welcomeBus"
         tools:ignore="MissingConstraints" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="0dp"
-        android:layout_height="77dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="27dp"
+        android:layout_height="95dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="77dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="78dp"
         android:contentDescription="@string/anImage"
-        app:layout_constraintEnd_toStartOf="@+id/busEmail"
+        app:layout_constraintBottom_toTopOf="@+id/busAddress"
+        app:layout_constraintEnd_toStartOf="@+id/busPhone"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/shop_icon"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="84dp" />
+        app:layout_constraintTop_toBottomOf="@+id/toolBarProf"
+        app:srcCompat="@drawable/shop_icon_black"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/busAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="306dp"
         android:text="busAddress"
-        app:layout_constraintEnd_toEndOf="@+id/busPhone"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/busPhone"
-        app:layout_constraintTop_toBottomOf="@+id/busEmail"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/busPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="15dp"
         android:text="busPhone"
-        app:layout_constraintBottom_toTopOf="@+id/btnEditProfile"
-        app:layout_constraintTop_toBottomOf="@+id/busAddress"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="27dp" />
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/busEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="224dp"
+        android:layout_marginBottom="21dp"
         android:text="busEmail"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/busName"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/busPhone"
+        app:layout_constraintStart_toStartOf="@+id/busPhone"
         tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="36dp"
+        android:layout_marginBottom="40dp"
         android:text="@string/profileUpdate"
         app:layout_constraintBottom_toTopOf="@+id/btnLogoff"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="138dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnLogoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="144dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="90dp"
+        android:text="@string/btnLogoff"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="161dp"
-        tools:text="@string/btnLogoff" />
+        app:layout_constraintEnd_toEndOf="@+id/btnEditProfile"
+        tools:ignore="MissingConstraints" />
+
+    <TextView
+        android:id="@+id/welcomeBus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="39dp"
+        android:text="@string/txtWelcome"
+        android:textSize="24sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/busName"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

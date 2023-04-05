@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
@@ -30,7 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         email = findViewById(R.id.txtEmail);
         pass = findViewById(R.id.txtPassword);
         DB = new DBHelper(this);
-
+        ImageView imageView = findViewById(R.id.imgRotate2);
+        imageView.startAnimation(AnimationUtils.loadAnimation(this,R.anim.rotation));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         //btn to delete record from db
