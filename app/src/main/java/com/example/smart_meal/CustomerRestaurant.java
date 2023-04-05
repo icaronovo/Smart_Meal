@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class CustomerRestaurant extends AppCompatActivity implements Communicator, CustomerOrderFragment.OnButtonClickListener {
+public class CustomerRestaurant extends AppCompatActivity implements Communicator {
     DBHelper DB = new DBHelper(this);
     private List<ItemModel> itemList;
     public int restaurantId;
@@ -59,14 +59,6 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
         str.append("Fees  $" + currency.format(FEE)+ "\n");
         str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");
         customerOrderFragment.makeOrder(str, itemIdAndQty);
-    }
-
-    //Handle order submit click, input data and pass to previous activity
-    @Override
-    public void onButtonClick() {
-        Intent intent = new Intent();
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
     //Get the items price from this Restaurant on DB

@@ -21,7 +21,6 @@ import java.util.HashMap;
 
 public class CustomerOrderFragment extends Fragment {
 
-    private OnButtonClickListener mListener;
     private TextView txtYourDelivery;
     private TextView txtDelivery;
     private TextView txtAddress;
@@ -124,23 +123,7 @@ public class CustomerOrderFragment extends Fragment {
                 }else{
                     Toast.makeText(getActivity(), "Couldn't submit order. Try again", Toast.LENGTH_SHORT).show();
                 }
-                //Here you are gonna send the ORDERID
-                mListener.onButtonClick();
             }
         });
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mListener = (OnButtonClickListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString() + " must implement OnButtonClickListener");
-        }
-    }
-
-    public interface OnButtonClickListener {
-        void onButtonClick();
     }
 }

@@ -126,24 +126,8 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         // The launcher with the Intent you want to start
         Intent intent = new Intent(CustomerMain.this, CustomerRestaurant.class);
         intent.putExtra("RESTAURANTID",restaurantsIdDisplay.get(position));
-        launchSomeActivity.launch(intent);
+        startActivity(intent);
     }
-
-    //Get the data from the Customer Restaurant Activity
-    private ActivityResultLauncher<Intent> launchSomeActivity = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        Intent data = result.getData();
-                        name = data.getStringExtra("ORDERID");
-                        String typeAdd = data.getStringExtra("DELIVERY");
-                        model.setMyString(name);
-                        customerOrder.setModel(model);
-                    }
-                }
-            });
 
     //Created a list of the recyclerview
     //Latter figure out how to import from database :)
