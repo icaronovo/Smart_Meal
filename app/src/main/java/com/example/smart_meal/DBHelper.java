@@ -293,6 +293,35 @@ public class DBHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+    //add several orders
+    public void insertSeveralOrders () {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ORDER_INFO WHERE OrderID = ?", new String[]{"1"});
+        Log.d("Cursor", String.valueOf(cursor.getCount()));
+        if (cursor.getCount() == 0) {
+            ArrayList<OrderModel> orderList = new ArrayList<>();
+            orderList.add(new OrderModel(1, 2, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(1, 1, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(2, 2, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(3, 3, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(1, 3, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(1, 4, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(1, 2, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(0, 1, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(0, 2, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+            orderList.add(new OrderModel(0, 3, 11, "05/04/2023 02:57:22", "2$3$1$", "1$4$5$"));
+
+            for (int i = 0; i < orderList.size(); i++) {
+                boolean isInserted = addOrder(orderList.get(i));
+                if (!isInserted) {
+                    Log.d("Order " + i, "Failed to add item.");
+                } else {
+                    Log.d("Order " + i, "Added successfully");
+                }
+            }
+        }
+    }
+
     //add several items when app is loaded
     public void insertSeveralItems() {
 

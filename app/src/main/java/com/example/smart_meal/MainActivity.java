@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         DB.addSeveralBusinesses();
         DB.retrieveAllBusinesses();
         DB.insertSeveralItems();
+        DB.insertSeveralOrders();
 
         if (!loggedUser.equals("")) {
             if (loggedUserType.equals("Business")) {
