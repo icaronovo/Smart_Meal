@@ -59,7 +59,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
         //TextView for the titles
         titleTextView = findViewById(R.id.topText);
-        titleTextView.setText("Welcome " + userName);
+        titleTextView.setText("Welcome, " + userName);
 
         if (!TextUtils.isEmpty(email)) {
             String[] cursor = DB.getUserData(email);
@@ -69,7 +69,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
             }
         }
-        //Constraint layout where is the Fragments
+        //Constraint layout where the Fragments are
         constraintLayout = findViewById(R.id.fragmentLayout);
 
         //Bottom navigation view
@@ -114,7 +114,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         recyclerView.setAdapter(itemAdapter);
     }
 
-    //Recycle view  is clickable. When you click in, you go to the restaurant page
+    //Recycle view  is clickable. When you click on it, you go to the restaurant's page
     //And when you click on the confirm order
     //It brings you back here
     @Override

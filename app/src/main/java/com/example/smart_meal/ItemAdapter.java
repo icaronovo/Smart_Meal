@@ -36,6 +36,7 @@ public class ItemAdapter extends RecyclerView.Adapter {
         ((ViewHolder) holder).textAdress.setText(itemList.get(position).getCustomerAddress());
         String nameWithCity = itemList.get(position).getCustomerCity() + " - " + itemList.get(position).getCustomerProvince();
         ((ViewHolder) holder).textCityAndProvince.setText(nameWithCity);
+        ((ViewHolder) holder).itemImage.setImageResource(itemList.get(position).getCustomerImage());
     }
 
     @Override

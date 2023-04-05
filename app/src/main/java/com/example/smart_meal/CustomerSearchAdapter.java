@@ -40,7 +40,7 @@ public class CustomerSearchAdapter extends RecyclerView.Adapter<CustomerSearchAd
         holder.businessName.setText(businessList.get(position).getCustomerName());
         holder.businessCity.setText(businessList.get(position).getCustomerCity());
         holder.businessAddress.setText(businessList.get(position).getCustomerAddress());
-        holder.businessImg.setImageResource(businessList.get(position).getCustomerImage());
+        holder.businessImg.setImageResource((businessList.get(position).getCustomerImage()));
     }
 
     @Override
