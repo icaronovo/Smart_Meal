@@ -5,7 +5,8 @@
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="#F8C1A2">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarOrder"
@@ -44,20 +45,29 @@
 
     <Button
         android:id="@+id/btnBusinessConfirmOrder"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
+        android:layout_width="111dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="52dp"
         android:layout_marginBottom="16dp"
         android:text="@string/btnConfirmORder"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btnBusinessCancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="109dp"
+        android:layout_height="47dp"
         android:layout_marginBottom="16dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
         android:text="@string/btnCancel"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.436"

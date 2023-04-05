@@ -79,7 +79,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"
-                android:text="@string/btnCancel" />
+                android:text="@string/btnCancel"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/white"/>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

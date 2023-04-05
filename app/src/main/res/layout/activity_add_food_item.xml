@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddFoodItem">
+    tools:context=".AddFoodItem"
+    android:background="#F8C1A2">
 
     <androidx.appcompat.widget.Toolbar
+        app:title="Add Item"
         android:id="@+id/toolbarAdd"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -84,6 +86,10 @@
         android:layout_height="50dp"
         android:layout_marginTop="40dp"
         android:text="@string/txtCreate"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@drawable/rounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"

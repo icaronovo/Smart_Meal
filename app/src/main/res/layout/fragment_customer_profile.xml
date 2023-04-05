@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CustomerProfileFragment">
+    tools:context=".CustomerProfileFragment"
+    android:backgroundTint="@color/smartAppLightGreen">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -15,6 +16,8 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="8dp"
         android:text="@string/btnLogoff"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/custState" />
 
@@ -23,6 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/profileUpdate"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toEndOf="@+id/btnLog"

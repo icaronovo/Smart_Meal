@@ -8,6 +8,7 @@
     android:background="#F8C1A2">
 
     <androidx.appcompat.widget.Toolbar
+        app:title="Business Reports"
         android:id="@+id/toolbarReport"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
