@@ -1,70 +1,73 @@
 package com.example.smart_meal;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-public class CustomerItemListFragment extends Fragment {
-    private Button btnConfirmOrder;
-    private Communicator communicator;
-    private TextView quantity;
-    private ListView mListView;
-    private CustomListAdapter adapter;
-
+public class BusinessItems extends AppCompatActivity {
+    private Button btnAddItem;
+    private androidx.appcompat.widget.Toolbar toolbar;
     private DBHelper DB;
-
+    private SharedPreferences sharedPreferences;
+//    private SimpleAdapter adapter;
+    private BusinessItemAdapter adapter;
+    private ListView mListView;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_customer_item_list, container, false);
-        mListView = view.findViewById(R.id.listView);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_business_items);
 
-        //Start the db
-        DB = new DBHelper(getActivity());
-
-        //Get the restaurant ID on the Customer Restaurant activity
-        CustomerRestaurant activity = (CustomerRestaurant) getActivity();
-        int selectedRestaurant = activity.restaurantId;
-
-        //Get the items of this restaurant
-        Cursor c = DB.itemsDisplay(String.valueOf(selectedRestaurant));
-        Boolean hasNoItems = getItems(c);
-        if(hasNoItems == true){
-            Toast.makeText(getActivity(),"No",Toast.LENGTH_LONG).show();
-        }
-        c.close();
-        return view;
-    }
-
-    public void onViewCreated(View view, Bundle savedInstance) {
-        super.onViewCreated(view, savedInstance);
-        //Get the business ID
-        communicator = (Communicator) getActivity();
-        btnConfirmOrder = getActivity().findViewById(R.id.btnFrag1);
-        quantity = getActivity().findViewById(R.id.count);
-        btnConfirmOrder.setOnClickListener(new View.OnClickListener() {
+        //Toolbar
+        toolbar = findViewById(R.id.toolbarAddOne);
+        toolbar.setTitle("Add Items");
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
+        // Handle navigation icon click event on toolbar
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                communicator.respond(adapter.getItems());
+                // Handle back button click here
+                onBackPressed();
             }
         });
-    }
 
+        //Get the items already added
+        //Start the db
+        DB = new DBHelper(this);
+        sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
+
+        //Get the items of this restaurant
+        Cursor c = DB.itemsDisplay(String.valueOf(businessID));
+        Boolean hasNoItems = getItems(c);
+        if(hasNoItems == true){
+            Toast.makeText(BusinessItems.this,"No",Toast.LENGTH_LONG).show();
+        }
+        c.close();
+
+        btnAddItem = findViewById(R.id.btnAddNewItem);
+        btnAddItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessItems.this,AddFoodItem.class));
+            }
+        });
+
+    }
     //Get the data from DB
     //If the customer doesn't has any data
     //It will show that he has no data
@@ -113,7 +116,8 @@ public class CustomerItemListFragment extends Fragment {
 
     //Create the view on Listview
     public void createListView(ArrayList<ItemModel> listItems) {
-        adapter = new CustomListAdapter(getContext(), listItems);
-        mListView.setAdapter(adapter);
+        ListView listView = findViewById(R.id.listViewAdd);
+        BusinessItemAdapter adapter = new BusinessItemAdapter(listItems);
+        listView.setAdapter(adapter);
     }
 }

@@ -13,12 +13,19 @@
         android:theme="@style/Theme.Smart_Meal"
         tools:targetApi="31">
         <activity
+            android:name=".BusinessItems"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".AddFoodItem"
             android:exported="false" />
         <activity
             android:name=".BusinessOrders"
             android:exported="false"
-            android:parentActivityName=".BusinessMain"/>
+            android:parentActivityName=".BusinessMain" />
         <activity
             android:name=".CustomerUpdate"
             android:exported="false" />

@@ -102,11 +102,9 @@ public class ItemModel{
     //to string method
     @Override
     public String toString() {
-        return "ItemModel{" +
-                "itemName='" + itemName + '\'' +
-                ", itemDescription='" + itemDescription + '\'' +
-                ", itemPrice=" + itemPrice +
-                ", itemQuantity=" + itemQuantity +
-                '}';
+        return  "\n Item Name: " + itemName + "\n" +
+                " Description: " + itemDescription + "\n"+
+                " Price: $" + itemPrice + "\n" +
+                " Quantity: " + itemQuantity + "\n";
     }
 }
