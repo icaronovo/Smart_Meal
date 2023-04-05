@@ -84,6 +84,7 @@
     <string name="addItemDescriptionHint">Item description</string>
     <string name="addItemQuantityHint">Quantity</string>
     <string name="addItemPriceHint">Price</string>
+    <string name="txtHistory">History</string>
 
 
 

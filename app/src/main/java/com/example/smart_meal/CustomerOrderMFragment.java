@@ -79,8 +79,6 @@ public class CustomerOrderMFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String order = displayOrderNum.getText().toString();
-//                ("ORDER #" + orderID + " - " + businessName);
 
             }
         });

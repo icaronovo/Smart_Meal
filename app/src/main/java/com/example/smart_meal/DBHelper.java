@@ -488,5 +488,16 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase database = this.getReadableDatabase();
 
     }
+
+    public void getLastOrderID (String customerID){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT " + COLUMN_ORDER_ID +
+                " FROM " + ORDER_INFO +
+                " WHERE " + COLUMN_CUSTOMER_ID + "=?" +
+                " ORDER BY "+ COLUMN_CUSTOMER_ID +
+                " LIMIT 1";
+        Cursor cursor = database.rawQuery(query, new String[]{customerID});
+
+    }
 }
 

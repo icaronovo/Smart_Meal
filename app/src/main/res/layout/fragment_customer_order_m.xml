@@ -83,6 +83,16 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <TextView
+        android:id="@+id/txtOlderOrders"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/txtHistory"
+        android:textColor="@color/black"
+        android:layout_marginStart="10dp"
+        android:textSize="23sp"
+        android:textStyle="bold" />
+
     <ListView
         android:id="@+id/listViewOldOrders"
         android:layout_width="match_parent"
