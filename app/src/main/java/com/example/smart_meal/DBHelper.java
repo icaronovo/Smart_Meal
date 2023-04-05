@@ -393,13 +393,16 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to update order status
-    public boolean orderStatusUpdate(String username, String orderStatus) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("OrderStatus", orderStatus);
-        int rowsAffected = db.update("ORDER_INFO", values, "CustomerID = ?", new String[]{username});
-
-        return rowsAffected > 0;
+    public boolean orderStatusUpdate(String username, int orderNumber, int cancelOrder) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COLUMN_ORDER_STATUS,cancelOrder);
+        int u = sqLiteDatabase.update(ORDER_INFO,contentValues,"CustomerID= ? AND OrderID= ?",
+                new String[]{username,Integer.toString(orderNumber)});
+        if(u>0)
+            return true;
+        else
+            return false;
     }
 
     //query to show all orders

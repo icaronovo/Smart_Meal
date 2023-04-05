@@ -42,9 +42,22 @@ public class BusinessMain extends AppCompatActivity {
                 startActivity(new Intent(BusinessMain.this, AddFoodItem.class));
             }
         });
+
         //Confirm orders
+        btnOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
+            }
+        });
 
         //Send reminders
+        btnReminder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
+            }
+        });
 
         //Reports
         btnReport.setOnClickListener(new View.OnClickListener() {
@@ -71,18 +84,6 @@ public class BusinessMain extends AppCompatActivity {
             }
         });
 
-        btnOrders.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
-            }
-        });
-        btnReminder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
-            }
-        });
     }
 
     //When creating the other activities from the Business Part, if you want to put the top menu

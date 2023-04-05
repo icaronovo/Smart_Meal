@@ -43,9 +43,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private ConstraintLayout constraintLayout;
     private List<Integer> restaurantsIdDisplay = new ArrayList<>();
     private String name = "";
-
     DBHelper DB = new DBHelper(this);
-    CustomerOrderModel model = new CustomerOrderModel();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,8 +90,6 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
                         constraintLayout.setVisibility(View.VISIBLE);
-                        model.setMyString(name);
-                        customerOrder.setModel(model);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:

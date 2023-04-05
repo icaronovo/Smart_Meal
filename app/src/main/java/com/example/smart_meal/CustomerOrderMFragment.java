@@ -16,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -25,7 +27,6 @@ import java.util.Stack;
 
 public class CustomerOrderMFragment extends Fragment {
 
-    CustomerOrderModel model;
     private TextView displayOrderNum;
     private TextView displayOrdersItem;
     private TextView displayDate;
@@ -33,8 +34,8 @@ public class CustomerOrderMFragment extends Fragment {
     private DBHelper DB;
     private ListView myListView;
     private ArrayAdapter<String> myAdapter;
-    private DecimalFormat decimalFormat = new DecimalFormat("#");
     private DecimalFormat currency = new DecimalFormat("#.##");
+    private int orderID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -50,7 +51,6 @@ public class CustomerOrderMFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         displayOrderNum = getActivity().findViewById(R.id.txtOrderNumber);
         displayOrdersItem = getActivity().findViewById(R.id.orderCustomerItem);
         displayDate = getActivity().findViewById(R.id.txtDate);
@@ -79,7 +79,9 @@ public class CustomerOrderMFragment extends Fragment {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                orderStatusUpdate(customerID,)
+                String order = displayOrderNum.getText().toString();
+//                ("ORDER #" + orderID + " - " + businessName);
+
             }
         });
     }
@@ -136,7 +138,7 @@ public class CustomerOrderMFragment extends Fragment {
         StringBuilder orderToPrint = new StringBuilder();
 
         //Get the order
-        int orderID = lastSix.getOrderID();
+        orderID = lastSix.getOrderID();
 
         //Order status
         int status = lastSix.getOrderStatus();
@@ -171,7 +173,6 @@ public class CustomerOrderMFragment extends Fragment {
         displayOrderNum.setText("ORDER #" + orderID + " - " + businessName);
         displayDate.setText(date);
         displayOrdersItem.setText(String.valueOf(orderToPrint));
-
     }
 
     public void displayPastOrders(Stack<OrderModel> pastOrders){
@@ -184,10 +185,7 @@ public class CustomerOrderMFragment extends Fragment {
             double finalTotal = 1;
 
             display.append("Order ID #" + order.getOrderID() + "\n");
-            /*0 = Pedido enviado
-            1 = Pedido recebido pelo Restaurante & enviar alerta pro customer (caso dê lol)
-            2 = Customer cancelar order
-            3 = Business cancelar order*/
+
             if(order.getOrderStatus() == 2 || order.getOrderStatus() == 3){
                 display.append("Order Status #CANCELED\n");
             }
@@ -251,9 +249,5 @@ public class CustomerOrderMFragment extends Fragment {
             }
         }
         return itemName;
-    }
-
-    public void setModel(CustomerOrderModel model){
-        this.model = model;
     }
 }
