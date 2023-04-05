@@ -13,25 +13,35 @@
         android:id="@+id/btnLog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/btnLogoff"
+        android:layout_marginStart="32dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppLightGreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/custState" />
+        android:text="@string/btnLogoff"
+        app:layout_constraintStart_toEndOf="@+id/btnEdit"
+        app:layout_constraintTop_toTopOf="@+id/btnEdit" />
+
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="123dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="32dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppLightGreen"
+        android:text="@string/btnDel"
+        app:layout_constraintStart_toEndOf="@+id/btnLog"
+        app:layout_constraintTop_toTopOf="@+id/btnEdit" />
 
     <Button
         android:id="@+id/btnEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/profileUpdate"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="48dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppLightGreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toEndOf="@+id/btnLog"
-        app:layout_constraintTop_toTopOf="@+id/btnLog"
+        android:text="@string/profileUpdate"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         tools:ignore="NotSibling" />
 
     <TextView

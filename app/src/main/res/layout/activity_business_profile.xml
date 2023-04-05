@@ -4,18 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BusinessProfile"
-    android:background="#F8C1A2">
+    android:background="#F8C1A2"
+    tools:context=".BusinessProfile">
 
     <androidx.appcompat.widget.Toolbar
-        app:title="Profile"
         android:id="@+id/toolBarProf"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="0dp"
         android:background="@color/smartAppColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:title="Profile"
         app:titleTextColor="@color/white">
 
     </androidx.appcompat.widget.Toolbar>
@@ -87,33 +87,32 @@
     <Button
         android:id="@+id/btnEditProfile"
         android:layout_width="111dp"
-        android:layout_height="48dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginBottom="92dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
         android:text="@string/profileUpdate"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteY="433dp" />
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/btnLogoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
+        android:layout_marginStart="44dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
         android:text="@string/btnLogoff"
         android:textColor="@color/white"
         android:textSize="12sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/btnEditProfile"
-        app:layout_constraintStart_toStartOf="@+id/btnEditProfile"
+        app:layout_constraintStart_toEndOf="@+id/btnEditProfile"
+        app:layout_constraintTop_toTopOf="@+id/btnEditProfile"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -126,6 +125,18 @@
         app:layout_constraintBaseline_toBaselineOf="@+id/busName"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Button
+        android:id="@+id/btnDel"
+        android:layout_width="113dp"
+        android:layout_height="47dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/btnDel"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnLogoff" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

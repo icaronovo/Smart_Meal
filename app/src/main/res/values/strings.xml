@@ -57,7 +57,7 @@
     <string name="DELtxtRating">4.5 / 5.0</string>
     <string name="btnViewOrder">View Order</string>
     <string name="txtItemAv">Items Available</string>
-    <string name="btnDel">Update Password</string>
+    <string name="btnDel">Delete Account</string>
     <string name="newPasswordHint">Enter the new password</string>
     <string name="resetPasswordButtonText">Reset</string>
     <string name="btnSearch">Search For a Restaurant</string>
