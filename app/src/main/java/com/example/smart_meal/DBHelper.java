@@ -526,5 +526,15 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = database.rawQuery(query, new String[]{customerID});
 
     }
+
+    public Cursor viewData(){
+        SQLiteDatabase database = this.getReadableDatabase();
+        String query = "SELECT * FROM " + ORDER_INFO;
+        Cursor cursor = database.rawQuery(query,null);
+        //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
+        //Cursor cursor = database.rawQuery(query,new String[]{"2"});
+        return cursor;
+    }
+
 }
 
