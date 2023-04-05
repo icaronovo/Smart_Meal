@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 
 public class BusinessReport extends AppCompatActivity {
 
+    // Declare toolbar variable
     private androidx.appcompat.widget.Toolbar toolbar;
 
     @Override
@@ -25,8 +26,10 @@ public class BusinessReport extends AppCompatActivity {
         setContentView(R.layout.activity_business_report);
 
         //Top menu
+        // Set the toolbar and its navigation icon
         toolbar = findViewById(R.id.toolbarReport);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
+        // Set the title of the toolbar
         toolbar.setTitle("Report");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
@@ -39,6 +42,5 @@ public class BusinessReport extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
     }
 }

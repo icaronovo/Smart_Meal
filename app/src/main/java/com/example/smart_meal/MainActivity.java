@@ -38,29 +38,5 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
 
-//
-//        Button btnCustomer = findViewById(R.id.btnCustomer);
-//        Button btnBusiness = findViewById(R.id.btnBusiness);
-//
-//        btnBusiness.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                customerType = 0;
-//                intent.putExtra("TYPE", customerType);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        btnCustomer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-//                customerType = 1;
-//                intent.putExtra("TYPE", customerType);
-//                startActivity(intent);
-//            }
-//        });
-//    }
     }
 }

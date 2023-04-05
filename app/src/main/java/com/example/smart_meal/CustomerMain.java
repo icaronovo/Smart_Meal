@@ -1,5 +1,6 @@
 package com.example.smart_meal;
 
+// Importing necessary packages
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -48,19 +49,24 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Setting the layout file for this activity
         setContentView(R.layout.activity_customer_main);
 
+        // Initializing the data needed for this activity
         initData();
 
+        // Setting up SharedPreferences
         sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
         String userName = sharedPreferences.getString("Name", "");
         String email = sharedPreferences.getString("Email","");
         Log.d("TAG", email);
 
-        //TextView for the titles
+        // Setting the title text view
         titleTextView = findViewById(R.id.topText);
-        titleTextView.setText("Welcome, " + userName);
+        titleTextView.setText("Welcome " + userName);
 
+        // If email is not empty, then get the user data from the database
         if (!TextUtils.isEmpty(email)) {
             String[] cursor = DB.getUserData(email);
             Log.d("TAG", String.valueOf(cursor));
@@ -69,30 +75,35 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
 
             }
         }
-        //Constraint layout where the Fragments are
+
+        // Initializing the ConstraintLayout for the fragments
         constraintLayout = findViewById(R.id.fragmentLayout);
 
-        //Bottom navigation view
+        // Initializing the bottom navigation view
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.home:
-                        titleTextView.setText("Welcome " + userName);
+                        // When home is clicked, set the title and visibility of views
+                        titleTextView.setText("Welcome, " + userName);
                         recyclerView.setVisibility(View.VISIBLE);
                         constraintLayout.setVisibility(View.INVISIBLE);
                         return true;
                     case R.id.search:
+                        // When search is clicked, start a new activity
                         startActivity(new Intent(CustomerMain.this, CustomerSearch.class));
                         return true;
                     case R.id.order:
+                        // When order is clicked, set the title and visibility of views and replace fragment
                         titleTextView.setText("Order");
                         recyclerView.setVisibility(View.INVISIBLE);
                         constraintLayout.setVisibility(View.VISIBLE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
                     case R.id.profile:
+                        // When profile is clicked, set the title and visibility of views and replace fragment
                         titleTextView.setText("Account");
                         constraintLayout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);

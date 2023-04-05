@@ -4,9 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BusinessProfile">
+    tools:context=".BusinessProfile"
+    android:background="#F8C1A2">
 
     <androidx.appcompat.widget.Toolbar
+        app:title="Profile"
         android:id="@+id/toolBarProf"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
@@ -84,24 +86,34 @@
 
     <Button
         android:id="@+id/btnEditProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
+        android:layout_width="111dp"
+        android:layout_height="48dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
         android:text="@string/profileUpdate"
-        app:layout_constraintBottom_toTopOf="@+id/btnLogoff"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteY="433dp" />
 
     <Button
         android:id="@+id/btnLogoff"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="90dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
         android:text="@string/btnLogoff"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/btnEditProfile"
+        app:layout_constraintStart_toStartOf="@+id/btnEditProfile"
         tools:ignore="MissingConstraints" />
 
     <TextView

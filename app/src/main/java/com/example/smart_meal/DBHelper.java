@@ -157,16 +157,13 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to update password
-    public boolean accountUpdate(String username, String password, String name) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        SQLiteDatabase database = this.getReadableDatabase();
-        Cursor dataRead = database.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE Name = ? AND EmailCust=? ", new String[]{name, username});
+    public boolean accountUpdate(String email, String password, String name) {
+        SQLiteDatabase database = this.getWritableDatabase();
+        Cursor dataRead = database.rawQuery("SELECT * FROM CUSTOMER_INFO WHERE EmailCust = ? ", new String[]{email});
         ContentValues values = new ContentValues();
-        if (dataRead.getCount() > 0) {
             values.put("PasswordCust", password);
-            db.update("CUSTOMER_INFO", values, "EmailCust= ?", null);
-            return true;
-        } else return false;
+            int rowsAffected = database.update("CUSTOMER_INFO", values, "EmailCust = ? AND Name=?", new String[]{email,name});
+            return rowsAffected>0;
     }
 
     //query to add customer data in the database
