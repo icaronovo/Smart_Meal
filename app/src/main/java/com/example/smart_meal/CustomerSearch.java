@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 public class CustomerSearch extends AppCompatActivity implements CustomerSearchRecyclerViewInterface {
     private ArrayList<CustomerModel> restaurantList = new ArrayList<CustomerModel>();
-
+    ArrayList<CustomerModel> businessList;
     private DBHelper dbHelper = new DBHelper(this);
 
     @Override
@@ -27,7 +27,7 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_customer_search);
 
-        ArrayList<CustomerModel> businessList;
+
         businessList = dbHelper.retrieveAllBusinesses();
 
         RecyclerView recyclerView = findViewById(R.id.customerSearchRecyclerView);
@@ -42,8 +42,8 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
         Log.d("Position", String.valueOf(position));
         Intent intent = new Intent(CustomerSearch.this, CustomerRestaurant.class);
         DBHelper DB = new DBHelper(this);
-        Log.d("Email", restaurantList.get(position).getCustomerEmail());
-        int businessID = DB.getBusinessIDFromDB(restaurantList.get(position).getCustomerEmail());
+        Log.d("Email", businessList.get(position).getCustomerEmail());
+        int businessID = DB.getBusinessIDFromDB(businessList.get(position).getCustomerEmail());
         Log.d("BusinessID", String.valueOf(businessID));
         if (businessID > -1) {
             intent.putExtra("RESTAURANTID", businessID);
