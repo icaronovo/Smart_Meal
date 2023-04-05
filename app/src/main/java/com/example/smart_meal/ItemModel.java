@@ -2,7 +2,7 @@ package com.example.smart_meal;
 
 import android.text.Editable;
 
-public class ItemModel{
+public class ItemModel {
 
     private String itemName;
     private String itemDescription;
@@ -102,8 +102,8 @@ public class ItemModel{
     //to string method
     @Override
     public String toString() {
-        return  "\n Item Name: " + itemName + "\n" +
-                " Description: " + itemDescription + "\n"+
+        return "\n Item Name: " + itemName + "\n" +
+                " Description: " + itemDescription + "\n" +
                 " Price: $" + itemPrice + "\n" +
                 " Quantity: " + itemQuantity + "\n";
     }
