@@ -67,6 +67,7 @@ public class BusinessOrders extends AppCompatActivity {
         c.close(); // close the cursor
     }
 
+
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed(); // handle back button click event

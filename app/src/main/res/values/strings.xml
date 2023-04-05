@@ -88,6 +88,7 @@
     <string name="txtHistory">History</string>
     <string name="txtItemDisplay">Item Display</string>
     <string name="btnAdd">Add item</string>
+    <string name="buttonView">View report</string>
 
 
 </resources>

@@ -47,7 +47,7 @@ public class BusinessMain extends AppCompatActivity {
         btnOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
+                startActivity(new Intent(BusinessMain.this,BusinessOrderList.class));
             }
         });
 
