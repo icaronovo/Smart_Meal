@@ -45,7 +45,7 @@ public class CustomerItemListFragment extends Fragment {
         Cursor c = DB.itemsDisplay(String.valueOf(selectedRestaurant));
         Boolean hasNoItems = getItems(c);
         if(hasNoItems == true){
-            Toast.makeText(getActivity(),"No",Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity(),"No items available",Toast.LENGTH_LONG).show();
         }
         c.close();
         return view;

@@ -205,6 +205,7 @@ public class CustomerOrderMFragment extends Fragment {
             for(int i = 0; i < itemQty.length;i++){
                 int id = Integer.parseInt(itemID[i]);
                 String name = getName(businessID,id);
+
                 Double price = getPrice(businessID,id);
                 display.append(itemQty[i] + "x "+ name +" - $" + currency.format(price) + "\n");
                 finalTotal += price * Double.parseDouble(itemQty[i]);

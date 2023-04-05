@@ -19,25 +19,16 @@
 
     <TextView
         android:id="@+id/textView4"
-        android:layout_width="150dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:gravity="center"
         android:text="@string/customerSearchHint"
         android:textColor="@color/black"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.003" />
 
-    <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:entries="@array/txtCities"
-        app:layout_constraintBottom_toTopOf="@+id/customerSearchRecyclerView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>

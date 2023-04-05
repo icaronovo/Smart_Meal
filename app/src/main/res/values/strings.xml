@@ -79,7 +79,7 @@
     <string name="txtName">Name </string>
     <string name="custID">Customer ID: </string>
     <string name="checkBoxSelect">Select All</string>
-    <string name="customerSearchHint">Select</string>
+    <string name="customerSearchHint">Select a restaurant below:</string>
     <string name="addItemNameHint">Item name</string>
     <string name="addItemDescriptionHint">Item description</string>
     <string name="addItemQuantityHint">Quantity</string>
