@@ -61,7 +61,7 @@ public class NewAccount extends AppCompatActivity {
                         accountType = "Customer";
                         break;
                     case R.id.radioBusiness:
-                        username.setCompoundDrawablesWithIntrinsicBounds(R.drawable.shop_icon, 0, 0, 0);
+                        username.setCompoundDrawablesWithIntrinsicBounds(R.drawable.shop_icon_black, 0, 0, 0);
                         username.setHint("Business");
                         accountType = "Business";
                         break;

@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CustomerProfileFragment extends Fragment {
     private TextView custName;
@@ -27,6 +28,7 @@ public class CustomerProfileFragment extends Fragment {
     private TextView custID;
     private Button editProfile;
     private Button logout;
+    private Button btnDel;
     private DBHelper DB;
 
     @Override
@@ -44,6 +46,7 @@ public class CustomerProfileFragment extends Fragment {
         custEmail = view.findViewById(R.id.custEmail);
         editProfile = view.findViewById(R.id.btnEdit);
         logout = view.findViewById(R.id.btnLog);
+        btnDel = view.findViewById(R.id.btnDel);
 
         // Initialize the DB object
         DB = new DBHelper(getActivity());
@@ -89,9 +92,24 @@ public class CustomerProfileFragment extends Fragment {
                 startActivity(new Intent(getContext(),CustomerUpdate.class));
             }
         });
-
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            boolean isDeleted;
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("data", Context.MODE_PRIVATE);
+                // Get business profile information from shared preferences
+                String email = sharedPreferences.getString("EmailCust", "");
+                DB.deleteUserAccount(email);
+                if (isDeleted) {
+                    Toast.makeText(getActivity(), "Nothing to Delete", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Account deleted.", Toast.LENGTH_LONG).show();
+                    DB.close();
+                    startActivity(new Intent(getActivity(),LoginActivity.class));
+                }
+            }
+        });
         // Inflate the layout for this fragment
         return view;
-
     }
 }

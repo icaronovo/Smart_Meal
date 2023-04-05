@@ -14,12 +14,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class BusinessProfile extends AppCompatActivity {
     Toolbar toolbar;
     DBHelper DB;
     TextView busName, busEmail, busPhone, busAddress;
-    Button btnEdit, btnLogout;
+    Button btnEdit, btnLogout, btnDel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,7 @@ public class BusinessProfile extends AppCompatActivity {
         // Initialize the edit and logout buttons
         btnEdit = findViewById(R.id.btnEditProfile);
         btnLogout = findViewById(R.id.btnLogoff);
+        btnDel = findViewById(R.id.btnDel);
 
         // Logout button click listener
         btnLogout.setOnClickListener(new View.OnClickListener() {
@@ -86,7 +88,26 @@ public class BusinessProfile extends AppCompatActivity {
                 startActivity(new Intent(BusinessProfile.this, CustomerUpdate.class));
             }
         });
+        btnDel.setOnClickListener(new View.OnClickListener() {
+            boolean isDeleted;
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences sharedPreferences = getSharedPreferences("data", Context.MODE_PRIVATE);
+                // Get business profile information from shared preferences
+                String email = sharedPreferences.getString("EmailCust", "");
+                DB.deleteUserAccount(email);
+                if (isDeleted) {
+                    Toast.makeText(BusinessProfile.this, "Nothing to Delete", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(BusinessProfile.this, "Account deleted.", Toast.LENGTH_LONG).show();
+                    DB.close();
+                    startActivity(new Intent(BusinessProfile.this,LoginActivity.class));
+                }
+            }
+        });
 
     }
+
 
 }

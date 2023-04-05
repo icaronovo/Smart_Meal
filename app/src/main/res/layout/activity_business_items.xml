@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BusinessItems">
+    tools:context=".BusinessItems"
+    android:background="#F8C1A2">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarAddOne"
@@ -42,6 +43,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/btnAdd"
+        android:backgroundTint="@color/smartAppColor"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:background="@drawable/rounded"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
