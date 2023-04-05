@@ -19,7 +19,7 @@ public class CustomerModel {
 
     //Constructors
 
-    //This contructor will be used to generate the recycler view in the Customer Main Activity
+    //This constructor will be used to generate the recycler view in the Customer Main Activity
     public CustomerModel(Integer id, String name, String address, String city, String province, Integer image){
         this.customerID = id;
         this.customerName = name;
