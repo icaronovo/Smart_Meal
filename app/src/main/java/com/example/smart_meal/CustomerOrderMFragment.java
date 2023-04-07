@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -92,6 +94,18 @@ public class CustomerOrderMFragment extends Fragment {
                 }
             }
         });
+
+        //To cancel the order
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int cancelOrder = 2;
+                boolean cancel = DB.orderStatusUpdate(orderID, cancelOrder);
+                if(cancel){
+                    Toast.makeText(getActivity(),"Your orders has ben canceled",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     //Get the data from DB
@@ -136,6 +150,7 @@ public class CustomerOrderMFragment extends Fragment {
         //Get the last item
         OrderModel lastOrder = stackOrders.pop();
         displayLastOrder(lastOrder);
+        orderID = lastOrder.getOrderID();
         displayPastOrders(stackOrders);
     }
 
@@ -144,9 +159,6 @@ public class CustomerOrderMFragment extends Fragment {
 
         double finalTotal = 0;
         StringBuilder orderToPrint = new StringBuilder();
-
-        //Get the order
-        orderID = lastSix.getOrderID();
 
         //Order status
         int status = lastSix.getOrderStatus();
@@ -193,13 +205,9 @@ public class CustomerOrderMFragment extends Fragment {
             double finalTotal = 1;
 
             display.append("Order ID #" + order.getOrderID() + "\n");
-
-            if(order.getOrderStatus() == 2 || order.getOrderStatus() == 3){
-                display.append("Order Status #CANCELED\n");
-            }
             display.append("Date " + order.getDate() + "\n");
 
-            //Gt restaurant name
+            //Get restaurant name
             String businessID = String.valueOf(order.getBusinessID());
             String businessName = DB.displayBusinessName(businessID,"Business");
             display.append("Restaurant - " + businessName + "\n");
@@ -220,6 +228,7 @@ public class CustomerOrderMFragment extends Fragment {
                 display.append(itemQty[i] + "x "+ name +" - $" + currency.format(price) + "\n");
                 finalTotal += price * Double.parseDouble(itemQty[i]);
             }
+
             final double FEE = 0.6 * finalTotal;
             display.append("Subtotal  $" + currency.format(finalTotal)+ "\n");
             display.append("Fees  $" + currency.format(FEE)+ "\n");

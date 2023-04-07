@@ -94,7 +94,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(createTableOrderInfo);
     }
 
-
     // this is called if the database version number changes. It prevents previous users apps from breaking when you change the database design.
     @Override
     //CREATING TABLES OR DROPPING IF IT EXISTS
@@ -420,12 +419,12 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to update order status
-    public boolean orderStatusUpdate(String username, int orderNumber, int cancelOrder) {
+    public boolean orderStatusUpdate(int orderNumber, int cancelOrder) {
         SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_ORDER_STATUS,cancelOrder);
-        int u = sqLiteDatabase.update(ORDER_INFO,contentValues,"CustomerID= ? AND OrderID= ?",
-                new String[]{username,Integer.toString(orderNumber)});
+        int u = sqLiteDatabase.update(ORDER_INFO,contentValues,"OrderID= ?",
+                new String[]{Integer.toString(orderNumber)});
         if(u>0)
             return true;
         else
@@ -516,16 +515,15 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-    public void getLastOrderID (String customerID){
-        SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT " + COLUMN_ORDER_ID +
-                " FROM " + ORDER_INFO +
-                " WHERE " + COLUMN_CUSTOMER_ID + "=?" +
-                " ORDER BY "+ COLUMN_CUSTOMER_ID +
-                " LIMIT 1";
-        Cursor cursor = database.rawQuery(query, new String[]{customerID});
-
-    }
+//    public void getLastOrderID (String customerID){
+//        SQLiteDatabase database = this.getReadableDatabase();
+//        String query = "SELECT " + COLUMN_ORDER_ID +
+//                " FROM " + ORDER_INFO +
+//                " WHERE " + COLUMN_CUSTOMER_ID + "=?" +
+//                " ORDER BY "+ COLUMN_CUSTOMER_ID +
+//                " LIMIT 1";
+//        Cursor cursor = database.rawQuery(query, new String[]{customerID});
+//    }
 
     public Cursor viewData(){
         SQLiteDatabase database = this.getReadableDatabase();

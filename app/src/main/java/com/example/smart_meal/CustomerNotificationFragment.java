@@ -62,22 +62,6 @@ public class CustomerNotificationFragment extends Fragment {
             notificationList.setVisibility(View.VISIBLE);
         }
         c.close();
-
-//        //To see/hide the history
-//        btnSeeHistory.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(historyListView.getVisibility() == View.GONE){
-//                    historyListView.setVisibility(View.VISIBLE);
-//                    txtHistory.setVisibility(View.VISIBLE);
-//                    btnSeeHistory.setText("Hide history");
-//                } else if (historyListView.getVisibility() == View.VISIBLE){
-//                    historyListView.setVisibility(View.GONE);
-//                    txtHistory.setVisibility(View.GONE);
-//                    btnSeeHistory.setText("See history");
-//                }
-//            }
-//        });
     }
 
     //Get the data from DB
