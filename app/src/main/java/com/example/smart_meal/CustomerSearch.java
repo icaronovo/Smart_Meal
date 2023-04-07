@@ -1,6 +1,7 @@
 package com.example.smart_meal;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
@@ -27,6 +29,7 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
     //Fetch all restaurants from the database and stores them in an ArrayList
     ArrayList<CustomerModel> businessList;
     private DBHelper dbHelper = new DBHelper(this);
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,19 @@ public class CustomerSearch extends AppCompatActivity implements CustomerSearchR
         CustomerSearchAdapter adapter = new CustomerSearchAdapter(this, businessList, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Setting up the toolbar
+        toolbar = findViewById(R.id.toolbarSearch);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
+        // Handling the navigation icon click event
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 
     @Override

@@ -7,6 +7,17 @@
     tools:context=".CustomerSearch"
     android:backgroundTint="@color/smartAppLightGreen">
 
+    <androidx.appcompat.widget.Toolbar
+        app:title="Search"
+        android:id="@+id/toolbarSearch"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/smartAppGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="@color/white" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/customerSearchRecyclerView"
@@ -28,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarSearch"
         app:layout_constraintVertical_bias="0.003" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
