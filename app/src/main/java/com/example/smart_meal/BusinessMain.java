@@ -15,8 +15,11 @@ import android.view.View;
 import android.widget.Button;
 
 public class BusinessMain extends AppCompatActivity {
-    Toolbar toolbar;
-    Button btnReport,btnLogout,btnOrders, btnAddFoodItem;
+    private Toolbar toolbar;
+    private Button btnReport;
+    private Button btnLogout;
+    private Button btnOrders;
+    private Button btnAddFoodItem;
 
     DBHelper DB;
     @Override

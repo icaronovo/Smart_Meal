@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.LongDef;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 
@@ -19,6 +20,8 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -33,7 +36,7 @@ import java.util.List;
 import java.util.Stack;
 
 public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemClickListener {
-
+    private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
     private androidx.recyclerview.widget.RecyclerView recyclerView;
     private ItemAdapter itemAdapter;
@@ -70,11 +73,16 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         if (!TextUtils.isEmpty(email)) {
             String[] cursor = DB.getUserData(email);
             Log.d("TAG", String.valueOf(cursor));
-
             if (cursor != null && cursor.length > 0) {
 
             }
         }
+
+        // Initializing the toolbar
+        //Top menu
+        toolbar = findViewById(R.id.toolbarCustomer);
+        toolbar.setTitle("Smart Meal");
+        setSupportActionBar(toolbar);
 
         // Initializing the ConstraintLayout for the fragments
         constraintLayout = findViewById(R.id.fragmentLayout);
@@ -197,4 +205,27 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
         }
         createRecyclerView(firstInLastOut);
     }
+
+    //Code for the toolbar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_menu_customer, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.profile) {
+            titleTextView.setText("Account");
+            constraintLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.INVISIBLE);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfile).commit();
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 }
