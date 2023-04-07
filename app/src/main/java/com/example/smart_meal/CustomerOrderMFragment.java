@@ -102,6 +102,7 @@ public class CustomerOrderMFragment extends Fragment {
                 int cancelOrder = 2;
                 boolean cancel = DB.orderStatusUpdate(orderID, cancelOrder);
                 if(cancel){
+                    displayOrdersItem.setText("Your order has been canceled");
                     Toast.makeText(getActivity(),"Your orders has ben canceled",Toast.LENGTH_LONG).show();
                 }
             }
@@ -192,7 +193,13 @@ public class CustomerOrderMFragment extends Fragment {
         String businessName = DB.displayBusinessName(String.valueOf(businessID),"Business");
         displayOrderNum.setText("ORDER #" + orderID + " - " + businessName);
         displayDate.setText(date);
-        displayOrdersItem.setText(String.valueOf(orderToPrint));
+        if (lastSix.getOrderStatus() == 2){
+            displayOrdersItem.setText("Order Canceled");
+            btnCancel.setVisibility(View.INVISIBLE);
+        } else{
+            displayOrdersItem.setText(String.valueOf(orderToPrint));
+            btnCancel.setVisibility(View.VISIBLE);
+        }
     }
 
     public void displayPastOrders(Stack<OrderModel> pastOrders){
