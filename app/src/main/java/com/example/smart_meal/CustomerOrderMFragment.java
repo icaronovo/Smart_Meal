@@ -16,8 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -30,9 +28,11 @@ public class CustomerOrderMFragment extends Fragment {
     private TextView displayOrderNum;
     private TextView displayOrdersItem;
     private TextView displayDate;
+    private TextView txtHistory;
     private Button btnCancel;
+    private Button btnSeeHistory;
     private DBHelper DB;
-    private ListView myListView;
+    private ListView historyListView;
     private ArrayAdapter<String> myAdapter;
     private DecimalFormat currency = new DecimalFormat("#.##");
     private int orderID;
@@ -44,7 +44,8 @@ public class CustomerOrderMFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_customer_order_m, container, false);
 
         // Initialize the ListView and the list
-        myListView = view.findViewById(R.id.listViewOldOrders);
+        historyListView = view.findViewById(R.id.listViewOldOrders);
+        txtHistory = view.findViewById(R.id.txtOlderOrders);
         return view;
     }
 
@@ -55,6 +56,7 @@ public class CustomerOrderMFragment extends Fragment {
         displayOrdersItem = getActivity().findViewById(R.id.orderCustomerItem);
         displayDate = getActivity().findViewById(R.id.txtDate);
         btnCancel = getActivity().findViewById(R.id.btnCancel);
+        btnSeeHistory = getActivity().findViewById((R.id.btnSeeHistory));
 
         //Start the database
         DB = new DBHelper(getActivity());
@@ -75,11 +77,19 @@ public class CustomerOrderMFragment extends Fragment {
         }
         c.close();
 
-        //For the user cancel the order
-        btnCancel.setOnClickListener(new View.OnClickListener() {
+        //To see/hide the history
+        btnSeeHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(historyListView.getVisibility() == View.GONE){
+                    historyListView.setVisibility(View.VISIBLE);
+                    txtHistory.setVisibility(View.VISIBLE);
+                    btnSeeHistory.setText("Hide history");
+                } else if (historyListView.getVisibility() == View.VISIBLE){
+                    historyListView.setVisibility(View.GONE);
+                    txtHistory.setVisibility(View.GONE);
+                    btnSeeHistory.setText("See history");
+                }
             }
         });
     }
@@ -112,13 +122,13 @@ public class CustomerOrderMFragment extends Fragment {
         int index = 0;
         while (index < list.size()) {
             OrderModel order = new OrderModel(
-                    Integer.parseInt(list.get(index)), //OrderID -  ARRAY 0
-                    Integer.parseInt(list.get(index + 1)), //OrderStatus ARRAY 1
-                    Integer.parseInt(list.get(index + 5)),//BusinessID ARRAY 5
+                    Integer.parseInt(list.get(index)), //OrderID
+                    Integer.parseInt(list.get(index + 1)), //OrderStatus
+                    Integer.parseInt(list.get(index + 5)),//BusinessID
                     Integer.parseInt(customerID), //CustomerID
-                    list.get(index + 3), //DATE ARRAY 3
-                    list.get(index + 2), //ItemID ARRAY 2
-                    list.get(index + 4)// ItemQty ARRAY 4
+                    list.get(index + 3), //DATE
+                    list.get(index + 2), //ItemID
+                    list.get(index + 4)// ItemQty
             );
             stackOrders.push(order);
             index += 6;
@@ -175,9 +185,9 @@ public class CustomerOrderMFragment extends Fragment {
 
     public void displayPastOrders(Stack<OrderModel> pastOrders){
         List<String> ordersDisplay = new ArrayList<>();
-
+        int count = 0;
         //Make the display until the stack is empty
-        while(pastOrders.size() > 10){
+        while(count < 10){
             OrderModel order = pastOrders.pop();
             StringBuilder display = new StringBuilder();
             double finalTotal = 1;
@@ -189,7 +199,7 @@ public class CustomerOrderMFragment extends Fragment {
             }
             display.append("Date " + order.getDate() + "\n");
 
-            //Caçar o nome do restaurante
+            //Gt restaurant name
             String businessID = String.valueOf(order.getBusinessID());
             String businessName = DB.displayBusinessName(businessID,"Business");
             display.append("Restaurant - " + businessName + "\n");
@@ -216,6 +226,11 @@ public class CustomerOrderMFragment extends Fragment {
             display.append("Total  $" + currency.format(finalTotal + FEE)+ "\n");
 
             ordersDisplay.add(String.valueOf(display));
+            if(pastOrders.isEmpty()){
+                count = 10;
+            } else{
+                count++;
+            }
         }
         createListView(ordersDisplay);
     }
@@ -223,7 +238,7 @@ public class CustomerOrderMFragment extends Fragment {
     //Create the view on Listview
     public void createListView(List<String> listItems) {
         myAdapter = new ArrayAdapter<>(getContext(), android.R.layout.simple_list_item_1, listItems);
-        myListView.setAdapter(myAdapter);
+        historyListView.setAdapter(myAdapter);
     }
 
     //Get the items price from this Restaurant on DB

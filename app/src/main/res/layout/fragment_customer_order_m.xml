@@ -85,6 +85,17 @@
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
+    <Button
+        android:id="@+id/btnSeeHistory"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="5dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppGreen"
+        android:text="@string/btnSeeHistory" />
+
     <TextView
         android:id="@+id/txtOlderOrders"
         android:layout_width="match_parent"
@@ -94,10 +105,12 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:textSize="23sp"
+        android:visibility="gone"
         android:textStyle="bold" />
 
     <ListView
         android:id="@+id/listViewOldOrders"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </LinearLayout>

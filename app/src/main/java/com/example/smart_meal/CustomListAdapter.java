@@ -38,6 +38,7 @@ public class CustomListAdapter extends ArrayAdapter<ItemModel> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+
         String textDisplay = mItems.get(position).getItemName() + " - $" +  mItems.get(position).getItemPrice();
         holder.itemName.setText(textDisplay);
 
@@ -78,8 +79,8 @@ public class CustomListAdapter extends ArrayAdapter<ItemModel> {
         return itemCountMap;
     }
 
-    public void setClickListener(BusinessItems businessItems) {
-    }
+//    public void setClickListener(BusinessItems businessItems) {
+//    }
 
     private static class ViewHolder {
         TextView itemName, quantityItem;
