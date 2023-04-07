@@ -9,7 +9,7 @@
     <item android:id="@+id/order"
         android:title="Orders"
         android:icon="@drawable/ic_baseline_reorder_24"/>
-    <item android:id="@+id/profile"
-        android:title="Profile"
-        android:icon="@drawable/ic_baseline_person_outline_24"/>
+    <item android:id="@+id/notification"
+        android:title="Notifications"
+        android:icon="@drawable/ic_baseline_notifications_none_24"/>
 </menu>

@@ -43,6 +43,7 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
     private TextView titleTextView;
     private CustomerProfileFragment customerProfile = new CustomerProfileFragment();
     private CustomerOrderMFragment customerOrder = new CustomerOrderMFragment();
+    private CustomerNotificationFragment customerNotification = new CustomerNotificationFragment();
     private SharedPreferences sharedPreferences;
     private ConstraintLayout constraintLayout;
     private List<Integer> restaurantsIdDisplay = new ArrayList<>();
@@ -110,12 +111,12 @@ public class CustomerMain extends AppCompatActivity implements ItemAdapter.ItemC
                         constraintLayout.setVisibility(View.VISIBLE);
                         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerOrder).commit();
                         return true;
-                    case R.id.profile:
+                    case R.id.notification:
                         // When profile is clicked, set the title and visibility of views and replace fragment
-                        titleTextView.setText("Account");
+                        titleTextView.setText("Notifications");
                         constraintLayout.setVisibility(View.VISIBLE);
                         recyclerView.setVisibility(View.INVISIBLE);
-                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerProfile).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentLayout, customerNotification).commit();
                         return true;
                 }
                 return false;
