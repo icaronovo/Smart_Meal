@@ -17,11 +17,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-    Button btnLogin, btnNewAccount;
-    DBHelper DB;
-    EditText email, pass;
-    String accountType;
-    TextView upPass;
+    private Button btnLogin;
+    private Button btnNewAccount;
+    private DBHelper DB;
+    private EditText email;
+    private EditText pass;
+    private String accountType;
+    private TextView btnUpdatePassword;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -33,20 +35,21 @@ public class LoginActivity extends AppCompatActivity {
         btnNewAccount = findViewById(R.id.txtNewAccount);
         email = findViewById(R.id.txtEmail);
         pass = findViewById(R.id.txtPassword);
-        upPass = findViewById(R.id.upPass);
+        btnUpdatePassword = findViewById(R.id.upPass);
+
         DB = new DBHelper(this);
+
         ImageView imageView = findViewById(R.id.imgRotate2);
         imageView.startAnimation(AnimationUtils.loadAnimation(this, R.anim.rotation));
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
-        upPass.setOnClickListener(new View.OnClickListener() {
+        //Update password
+        btnUpdatePassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this,PasswordUpdate.class));
             }
         });
-
-
 
         //Login
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -55,13 +58,14 @@ public class LoginActivity extends AppCompatActivity {
                 String user = email.getText().toString();
                 String password = pass.getText().toString();
 
-                //checking if user exists and validating with db, simple validation to prevent empty fields
+                //Checking if user exists and validating with db
+                // Simple validation to prevent empty fields
                 if (user.equals("") || password.equals(""))
                     Toast.makeText(LoginActivity.this, "Please enter all the fields", Toast.LENGTH_SHORT).show();
                 else {
                     try {
-                        Cursor cursorAccoountType = DB.checkAccountType(user);
-                        accountType = cursorAccoountType.getString(0);
+                        Cursor cursorAccountType = DB.checkAccountType(user);
+                        accountType = cursorAccountType.getString(0);
                         boolean c = DB.checkUserAccount(user, password);
 
                         String[] data = DB.getUserData(user);
@@ -88,9 +92,6 @@ public class LoginActivity extends AppCompatActivity {
                                 Toast.makeText(LoginActivity.this, "Login or Password doesn't exist, try again.", Toast.LENGTH_SHORT).show();
                             }
                         }
-//                        SharedPreferences.Editor editor = getSharedPreferences("user", MODE_PRIVATE).edit();
-//                        editor.putString("user", user);
-//                        editor.apply();
 
                     } catch (Exception e) {
                         Toast.makeText(LoginActivity.this, "Account not found.", Toast.LENGTH_SHORT).show();

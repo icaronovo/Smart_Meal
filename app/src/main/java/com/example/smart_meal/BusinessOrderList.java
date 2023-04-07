@@ -23,10 +23,10 @@ public class BusinessOrderList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_order_list);
-        toolbar = findViewById(R.id.toolbarOrder);
-        setSupportActionBar(toolbar); // set the toolbar as the action bar for the activity
-        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
 
+        toolbar = findViewById(R.id.toolbarOrder);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

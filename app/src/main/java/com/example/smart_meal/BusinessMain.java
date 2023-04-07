@@ -30,10 +30,10 @@ public class BusinessMain extends AppCompatActivity {
         btnReport = findViewById(R.id.btnReports);
         btnLogout = findViewById(R.id.btnLogout);
         btnOrders = findViewById(R.id.btnOrdersFromClient);
-
         btnAddFoodItem = findViewById(R.id.btnAddFoodItem);
 
         DB = new DBHelper(this);
+
         //Top menu
         toolbar = findViewById(R.id.toolbarBusiness);
         setSupportActionBar(toolbar);
@@ -50,10 +50,9 @@ public class BusinessMain extends AppCompatActivity {
         btnOrders.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(BusinessMain.this,BusinessOrderList.class));
+                startActivity(new Intent(BusinessMain.this,BusinessOrders.class));
             }
         });
-
 
         //Reports
         btnReport.setOnClickListener(new View.OnClickListener() {

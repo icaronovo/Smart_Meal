@@ -8,13 +8,13 @@
     tools:context=".BusinessMain">
 
     <include layout="@layout/business_appbar"
-        android:id="@+id/include" />
+         />
 
     <Button
         android:id="@+id/btnAddFoodItem"
         android:layout_width="133dp"
         android:layout_height="56dp"
-        android:layout_marginTop="112dp"
+        android:layout_marginTop="148dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
         android:text="@string/txtFoodItem"
@@ -22,32 +22,15 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/include"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/btnOrdersFromClient"
-        android:layout_width="132dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="52dp"
-        android:background="@drawable/rounded"
-        android:backgroundTint="@color/smartAppColor"
-        android:text="@string/txtOrder"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnAddFoodItem" />
 
     <Button
         android:id="@+id/btnReports"
         android:layout_width="133dp"
         android:layout_height="59dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="52dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
         android:text="@string/txtReports"
@@ -55,7 +38,7 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnOrdersFromClient"
         tools:ignore="MissingConstraints" />
@@ -64,6 +47,7 @@
         android:id="@+id/btnLogout"
         android:layout_width="135dp"
         android:layout_height="62dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
         android:fontFamily="sans-serif-medium"
@@ -71,11 +55,25 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnReports"
-        app:layout_constraintVertical_bias="0.436" />
+        app:layout_constraintTop_toBottomOf="@+id/btnReports" />
+
+    <Button
+        android:id="@+id/btnOrdersFromClient"
+        android:layout_width="132dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="48dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/txtOrder"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnAddFoodItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
