@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,12 +22,12 @@ import java.util.List;
 import java.util.Stack;
 
 public class BusinessOrders extends AppCompatActivity {
-    DBHelper DB; // instance of DBHelper class
+    private DBHelper DB; // instance of DBHelper class
     private BusinessAdapter adapter; // instance of BusinessAdapter class
     private CheckBox checkBox; // instance of CheckBox class
     private ListView listView; // instance of ListView class
     private androidx.appcompat.widget.Toolbar toolbar; // instance of Toolbar class
-
+    private ArrayList<OrderModel> firstInLastOut;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +66,13 @@ public class BusinessOrders extends AppCompatActivity {
             checkBox.setText("Select all orders");
         }
         c.close(); // close the cursor
+
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                adapter.checkAll();
+            }
+        });
     }
 
 

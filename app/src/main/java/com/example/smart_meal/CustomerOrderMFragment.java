@@ -181,8 +181,10 @@ public class CustomerOrderMFragment extends Fragment {
         for(int i = 0; i < itemQty.length;i++){
             String name = getName(String.valueOf(businessID),Integer.parseInt(itemID[i]));
             Double price = getPrice(String.valueOf(businessID),Integer.parseInt(itemID[i]));
-            orderToPrint.append(itemQty[i] + "x "+ name +" - $" + currency.format(price) + "\n");
-            finalTotal += price * Double.parseDouble(itemQty[i]);
+            if(Integer.parseInt(itemQty[i])!=0){
+                orderToPrint.append(itemQty[i] + "x "+ name +" - $" + currency.format(price) + "\n");
+                finalTotal += price * Double.parseDouble(itemQty[i]);
+            }
         }
         final double FEE = 0.6 * finalTotal;
         orderToPrint.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
@@ -236,7 +238,7 @@ public class CustomerOrderMFragment extends Fragment {
                 finalTotal += price * Double.parseDouble(itemQty[i]);
             }
 
-            final double FEE = 0.6 * finalTotal;
+            final double FEE = 0.06 * finalTotal;
             display.append("Subtotal  $" + currency.format(finalTotal)+ "\n");
             display.append("Fees  $" + currency.format(FEE)+ "\n");
             display.append("Total  $" + currency.format(finalTotal + FEE)+ "\n");

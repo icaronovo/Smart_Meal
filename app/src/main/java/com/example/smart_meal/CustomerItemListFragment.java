@@ -24,7 +24,6 @@ public class CustomerItemListFragment extends Fragment {
     private TextView quantity;
     private ListView mListView;
     private CustomListAdapter adapter;
-
     private DBHelper DB;
 
 

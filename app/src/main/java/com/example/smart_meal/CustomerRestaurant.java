@@ -46,12 +46,14 @@ public class CustomerRestaurant extends AppCompatActivity implements Communicato
 
         for (Integer key : itemIdAndQty.keySet()) {
             Integer quantity = itemIdAndQty.get(key);
-            Double price = getPrice(String.valueOf(restaurantId),key);
-            String name = getName(String.valueOf(restaurantId),key);
-            str.append(quantity + " x " + name + " $ " + currency.format(price) + "\n");
-            finalTotal += quantity * price;
+            if(quantity !=0 ){
+                Double price = getPrice(String.valueOf(restaurantId),key);
+                String name = getName(String.valueOf(restaurantId),key);
+                str.append(quantity + " x " + name + " $ " + currency.format(price) + "\n");
+                finalTotal += quantity * price;
+            }
         }
-        final double FEE = 0.6 * finalTotal;
+        final double FEE = 0.06 * finalTotal;
         str.append("\nSubtotal  $" + currency.format(finalTotal)+ "\n");
         str.append("Fees  $" + currency.format(FEE)+ "\n");
         str.append("\nTotal  $" + currency.format(finalTotal + FEE)+ "\n");

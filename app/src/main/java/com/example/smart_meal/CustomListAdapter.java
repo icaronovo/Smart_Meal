@@ -65,7 +65,8 @@ public class CustomListAdapter extends ArrayAdapter<ItemModel> {
                 if (number > 0){
                     updateItems(mItems.get(position).getItemID(),number);
                 }else {
-                    String item = String.valueOf(holder.itemName.getText());
+                    String item = String.valueOf(mItems.get(position).getItemID());
+                    updateItems(mItems.get(position).getItemID(),number);
                     if(itemCountMap.containsKey(item)){
                         itemCountMap.remove(item);
                     }
@@ -78,9 +79,6 @@ public class CustomListAdapter extends ArrayAdapter<ItemModel> {
     public HashMap<Integer,Integer> getItems(){
         return itemCountMap;
     }
-
-//    public void setClickListener(BusinessItems businessItems) {
-//    }
 
     private static class ViewHolder {
         TextView itemName, quantityItem;

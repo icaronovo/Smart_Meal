@@ -112,8 +112,10 @@ public class CustomerOrderFragment extends Fragment {
                 //so we can sent more than one item to the db
                 for (Integer key : customerOrderList.keySet()) {
                     Integer values = customerOrderList.get(key);
-                    itemID += key + "$";
-                    quantityNumber += values + "$";
+                    if(values!=0){
+                        itemID += key + "$";
+                        quantityNumber += values + "$";
+                    }
                 }
 
                 OrderModel newOrder = new OrderModel(orderStatus, businessID, customerID, date, itemID, quantityNumber);
