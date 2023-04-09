@@ -155,6 +155,13 @@ public class DBHelper extends SQLiteOpenHelper {
         return d > 0;
     }
 
+    //query to delete item record from db
+    public boolean deleteItem(String id) {
+        SQLiteDatabase sqLiteDatabase = this.getWritableDatabase();
+        int d = sqLiteDatabase.delete(ITEM, "ItemID=?", new String[]{id});
+        return d > 0;
+    }
+
     //query to update password
     public boolean accountUpdate(String email, String password, String name) {
         SQLiteDatabase database = this.getWritableDatabase();
@@ -385,12 +392,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE BusinessID= ?", new String[]{businessID});
         return cursor;
     }
-
-//    public boolean itemNamePrice(String email, Double itemPrice, String itemName){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT ItemName,ItemValue FROM ITEM WHERE EmailCust= ? ", new String[]{email,itemPrice.toString(),itemName});
-//        return cursor.getCount() > 0;
-//    }
 
     //query to update item qty
     public boolean itemsQtyUpdate(int itemID, int itemQty) {

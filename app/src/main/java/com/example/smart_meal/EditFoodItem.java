@@ -21,6 +21,7 @@ public class EditFoodItem extends AppCompatActivity {
     private int itemID;
     private Button btnCancel;
     private Button btnEdit;
+    private Button btnDelete;
     private EditText txtName;
     private EditText txtDescription;
     private EditText txtQuantity;
@@ -46,6 +47,7 @@ public class EditFoodItem extends AppCompatActivity {
         int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
 
         // Getting references to the EditText and Button views in the layout
+        btnDelete = findViewById(R.id.btnDelete);
         txtItemId = findViewById(R.id.txtItemID);
         btnCancel = findViewById(R.id.btnCancelItem);
         txtName = findViewById(R.id.editNameItem);
@@ -81,8 +83,25 @@ public class EditFoodItem extends AppCompatActivity {
                 String price = String.valueOf(txtPrice.getText());
 
                 boolean rows = DB.itemsUpdate(itemID, name, description, quantity, price);
+
                 if(rows == true){
                     Toast.makeText(EditFoodItem.this,"Item Updated!",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(EditFoodItem.this, BusinessMain.class);
+                    startActivity(intent);
+                } else{
+                    Toast.makeText(EditFoodItem.this,"Error",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        //Delete item
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean rows = DB.deleteItem(String.valueOf(itemID));
+
+                if(rows == true){
+                    Toast.makeText(EditFoodItem.this,"Item deleted!",Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(EditFoodItem.this, BusinessMain.class);
                     startActivity(intent);
                 } else{

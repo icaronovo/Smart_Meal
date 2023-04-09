@@ -92,6 +92,7 @@
     <string name="btnSeeHistory">See history</string>
     <string name="btnEditItem">Edit</string>
     <string name="btnCancelItem">Cancel</string>
+    <string name="btnDeleteItem">Delete</string>
 
 
 </resources>

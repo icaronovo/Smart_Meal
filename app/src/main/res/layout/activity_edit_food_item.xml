@@ -95,14 +95,14 @@
         android:id="@+id/btnEditItem"
         android:layout_width="204dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
-        android:text="@string/btnEditItem"
         android:textColor="#FFF3E0"
         android:textStyle="bold"
+        android:text="@string/btnEditItem"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editPriceItem" />
 
@@ -110,7 +110,8 @@
         android:id="@+id/btnCancelItem"
         android:layout_width="204dp"
         android:layout_height="50dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="36dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
         android:text="@string/btnCancelItem"
@@ -120,8 +121,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnEditItem"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnDelete" />
 
     <TextView
         android:id="@+id/txtItemID"
@@ -183,5 +183,20 @@
         app:layout_constraintEnd_toStartOf="@+id/editPriceItem"
         app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="204dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="25dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/btnDeleteItem"
+        android:textColor="#FFF3E0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnEditItem" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
