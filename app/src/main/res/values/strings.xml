@@ -93,6 +93,7 @@
     <string name="btnEditItem">Edit</string>
     <string name="btnCancelItem">Cancel</string>
     <string name="btnDeleteItem">Delete</string>
+    <string name="txtSelect">Select the order to confirm</string>
 
 
 </resources>

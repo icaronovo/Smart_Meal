@@ -1,27 +1,17 @@
 package com.example.smart_meal;
 
-import android.app.LauncherActivity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class BusinessAdapter extends ArrayAdapter<OrderModel> {
 
-    TextView textView;
-    CheckBox checkBox;
+    TextView orderTxtView;
 
     public BusinessAdapter(Context context, ArrayList<OrderModel> items) {
         super(context, 0, items);
@@ -38,19 +28,12 @@ public class BusinessAdapter extends ArrayAdapter<OrderModel> {
         }
 
         // Lookup view for data population
-        textView = convertView.findViewById(R.id.textView);
-        checkBox = convertView.findViewById(R.id.checkBox);
+        orderTxtView = convertView.findViewById(R.id.textView);
 
         // Populate the data into the template view using the data object
-        textView.setText(item.toString());
-        checkBox.setChecked(false);
+        orderTxtView.setText(item.toString());
 
         // Return the completed view to render on screen
         return convertView;
-    }
-
-    public void checkAll(){
-
-        checkBox.setChecked(true);
     }
 }

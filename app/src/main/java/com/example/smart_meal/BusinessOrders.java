@@ -2,10 +2,12 @@ package com.example.smart_meal;
 
 import android.app.LauncherActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ListView;
@@ -24,17 +26,17 @@ import java.util.Stack;
 public class BusinessOrders extends AppCompatActivity {
     private DBHelper DB; // instance of DBHelper class
     private BusinessAdapter adapter; // instance of BusinessAdapter class
-    private CheckBox checkBox; // instance of CheckBox class
     private ListView listView; // instance of ListView class
     private androidx.appcompat.widget.Toolbar toolbar; // instance of Toolbar class
     private ArrayList<OrderModel> firstInLastOut;
+    private TextView txtSelectOrder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_orders);
 
-        checkBox = findViewById(R.id.checkboxSelectAll);
+        txtSelectOrder = findViewById(R.id.txtSelectOrder);
         listView = findViewById(R.id.listViewBusiness);
         toolbar = findViewById(R.id.toolbarOrder); // retrieve the toolbar object from the activity layout
         setSupportActionBar(toolbar); // set the toolbar as the action bar for the activity
@@ -62,18 +64,12 @@ public class BusinessOrders extends AppCompatActivity {
         //Check if the customer has orders
         Boolean hasNoData = updateData(c, businessID); // update the data in the activity
         if (hasNoData == true) {
-            checkBox.setText("You have no orders");
+            txtSelectOrder.setText("You have no orders");
         } else{
-            checkBox.setText("Select all orders");
+            txtSelectOrder.setText("Click on order to confirm");
         }
         c.close(); // close the cursor
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                adapter.checkAll();
-            }
-        });
     }
 
     @Override
@@ -111,10 +107,10 @@ public class BusinessOrders extends AppCompatActivity {
         int index = 0;
         while (index < list.size()) {
             OrderModel order = new OrderModel(
-                    Integer.parseInt(list.get(index)), //OrderID -  ARRAY 0
-                    Integer.parseInt(list.get(index + 1)), //OrderStatus ARRAY 1
+                    Integer.parseInt(list.get(index)), //OrderID
+                    Integer.parseInt(list.get(index + 1)), //OrderStatus
                     Integer.parseInt(businessID), //BusinessID
-                    Integer.parseInt(list.get(index + 5)),//CustomerID ARRAY 5
+                    Integer.parseInt(list.get(index + 5)),//CustomerID
                     list.get(index + 3), //DATE ARRAY 3
                     list.get(index + 2), //ItemID ARRAY 2
                     list.get(index + 4)// ItemQty ARRAY 4
@@ -134,6 +130,7 @@ public class BusinessOrders extends AppCompatActivity {
     public void createListView(ArrayList<OrderModel> listItems) {
         adapter = new BusinessAdapter(this, listItems);
         listView.setAdapter(adapter);
+
     }
 
 }
