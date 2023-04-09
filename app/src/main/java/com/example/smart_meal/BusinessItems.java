@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -48,8 +49,10 @@ public class BusinessItems extends AppCompatActivity {
         //Get the items already added
         //Start the db
         DB = new DBHelper(this);
+        // Getting the shared preferences of the application
         sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
         int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
+        Log.d("BusinessID", String.valueOf(businessID));
 
         //Get the items of this restaurant
         Cursor c = DB.itemsDisplay(String.valueOf(businessID));

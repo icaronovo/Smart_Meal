@@ -11,7 +11,9 @@
         android:id="@+id/toolbarEdit"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
+        android:layout_marginBottom="15dp"
         android:background="@color/smartAppColor"
+        app:layout_constraintBottom_toTopOf="@+id/txtItemID"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -26,6 +28,7 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="5dp"
+        android:autofillHints=""
         android:ems="10"
         android:hint="@string/addItemNameHint"
         android:inputType="textPersonName"
@@ -33,8 +36,7 @@
         android:textColorHint="#6D4C41"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editDescriptionItem"
@@ -118,5 +120,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEditItem"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtItemID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@+id/editNameItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,8 +13,11 @@ import android.widget.Toast;
 
 public class AddFoodItem extends AppCompatActivity {
     // Defining variables
-    EditText txtName, txtDescrip, txtQuant, txtPrice;
-    Button btnAdd;
+    private EditText txtName;
+    private EditText txtDescrip;
+    private EditText txtQuant;
+    private EditText txtPrice;
+    private Button btnAdd;
     private SharedPreferences sharedPreferences;
     private androidx.appcompat.widget.Toolbar toolbar;
 

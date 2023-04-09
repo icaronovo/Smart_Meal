@@ -515,16 +515,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
-//    public void getLastOrderID (String customerID){
-//        SQLiteDatabase database = this.getReadableDatabase();
-//        String query = "SELECT " + COLUMN_ORDER_ID +
-//                " FROM " + ORDER_INFO +
-//                " WHERE " + COLUMN_CUSTOMER_ID + "=?" +
-//                " ORDER BY "+ COLUMN_CUSTOMER_ID +
-//                " LIMIT 1";
-//        Cursor cursor = database.rawQuery(query, new String[]{customerID});
-//    }
-
     public Cursor viewData(){
         SQLiteDatabase database = this.getReadableDatabase();
         String query = "SELECT * FROM " + ORDER_INFO;
@@ -532,6 +522,19 @@ public class DBHelper extends SQLiteOpenHelper {
         //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
         //Cursor cursor = database.rawQuery(query,new String[]{"2"});
         return cursor;
+    }
+
+    public List<String> itemDisplay(int businessID, int itemID) {
+        List<String> itemData = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM ITEM WHERE BusinessID= ? AND ItemID= ? ", new String[]{String.valueOf(businessID), String.valueOf(itemID)});
+        if (cursor != null) {
+            cursor.moveToFirst();
+            for (int i = 0; i < 6; i++) {
+                itemData.add(i, cursor.getString(i));
+            }
+        }
+        return itemData;
     }
 
 }
