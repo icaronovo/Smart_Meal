@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -55,16 +56,38 @@ public class EditFoodItem extends AppCompatActivity {
 
         //Recover the item data
         itemData = DB.itemDisplay(businessID,itemID);
-        txtItemId.setText("Item ID: " + itemID);
-        txtName.setText("Item Name" + itemData.get(3));
-        txtDescription.setText("Item Description: " + itemData.get(4));
-        txtQuantity.setText("Quantity: " + itemData.get(2));
-        txtPrice.setText("Price: " + itemData.get(1));
+        txtItemId.setText("" + itemID);
+        txtName.setText("" + itemData.get(3));
+        txtDescription.setText("" + itemData.get(4));
+        txtQuantity.setText("" + itemData.get(2));
+        txtPrice.setText("" + itemData.get(1));
+
         //Cancel and go back to the BusinessItems activity
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        //Update orders
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String itemID = (String) txtItemId.getText();
+                String name = String.valueOf(txtName.getText());
+                String description = String.valueOf(txtDescription.getText());
+                String quantity = String.valueOf(txtQuantity.getText());
+                String price = String.valueOf(txtPrice.getText());
+
+                boolean rows = DB.itemsUpdate(itemID, name, description, quantity, price);
+                if(rows == true){
+                    Toast.makeText(EditFoodItem.this,"Item Updated!",Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(EditFoodItem.this, BusinessMain.class);
+                    startActivity(intent);
+                } else{
+                    Toast.makeText(EditFoodItem.this,"Error",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }

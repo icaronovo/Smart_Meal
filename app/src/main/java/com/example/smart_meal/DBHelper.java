@@ -409,11 +409,14 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     //query to update item value
-    public boolean itemsValueUpdate(int itemID, String itemValue) {
+    public boolean itemsUpdate(String itemID, String name, String description, String quantity, String price) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("ItemValue", itemValue);
-        int rowsAffected = db.update("ITEM", values, "ItemID = ?", new String[]{String.valueOf(itemID)});
+        values.put("ItemName", name);
+        values.put("ItemDescription", description);
+        values.put("ItemQuantity", quantity);
+        values.put("ItemValue", price);
+        int rowsAffected = db.update("ITEM", values, "ItemID = ?", new String[]{itemID});
 
         return rowsAffected > 0;
     }

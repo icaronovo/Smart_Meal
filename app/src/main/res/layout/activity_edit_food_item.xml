@@ -26,7 +26,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="104dp"
         android:layout_marginEnd="5dp"
         android:autofillHints=""
         android:ems="10"
@@ -35,32 +35,15 @@
         android:minHeight="48dp"
         android:textColorHint="#6D4C41"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.774"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/editDescriptionItem"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="100dp"
-        android:layout_marginBottom="15dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/addItemDescriptionHint"
-        android:inputType="textPersonName"
-        android:minHeight="48dp"
-        android:textColorHint="#6D4C41"
-        app:layout_constraintBottom_toTopOf="@+id/editQuantityItem"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/editNameItem"
-        app:layout_constraintTop_toBottomOf="@+id/editNameItem" />
 
     <EditText
         android:id="@+id/editQuantityItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="28dp"
         android:layout_marginEnd="100dp"
         android:autofillHints=""
         android:ems="10"
@@ -77,7 +60,7 @@
         android:id="@+id/editPriceItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="100dp"
         android:ems="10"
         android:hint="@string/addItemPriceHint"
@@ -88,6 +71,25 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/editQuantityItem"
         app:layout_constraintTop_toBottomOf="@+id/editQuantityItem" />
+
+    <EditText
+        android:id="@+id/editDescriptionItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginBottom="15dp"
+        android:autofillHints=""
+        android:ems="10"
+        android:hint="@string/addItemDescriptionHint"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:textColorHint="#6D4C41"
+        app:layout_constraintBottom_toTopOf="@+id/editQuantityItem"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="@+id/editNameItem"
+        app:layout_constraintTop_toBottomOf="@+id/editNameItem" />
 
     <Button
         android:id="@+id/btnEditItem"
@@ -129,6 +131,57 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/editNameItem"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtNameEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="24dp"
+        android:text="@string/addItemNameHint"
+        android:textColor="#6D4C41"
+        app:layout_constraintBottom_toTopOf="@+id/txtDescritionEdit"
+        app:layout_constraintEnd_toStartOf="@+id/editNameItem"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbarEdit"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtDescritionEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="52dp"
+        android:text="@string/addItemDescriptionHint"
+        android:textColor="#6D4C41"
+        app:layout_constraintBottom_toTopOf="@+id/txtQuantityEdit"
+        app:layout_constraintEnd_toStartOf="@+id/editDescriptionItem"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtQuantityEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:text="@string/addItemQuantityHint"
+        app:layout_constraintBottom_toTopOf="@+id/txtPriceEdit"
+        app:layout_constraintEnd_toStartOf="@+id/editQuantityItem"
+        app:layout_constraintHorizontal_bias="0.757"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txtPriceEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="56dp"
+        android:text="@string/addItemPriceHint"
+        android:textColor="#6D4C41"
+        app:layout_constraintBottom_toTopOf="@+id/btnEditItem"
+        app:layout_constraintEnd_toStartOf="@+id/editPriceItem"
+        app:layout_constraintHorizontal_bias="0.757"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

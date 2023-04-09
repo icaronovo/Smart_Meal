@@ -28,6 +28,7 @@ public class BusinessOrders extends AppCompatActivity {
     private ListView listView; // instance of ListView class
     private androidx.appcompat.widget.Toolbar toolbar; // instance of Toolbar class
     private ArrayList<OrderModel> firstInLastOut;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +75,6 @@ public class BusinessOrders extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public boolean onSupportNavigateUp() {
