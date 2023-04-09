@@ -90,6 +90,8 @@
     <string name="btnAdd">Add item</string>
     <string name="buttonView">View report</string>
     <string name="btnSeeHistory">See history</string>
+    <string name="btnEditItem">Edit</string>
+    <string name="btnCancelItem">Cancel</string>
 
 
 </resources>

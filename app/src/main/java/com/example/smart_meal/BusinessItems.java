@@ -116,9 +116,19 @@ public class BusinessItems extends AppCompatActivity {
 
     //Create the view on Listview
     public void createListView(ArrayList<ItemModel> listItems) {
-        ListView listView = findViewById(R.id.listViewAdd);
-        BusinessItemAdapter adapter = new BusinessItemAdapter(listItems);
-        listView.setAdapter(adapter);
+        mListView = findViewById(R.id.listViewAdd);
+        adapter = new BusinessItemAdapter(listItems);
+        mListView.setAdapter(adapter);
+
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int itemID = listItems.get(position).getItemID();
+                Intent intent = new Intent(BusinessItems.this,EditFoodItem.class);
+                intent.putExtra("ITEMID",itemID);
+                startActivity(intent);
+            }
+        });
     }
 
 }
