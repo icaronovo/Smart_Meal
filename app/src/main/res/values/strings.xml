@@ -94,7 +94,7 @@
     <string name="btnCancelItem">Cancel</string>
     <string name="btnDeleteItem">Delete</string>
     <string name="txtSelect">Select the order to confirm</string>
-    <string name="btnReturn">Return</string>
+    <string name="btnFinishOrder">Finish Order</string>
     <string name="btnReady">Order Ready</string>
 
 

@@ -63,13 +63,13 @@
         app:layout_constraintTop_toBottomOf="@+id/btnConfirmOrderBusiness" />
 
     <Button
-        android:id="@+id/btnReturnMain"
+        android:id="@+id/btnFinishOrder"
         android:layout_width="204dp"
         android:layout_height="50dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/rounded"
         android:backgroundTint="@color/smartAppColor"
-        android:text="@string/btnReturn"
+        android:text="@string/btnFinishOrder"
         android:textColor="#FFF3E0"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +84,7 @@
         android:text="@string/addItemPriceHint"
         android:textColor="#6D4C41"
         android:textSize="20sp"
+        android:layout_marginStart="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.093"

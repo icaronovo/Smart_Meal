@@ -104,10 +104,34 @@ public class OrderModel {
     public String toString() {
         //Get the type of status
         String status = "";
-        if(orderStatus == 0){
-            status = "PROCESSING";
-        }else{
-            status = "COMPLETE";
+        switch (orderStatus){
+            case 0:
+                //Request sended
+                status = "CUSTOMER SEND ORDER";
+                break;
+            case 1:
+                //Restaurant is prepering your order
+                status = "ORDER IS BEING PREPARED" ;
+                break;
+            case 2:
+                //Customer cancel the order
+                status = "ORDER CANCELED BY CUSTOMER" ;
+                break;
+            case 3:
+                //Business cancel the order
+                status = "ORDER CANCELED BY BUSINESS" ;
+                break;
+            case 4:
+                //Order is ready
+                status = "ORDER IS READY!" ;
+                break;
+            case 5:
+                //Order is ready
+                status = "ORDER FINISHED" ;
+                break;
+            default:
+                status = "NO INFORMATION";
+                break;
         }
 
         //Get items id
