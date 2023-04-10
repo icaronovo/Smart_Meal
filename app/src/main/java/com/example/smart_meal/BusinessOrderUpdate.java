@@ -18,9 +18,6 @@ public class BusinessOrderUpdate extends AppCompatActivity {
     private Button btnFinishOrder;
     private androidx.appcompat.widget.Toolbar toolbar;
     private DBHelper DB;
-    private SharedPreferences sharedPreferences;
-    private BusinessItemAdapter adapter;
-    private ListView mListView;
     private int orderID;
     private String orderTxt;
     private TextView txtFullOrder;

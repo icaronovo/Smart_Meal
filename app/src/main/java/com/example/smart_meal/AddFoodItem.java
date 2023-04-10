@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class AddFoodItem extends AppCompatActivity {
-    // Defining variables
     private EditText txtName;
     private EditText txtDescrip;
     private EditText txtQuant;
@@ -21,11 +20,9 @@ public class AddFoodItem extends AppCompatActivity {
     private SharedPreferences sharedPreferences;
     private androidx.appcompat.widget.Toolbar toolbar;
 
-    // Overriding onCreate method to set up the view of the activity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Setting the layout of the activity
         setContentView(R.layout.activity_add_food_item);
 
         // Getting the shared preferences of the application
@@ -63,19 +60,23 @@ public class AddFoodItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Adding an item to the database and handling the result
-                Boolean itemAdded = dbHelper.addItem(new ItemModel(txtName.getText().toString(), txtDescrip.getText().toString(), Double.parseDouble(txtPrice.getText().toString()), Integer.parseInt(txtQuant.getText().toString()), businessID));
-                if (itemAdded) {
-                    // Clearing the EditText views if the item was added successfully
-                    txtName.setText("");
-                    txtDescrip.setText("");
-                    txtQuant.setText("");
-                    txtPrice.setText("");
-                    // Redirecting to the BusinessMain activity if the item was added successfully
-                    Intent intent = new Intent(AddFoodItem.this, BusinessMain.class);
-                    startActivity(intent);
-                } else {
-                    // Showing a toast message if the item was not added successfully
-                    Toast.makeText(AddFoodItem.this, "Failed to add Item", Toast.LENGTH_LONG).show();
+                if(txtName.getText().toString().isEmpty() || txtDescrip.getText().toString().isEmpty() || txtPrice.getText().toString().isEmpty() ||txtQuant.getText().toString().isEmpty()){
+                    Toast.makeText(AddFoodItem.this, "Please fill all the fields", Toast.LENGTH_LONG).show();
+                }else{
+                    Boolean itemAdded = dbHelper.addItem(new ItemModel(txtName.getText().toString(), txtDescrip.getText().toString(), Double.parseDouble(txtPrice.getText().toString()), Integer.parseInt(txtQuant.getText().toString()), businessID));
+                    if (itemAdded) {
+                        // Clearing the EditText views if the item was added successfully
+                        txtName.setText("");
+                        txtDescrip.setText("");
+                        txtQuant.setText("");
+                        txtPrice.setText("");
+                        // Redirecting to the BusinessMain activity if the item was added successfully
+                        Intent intent = new Intent(AddFoodItem.this, BusinessMain.class);
+                        startActivity(intent);
+                    } else {
+                        // Showing a toast message if the item was not added successfully
+                        Toast.makeText(AddFoodItem.this, "Failed to add Item", Toast.LENGTH_LONG).show();
+                    }
                 }
             }
         });
