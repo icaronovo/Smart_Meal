@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,7 +46,7 @@ public class EditFoodItem extends AppCompatActivity {
         int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
 
         // Getting references to the EditText and Button views in the layout
-        btnDelete = findViewById(R.id.btnDelete);
+        btnDelete = findViewById(R.id.btnCancelOrderBusiness);
         txtItemId = findViewById(R.id.txtItemID);
         btnCancel = findViewById(R.id.btnCancelItem);
         txtName = findViewById(R.id.editNameItem);

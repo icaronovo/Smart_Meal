@@ -34,7 +34,6 @@ public class BusinessItems extends AppCompatActivity {
 
         //Toolbar
         toolbar = findViewById(R.id.toolbarAddOne);
-        toolbar.setTitle("Add Items");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
         // Handle navigation icon click event on toolbar

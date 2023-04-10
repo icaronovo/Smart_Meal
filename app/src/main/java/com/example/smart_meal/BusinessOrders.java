@@ -130,7 +130,17 @@ public class BusinessOrders extends AppCompatActivity {
     public void createListView(ArrayList<OrderModel> listItems) {
         adapter = new BusinessAdapter(this, listItems);
         listView.setAdapter(adapter);
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int orderID = listItems.get(position).getOrderID();
+                String fullOrder = listItems.get(position).toString();
+                Intent intent = new Intent(BusinessOrders.this,BusinessOrderUpdate.class);
+                intent.putExtra("ORDERID",orderID);
+                intent.putExtra("ORDERFULL",fullOrder);
+                startActivity(intent);
+            }
+        });
     }
 
 }

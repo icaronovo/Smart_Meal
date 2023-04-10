@@ -26,7 +26,6 @@ public class BusinessAdapter extends ArrayAdapter<OrderModel> {
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_checkbox, parent, false);
         }
-
         // Lookup view for data population
         orderTxtView = convertView.findViewById(R.id.textView);
 

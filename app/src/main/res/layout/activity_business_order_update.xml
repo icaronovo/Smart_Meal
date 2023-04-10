@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusinessOrderUpdate">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarOrderEdit"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/smartAppColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Order Detail"
+        app:titleTextColor="@color/white" />
+
+    <Button
+        android:id="@+id/btnConfirmOrderBusiness"
+        android:layout_width="207dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/btnConfirmORder"
+        android:textColor="#FFF3E0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFullOrder" />
+
+    <Button
+        android:id="@+id/btnCancelOrderBusiness"
+        android:layout_width="204dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="44dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/btnCancel"
+        android:textColor="#FFF3E0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnReadyToPickUp" />
+
+    <Button
+        android:id="@+id/btnReadyToPickUp"
+        android:layout_width="204dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/btnReady"
+        android:textColor="#FFF3E0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnConfirmOrderBusiness" />
+
+    <Button
+        android:id="@+id/btnReturnMain"
+        android:layout_width="204dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded"
+        android:backgroundTint="@color/smartAppColor"
+        android:text="@string/btnReturn"
+        android:textColor="#FFF3E0"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnCancelOrderBusiness" />
+
+    <TextView
+        android:id="@+id/txtFullOrder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/addItemPriceHint"
+        android:textColor="#6D4C41"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.093"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.158" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
