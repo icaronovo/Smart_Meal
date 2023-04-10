@@ -72,10 +72,12 @@
         android:text="@string/btnFinishOrder"
         android:textColor="#FFF3E0"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.512"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnCancelOrderBusiness" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCancelOrderBusiness"
+        app:layout_constraintVertical_bias="0.007" />
 
     <TextView
         android:id="@+id/txtFullOrder"

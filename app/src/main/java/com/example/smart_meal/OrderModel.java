@@ -111,15 +111,15 @@ public class OrderModel {
                 break;
             case 1:
                 //Restaurant is prepering your order
-                status = "ORDER IS BEING PREPARED" ;
+                status = "BEING PREPARED" ;
                 break;
             case 2:
                 //Customer cancel the order
-                status = "ORDER CANCELED BY CUSTOMER" ;
+                status = "CANCELED BY CUSTOMER" ;
                 break;
             case 3:
                 //Business cancel the order
-                status = "ORDER CANCELED BY BUSINESS" ;
+                status = "CANCELED BY BUSINESS" ;
                 break;
             case 4:
                 //Order is ready
@@ -127,7 +127,7 @@ public class OrderModel {
                 break;
             case 5:
                 //Order is ready
-                status = "ORDER FINISHED" ;
+                status = "FINISHED" ;
                 break;
             default:
                 status = "NO INFORMATION";
@@ -145,8 +145,8 @@ public class OrderModel {
         }
 
         return "Order ID #" + this.orderID + '\n' +
-                "OrderStatus: " + status + '\n' +
-                "CustomerID: " + this.customerID + '\n' +
+                "Order Status: " + status + '\n' +
+                "Customer ID: " + this.customerID + '\n' +
                 "Date:" + this.date + '\n' +
                 String.valueOf(str);
     }

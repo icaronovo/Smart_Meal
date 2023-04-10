@@ -516,16 +516,19 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void removeQuantityfromItem(int businessID) {
         SQLiteDatabase database = this.getReadableDatabase();
-
     }
 
-    public Cursor viewData(){
+    public String viewData(String businessID, int orderStatus){
         SQLiteDatabase database = this.getReadableDatabase();
-        String query = "SELECT * FROM " + ORDER_INFO;
-        Cursor cursor = database.rawQuery(query,null);
-        //String query = "SELECT * FROM " + TABLE1_NAME + " WHERE Id = ?";
-        //Cursor cursor = database.rawQuery(query,new String[]{"2"});
-        return cursor;
+        String count = "0";
+        String query = "SELECT COUNT(*) FROM " + ORDER_INFO + " WHERE BusinessID= ? AND OrderStatus=? ";
+        Cursor cursor = database.rawQuery(query,new String[]{businessID, String.valueOf(orderStatus)});
+        if(cursor.getCount()>0){
+            while(cursor.moveToNext()){
+                count = cursor.getString(0);
+            }
+        }
+        return count;
     }
 
     public List<String> itemDisplay(int businessID, int itemID) {

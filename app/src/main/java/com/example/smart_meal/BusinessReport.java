@@ -1,38 +1,42 @@
 package com.example.smart_meal;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Document;
-
-import java.io.FileOutputStream;
-
 public class BusinessReport extends AppCompatActivity {
 
     private androidx.appcompat.widget.Toolbar toolbar;
-    DBHelper dbh;
+    private DBHelper DBH;
+    private TextView report;
+    private SharedPreferences sharedPreferences;
+    private String businessID;
+    private final int REQUESTRECEIVED = 0;
+    private final int PREPARINGORDER = 1;
+    private final int CUSTOMERCANCELED = 2;
+    private final int RESTAURANTCANCELED = 3;
+    private final int ORDERFINISHE = 5;
+    private String received;
+    private String prepared;
+    private String custCanceled;
+    private String busCanceled;
+    private String orFinished;
+    private StringBuilder displayReport = new StringBuilder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_report);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
-        String customerID = sharedPreferences.getString("CustomerID", "");
+        //Get the business id
+        sharedPreferences = getSharedPreferences("data", MODE_PRIVATE);
+        businessID = sharedPreferences.getString("CustomerID", "");
 
         //Top menu
         toolbar = findViewById(R.id.toolbarReport);
@@ -40,7 +44,6 @@ public class BusinessReport extends AppCompatActivity {
         toolbar.setTitle("Report");
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_baseline_reorder_w);
-
         // Handle navigation icon click event
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,63 +53,25 @@ public class BusinessReport extends AppCompatActivity {
             }
         });
 
-        dbh = new DBHelper(this);
-        TextView report = findViewById(R.id.txtOutput);
-        Button btnShow = findViewById(R.id.btnView);
+        DBH = new DBHelper(this);
+        report = findViewById(R.id.txtOutput);
 
+        received = DBH.viewData(businessID, REQUESTRECEIVED);
+        displayReport.append("This business has " + received + " order(s) active \n\n");
 
-        btnShow.setOnClickListener(new View.OnClickListener() {
+        prepared = DBH.viewData(businessID, PREPARINGORDER);
+        displayReport.append("- The total of " + prepared + " order(s) are being prepared\n\n");
 
-            @Override
-            public void onClick(View view) {
-                Cursor c = dbh.viewData();
-                StringBuilder str = new StringBuilder();
+        custCanceled = DBH.viewData(businessID, CUSTOMERCANCELED);
+        displayReport.append("- The number of " + custCanceled + " customers canceled the order(s)\n\n");
 
-                String status = String.valueOf(c.getColumnIndex("OrderStatus"));
-                switch (status) {
-                    case "0":
-                        status = "Order sent to restaurant";
-                        break;
-                    case "1":
-                        status = "Order received by the restaurant";
-                        break;
-                    case "2":
-                        status = "Customer CANCELED order";
-                        break;
-                    case "3":
-                        status = "Business CANCELED order";
-                        break;
-                }
+        busCanceled = DBH.viewData(businessID, RESTAURANTCANCELED);
+        displayReport.append("- We had to cancel " + busCanceled + " order(s)\n\n");
 
-                if (c.getCount() > 0) {
-                    while (c.moveToNext()) {
-                        if (customerID.equals(c.getString(c.getColumnIndexOrThrow("BusinessID")))) {
-                            str.append(" OrderID: " + c.getString(0));
-                            str.append("\n");
-                            str.append(" OrderStatus: " + status);
-                            str.append("\n");
-                            str.append(" ItemID: " + c.getString(2));
-                            str.append("\n");
-                            str.append(" Date: " + c.getString(3));
-                            str.append("\n");
-                            str.append(" ItemQuantity:" + c.getString(4));
-                            str.append("\n");
-                            str.append(" BusinessID: " + c.getString(5));
-                            str.append("\n");
-                            str.append(" CustomerID: " + c.getString(6));
-                            str.append("\n");
-                            str.append("----------------------------------------------------");
-                            str.append("\n");
-                        }
-                    }
-                    report.setText(str);
+        orFinished = DBH.viewData(businessID, ORDERFINISHE);
+        displayReport.append("We had a total of " + orFinished + " order(s) finished \n\n");
 
-                } else {
-                    Toast.makeText(BusinessReport.this, "nothing to display", Toast.LENGTH_LONG).show();
-                }
-                c.close();
-            }
-        });
+        report.setText(String.valueOf(displayReport));
 
     }
 }

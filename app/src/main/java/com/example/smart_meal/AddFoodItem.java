@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,8 +12,8 @@ import android.widget.Toast;
 
 public class AddFoodItem extends AppCompatActivity {
     private EditText txtName;
-    private EditText txtDescrip;
-    private EditText txtQuant;
+    private EditText txtDescription;
+    private EditText txtQuantity;
     private EditText txtPrice;
     private Button btnAdd;
     private SharedPreferences sharedPreferences;
@@ -30,8 +29,8 @@ public class AddFoodItem extends AppCompatActivity {
 
         // Getting references to the EditText and Button views in the layout
         txtName = findViewById(R.id.editName);
-        txtDescrip = findViewById(R.id.editDescription);
-        txtQuant = findViewById(R.id.editQuantity);
+        txtDescription = findViewById(R.id.editDescription);
+        txtQuantity = findViewById(R.id.editQuantity);
         txtPrice = findViewById(R.id.editPrice);
         btnAdd = findViewById(R.id.btnAdd);
 
@@ -50,7 +49,6 @@ public class AddFoodItem extends AppCompatActivity {
 
         // Getting the business ID from the shared preferences and logging it
         int businessID = Integer.parseInt(sharedPreferences.getString("CustomerID", ""));
-        Log.d("BusinessID", String.valueOf(businessID));
 
         // Creating a DBHelper instance
         DBHelper dbHelper = new DBHelper(this);
@@ -60,15 +58,15 @@ public class AddFoodItem extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Adding an item to the database and handling the result
-                if(txtName.getText().toString().isEmpty() || txtDescrip.getText().toString().isEmpty() || txtPrice.getText().toString().isEmpty() ||txtQuant.getText().toString().isEmpty()){
+                if(txtName.getText().toString().isEmpty() || txtDescription.getText().toString().isEmpty() || txtPrice.getText().toString().isEmpty() || txtQuantity.getText().toString().isEmpty()){
                     Toast.makeText(AddFoodItem.this, "Please fill all the fields", Toast.LENGTH_LONG).show();
                 }else{
-                    Boolean itemAdded = dbHelper.addItem(new ItemModel(txtName.getText().toString(), txtDescrip.getText().toString(), Double.parseDouble(txtPrice.getText().toString()), Integer.parseInt(txtQuant.getText().toString()), businessID));
+                    Boolean itemAdded = dbHelper.addItem(new ItemModel(txtName.getText().toString(), txtDescription.getText().toString(), Double.parseDouble(txtPrice.getText().toString()), Integer.parseInt(txtQuantity.getText().toString()), businessID));
                     if (itemAdded) {
                         // Clearing the EditText views if the item was added successfully
                         txtName.setText("");
-                        txtDescrip.setText("");
-                        txtQuant.setText("");
+                        txtDescription.setText("");
+                        txtQuantity.setText("");
                         txtPrice.setText("");
                         // Redirecting to the BusinessMain activity if the item was added successfully
                         Intent intent = new Intent(AddFoodItem.this, BusinessMain.class);
