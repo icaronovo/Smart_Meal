@@ -153,6 +153,7 @@ public class CustomerOrderMFragment extends Fragment {
         displayLastOrder(lastOrder);
         orderID = lastOrder.getOrderID();
         displayPastOrders(stackOrders);
+
     }
 
     //Display the last order

@@ -121,6 +121,8 @@ public class CustomerOrderFragment extends Fragment {
                 OrderModel newOrder = new OrderModel(orderStatus, businessID, customerID, date, itemID, quantityNumber);
 
                 if(DB.addOrder(newOrder)){
+                    //Remove from DB the items
+
                     Toast.makeText(getActivity(), "Order sent!", Toast.LENGTH_SHORT).show();
                     getActivity().finish();
                 }else{

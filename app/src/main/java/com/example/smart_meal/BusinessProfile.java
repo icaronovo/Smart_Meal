@@ -53,7 +53,7 @@ public class BusinessProfile extends AppCompatActivity {
 
         // Display the business profile information on the screen
         busName.setText(name);
-        busEmail.setText("Email: " + email);
+        busEmail.setText(email);
         busPhone.setText("Phone Number: " + phone);
         busAddress.setText("Address: " + address);
 
